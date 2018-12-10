@@ -5,6 +5,7 @@ class CMSRecord {
 
 	constructor(item, modules) {
 
+
 		this.id = item.id;
 		this.fields = this.mapFields(item);
 

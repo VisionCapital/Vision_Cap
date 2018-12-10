@@ -8,6 +8,6 @@ module.exports = {
 	cmsAdapter: 'airtable',
 	cmsConfig: {
 		apiKey: 'key8E8wSxgLapJ0Vs',
-		baseKey: 'appDmVBGD9ArODSCq'
+		baseKey: 'appYCYsZJkUhB2GAY'
 	}
 };

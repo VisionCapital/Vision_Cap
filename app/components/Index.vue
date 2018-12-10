@@ -23,7 +23,7 @@ export default {
 
 	metaInfo() {
 		return {
-			titleTemplate: '%s | Envoy',
+			titleTemplate: '%s | Vision Capital',
 			title: 'Welcome'
 		};
 	},

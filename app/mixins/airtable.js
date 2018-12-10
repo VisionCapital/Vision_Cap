@@ -3,7 +3,7 @@ var Airtable = require('airtable');
 export default {
 	data() {
 		const apiKey = 'key8E8wSxgLapJ0Vs';
-		const baseKey = 'appDmVBGD9ArODSCq';
+		const baseKey = 'appYCYsZJkUhB2GAY';
 		const base = new Airtable({ apiKey: apiKey }).base(baseKey);
 
 		return {
