@@ -1,0 +1,25 @@
+@import '_fonts'
+@import '_variables'
+
+*
+	box-sizing: border-box
+	-webkit-tap-highlight-color: transparent
+
+html, body
+	margin: 0
+	min-height: 100%
+
+html
+	background $bg
+	color $blk
+	font-family $akkurat
+	font-size ($p / 16) * 100%
+
+	+above($tablet)
+		background $w
+
+body
+	font-size 100%
+	line-height $let
+
+@import '_global'

@@ -1,0 +1,22 @@
+{
+  "short_name": "Muncie Girls",
+  "name": "Muncie Girls",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "32x32 64x64 128x128 256x256"
+    },
+    {
+      "src": "./favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "16x16 32x32 64x64 128x128 256x256"
+    }
+  ],
+  "start_url": ".",
+  "description": "",
+  "background_color": "#063660",
+  "theme_color": "#063660",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}

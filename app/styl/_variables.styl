@@ -1,0 +1,58 @@
+// ----------
+// Colours
+// ----------
+
+$b          = #000
+$w          = #fff
+
+$blk				= #4f4f4f
+
+$red				= #ef3e2d
+$yellow			= #dfd5c8
+$bg					= #fff9f3
+
+// ----------
+// Fonts
+// ----------
+
+$integral				= 'Integral CF', sans-serif
+$integral-bold 	= 'Integral CF Demi', sans-serif
+$akkurat				= 'AkkuratStd', sans-serif
+$akkurat-light 	= 'Akkurat Light Pro', sans-serif
+
+font-smoothing()
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
+
+
+// ----------
+// Mixins
+// ----------
+
+random(a,b)
+	return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+
+
+// ----------
+// Breakpoints
+// ----------
+
+$mobile     = 600px
+$tablet     = 800px
+$notebook   = 1000px
+$laptop	    = 1420px
+$desktop    = 1600px
+$ultra	    = 1920px
+
+above($size)
+	@media screen and (min-width: $size + 1)
+		{block}
+
+below($size)
+	@media screen and (max-width: $size)
+		{block}
+
+@import '_ease'
+@import '_type'
+@import '_mixins'

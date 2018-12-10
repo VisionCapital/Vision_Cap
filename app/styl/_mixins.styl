@@ -1,0 +1,36 @@
+// ----------
+// Window/drawer
+// ----------
+
+.slice
+	background $bg
+
+	+above($tablet)
+		background $w
+
+		.wrap
+			margin 0 auto
+			max-width $desktop
+			padding 1px 0
+			width 100%
+
+.heading
+	color $red
+	font-family $akkurat-light
+	fs(46)
+	font-weight 300
+	letter-spacing -(0.7 / 46) * 1em
+	line-height (56 / 46)
+	margin-left -0.08em
+
+.smol-copy
+	fs(14)
+	letter-spacing -(0.1 / 14) * 1em
+	line-height (26 / 14)
+
+abs()
+	height: 100%
+	left: 0
+	position: absolute
+	top: 0
+	width: 100%
