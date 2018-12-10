@@ -25,32 +25,28 @@ export default {
 
 		links = [
 			{
-				path: '/properties/the-torontonian',
-				title: 'The Torontonian'
+				path: '/mutual-funds/',
+				title: 'Mutual Funds'
 			},
 			{
-				path: '/properties/balliol-park',
-				title: 'Balliol Park'
+				path: '/governance-admin/',
+				title: 'Governance & Admin'
 			},
 			{
-				path: '/properties/lillian-park',
-				title: 'Lillian Park'
+				path: '/visual-resources/',
+				title: 'Visual Resourcs'
 			},
 			{
-				path: '/about/',
-				title: 'About'
+				path: '/funds-strategy/',
+				title: 'Funds Strategy'
 			},
 			{
-				path: '/contact/',
-				title: 'Contact'
+				path: '/team/',
+				title: 'Team'
 			},
 			{
-				path: '/careers/',
-				title: 'Careers'
-			},
-			{
-				path: '/residents/',
-				title: 'Residents'
+				path: '/contact-us/',
+				title: 'Contact Us'
 			}
 		];
 
@@ -68,10 +64,9 @@ export default {
 @import "../styl/_variables"
 
 .main-nav
-	background $bg
-	abs()
-	pad(3,3)
+	left (100% / 8)
 	position fixed
+	top 0
 	z-index 10
 
 .links
@@ -80,13 +75,8 @@ export default {
 	padding 0
 
 	li
-		display block
-
-	a
-		color $red
-		font-family $integral
-
-		&.router-link-exact-active
-			color $blk
+		display inline-block
+		mgn(1,.5)
+		vertical-align middle
 
 </style>

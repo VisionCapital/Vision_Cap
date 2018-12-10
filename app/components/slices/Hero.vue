@@ -1,7 +1,7 @@
 <template>
 	<div class="hero">
 
-		<div class="bg"
+		<div class="bg" v-if="image"
 			:style="{ backgroundImage: `url('${image[0].url}')` }"/>
 
 		<div class="wrap">
@@ -33,30 +33,5 @@ export default {
 
 .hero
 	@extend .slice
-	height 100%
-	position relative
-
-.bg
-	background-repeat no-repeat
-	background-position center
-	background-size cover
-	abs()
-
-.wrap
-	height 100%
-	position relative
-
-.copy
-	bottom 0
-	color $w
-	left (100% / 8)
-	width (300% / 8)
-	position absolute
-
-	h2
-		color $w
-		font-family $integral
-		fs(62)
-		line-height (51 / 62)
 
 </style>

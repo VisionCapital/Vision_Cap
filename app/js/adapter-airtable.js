@@ -5,7 +5,6 @@ class CMSRecord {
 
 	constructor(item, modules) {
 
-
 		this.id = item.id;
 		this.fields = this.mapFields(item);
 
@@ -24,6 +23,8 @@ class CMSRecord {
 	}
 
 	mapFields(obj) {
+
+		console.log(obj);
 		return Object.keys(obj.fields).reduce((acc, f) => {
 			acc[f.toLowerCase()] = obj.get(f);
 			return acc;

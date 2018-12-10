@@ -24,10 +24,12 @@ export default {
 	data() {
 
 		let name = this.slug.charAt(0).toUpperCase() + this.slug.slice(1);
-		let record = this.$cms.records.find((r) => r.get('name') === name);
+		let slugger = '/' + this.slug + '/';
+		let record = this.$cms.records.find((r) => r.get('url structure') === slugger);
 
 		return {
 			name,
+			slugger,
 			record
 		};
 	}

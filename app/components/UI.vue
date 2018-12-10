@@ -8,7 +8,7 @@
 		</router-link>
 
 		<transition appear>
-			<main-nav v-if="$store.state.navOpen"/>
+			<main-nav/>
 		</transition>
 
 		<transition appear>
