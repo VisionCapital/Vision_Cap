@@ -72,7 +72,7 @@ export default {
 
 		/deep/ p
 			color $w
-			font-family $akkurat-light
+			font-family $cormorant-light
 			fs(26)
 			font-weight 300
 			line-height (36 / 26)

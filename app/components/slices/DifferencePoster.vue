@@ -86,7 +86,6 @@ export default {
 
 	/deep/
 		h2
-			font-family $integral
 			fs(78)
 			letter-spacing (0.3 / 78) * 1em
 			line-height (74 / 78)

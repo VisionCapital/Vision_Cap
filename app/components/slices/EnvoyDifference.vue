@@ -69,7 +69,6 @@ export default {
 
 	/deep/ h1
 		color $w
-		font-family $integral
 		fs(120)
 		letter-spacing (0.69 / 120) * 1em
 		line-height (100 / 120)
@@ -86,6 +85,6 @@ export default {
 
 	/deep/ h3
 		color $w
-		font-family $akkurat-light
+		font-family $cormorant-light
 
 </style>

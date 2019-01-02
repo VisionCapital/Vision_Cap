@@ -52,7 +52,6 @@ export default {
 	/deep/
 		h2
 			bottom 100%
-			font-family $integral
 			position absolute
 			right (6 / 5) * 100%
 			transform rotateZ(-90deg)
@@ -71,7 +70,7 @@ export default {
 	/deep/
 		h3
 			color $red
-			font-family $akkurat-light
+			font-family $cormorant-light
 			fs(60)
 			font-weight 300
 			letter-spacing -(3 / 60) * 1em
