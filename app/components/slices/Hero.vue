@@ -45,6 +45,8 @@ export default {
 			color $w
 
 .bg
+	background-repeat no-repeat
+	background-size cover
 	height 100%
 	left 0
 	position absolute

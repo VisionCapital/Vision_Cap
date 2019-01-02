@@ -18,6 +18,7 @@
 				<p v-if="tel">
 					Tel: <a :href="`mailto:${tel}`" v-html="tel"></a>
 				</p>
+
       </div>
 
 		</div>
@@ -47,16 +48,16 @@ export default {
 .contact-card
 	@extend .slice
 	padding 1px 0
-	
+
 	+above($tablet)
 		margin 0 (100% / 8)
 		width (600% / 8)
-		
+
 	.wrap
 		margin (100% / 8) auto
 		display flex
 		position relative
-		
+
 .contact
 	width 46%
 
