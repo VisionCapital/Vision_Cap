@@ -13,6 +13,7 @@
 <style lang="stylus" scoped>
 
 @import "../styl/_variables";
+	
 
 .nav-switch
 	background $b

@@ -19,7 +19,6 @@
 <script>
 
 export default {
-
 	data() {
 		let links = [];
 
@@ -65,7 +64,9 @@ export default {
 
 <style lang="stylus" scoped>
 
+
 @import "../styl/_variables"
+@import "../styl/_global"
 
 .main-nav
 	left (100% / 8)
@@ -77,10 +78,14 @@ export default {
 	margin 0
 	list-style none
 	padding 0
+	background-color black
+
+	a
+		color white
 
 	li
-		display inline-block
-		mgn(1,.5)
-		vertical-align middle
+		display inline-block !important
+		mgn(1,.5) !important
+		vertical-align middle !important
 
 </style>
