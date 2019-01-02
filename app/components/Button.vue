@@ -64,7 +64,7 @@ export default {
 		},
 		fill: {
 			type: String,
-			default: '#ef3e2d'
+			default: '#101010'
 		}
 	}
 };
@@ -79,7 +79,7 @@ export default {
 	align-items center
 	appearance none
 	background 0
-	border 1px solid
+	// border 1px solid 
 	color $blue
 	display flex
 	outline 0
@@ -97,13 +97,13 @@ export default {
 	+above($tablet)
 		width (200vw / 8)
 
-		&:hover
-			.bg
-				transform scaleX(1)
+		// &:hover
+		// 	.bg
+		// 		transform scaleX(1)
 
-			.icon,
-			/deep/ span
-				mix-blend-mode difference
+		// 	.icon,
+		// 	/deep/ span
+		// 		mix-blend-mode difference
 
 	.icon,
 	/deep/ span

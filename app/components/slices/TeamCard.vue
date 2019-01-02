@@ -22,6 +22,7 @@
 				</div>
 
 				<a>read more</a>
+				<!-- <core-button label="Read More"></core-button> -->
 
 			</div>
 
