@@ -18,12 +18,6 @@ const router = new VueRouter({
 					component: () => import('../components/pages/Page.vue')
 				},
 				{
-					path: 'properties/:slug',
-					name: 'property',
-					props: { slug: 'property' },
-					component: () => import('../components/pages/Page.vue')
-				},
-				{
 					path: ':slug',
 					name: 'page',
 					props: true,
