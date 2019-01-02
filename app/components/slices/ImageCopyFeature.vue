@@ -63,7 +63,7 @@ export default {
 		width (300% / 8)
 
 	.copy
-		background $red
+		background $blue
 		pad(2, 0)
 		width (500% / 8)
 

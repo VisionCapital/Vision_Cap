@@ -85,7 +85,7 @@ export default {
 		word-spacing 10em
 
 .info
-	background $red
+	background $blue
 	bottom 0
 	color $w
 	display flex

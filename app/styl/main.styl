@@ -1,9 +1,8 @@
 @import '_fonts'
 @import '_variables'
 
-*
+div, a
 	box-sizing: border-box
-	-webkit-tap-highlight-color: transparent
 
 html, body
 	margin: 0
@@ -11,12 +10,10 @@ html, body
 
 html
 	background $bg
-	color $blk
-	font-family $cormorant-light
+	color $copy
+	font-family $circular
 	font-size ($p / 16) * 100%
-
-	+above($tablet)
-		background $w
+	-webkit-tap-highlight-color: transparent
 
 body
 	font-size 100%
