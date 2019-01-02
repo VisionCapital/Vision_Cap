@@ -44,11 +44,11 @@ export default {
 
 .map
 	@extend .slice
-
+	margin-left 12.5%
 .map-frame
 	// margin (100% / 8) (100% / 8) 0
 	// width (600% / 8)
-	width 60%
+	width 70%
 
 
 .map-ratio
@@ -73,13 +73,14 @@ export default {
 
 
 .annotations
-	// margin 0 (100% / 8) 0
-	// width (600% / 8)
-	padding 0 5% 0 10%
+	margin-right 40px
+	display flex
+	flex-direction column
+	justify-content center
+
 
 	/deep/ h2,
 	/deep/ h3
-		fs(30)
 
 	+above($tablet)
 		// display flex
