@@ -24,13 +24,13 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('ImageCopyFeature', () => import('../components/slices/ImageCopyFeature.vue'));
 	Vue.component('InfoCards', () => import('../components/slices/InfoCards.vue'));
 	Vue.component('Map', () => import('../components/slices/Map.vue'));
-	Vue.component('NewsletterCta', () => import('../components/slices/NewsletterCta.vue'));
+	Vue.component('NewsletterSignup', () => import('../components/slices/NewsletterSignup.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));
 	Vue.component('Resource', () => import('../components/slices/Resource.vue'));
 	Vue.component('TwoColumnCopy', () => import('../components/slices/TwoColumnCopy.vue'));
 	Vue.component('TeamCard', () => import('../components/slices/TeamCard.vue'));
 	Vue.component('ContactCard', () => import('../components/slices/ContactCard.vue'));
-
+	Vue.component('ContactForm', () => import('../components/slices/ContactForm.vue'));
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 

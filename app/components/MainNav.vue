@@ -84,9 +84,7 @@ export default {
 
 <style lang="stylus" scoped>
 
-
 @import "../styl/_variables"
-@import "../styl/_global"
 
 .main-nav
 	left 0

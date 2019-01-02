@@ -1,49 +1,83 @@
 <template>
 	<div class="footer">
 		<footer>
+			<nav>
+				<ul class="links">
 
-			<div class="content">
+					<li v-if="!$store.state.device.mobile">
+						<router-link
+							to="/"
+							class="home-link"
+							title="Home">
+							<logo class="light"/>
+						</router-link>
+					</li>
 
-				<logo class="logo light"/>
+					<li v-for="link in links"
+						:key="link.path">
+						<router-link :to="link.path"
+							:title="link.title"
+							@click.native="$store.dispatch('toggleNav')"
+							v-html="link.title"/>
+					</li>
 
-				<!-- <ul v-if="splitCopy">
-					<li v-for="(line, idx) in splitCopy"
-						:key="idx"
-						v-html="line"/>
-				</ul> -->
-
-			</div>
-
+				</ul>
+			</nav>
 		</footer>
 	</div>
 </template>
 
 <script>
 
-import airprops from '../../mixins/airprops';
 import Logo from '../svg/Logo.vue';
 
 export default {
-
-	mixins: [ airprops ],
 
 	components: {
 		Logo
 	},
 
 	data() {
-		return {
-			splitCopy: null
-		};
-	},
+		let links = [];
 
-	created() {
-		if (this.copy) {
-			this.splitCopy = this.copy.split(/\n/);
-		}
+		links = [
+			{
+				path: '/about/',
+				title: 'About'
+			},
+			{
+				path: '/team/',
+				title: 'Team'
+			},
+			{
+				path: '/private-funds/',
+				title: 'Private Funds'
+			},
+			{
+				path: '/mutual-funds/',
+				title: 'Mutual Funds'
+			},
+			{
+				path: '/visual-resources/',
+				title: 'Visual Resources'
+			},
+			{
+				path: '/investor-portal/',
+				title: 'Investor Portal'
+			},
+			{
+				path: '/contact-us/',
+				title: 'Contact Us'
+			}
+		];
+
+		return {
+			links
+		};
 	}
 
 };
+
 </script>
 
 <style lang="stylus" scoped>
@@ -56,13 +90,21 @@ export default {
 	position relative
 	overflow hidden
 
-.content
+.links
+	margin 0
+	list-style none
+	padding 0
+	position relative
+	text-align center
+
 	/deep/
-		ul
-			list-style none
-			padding 0
+		a
+			color white
 
 		li
-			margin 0
+			display inline-block
+			max-width 280px
+			mgn(1,.5)
+			vertical-align middle
 
 </style>

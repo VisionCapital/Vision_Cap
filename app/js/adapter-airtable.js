@@ -23,8 +23,6 @@ class CMSRecord {
 	}
 
 	mapFields(obj) {
-
-		console.log(obj);
 		return Object.keys(obj.fields).reduce((acc, f) => {
 			acc[f.toLowerCase()] = obj.get(f);
 			return acc;
