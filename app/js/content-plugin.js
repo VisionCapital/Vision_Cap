@@ -39,6 +39,8 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('RolloverGallery', () => import('../components/slices/RolloverGallery.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));
 	Vue.component('Resource', () => import('../components/slices/Resource.vue'));
+	Vue.component('TwoColumnCopy', () => import('../components/slices/TwoColumnCopy.vue'));
+
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 
