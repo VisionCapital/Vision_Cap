@@ -6,8 +6,8 @@
 		<nav>
 			<ul class="links">
 
-				<li>
-					<router-link v-if="$store.state.device.mobile"
+				<li v-if="!$store.state.device.mobile">
+					<router-link
 						to="/"
 						class="home-link"
 						title="Home">
@@ -84,7 +84,9 @@ export default {
 
 <style lang="stylus" scoped>
 
+
 @import "../styl/_variables"
+@import "../styl/_global"
 
 .main-nav
 	left 0
@@ -97,10 +99,14 @@ export default {
 	margin 0
 	list-style none
 	padding 0
+	background-color black
+
+	a
+		color white
 
 	li
-		display inline-block
-		mgn(1,.5)
-		vertical-align middle
+		display inline-block !important
+		mgn(1,.5) !important
+		vertical-align middle !important
 
 </style>

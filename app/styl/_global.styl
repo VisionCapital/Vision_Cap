@@ -6,8 +6,47 @@ html, body, #app
 	height: 100%
 
 a
-	color: inherit
+	color: black
+	position relative
 	text-decoration: none
+	
+	&:before, &:after
+		content: ''
+		position: absolute;
+		height 3px
+
+	&:before
+		content: ''
+		background: $blue;
+		left 0
+		top 100%
+		width: 0%
+		left: -2px;
+
+	&:after
+		background: $blue;
+		right: 2px;
+		right 0
+		top 100%
+		width: 0%
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+
+	&:hover
+		&:before
+			width: 100%;
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+	&:hover
+		width: 100%;
+		color: $blue;
+		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+	&:hover
+		&:after
+			font: inherit;
+			width: 100%;
+			transition: 0s;
+			background: transparent;
 
 img, svg
 	display: block
@@ -82,7 +121,7 @@ button, input, label, select, textarea
 button, input, select, textarea
 	appearance: none
 	background: none
-	border: 1px solid $blue
+	// border: 1px solid $blue
 	outline: 0
 
 	&:focus

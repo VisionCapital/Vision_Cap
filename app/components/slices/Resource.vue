@@ -2,7 +2,7 @@
 	<div class="resource-slice">
 		<div class="wrap">
 
-      <h3 class="date" 
+      <h5 class="date" 
         v-if="subheading"
         v-html="subheading"/>
 
@@ -18,7 +18,7 @@
 			</div>
 
       <div class="media" v-for="(media, idx) in image" :key="idx">
-        <h4 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h4>
+        <h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
 
         <!-- will probably need to adjust this v-if for prismic -->
         <img :src="media.url" v-if="media.type === 'image/png' ">

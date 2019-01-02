@@ -1,5 +1,5 @@
 <template>
-	<div class="resource-slice">
+	<div class="two-column-copy-slice">
 		<div class="wrap">
 
 			<div class="title">
@@ -41,7 +41,7 @@ export default {
 
 @import "../../styl/_variables"
 
-.resource-slice
+.two-column-copy-slice
 	@extend .slice
 	padding 1px 0
 	+above($tablet)
@@ -59,5 +59,5 @@ export default {
 	display flex
 	justify-content space-between
 	p
-		width 47%
+		width 46%
 </style>
