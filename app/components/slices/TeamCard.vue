@@ -89,7 +89,6 @@ img
 
 .copy-container
 	max-height 200px
-	// white-space nowrap
 	overflow hidden
 	text-overflow ellipsis 
 	transition max-height 1s

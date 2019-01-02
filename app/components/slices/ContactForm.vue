@@ -18,7 +18,15 @@
 				</div>
 				<div class="right">
 					<textarea placeholder="Enter your message"></textarea>
-					<input class="submit" type="submit" placeholder="Send">
+					<!-- <input class="submit" type="submit" placeholder="Send"> -->
+					<button type="submit">
+						<span v-html="'Submit'"/>
+						<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
+							<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
+								<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
+							</g>
+						</svg>
+					</button>
 				</div>
 			</form>
 
@@ -91,13 +99,11 @@ form
 	width 50%
 
 .left
-	width 30%
+	width 38%
 
 .right 
-	width 65%
-// 	pad(5,0)
-// 	position relative
-
+	width 60%
+	
 .wrap
 	color $w
 	position relative
@@ -110,23 +116,46 @@ form
 		opacity 0.7
 		fs(26)
 
-input, textarea
-	color $w
-	border 0
-	border-bottom 1px solid $w
-	mgn(1,0)
+form 
+	/deep/ input, textarea
+		color $w
+		border 0
+		border-bottom 1px solid $w
+		mgn(1,0)
 
-.submit
-	border 0
-	background $blk
-	position absolute 
-	right 0
-	margin 0
-// .bg
-// 	height 100%
-// 	left 0
-// 	position absolute
-// 	top 0
-// 	width 100%
+		&:hover
+			border-color $copy
+
+		&:focus
+			border-color $blk
+
+		::placeholder
+			color #9F9F9F
+
+	/deep/	button
+		background $blk
+		position absolute 
+		right 0
+		margin 0
+		align-items center
+		background $blk
+		border 0
+		color $w
+		display flex
+		pad(.25,.5)
+		letter-spacing (0.1 / 14) * 1em
+		line-height $let * 1.125em
+		flex-grow 0
+		margin-left 1em
+
+		span
+			pad(0,.5,0,.25)
+
+		&:hover, &:focus
+			background $copy
+
+		&:active
+			// background $blk
+
 
 </style>
