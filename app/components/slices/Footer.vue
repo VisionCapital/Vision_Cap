@@ -4,14 +4,13 @@
 
 			<div class="content">
 
-				<logo fill="#fff"
-					class="logo"/>
+				<logo class="logo light"/>
 
-				<ul v-if="splitCopy">
+				<!-- <ul v-if="splitCopy">
 					<li v-for="(line, idx) in splitCopy"
 						:key="idx"
 						v-html="line"/>
-				</ul>
+				</ul> -->
 
 			</div>
 
@@ -52,7 +51,8 @@ export default {
 @import "../../styl/_variables"
 
 .footer
-	background $w
+	background $blue
+	color $w
 	position relative
 	overflow hidden
 
