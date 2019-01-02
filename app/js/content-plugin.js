@@ -22,6 +22,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('Hero', () => import('../components/slices/Hero.vue'));
 	Vue.component('ImageCopy', () => import('../components/slices/ImageCopy.vue'));
 	Vue.component('ImageCopyFeature', () => import('../components/slices/ImageCopyFeature.vue'));
+	Vue.component('InfoCards', () => import('../components/slices/InfoCards.vue'));
 	Vue.component('Map', () => import('../components/slices/Map.vue'));
 	Vue.component('NewsletterCta', () => import('../components/slices/NewsletterCta.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));
