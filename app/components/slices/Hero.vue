@@ -39,6 +39,7 @@ export default {
 	.wrap
 		color $w
 		position relative
+		margin: 0 12.5%;
 
 		/deep/ h1
 			color $w

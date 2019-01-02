@@ -18,6 +18,7 @@
 
 		<nav-switch v-if="$store.state.device.mobile"/>
 
+
 	</div>
 </template>
 
@@ -26,12 +27,14 @@
 import Logo from './svg/Logo.vue';
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
+import Hero from './slices/Hero.vue';
 
 export default {
 	components: {
 		Logo,
 		MainNav,
-		NavSwitch
+		NavSwitch,
+		Hero
 	}
 };
 
