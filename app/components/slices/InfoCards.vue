@@ -48,16 +48,19 @@ export default {
 
 	.wrap
 		position relative
+
 		/deep/ h1
 			color $w
+			fs(mp(3))
 
 .content
 	width 100%
 	display inline-block
 
 .individual-card
-	width (100%/3)
 	background-color $darkblue
+	color $w
+	width (100%/3)
 	margin 0 2px 0 2px
 
 .copy
