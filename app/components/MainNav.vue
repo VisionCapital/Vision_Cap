@@ -25,24 +25,28 @@ export default {
 
 		links = [
 			{
-				path: '/mutual-funds/',
-				title: 'Mutual Funds'
-			},
-			{
-				path: '/governance-admin/',
-				title: 'Governance & Admin'
-			},
-			{
-				path: '/visual-resources/',
-				title: 'Visual Resourcs'
-			},
-			{
-				path: '/funds-strategy/',
-				title: 'Funds Strategy'
+				path: '/about/',
+				title: 'About'
 			},
 			{
 				path: '/team/',
 				title: 'Team'
+			},
+			{
+				path: '/private-funds/',
+				title: 'Private Funds'
+			},
+			{
+				path: '/mutual-funds/',
+				title: 'Mutual Funds'
+			},
+			{
+				path: '/visual-resources/',
+				title: 'Visual Resources'
+			},
+			{
+				path: '/investor-portal/',
+				title: 'Investor Portal'
 			},
 			{
 				path: '/contact-us/',
