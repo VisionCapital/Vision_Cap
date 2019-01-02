@@ -95,18 +95,25 @@ export default {
 	width 100%
 	z-index 10
 
+.bg
+	background black
+	abs()
+
 .links
 	margin 0
 	list-style none
 	padding 0
-	background-color black
+	position relative
+	text-align center
 
-	a
-		color white
+	/deep/
+		a
+			color white
 
-	li
-		display inline-block !important
-		mgn(1,.5) !important
-		vertical-align middle !important
+		li
+			display inline-block
+			max-width 280px
+			mgn(1,.5)
+			vertical-align middle
 
 </style>

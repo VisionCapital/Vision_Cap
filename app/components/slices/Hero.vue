@@ -33,6 +33,7 @@ export default {
 
 .hero
 	@extend .slice
+	pad(5,0)
 	position relative
 
 	.wrap

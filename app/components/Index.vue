@@ -11,7 +11,6 @@
 			<router-view v-if="loaded"/>
 		</transition>
 
-
 	</div>
 </template>
 
