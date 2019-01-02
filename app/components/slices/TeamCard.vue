@@ -2,7 +2,9 @@
 	<div class="team-card-slice">
 		<div class="wrap">
 
-			<img class="profile-pic" :src="image[0].url" v-if="image">
+			<div class="img-wrap">
+				<img class="profile-pic" :src="image[0].url" v-if="image">
+			</div>
 
 			<div class="guy"></div>
 			<div class="content">
@@ -16,12 +18,15 @@
 					v-if="subheading"
 					v-html="subheading"/>
 
-				<div class="copy">
-					<p v-if="copy"
+				<div class="copy-container" :class="{'full-copy': copyFull}" ref="copy-container">
+					<p ref="copy" v-if="copy"
 						v-html="copy"/>
 				</div>
 
-				<a>read more</a>
+				<div @click="toggleText()" class="copy-cta">
+					<p v-if="copyFull === true">read more</p>
+					<p v-else>collapse</p>
+				</div>
 				<!-- <core-button label="Read More"></core-button> -->
 
 			</div>
@@ -35,7 +40,22 @@
 import airprops from '../../mixins/airprops';
 
 export default {
-	mixins: [ airprops ]
+	mixins: [ airprops ],
+	data() {
+
+		// let copyFull = false;
+
+		// console.log(this.$refs);
+		return {
+			copyFull: true
+		};
+	},
+	methods: {
+		toggleText() {
+			this.copyFull = !this.copyFull;
+		}
+
+	}
 };
 
 </script>
@@ -58,11 +78,24 @@ export default {
 		justify-content space-between
 
 img
-	width 30% 
+	width 20vw
 	
 .content
 	width 60%
 	display inline-block
+
+.copy-cta
+	color $blue
+
+.copy-container
+	max-height 200px
+	// white-space nowrap
+	overflow hidden
+	text-overflow ellipsis 
+	transition max-height 1s
+
+	&.full-copy
+		max-height 100%
 
 .guy
 	height 100% 
