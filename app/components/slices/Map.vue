@@ -2,30 +2,29 @@
 	<div class="map">
 		<div class="wrap">
 
-			<div class="map-frame">
-				<div class="map-ratio">
-					<img v-if="image"
-						:src="image[0].url"/>
-				</div>
-			</div>
-
 			<div class="annotations">
 
 				<div class="copy">
 					<h2 v-if="heading"
 						v-html="heading"/>
-					<h3 v-if="subheading"
+					<p v-if="subheading"
 						v-html="subheading"/>
-					<p v-if="copy"
-						v-html="copy"/>
 				</div>
 
 				<div class="cta">
-					<core-button label="View The Map"/>
+					<core-button label="View Larger Map"/>
 				</div>
 
 			</div>
 
+			<div class="map-frame">
+				<div class="map-ratio">
+					<!-- <img v-if="copy"
+						:src="copy"/> -->
+						<iframe :src="copy"></iframe>
+				</div>
+			</div>
+		
 		</div>
 	</div>
 </template>
@@ -47,8 +46,10 @@ export default {
 	@extend .slice
 
 .map-frame
-	margin (100% / 8) (100% / 8) 0
-	width (600% / 8)
+	// margin (100% / 8) (100% / 8) 0
+	// width (600% / 8)
+	width 60%
+
 
 .map-ratio
 	overflow hidden
@@ -66,19 +67,25 @@ export default {
 	/deep/ iframe
 		height 100%
 
+.wrap 
+	display flex
+	justify-content space-between
+
+
 .annotations
-	margin 0 (100% / 8) 0
-	width (600% / 8)
+	// margin 0 (100% / 8) 0
+	// width (600% / 8)
+	padding 0 5% 0 10%
 
 	/deep/ h2,
 	/deep/ h3
 		fs(30)
 
 	+above($tablet)
-		display flex
+		// display flex
 
 		.copy
-			width (400%/ 6)
+			// width (400%/ 6)
 
 		.cta
 			pad(1,0)
