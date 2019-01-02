@@ -119,7 +119,9 @@ input, textarea
 .submit
 	border 0
 	background $blk
-	
+	position absolute 
+	right 0
+	margin 0
 // .bg
 // 	height 100%
 // 	left 0

@@ -16,7 +16,7 @@
           Email: <a :href="`mailto:${email}`" v-html="email"></a>
         </p>
 				<p v-if="tel">
-					Tel: <a :href="`mailto:${tel}`" v-html="tel"></a>
+					Tel: <a :href="`tel:${tel}`" v-html="tel"></a>
 				</p>
       </div>
 
