@@ -29,8 +29,7 @@
 import airprops from '../../mixins/airprops';
 
 export default {
-    mixins: [ airprops ]
-   
+	mixins: [ airprops ]
 };
 
 </script>
@@ -44,14 +43,14 @@ export default {
 	@extend .slice
 	position relative
 
-	+above($tablet)	
+	+above($tablet)
 		width 100%
 
 	.wrap
 		position relative
 		/deep/ h1
 			color $w
-	
+
 .content
 	width 100%
 	display inline-block
@@ -60,7 +59,7 @@ export default {
 	width (100%/3)
 	background-color $darkblue
 	margin 0 2px 0 2px
-	
+
 .copy
 	margin 10em (100%/12) 10em (100%/12)
 	text-align center
