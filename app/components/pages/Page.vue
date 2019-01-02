@@ -18,17 +18,17 @@
 import slices from '../../mixins/slices.js';
 
 export default {
+
 	props: [ 'slug' ],
+
 	mixins: [ slices ],
 
 	data() {
 
-		let name = this.slug.charAt(0).toUpperCase() + this.slug.slice(1);
-		let slugger = '/' + this.slug + '/';
+		let slugger = this.slug === 'home' ? '/' : '/' + this.slug + '/';
 		let record = this.$cms.records.find((r) => r.get('url structure') === slugger);
 
 		return {
-			name,
 			slugger,
 			record
 		};
