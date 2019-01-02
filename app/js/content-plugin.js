@@ -28,6 +28,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('Resource', () => import('../components/slices/Resource.vue'));
 	Vue.component('TwoColumnCopy', () => import('../components/slices/TwoColumnCopy.vue'));
 	Vue.component('TeamCard', () => import('../components/slices/TeamCard.vue'));
+	Vue.component('ContactCard', () => import('../components/slices/ContactCard.vue'));
 
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
