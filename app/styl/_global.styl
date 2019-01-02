@@ -10,43 +10,43 @@ a
 	position relative
 	text-decoration: none
 
-	&:before, &:after
-		content: ''
-		position: absolute;
-		height 3px
+	// &:before, &:after
+	// 	content: ''
+	// 	position: absolute;
+	// 	height 3px
 
-	&:before
-		content: ''
-		background: $blue;
-		left 0
-		top 100%
-		width: 0%
-		left: -2px;
+	// &:before
+	// 	content: ''
+	// 	background: $blue;
+	// 	left 0
+	// 	top 100%
+	// 	width: 0%
+	// 	left: -2px;
 
-	&:after
-		background: $blue;
-		right: 2px;
-		right 0
-		top 100%
-		width: 0%
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+	// &:after
+	// 	background: $blue;
+	// 	right: 2px;
+	// 	right 0
+	// 	top 100%
+	// 	width: 0%
+	// 	transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
 
-	&:hover
-		&:before
-			width: 100%;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+	// &:hover
+	// 	&:before
+	// 		width: 100%;
+	// 		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
 
-	&:hover
-		width: 100%;
-		color: $blue;
-		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+	// &:hover
+	// 	width: 100%;
+	// 	color: $blue;
+	// 	transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
 
-	&:hover
-		&:after
-			font: inherit;
-			width: 100%;
-			transition: 0s;
-			background: transparent;
+	// &:hover
+	// 	&:after
+	// 		font: inherit;
+	// 		width: 100%;
+	// 		transition: 0s;
+	// 		background: transparent;
 
 img, svg
 	display: block

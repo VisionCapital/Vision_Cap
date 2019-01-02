@@ -8,11 +8,9 @@
 				<div class="bg" v-if="image"
 					:style="{ backgroundImage: `url('${image[0].url}')` }"/>
 
-
 				<!-- <core-button type="link" :route="link.url" :label="link.label"></core-button> -->
 
-				<router-link class="link" :to="link.url">
-					<h3 v-html="link.label"></h3>
+				<router-link class="link" :to="link.url"	v-html="link.label">
 				</router-link>
 			</div>
 		</div>
@@ -29,11 +27,11 @@ export default {
 	data() {
 		let links = [
 			{
-				label: 'Private Funds',
+				label: '<h3>Private Funds</h3>',
 				url: '/private-funds/'
 			},
 			{
-				label: 'Mutual Funds',
+				label: '<h3>Mutual Funds</h3>',
 				url: '/mutual-funds/'
 			}
 		];
@@ -56,7 +54,6 @@ export default {
 	.wrap
 		color $w
 		position relative
-		margin: 0 12.5%;
 		display flex
 		/deep/ h1
 			color $w
@@ -74,13 +71,15 @@ export default {
 	color $w
 	z-index 2
 	border 1px solid $w
-	pad(0,1)
+	width 60%
 	
 	// to kill global style
 	&:before, &:after, &:hover
-		width auto
-		
+		width 60%
+
 	/deep/ h3
+
+		margin-left 40px
 		color $w
 
 .bg
