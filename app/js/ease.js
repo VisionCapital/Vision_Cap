@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*
 
 t = current time

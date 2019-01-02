@@ -1,7 +1,19 @@
 <template>
 	<div class="main-nav">
+
+		<div class="bg"/>
+
 		<nav>
 			<ul class="links">
+
+				<li v-if="!$store.state.device.mobile">
+					<router-link
+						to="/"
+						class="home-link"
+						title="Home">
+						<logo class="light"/>
+					</router-link>
+				</li>
 
 				<li v-for="link in links"
 					:key="link.path">
@@ -13,12 +25,19 @@
 
 			</ul>
 		</nav>
+
 	</div>
 </template>
 
 <script>
 
+import Logo from './svg/Logo.vue';
+
 export default {
+
+	components: {
+		Logo
+	},
 
 	data() {
 		let links = [];
@@ -65,22 +84,36 @@ export default {
 
 <style lang="stylus" scoped>
 
+
 @import "../styl/_variables"
+@import "../styl/_global"
 
 .main-nav
-	left (100% / 8)
+	left 0
 	position fixed
 	top 0
+	width 100%
 	z-index 10
+
+.bg
+	background black
+	abs()
 
 .links
 	margin 0
 	list-style none
 	padding 0
+	position relative
+	text-align center
 
-	li
-		display inline-block
-		mgn(1,.5)
-		vertical-align middle
+	/deep/
+		a
+			color white
+
+		li
+			display inline-block
+			max-width 280px
+			mgn(1,.5)
+			vertical-align middle
 
 </style>

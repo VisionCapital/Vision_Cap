@@ -6,7 +6,7 @@
 
 		<div class="wrap">
 			<div class="copy">
-				<h2 v-if="heading"
+				<h1 v-if="heading"
 					v-html="heading"/>
 				<h3 v-if="subheading"
 					v-html="subheading"/>
@@ -33,5 +33,21 @@ export default {
 
 .hero
 	@extend .slice
+	pad(5,0)
+	position relative
+
+	.wrap
+		color $w
+		position relative
+
+		/deep/ h1
+			color $w
+
+.bg
+	height 100%
+	left 0
+	position absolute
+	top 0
+	width 100%
 
 </style>

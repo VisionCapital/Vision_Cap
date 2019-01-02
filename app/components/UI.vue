@@ -1,10 +1,11 @@
 <template>
 	<div class="app">
 
-		<router-link to="/"
+		<router-link v-if="$store.state.device.mobile"
+			to="/"
 			class="home-link"
 			title="Home">
-			<logo/>
+			<logo class="light"/>
 		</router-link>
 
 		<transition appear>
@@ -15,7 +16,7 @@
 			<router-view :key="$route.fullPath"/>
 		</transition>
 
-		<nav-switch/>
+		<nav-switch v-if="$store.state.device.mobile"/>
 
 	</div>
 </template>
