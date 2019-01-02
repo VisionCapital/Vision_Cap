@@ -19,8 +19,16 @@ h1, h2, h3, h4, h5, p
 	mgn(1,0)
 	max-width: $pwidth*1em
 
+h1, h2, h3, h4
+	font-family $cormorant
+
+h1, h2, h3
+	color $blue
+
+h4
+	color $b
+
 h1
-	font-family $circular
 	fs(mp(5))
 
 	+below($mobile)
@@ -74,7 +82,7 @@ button, input, label, select, textarea
 button, input, select, textarea
 	appearance: none
 	background: none
-	border: 1px solid $red
+	border: 1px solid $blue
 	outline: 0
 
 	&:focus

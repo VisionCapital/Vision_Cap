@@ -80,7 +80,7 @@ export default {
 	appearance none
 	background 0
 	border 1px solid
-	color $red
+	color $blue
 	display flex
 	outline 0
 	padding 0

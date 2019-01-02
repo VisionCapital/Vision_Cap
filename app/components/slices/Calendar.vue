@@ -69,7 +69,7 @@ export default {
 
 	/deep/
 		h3
-			color $red
+			color $blue
 			font-family $cormorant-light
 			fs(60)
 			font-weight 300
