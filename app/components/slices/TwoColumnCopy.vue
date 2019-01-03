@@ -43,13 +43,7 @@ export default {
 
 .two-column-copy-slice
 	@extend .slice
-	padding 1px 0
-	+above($tablet)
-		margin 0 (100% / 8)
-		width (600% / 8)
-
-	.wrap
-		margin (100% / 8) auto
+	pad(2,0)
 
 .title
 	/deep/ h3
