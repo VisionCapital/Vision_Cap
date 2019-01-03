@@ -54,10 +54,14 @@ export default {
 .wrap
 	color $w
 	position relative
-	+above($tablet)
+
+	+above($tablet) //desktop
 		display flex
+
+
 	/deep/ h1
 		color $w
+		
 
 .column
 	width 50%
@@ -71,7 +75,8 @@ export default {
 			margin-left 2px
 
 	+below($tablet)
-		width 100%
+		width auto
+		margin 2px -6% 2px -6%
 
 .link
 	position absolute 
