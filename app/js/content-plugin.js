@@ -32,7 +32,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('ContactForm', () => import('../components/slices/ContactForm.vue'));
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
 	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
-
+	Vue.component('MutualFund', () => import('../components/slices/MutualFund.vue'));
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 

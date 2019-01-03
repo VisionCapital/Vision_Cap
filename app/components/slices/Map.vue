@@ -24,7 +24,7 @@
 						<iframe :src="copy"></iframe>
 				</div>
 			</div>
-		
+
 		</div>
 	</div>
 </template>
@@ -44,12 +44,13 @@ export default {
 
 .map
 	@extend .slice
-	margin-left 12.5%
-.map-frame
-	// margin (100% / 8) (100% / 8) 0
-	// width (600% / 8)
-	width 70%
 
+	.wrap
+		max-width none
+		width 100%
+
+.map-frame
+	width (600% / 9)
 
 .map-ratio
 	overflow hidden
@@ -67,17 +68,15 @@ export default {
 	/deep/ iframe
 		height 100%
 
-.wrap 
+.wrap
 	display flex
 	justify-content space-between
 
 
 .annotations
-	margin-right 40px
 	display flex
 	flex-direction column
 	justify-content center
-
 
 	/deep/ h2,
 	/deep/ h3

@@ -18,7 +18,6 @@
 
 		<nav-switch v-if="$store.state.device.mobile"/>
 
-
 	</div>
 </template>
 
