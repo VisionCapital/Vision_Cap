@@ -64,7 +64,7 @@ export default {
 	width 100%
 	padding 3em (100%/12) 3em (100%/12)
 
-	+above($mobile)
+	+above($tablet)
 		width (100%/3)
 
 .copy
@@ -84,7 +84,7 @@ export default {
 
 .cards
 	width 100%
-	+above($mobile)
+	+above($tablet)
 		display flex
 		width 100%
 
