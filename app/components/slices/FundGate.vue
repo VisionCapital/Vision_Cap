@@ -48,7 +48,7 @@ export default {
 
 .fund-gate
 	@extend .slice
-	pad(5,0)
+	pad(2px,0)
 	position relative
 
 	.wrap
@@ -62,6 +62,10 @@ export default {
 	width 50%
 	height 400px
 	position relative
+	&:first-child
+		margin-right 2px
+	&:last-child
+		margin-left 2px
 
 .link
 	position absolute 
@@ -71,15 +75,15 @@ export default {
 	color $w
 	z-index 2
 	border 1px solid $w
-	width 60%
+	width 360px
 	
 	// to kill global style
 	&:before, &:after, &:hover
-		width 60%
+		width 360px
 
 	/deep/ h3
-
-		margin-left 40px
+		width 100%
+		text-align center
 		color $w
 
 .bg
