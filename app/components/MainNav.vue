@@ -11,7 +11,7 @@
 						to="/"
 						class="home-link"
 						title="Home">
-						<logo class="light"/>
+						<logo class="light" :interactive="true"/>
 					</router-link>
 				</li>
 
