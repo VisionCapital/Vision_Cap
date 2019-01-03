@@ -29,15 +29,21 @@
 			</div>
 
 
-			<div class="reports">
+			<div class="documents">
 
-				<div class="heading-tabs">
+				<div class="dropdown" v-if="$store.state.device.mobile" @click="reportDrop = !reportDrop">
+					<div class="tab" v-html="reports[reportIdx].title"></div>
+				</div>
+
+				<div class="heading-tabs" v-if="!$store.state.device.mobile || reportDrop">
+
 					<div class="tab" v-for="(tab, idx) in reports" 
 						v-html="tab.title"
 						:class="{selected: idx === reportIdx}"
 						:key="'tab' + idx"
 						@click="reportIdx = idx"
 					></div>
+
 				</div>
 
 				<div class="report-content">
@@ -157,6 +163,21 @@ export default {
 						pdf: 'something.pdf'
 					}
 				]
+			},
+			{
+				title: 'Regulatory Filings',
+				documents: [
+					{
+						title: 'Financial Statement',
+						date: 'jul 27th, 2018',
+						pdf: 'something.pdf'
+					},
+					{
+						title: 'Financial Statement',
+						date: 'jul 27th, 2018',
+						pdf: 'something.pdf'
+					}
+				]
 			}
 		];
 
@@ -166,6 +187,7 @@ export default {
 			reasons,
 			funds,
 			reports,
+			reportDrop: false,
 			reportIdx: 0
 		};
 	}
@@ -189,14 +211,16 @@ a
 
 
 .columns
-	display flex
-	flex-wrap wrap
 	position relative
-	justify-content space-between
+	+above($tablet)
+		display flex
+		flex-wrap wrap
+		justify-content space-between
 	h4 
 		color $blue
 	ul
-		width 45%
+		+above($tablet)
+			width 45%
 
 .funds
 	text-align center
@@ -209,12 +233,14 @@ a
 	p, h4
 		width (100% / 6)
 
-.reports
+.documents
 	pad(2,0)
 	
 	h5, p
 		mgn(1,1,.5,0)
-		display inline-block
+		+above($tablet)
+			display inline-block
+
 	h5
 		color $blk
 		font-family $cormorant
@@ -225,21 +251,36 @@ a
 		justify-content space-between
 		align-items flex-end
 		border-bottom 1px solid blue
-		pad(0,1.5)
+		+above($tablet)
+			pad(0,1.5)
+
 
 	.heading-tabs
-		display flex
-		text-align center
+		+above($tablet)
+			display flex
+			text-align center
+			
 	.tab
 		background $grey
 		width calc((100% - 40px) / 5)
 		margin-right 10px
 		padding 0.5em 0
+		+below($tablet)
+			width 100%
+			background none 
+			fs(20)
+			color $blue
+
 		&:last-child
 			margin-right 0
 	.selected
 		background $lightgrey
 		color $blue
+		+below($tablet)
+			display none
+	.dropdown
+		width 100%
+		background $grey
 
 .disclaimer
 	fs(12)
