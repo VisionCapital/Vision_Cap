@@ -8,12 +8,13 @@
 
 				<div class="columns">
 					<ul v-for="(reason, idx) in reasons" :key="idx">
-						<h3 v-html="reason.title" v-if="reason.title"></h3>
+						<h4 v-html="reason.title" v-if="reason.title"></h4>
 						<li v-for="(item, idx) in reason.copy" :key="'item' + idx" v-html="item"></li>
 					</ul>
 				</div>
 
 			</div>
+
 
 			<div class="funds">
 				<div class="heading row">
@@ -24,8 +25,8 @@
 				</div>
 			</div>
 
-			<div class="reports">
 
+			<div class="reports">
 
 				<div class="heading-tabs">
 					<div class="tab" v-for="(tab, idx) in reports" 
@@ -38,9 +39,11 @@
 
 				<div class="report-content">
 					<div class="row" v-for="document in reports[reportIdx].documents">
-						<h5 v-html="document.title"></h5>
-						<p v-html="document.date">
-						<div class="pdf" v-html="document.pdf"></div>
+						<div>
+							<h5 v-html="document.title"></h5>
+							<p v-html="document.date"></p>
+						</div>
+						<a class="pdf" :href="document.pdf">pdf icon</a>
 					</div>
 				</div>
 
@@ -96,7 +99,7 @@ export default {
 				class: 'A',
 				date: '12-Dec-18',
 				nav: 8.80,
-				pdf: 'not sure'
+				pdf: 'something.pdf'
 			},
 			{
 				code: 'DAM500',
@@ -104,7 +107,7 @@ export default {
 				class: 'A',
 				date: '12-Dec-18',
 				nav: 8.80,
-				pdf: 'not sure'
+				pdf: 'something.pdf'
 			}
 		];
 
@@ -124,12 +127,12 @@ export default {
 					{
 						title: 'Fund Facts Document',
 						date: 'jul 27th, 2018',
-						pdf: 'not-sure'
+						pdf: 'something.pdf'
 					},
 					{
 						title: 'Fund Facts Document',
 						date: 'jul 27th, 2018',
-						pdf: 'not-sure'
+						pdf: 'something.pdf'
 					}
 				]
 			},
@@ -139,12 +142,12 @@ export default {
 					{
 						title: 'Financial Statement',
 						date: 'jul 27th, 2018',
-						pdf: 'not-sure'
+						pdf: 'something.pdf'
 					},
 					{
 						title: 'Financial Statement',
 						date: 'jul 27th, 2018',
-						pdf: 'not-sure'
+						pdf: 'something.pdf'
 					}
 				]
 			}
@@ -167,17 +170,24 @@ export default {
 @import "../../styl/_variables"
 
 .mutual-fund
-  @extend .slice
+	@extend .slice
+	.wrap
+		position relative
+		pad(3, 0);
 
-.wrap
-	position relative
-	pad(5, 0);
+a
+	width auto
+	&:before, &:after
+		display none
+
 
 .columns
 	display flex
 	flex-wrap wrap
 	position relative
 	justify-content space-between
+	h4 
+		color $blue
 	ul
 		width 45%
 
@@ -194,23 +204,34 @@ export default {
 	pad(2,0)
 	
 	h5, p
-		mgn(1,0,0.5)
-
+		mgn(1,1,.5,0)
+		display inline-block
+	h5
+		color $blk
+		font-family $cormorant
 	.report-content
 		background $lightgrey
 	.row
 		display flex
-		align-items center
+		justify-content space-between
+		align-items flex-end
 		border-bottom 1px solid blue
-	.pdf
-		position absolute
-		right 0
+		pad(0,1.5)
+
 	.heading-tabs
 		display flex
 		text-align center
 	.tab
 		background $grey
-		width (100% / 5)
+		width calc((100% - 40px) / 5)
+		margin-right 10px
+		padding 0.5em 0
+		&:last-child
+			margin-right 0
 	.selected
 		background $lightgrey
+		color $blue
+
+.disclaimer
+	fs(12)
 </style>
