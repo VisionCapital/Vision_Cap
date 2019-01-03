@@ -4,7 +4,7 @@
 			<nav>
 				<ul class="links">
 
-					<li v-if="!$store.state.device.mobile">
+					<li>
 						<router-link
 							to="/"
 							class="home-link"
@@ -89,22 +89,30 @@ export default {
 	color $w
 	position relative
 	overflow hidden
+	+below($tablet)
+		pad(1,1)
 
 .links
 	margin 0
 	list-style none
 	padding 0
 	position relative
-	text-align center
+	+above($tablet)
+		text-align center
 
 	/deep/
 		a
 			color white
+
 
 		li
 			display inline-block
 			max-width 280px
 			mgn(1,.5)
 			vertical-align middle
-
+			+below($tablet)
+				width 40%
+				mgn(.5,.5)
+				&:first-child
+					width auto
 </style>

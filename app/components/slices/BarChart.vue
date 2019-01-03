@@ -93,7 +93,7 @@ export default {
 .chart
 	order 3
 	+below($tablet)
-		pad(2,0,0)
+		pad(2,1,0)
 
 	+above($tablet)
 		width (700% / 9)
