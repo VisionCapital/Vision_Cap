@@ -18,13 +18,13 @@
 					v-if="subheading"
 					v-html="subheading"/>
 
-				<div class="copy-container" :class="{'full-copy': copyFull}" ref="copy-container">
+				<div class="copy-container" :class="{'full-copy': copyFull}" ref="copyContainer">
 					<p ref="copy" v-if="copy"
 						v-html="copy"/>
 				</div>
 
-				<div @click="toggleText()" class="copy-cta">
-					<p v-if="copyFull === true">read more</p>
+				<div @click="toggleText()" v-if="!shortText" class="copy-cta">
+					<p v-if="copyFull === false">read more</p>
 					<p v-else>collapse</p>
 				</div>
 				<!-- <core-button label="Read More"></core-button> -->
@@ -42,12 +42,9 @@ import airprops from '../../mixins/airprops';
 export default {
 	mixins: [ airprops ],
 	data() {
-
-		// let copyFull = false;
-
-		// console.log(this.$refs);
 		return {
-			copyFull: true
+			shortText: true,
+			copyFull: false
 		};
 	},
 	methods: {
@@ -55,6 +52,11 @@ export default {
 			this.copyFull = !this.copyFull;
 		}
 
+	},
+	mounted() {
+		if (this.$refs.copyContainer.offsetHeight < this.$refs.copy.offsetHeight) {
+			this.shortText = false;
+		}
 	}
 };
 
