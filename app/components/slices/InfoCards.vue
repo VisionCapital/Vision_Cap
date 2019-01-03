@@ -51,7 +51,11 @@ export default {
 
 		/deep/ h1
 			color $w
-			fs(mp(3))
+			fs(mp(2))
+			padding 2em
+
+			+above($mobile)
+				fs(mp(3))
 
 .individual-card
 	margin 2px
@@ -59,7 +63,7 @@ export default {
 	color $w
 	width 100%
 	padding 3em (100%/12) 3em (100%/12)
-	
+
 	+above($mobile)
 		width (100%/3)
 
@@ -69,8 +73,6 @@ export default {
 	p
 		font-size inherit
 	
-
-
 .bg
 	height 100%
 	left 0
