@@ -9,7 +9,7 @@
 		</router-link>
 
 		<transition appear>
-			<main-nav/>
+			<main-nav v-if="!$store.state.device.mobile || $store.state.navOpen"/>
 		</transition>
 
 		<transition appear>

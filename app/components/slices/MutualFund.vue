@@ -21,7 +21,10 @@
 					<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
 				</div>
 				<div class="row" v-for="(fund, idx) in funds" :key="idx">
-					<p v-for="(category, idx) in fund" :key="'category' + idx" v-html="category"></p>
+					<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
+					<p>
+						<a :href="fund.pdf">pdf icon</a>
+					</p>
 				</div>
 			</div>
 
@@ -94,19 +97,23 @@ export default {
 
 		let funds = [
 			{
-				code: 'DAM500',
-				currency: 'CAD',
-				class: 'A',
-				date: '12-Dec-18',
-				nav: 8.80,
+				info: {
+					code: 'DAM500',
+					currency: 'CAD',
+					class: 'A',
+					date: '12-Dec-18',
+					nav: 8.80
+				},
 				pdf: 'something.pdf'
 			},
 			{
-				code: 'DAM500',
-				currency: 'CAD',
-				class: 'A',
-				date: '12-Dec-18',
-				nav: 8.80,
+				info: {
+					code: 'DAM500',
+					currency: 'CAD',
+					class: 'A',
+					date: '12-Dec-18',
+					nav: 8.80
+				},
 				pdf: 'something.pdf'
 			}
 		];
@@ -197,6 +204,8 @@ a
 		display flex
 		&:nth-child(even)
 			background $lightgrey
+	h4
+		color $blue
 	p, h4
 		width (100% / 6)
 

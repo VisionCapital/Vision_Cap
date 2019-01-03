@@ -92,6 +92,10 @@ export default {
 	top 0
 	width 100%
 	z-index 10
+	+below($tablet) {
+		height 100%
+		pad(5,1)
+	}
 
 .bg
 	background black
@@ -102,16 +106,17 @@ export default {
 	list-style none
 	padding 0
 	position relative
-	text-align center
+	+above($tablet)
+		text-align center
 
 	/deep/
 		a
 			color white
 
 		li
-			display inline-block
 			max-width 280px
 			mgn(1,.5)
 			vertical-align middle
-
+			+above($tablet)
+				display inline-block
 </style>
