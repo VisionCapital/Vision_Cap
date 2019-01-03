@@ -53,19 +53,23 @@ export default {
 			color $w
 			fs(mp(3))
 
-.content
-	width 100%
-	display inline-block
-
 .individual-card
+	margin 2px
 	background-color $darkblue
 	color $w
-	width (100%/3)
-	margin 0 2px 0 2px
+	width 100%
+	padding 3em (100%/12) 3em (100%/12)
+	
+	+above($mobile)
+		width (100%/3)
 
 .copy
-	margin 10em (100%/12) 10em (100%/12)
 	text-align center
+
+	p
+		font-size inherit
+	
+
 
 .bg
 	height 100%
@@ -77,7 +81,10 @@ export default {
 	background-size: cover;
 
 .cards
-	display flex
+	width 100%
+	+above($mobile)
+		display flex
+		width 100%
 
 .heroAboveCards
 	padding-top 4em
