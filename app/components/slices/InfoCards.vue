@@ -52,20 +52,24 @@ export default {
 		/deep/ h1
 			color $w
 			fs(mp(2))
-			padding 2em
 
 			+above($mobile)
 				fs(mp(3))
 
 .individual-card
-	margin 2px
+	
 	background-color $darkblue
 	color $w
-	width 100%
-	padding 3em (100%/12) 3em (100%/12)
+	padding 2em 5% 2em 5%
 
-	+above($tablet)
+	+above($tablet) //desktop
 		width (100%/3)
+		margin 2px
+
+	+below($tablet) //tablet and mobile
+		width auto
+		margin 2px -6% 2px -6%
+		padding 4em 20% 4em 20%
 
 .copy
 	text-align center
