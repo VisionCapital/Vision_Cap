@@ -54,10 +54,13 @@ export default {
 
 .wrap
 	display inline-block
-
+	width 75%
 .form-row
 	display flex
 	width 100%
+	+below($tablet)
+		flex-direction column
+		align-items center
 
 	/deep/
 		input
@@ -65,6 +68,10 @@ export default {
 			border-bottom 2px solid $blue
 			flex-grow 1
 			width auto
+
+			+below($tablet)
+				width 100%
+				text-align center
 
 			&:hover
 				border-color $copy
@@ -85,7 +92,10 @@ export default {
 			letter-spacing (0.1 / 14) * 1em
 			line-height $let * 1.125em
 			flex-grow 0
-			margin-left 1em
+			margin-top 2em
+			+above($tablet)
+				margin-top 0
+				margin-left 1em
 
 			span
 				pad(0,.5,0,.25)

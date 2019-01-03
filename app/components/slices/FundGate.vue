@@ -48,24 +48,30 @@ export default {
 
 .fund-gate
 	@extend .slice
-	pad(2px,0)
+	// pad(2px,0)
 	position relative
 
-	.wrap
-		color $w
-		position relative
+.wrap
+	color $w
+	position relative
+	+above($tablet)
 		display flex
-		/deep/ h1
-			color $w
+	/deep/ h1
+		color $w
 
 .column
 	width 50%
 	height 400px
 	position relative
-	&:first-child
-		margin-right 2px
-	&:last-child
-		margin-left 2px
+	margin-top 4px
+	+above($tablet)
+		&:first-child
+			margin-right 2px
+		&:last-child
+			margin-left 2px
+
+	+below($tablet)
+		width 100%
 
 .link
 	position absolute 
@@ -76,15 +82,22 @@ export default {
 	z-index 2
 	border 1px solid $w
 	width 360px
+	+below($tablet)
+		width 280px
 	
 	// to kill global style
 	&:before, &:after, &:hover
 		width 360px
+		+below($tablet)
+			width 280px
 
 	/deep/ h3
 		width 100%
 		text-align center
 		color $w
+		+below($tablet)
+			fs(36)
+			mgn(0.5,0)
 
 .bg
 	height 100%
