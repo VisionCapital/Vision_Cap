@@ -46,13 +46,11 @@ export default {
 	@extend .slice
 
 	.wrap
-		margin-left 5%
 		max-width none
-		width 95%
+		width 100%
 
 .map-frame
-	width 70%
-
+	width (600% / 9)
 
 .map-ratio
 	overflow hidden
@@ -76,11 +74,9 @@ export default {
 
 
 .annotations
-	margin-right 40px
 	display flex
 	flex-direction column
 	justify-content center
-
 
 	/deep/ h2,
 	/deep/ h3
