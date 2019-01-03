@@ -31,6 +31,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('ContactCard', () => import('../components/slices/ContactCard.vue'));
 	Vue.component('ContactForm', () => import('../components/slices/ContactForm.vue'));
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
+	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
 
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
