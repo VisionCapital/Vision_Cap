@@ -56,14 +56,20 @@ export default {
 	@extend .slice
 	pad(2,0)
 
+.wrap
+	+below($tablet)
+		pad(0,2)
+
 h3, p
 	color $copy
 
 .contact-info
-	display flex
+	+above($tablet)
+		display flex
 
 .contacts 
-	mgn(0,0,0,2)
+	+above($tablet)
+		mgn(0,0,0,2)
 	p
 		margin-bottom 0
 		color $blk
