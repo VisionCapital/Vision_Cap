@@ -50,6 +50,8 @@ export default {
 .title-copy
 	order 1
 	width 100%
+	+below($tablet)
+		pad(0,1)
 
 	/deep/ h3
 		fs(mp(2))
@@ -62,6 +64,8 @@ export default {
 	order 2
 	position relative
 	pad(.5,1,2,0)
+	+below($tablet)
+		pad(.5,1,2,1)
 
 	/deep/
 		h2, a
@@ -88,6 +92,8 @@ export default {
 
 .chart
 	order 3
+	+below($tablet)
+		pad(2,0,0)
 
 	+above($tablet)
 		width (700% / 9)
