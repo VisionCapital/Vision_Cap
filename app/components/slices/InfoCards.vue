@@ -73,6 +73,7 @@ export default {
 
 .copy
 	text-align center
+	padding 10%
 
 	p
 		font-size inherit
