@@ -42,7 +42,10 @@ export default {
 
 		/deep/ h1
 			color $w
-
+			line-height 1em
+	
+			+below($tablet)
+				fs(mp(4))
 .bg
 	background-repeat no-repeat
 	background-size cover

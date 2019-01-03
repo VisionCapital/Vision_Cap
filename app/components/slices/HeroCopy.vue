@@ -52,4 +52,12 @@ export default {
 		margin 0 (100% / 8)
 		width (600% / 8)
 
+h1
+	color $w
+	fs(mp(2))
+	padding 2em
+
+	+above($mobile)
+		fs(mp(3))
+
 </style>
