@@ -17,14 +17,30 @@
 
 
 			<div class="funds">
-				<div class="heading row">
-					<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
+				<div v-if="!$store.state.device.mobile">
+					<div class="heading row">
+						<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
+					</div>
+					<div class="row" v-for="(fund, idx) in funds" :key="idx">
+						<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
+						<p>
+							<a :href="fund.pdf">pdf icon</a>
+						</p>
+					</div>
 				</div>
-				<div class="row" v-for="(fund, idx) in funds" :key="idx">
-					<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
-					<p>
-						<a :href="fund.pdf">pdf icon</a>
-					</p>
+
+				<div v-else>
+					<div class="row" v-for="(category, idx) in funds[fundIdx].info" :key="'category' + idx">
+						<h4 v-html="fundSpecs[idx]"></h4>
+						<p  v-html="category"></p>
+					</div>
+
+					<div class="row">
+						<h4 v-html="fundSpecs[fundSpecs.length - 1]"></h4>
+						<p>
+							<a :href="funds[fundIdx].pdf">pdf icon</a>
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -103,23 +119,23 @@ export default {
 
 		let funds = [
 			{
-				info: {
-					code: 'DAM500',
-					currency: 'CAD',
-					class: 'A',
-					date: '12-Dec-18',
-					nav: 8.80
-				},
+				info: [
+					'DAM500',
+					'CAD',
+					'A',
+					'12-Dec-18',
+					8.80
+				],
 				pdf: 'something.pdf'
 			},
 			{
-				info: {
-					code: 'DAM500',
-					currency: 'CAD',
-					class: 'A',
-					date: '12-Dec-18',
-					nav: 8.80
-				},
+				info: [
+					'DAM500',
+					'CAD',
+					'A',
+					'12-Dec-18',
+					8.80
+				],
 				pdf: 'something.pdf'
 			}
 		];
@@ -188,7 +204,8 @@ export default {
 			funds,
 			reports,
 			reportDrop: false,
-			reportIdx: 0
+			reportIdx: 0,
+			fundIdx: 0
 		};
 	}
 };
@@ -228,10 +245,15 @@ a
 		display flex
 		&:nth-child(even)
 			background $lightgrey
+		+below($tablet)
+			background none 
+			border-bottom 1px solid blue
+			justify-content space-between
 	h4
 		color $blue
 	p, h4
-		width (100% / 6)
+		+above($tablet)
+			width (100% / 6)
 
 .documents
 	pad(2,0)
