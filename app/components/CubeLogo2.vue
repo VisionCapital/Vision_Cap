@@ -42,11 +42,11 @@ export default {
 				ar,
 				1,
 				-1,
-				1,
+				0.1,
 				10000
 			);
 
-			this.camera.position.z = -2;
+			this.camera.position.z = -1.6;
 			this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 			this.mesh = new THREE.Object3D();
@@ -189,7 +189,7 @@ export default {
 			canvas: this.$refs.canvas
 		});
 
-		this.renderer.setClearColor(0xffffff, 1);
+		this.renderer.setClearColor(0x000000, 0);
 		this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 
 		this.setup();
