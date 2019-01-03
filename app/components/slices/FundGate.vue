@@ -61,13 +61,14 @@ export default {
 
 	/deep/ h1
 		color $w
-		
+
 
 .column
 	width 50%
 	height 400px
 	position relative
 	margin-top 4px
+		
 	+above($tablet)
 		&:first-child
 			margin-right 2px
@@ -93,6 +94,7 @@ export default {
 	// to kill global style
 	&:before, &:after, &:hover
 		width 360px
+		background: none
 		+below($tablet)
 			width 280px
 
@@ -100,6 +102,7 @@ export default {
 		width 100%
 		text-align center
 		color $w
+		
 		+below($tablet)
 			fs(36)
 			mgn(0.5,0)
