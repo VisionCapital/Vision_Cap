@@ -35,7 +35,7 @@ export default {
 	@extend .slice
 	pad(5,0)
 	position relative
-
+		
 	.wrap
 		color $w
 		position relative

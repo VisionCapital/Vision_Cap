@@ -12,16 +12,17 @@
 				</div>
 
 				<div class="cta">
-					<core-button label="View Larger Map"/>
+					<a href="https://www.google.com/maps?ll=43.647978,-79.384653&z=15&t=m&hl=en-US&gl=CA&mapclient=embed&cid=3974017344680135893" 
+					v-html="'View Larger Map'"
+					target="blank"></a>
+					<!-- <core-button label="View Larger Map"/> -->
 				</div>
 
 			</div>
 
 			<div class="map-frame">
 				<div class="map-ratio">
-					<!-- <img v-if="copy"
-						:src="copy"/> -->
-						<iframe :src="copy"></iframe>
+					<iframe :src="copy"></iframe>
 				</div>
 			</div>
 
@@ -42,16 +43,17 @@ export default {
 
 @import "../../styl/_variables"
 
-.map
-	@extend .slice
 
-	.wrap
-		max-width none
-		width 100%
+.wrap
+	+above(1060px * 1.1)
+		// compensating for extend .slice  on all the wraps
+		width calc(100vw - (50vw - 1060px / 2))
+	width 95%
+	margin 0 0 0 auto
 
 .map-frame
 	width (600% / 9)
-
+	width 100%
 .map-ratio
 	overflow hidden
 	padding-bottom 50%

@@ -2,7 +2,7 @@
   <div class="funds-info"> 
     <div class="wrap">
       
-			<h3 v-html="heading"></h3>
+			<h3 v-html="heading" v-if="heading"></h3>
 			<div class="contact-info">
 
 				<p v-html="subheading"></p>
@@ -11,7 +11,9 @@
 					<div v-for="(contact, idx) in contacts" :key="idx">
 
 						<p v-html="contact.name"></p>
-						<a :href="`tel:${contact.tel}`" v-html="contact.tel"/> or <a :href="`mailto:${contact.email}`" v-html="contact.email"/>
+						<a :href="`tel:${contact.tel}`" v-if="contact.tel" v-html="contact.tel"/> 
+						<em v-if="contact.email && contact.tel">or</em> 
+						<a v-if="contact.email" :href="`mailto:${contact.email}`" v-html="contact.email"/>
 
 					</div>
 				</div>

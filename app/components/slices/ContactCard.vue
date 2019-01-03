@@ -54,7 +54,7 @@ export default {
 		position relative
 
 .contact
-	width 46%
+	width 50%
 
 	p
 		margin 0
