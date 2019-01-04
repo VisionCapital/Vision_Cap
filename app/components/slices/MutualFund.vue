@@ -17,27 +17,69 @@
 
 
 			<div class="funds">
-				<div class="heading row">
-					<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
+				<div v-if="$store.state.device.mobile">Select Code</div>
+				<div v-if="!$store.state.device.mobile">
+					<div class="heading row">
+						<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
+					</div>
+					<div class="row" v-for="(fund, idx) in funds" :key="idx">
+						<p v-html="fund.code"></p>
+						<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
+						<p>
+							<a :href="fund.pdf">pdf icon</a>
+						</p>
+					</div>
 				</div>
-				<div class="row" v-for="(fund, idx) in funds" :key="idx">
-					<p v-for="(category, idx) in fund" :key="'category' + idx" v-html="category"></p>
+
+				<div v-else>
+					<div class="dropdown" @click="fundDrop = !fundDrop">
+						<div class="tab" v-html="funds[fundIdx].code"></div>
+					</div>
+
+					<div class="heading-tabs" v-if="fundDrop">
+						<div class="tab" v-for="(tab, idx) in funds"
+							v-html="tab.code"
+							v-if="idx !== fundIdx"
+							:key="'tab' + idx"
+							@click="fundIdx = idx"
+						></div>
+					</div>
+
+					<div class="row" v-for="(category, idx) in funds[fundIdx].info" :key="'category' + idx">
+						<h4 v-html="fundSpecs[idx + 1]"></h4>
+						<p  v-html="category"></p>
+					</div>
+
+					<div class="row">
+						<h4 v-html="fundSpecs[fundSpecs.length - 1]"></h4>
+						<p>
+							<a :href="funds[fundIdx].pdf">pdf icon</a>
+						</p>
+					</div>
 				</div>
 			</div>
 
 
-			<div class="reports">
+			<div class="documents">
+				<div v-if="$store.state.device.mobile">select document type</div>
 
-				<div class="heading-tabs">
+				<div class="dropdown" v-if="$store.state.device.mobile" @click="reportDrop = !reportDrop">
+					<div class="tab" v-html="reports[reportIdx].title"></div>
+				</div>
+
+				<div class="heading-tabs" v-if="!$store.state.device.mobile || reportDrop">
+
 					<div class="tab" v-for="(tab, idx) in reports" 
 						v-html="tab.title"
 						:class="{selected: idx === reportIdx}"
 						:key="'tab' + idx"
 						@click="reportIdx = idx"
 					></div>
+
 				</div>
 
 				<div class="report-content">
+					<div class="bg" v-if="!$store.state.device.mobile"></div>
 					<div class="row" v-for="document in reports[reportIdx].documents">
 						<div>
 							<h5 v-html="document.title"></h5>
@@ -94,19 +136,23 @@ export default {
 
 		let funds = [
 			{
+				info: [
+					'CAD',
+					'A',
+					'12-Dec-18',
+					8.80
+				],
 				code: 'DAM500',
-				currency: 'CAD',
-				class: 'A',
-				date: '12-Dec-18',
-				nav: 8.80,
 				pdf: 'something.pdf'
 			},
 			{
+				info: [
+					'EU',
+					'A',
+					'12-Dec-18',
+					8.80
+				],
 				code: 'DAM500',
-				currency: 'CAD',
-				class: 'A',
-				date: '12-Dec-18',
-				nav: 8.80,
 				pdf: 'something.pdf'
 			}
 		];
@@ -150,16 +196,33 @@ export default {
 						pdf: 'something.pdf'
 					}
 				]
+			},
+			{
+				title: 'Regulatory Filings',
+				documents: [
+					{
+						title: 'Financial Statement',
+						date: 'jul 27th, 2018',
+						pdf: 'something.pdf'
+					},
+					{
+						title: 'Financial Statement',
+						date: 'jul 27th, 2018',
+						pdf: 'something.pdf'
+					}
+				]
 			}
 		];
-
 
 		return {
 			fundSpecs,
 			reasons,
 			funds,
 			reports,
-			reportIdx: 0
+			reportDrop: false,
+			fundDrop: false,
+			reportIdx: 0,
+			fundIdx: 0
 		};
 	}
 };
@@ -175,63 +238,119 @@ export default {
 		position relative
 		pad(3, 0);
 
+
 a
 	width auto
 	&:before, &:after
 		display none
 
+.tab
+	background $grey
+	width calc((100% - 40px) / 5)
+	margin-right 10px
+	padding 0.5em 0
+	+below($tablet)
+		width 100%
+		background none 
+		fs(20)
+		color $blue
+
+	&:last-child
+		margin-right 0
+
+.row
+	display flex
+	justify-content space-between
+	align-items flex-end
+	border-bottom 1px solid $bluesat
+	+above($tablet)
+		pad(0,1.5)
+	+below($tablet)
+		&:last-child
+			border-bottom none
+
+
 
 .columns
-	display flex
-	flex-wrap wrap
 	position relative
-	justify-content space-between
+	+above($tablet)
+		display flex
+		flex-wrap wrap
+		justify-content space-between
 	h4 
 		color $blue
 	ul
-		width 45%
+		+above($tablet)
+			width 45%
 
 .funds
-	text-align center
-	.row
-		display flex
-		&:nth-child(even)
-			background $lightgrey
+	+above($tablet)
+		text-align center
+	.dropdown
+		position relative
+		left -5%
+		width 100vw
+		padding 5% 5%
+		background $grey
+	h4
+		color $blue
+		+below($tablet)
+			fs(24)
 	p, h4
-		width (100% / 6)
-
-.reports
+		+above($tablet)
+			width (100% / 6)
+	p
+		+below($tablet)
+			fs(17)
+.documents
 	pad(2,0)
 	
 	h5, p
 		mgn(1,1,.5,0)
-		display inline-block
+		+above($tablet)
+			display inline-block
+
+	p
+		+below($tablet)
+			margin-top 0
 	h5
 		color $blk
 		font-family $cormorant
+		+below($tablet)
+			fs(24)
 	.report-content
-		background $lightgrey
-	.row
-		display flex
-		justify-content space-between
-		align-items flex-end
-		border-bottom 1px solid blue
-		pad(0,1.5)
+		position relative
 
 	.heading-tabs
-		display flex
-		text-align center
-	.tab
-		background $grey
-		width calc((100% - 40px) / 5)
-		margin-right 10px
-		padding 0.5em 0
-		&:last-child
-			margin-right 0
+		+above($tablet)
+			display flex
+			text-align center
+	
+	.bg
+		background $lightgrey
+		z-index -1
+		position absolute 
+		left (-1080px / 2)
+		width 100vw
+		height 100%
+
 	.selected
 		background $lightgrey
 		color $blue
-
+		+below($tablet)
+			display none
+	.dropdown
+		width 100%
+		background $grey
+		+below($tablet)
+			position relative
+			left -5%
+			width 100vw
+			padding 5% 5%
+			
 .disclaimer
 	fs(12)
+	width 60%
+	+below($tablet)
+		width 90%
 </style>

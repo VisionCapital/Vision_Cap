@@ -4,15 +4,23 @@
 		<div class="wrap">
 			<div class="column" v-for="(link) in links" :key="link.label">
 				
-						<div class="bg" v-if="image"
-							:style="{ backgroundImage: `url('${image[0].url}')` }"/>
+				<router-link :to="link.url">
+
+					<div class="bg" v-if="image"
+						:style="{ backgroundImage: `url('${image[0].url}')` }"/>
 
 						<!-- <core-button type="link" :route="link.url" :label="link.label"></core-button> -->
 
-						<router-link class="link" :to="link.url"	v-html="link.label">
+				<div class="border">
+					<div class="border-stroke"/>
+						
+						<div class="link" v-html="link.label">
+											</div>
+
+						</div>
 						</router-link>
-				
 			</div>
+			
 		</div>
 
 	</div>
@@ -80,29 +88,45 @@ export default {
 
 	&:hover .bg
 		transform scale(1.1)
-		opacity 0.5
-		
+		opacity 1
+
+	&:hover 
+		.border-stroke//when you hover on the link, affects border class
+			transform scale(0.9)	
+
+	> a
+		position static	
+
 	+above($tablet) //desktop
 		&:first-child
 			margin-right 2px
 		&:last-child
 			margin-left 2px
 
+.border-stroke //separate border box element to be re-sized
+	border 1px solid $w
+	position absolute
+	height 100%
+	width 100%
+	transition all 0.4s $easeInCubic
 
-
-.link
+.border
 	position absolute 
 	top 50%
 	left 50%
 	transform translate(-50%, -50%)
 	color $w
 	z-index 2
-	border 1px solid $w
-	transition padding 0.3s linear
 	width auto
+	
 
-	&:hover
-		padding 10px
+.link
+	position relative 
+	color $w
+	z-index 2
+	width auto
+	padding 5px
+	display block
 
 	width 360px
 	+below($tablet)
@@ -135,7 +159,8 @@ export default {
 	background-size cover
 	background-repeat no-repeat
 	z-index 1
-	transition all 1s ease-in-out
+	transition all 0.4s $easeInCubic
+	opacity 0.6
 	
 
 </style>
