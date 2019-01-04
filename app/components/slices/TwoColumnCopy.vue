@@ -3,8 +3,7 @@
 		<div class="wrap">
 
 			<div class="title" v-if="data.fields.module_title.length">
-				<h2
-					v-html="data.text('module_title')"/>
+				<h2 v-html="data.text('module_title')"/>
 			</div>
 
 			<div v-else-if="title"
