@@ -43,40 +43,51 @@ export default {
 	@extend .slice
 	position relative
 
-	+above($tablet)
-		width 100%
 
 	.wrap
 		position relative
 
 		/deep/ h1
 			color $w
-			fs(mp(2))
+			font-size 30px
+			line-height (37/30)
+			+above($mobile)//tablet
+				fs(30)
+				line-height (52/44)
+			+above($tablet)//notebook
+				fs(36)
+				line-height (44/36)
+			+above($notebook)//laptop
+				fs(44)
+				line-height (52/44)
 
-			+above($mobile)
-				fs(mp(3))
-
-.individual-card
+.individual-card // style this according to dimensions
 	
 	background-color $darkblue
 	color $w
-	padding 2em 5% 2em 5%
 
-	+above($tablet) //desktop
-		width (100%/3)
-		margin 2px
 
-	+below($tablet) //tablet and mobile
+	+below($tablet) //mobile and tablet
 		width auto
-		margin 2px -6% 2px -6%
-		padding 4em 20% 4em 20%
+		margin 1em 0 
+		padding 0em 2em 
+
+	+above($tablet) //desktop plus
+		width (100%/3)
+		margin 5px
+		padding 0em 1vw 
+
 
 .copy
 	text-align center
-	padding 10%
+	padding 10px
 
 	p
-		font-size inherit
+		font-size relative
+		+below($notebook) //mobile and tablet
+			fs(12)
+		+below($tablet) 
+			fs($p)
 	
 .bg
 	height 100%
@@ -93,7 +104,10 @@ export default {
 		display flex
 		width 100%
 
+	padding-bottom 10%
+
 .heroAboveCards
-	padding-top 4em
+	padding-top 8em
+	padding-bottom 4em
 
 </style>
