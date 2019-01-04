@@ -2,10 +2,9 @@
 	<div class="two-column-copy-slice">
 		<div class="wrap">
 
-			<div class="title">
-				<h2 v-if="title"
-					v-html="title"/>
-
+			<div class="title" 
+				v-if="title"
+				v-html="title">
 			</div>
 
 			<div class="copy">
@@ -27,7 +26,7 @@ export default {
 	mixins: [ airprops ],
 
 	data() {
-		let title = '<h2>Vision capital corporation is the manager of the vision opportunity funds...</h2>';
+		let title = '<h3>Vision capital corporation is the manager of the vision opportunity funds...</h3>';
 		return {
 			title
 		};
@@ -47,11 +46,19 @@ export default {
 
 .title
 	/deep/ h3
-		@extend .heading
+		font-family $cormorant-semibold
+		+below($tablet)
+			font-family $cormorant-medium
+
+		// @extend .heading
 
 .copy
 	display flex
 	justify-content space-between
+	+below($tablet)
+		flex-direction column
 	p
-		width 46%
+		+above($tablet)
+			width 46%
+		
 </style>
