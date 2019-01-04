@@ -1,18 +1,26 @@
 <template>
 	<div class="fund-gate">
 
-
 		<div class="wrap">
 			<div class="column" v-for="(link) in links" :key="link.label">
+				
+				<router-link :to="link.url">
 
-				<div class="bg" v-if="image"
-					:style="{ backgroundImage: `url('${image[0].url}')` }"/>
+					<div class="bg" v-if="image"
+						:style="{ backgroundImage: `url('${image[0].url}')` }"/>
 
-				<!-- <core-button type="link" :route="link.url" :label="link.label"></core-button> -->
+						<!-- <core-button type="link" :route="link.url" :label="link.label"></core-button> -->
 
-				<router-link class="link" :to="link.url"	v-html="link.label">
-				</router-link>
+				<div class="border">
+					<div class="border-stroke"/>
+						
+						<div class="link" v-html="link.label">
+											</div>
+
+						</div>
+						</router-link>
 			</div>
+			
 		</div>
 
 	</div>
@@ -51,42 +59,75 @@ export default {
 	// pad(2px,0)
 	position relative
 
+	.wrap
+		width 100%
+
 .wrap
 	color $w
 	position relative
+		width 100%
 
 	+above($tablet) //desktop
 		display flex
-
+		width 100%
 
 	/deep/ h1
 		color $w
 
+	+below($tablet) //tablet and phone
+		width 100%
+		display inline-block
 
 .column
-	width 50%
+	width 100%
 	height 400px
 	position relative
 	margin-top 4px
-		
-	+above($tablet)
+	overflow hidden
+	background-color:#000;
+
+	&:hover .bg
+		transform scale(1.1)
+		opacity 1
+
+	&:hover 
+		.border-stroke//when you hover on the link, affects border class
+			transform scale(0.9)	
+
+	> a
+		position static	
+
+	+above($tablet) //desktop
 		&:first-child
 			margin-right 2px
 		&:last-child
 			margin-left 2px
 
-	+below($tablet)
-		width auto
-		margin 2px -6% 2px -6%
+.border-stroke //separate border box element to be re-sized
+	border 1px solid $w
+	position absolute
+	height 100%
+	width 100%
+	transition all 0.4s $easeInCubic
 
-.link
+.border
 	position absolute 
 	top 50%
 	left 50%
 	transform translate(-50%, -50%)
 	color $w
 	z-index 2
-	border 1px solid $w
+	width auto
+	
+
+.link
+	position relative 
+	color $w
+	z-index 2
+	width auto
+	padding 5px
+	display block
+
 	width 360px
 	+below($tablet)
 		width 280px
@@ -107,6 +148,8 @@ export default {
 			fs(36)
 			mgn(0.5,0)
 
+
+
 .bg
 	height 100%
 	left 0
@@ -116,5 +159,8 @@ export default {
 	background-size cover
 	background-repeat no-repeat
 	z-index 1
+	transition all 0.4s $easeInCubic
+	opacity 0.6
+	
 
 </style>
