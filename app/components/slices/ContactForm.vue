@@ -17,8 +17,7 @@
 					<input placeholder="Enter your phone number" type="tel" :required="false">
 				</div>
 				<div class="right">
-					<textarea placeholder="Enter your message"></textarea>
-					<!-- <input class="submit" type="submit" placeholder="Send"> -->
+					<textarea rows="1" placeholder="Enter your message"></textarea>
 					<button type="submit">
 						<span v-html="'Submit'"/>
 						<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
@@ -89,39 +88,49 @@ export default {
 	@extend .slice
 	text-align center
 	background $blue
+	.wrap
+		color $w
+		position relative
+		pad(2,0)
+
+		/deep/ h3
+			color $w
+		/deep/ h4
+			max-width 100%
+			color $w
+			opacity 0.7
+			fs(26)
+			+below($tablet)
+				fs(20)
 
 form
-	display flex
-	justify-content space-between
+
 	position relative
 	left 50%
 	transform translate(-50%,0)
-	width 50%
+	width 75%
+	+above($tablet)
+		width 60%
+		display flex
+		justify-content space-between
 
 .left
-	width 38%
+	+above($tablet)
+		width 36%
 
 .right 
-	width 60%
+	+above($tablet)
+		width 58%
 	
-.wrap
-	color $w
-	position relative
-
-	/deep/ h3
-		color $w
-	/deep/ h4
-		max-width 100%
-		color $w
-		opacity 0.7
-		fs(26)
 
 form 
 	/deep/ input, textarea
 		color $w
 		border 0
 		border-bottom 1px solid $w
+		padding 0
 		mgn(1,0)
+		line-height 2.5em
 
 		&:hover
 			border-color $copy
@@ -129,13 +138,17 @@ form
 		&:focus
 			border-color $blk
 
-		::placeholder
+		&::placeholder
 			color #9F9F9F
+			+below($tablet)
+				text-align center
+			
 
 	/deep/	button
 		background $blk
-		position absolute 
-		right 0
+		+above($tablet)
+			position absolute 
+			right 0
 		margin 0
 		align-items center
 		background $blk
@@ -147,6 +160,9 @@ form
 		line-height $let * 1.125em
 		flex-grow 0
 		margin-left 1em
+		+below($tablet)
+			mgn(1.5,auto,0)
+			// margin 0 auto
 
 		span
 			pad(0,.5,0,.25)

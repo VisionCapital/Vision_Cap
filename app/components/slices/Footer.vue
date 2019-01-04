@@ -114,5 +114,6 @@ export default {
 				width 40%
 				mgn(.5,.5)
 				&:first-child
+					max-width 100%
 					width auto
 </style>
