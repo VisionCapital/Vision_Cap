@@ -1,12 +1,15 @@
 <template>
-	<div class="two-column-copy-slice">
+	<div class="two-column-copy">
 		<div class="wrap">
 
-			<div class="title">
-				<h2 v-if="data.fields.module_title.length"
+			<div class="title" v-if="data.fields.module_title.length">
+				<h2
 					v-html="data.text('module_title')"/>
-				<h2 v-else-if="title"
-					v-html="title"/>
+			</div>
+
+			<div v-else-if="title"
+				class="title"
+				v-html="title">
 			</div>
 
 			<div v-if="data.fields.column_copy.length"
@@ -33,7 +36,7 @@ export default {
 	mixins: [ airprops ],
 
 	data() {
-		let title = '<h2>Vision capital corporation is the manager of the vision opportunity funds...</h2>';
+		let title = '<h3>Vision capital corporation is the manager of the vision opportunity funds...</h3>';
 		return {
 			title
 		};
@@ -47,22 +50,21 @@ export default {
 
 @import "../../styl/_variables"
 
-.two-column-copy-slice
+.two-column-copy
 	@extend .slice
 	pad(2,0)
 
 .title
 	/deep/ h3
-		@extend .heading
+		font-family $cormorant-semibold
+
+		+below($tablet)
+			font-family $cormorant-medium
 
 .copy
-	// display flex
-	// justify-content space-between
 	column-count 2
 
 	/deep/ p
 		margin-top 0
-		// width 46%
-		// max-width 100%
 
 </style>

@@ -95,6 +95,8 @@ export default {
 	+below($tablet) {
 		height 100%
 		pad(5,1)
+		font-family $cormorant
+		fs(30)
 	}
 
 .bg

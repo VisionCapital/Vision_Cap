@@ -44,6 +44,8 @@ export default {
 	background #f5f5f5
 	pad(4,0)
 	text-align center
+	+below($tablet)
+		pad(2,0)
 
 	/deep/
 		h2

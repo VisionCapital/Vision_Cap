@@ -6,6 +6,7 @@
 				:page="record"
 				:data="module"/>
 		</transition>
+		<page-footer/>
 	</div>
 </template>
 

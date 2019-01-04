@@ -50,18 +50,32 @@ export default {
 	pad(2,0)
 
 	.wrap
-		display flex
 		position relative
+		+above($tablet)
+			display flex
 
 .contact
-	width 50%
-
+	+above($tablet)
+		width 50%
+	+below($tablet)
+		mgn(0,0,2)
 	p
 		margin 0
+		color $copy
+
+	a
 		color $blue
 
-.title
-	/deep/ h3
-		// @extend .heading
+	/deep/ h4
+		font-family $cormorant-medium
+		fs(26)
+		+below($tablet)
+			fs(20)
 
+.title
+	/deep/ h2
+		@extend .heading
+		font-family $cormorant-semibold
+		+below($tablet)
+			fs(30)
 </style>
