@@ -1,8 +1,7 @@
 <template>
 	<div class="info-card-slice">
 
-			<div class="bg" v-if="image"
-			:style="{ backgroundImage: `url('${image[0].url}')` }"/>
+			<div class="bg"/>
 
 				<div class="wrap">
 					<div class="heroAboveCards">
@@ -62,20 +61,20 @@ export default {
 				line-height (52/44)
 
 .individual-card // style this according to dimensions
-	
+
 	background-color $darkblue
 	color $w
 
 
 	+below($tablet) //mobile and tablet
 		width auto
-		margin 1em 0 
-		padding 0em 2em 
+		margin 1em 0
+		padding 0em 2em
 
 	+above($tablet) //desktop plus
 		width (100%/3)
 		margin 5px
-		padding 0em 1vw 
+		padding 0em 1vw
 
 
 .copy
@@ -86,10 +85,11 @@ export default {
 		font-size relative
 		+below($notebook) //mobile and tablet
 			fs(12)
-		+below($tablet) 
+		+below($tablet)
 			fs($p)
-	
+
 .bg
+	background url('../../images/strip-bg.jpg')
 	height 100%
 	left 0
 	position absolute
