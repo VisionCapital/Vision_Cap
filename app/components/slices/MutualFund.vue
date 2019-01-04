@@ -41,7 +41,7 @@
 							v-html="tab.code"
 							v-if="idx !== fundIdx"
 							:key="'tab' + idx"
-							@click="fundIdx = idx"
+							@click="fundSelect(idx)"
 						></div>
 					</div>
 
@@ -73,7 +73,7 @@
 						v-html="tab.title"
 						:class="{selected: idx === reportIdx}"
 						:key="'tab' + idx"
-						@click="reportIdx = idx"
+						@click="reportSelect(idx)"
 					></div>
 
 				</div>
@@ -224,6 +224,19 @@ export default {
 			reportIdx: 0,
 			fundIdx: 0
 		};
+	},
+	methods: {
+		reportSelect(idx) {
+			this.reportIdx = idx;
+			if (this.$store.state.device.mobile) {
+				this.reportDrop = false;
+			}
+		},
+
+		fundSelect(idx) {
+			this.fundIdx = idx;
+			this.fundDrop = false;
+		}
 	}
 };
 </script>
