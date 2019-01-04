@@ -19,25 +19,28 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
 
-@import '../../sass/variables';
-@import '../../sass/ease';
+@import '../../styl/_variables';
+@import '../../styl/_ease';
 
 .close-outer {
 	cursor: pointer;
-	height: unit(65);
+	height 30px
+	width 30px
+	right 30px
+	// height: unit(65);
 	position: fixed;
-	right: unit(98);
-	top: unit(108);
-	width: unit(65);
+	// right: unit(98);
+	// top: unit(108);
+	// width: unit(65);
 	z-index: 2;
 
 	@include below($tablet) {
-		height: mobile-unit(120);
-		right: mobile-unit(96);
-		top: mobile-unit(80);
-		width: mobile-unit(120);
+		// height: mobile-unit(120);
+		// right: mobile-unit(96);
+		// top: mobile-unit(80);
+		// width: mobile-unit(120);
 		z-index: 3;
 	}
 }
