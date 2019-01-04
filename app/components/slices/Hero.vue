@@ -33,7 +33,7 @@ export default {
 
 .hero
 	@extend .slice
-	pad(5,0)
+	pad(4,0)
 	position relative
 		
 	.wrap
@@ -43,9 +43,16 @@ export default {
 		/deep/ h1
 			color $w
 			line-height 1em
+			padding-bottom 0.3em
 	
 			+below($tablet)
-				fs(mp(4))
+				padding-bottom 1em
+				fs (60)
+				line-height (73/60)
+		/deep/ p
+			+below($tablet)
+				fs(12)
+				line-height (24/12)
 .bg
 	background-repeat no-repeat
 	background-size cover
