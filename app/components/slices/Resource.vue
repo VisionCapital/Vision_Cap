@@ -55,8 +55,12 @@ export default {
 	.wrap
 		margin (100% / 8) auto
 
+h5
+	+below($tablet)
+		fs(12)
+
 .title
-	/deep/ h3
+	/deep/ h2
 		@extend .heading
 
 	+above($tablet)

@@ -288,9 +288,9 @@ a
 		text-align center
 	.dropdown
 		position relative
-		left -5%
+		left -15vw
 		width 100vw
-		padding 5% 5%
+		padding 5% 15vw
 		background $grey
 	h4
 		color $blue
@@ -318,6 +318,7 @@ a
 		font-family $cormorant
 		+below($tablet)
 			fs(24)
+			// margin-right 0
 	.report-content
 		position relative
 
@@ -332,7 +333,7 @@ a
 		position absolute 
 		left (-1080px / 2)
 		width 100vw
-		height 100%
+		height 100% 
 
 	.selected
 		background $lightgrey
@@ -344,9 +345,9 @@ a
 		background $grey
 		+below($tablet)
 			position relative
-			left -5%
+			left -15vw
 			width 100vw
-			padding 5% 5%
+			padding 5% 15vw
 			
 .disclaimer
 	fs(12)
