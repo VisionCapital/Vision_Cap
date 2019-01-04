@@ -17,11 +17,13 @@
 
 
 			<div class="funds">
+				<div v-if="$store.state.device.mobile">Select Code</div>
 				<div v-if="!$store.state.device.mobile">
 					<div class="heading row">
 						<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
 					</div>
 					<div class="row" v-for="(fund, idx) in funds" :key="idx">
+						<p v-html="fund.code"></p>
 						<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
 						<p>
 							<a :href="fund.pdf">pdf icon</a>
@@ -30,8 +32,21 @@
 				</div>
 
 				<div v-else>
+					<div class="dropdown" @click="fundDrop = !fundDrop">
+						<div class="tab" v-html="funds[fundIdx].code"></div>
+					</div>
+
+					<div class="heading-tabs" v-if="fundDrop">
+						<div class="tab" v-for="(tab, idx) in funds"
+							v-html="tab.code"
+							v-if="idx !== fundIdx"
+							:key="'tab' + idx"
+							@click="fundIdx = idx"
+						></div>
+					</div>
+
 					<div class="row" v-for="(category, idx) in funds[fundIdx].info" :key="'category' + idx">
-						<h4 v-html="fundSpecs[idx]"></h4>
+						<h4 v-html="fundSpecs[idx + 1]"></h4>
 						<p  v-html="category"></p>
 					</div>
 
@@ -46,6 +61,7 @@
 
 
 			<div class="documents">
+				<div v-if="$store.state.device.mobile">select document type</div>
 
 				<div class="dropdown" v-if="$store.state.device.mobile" @click="reportDrop = !reportDrop">
 					<div class="tab" v-html="reports[reportIdx].title"></div>
@@ -120,22 +136,22 @@ export default {
 		let funds = [
 			{
 				info: [
-					'DAM500',
 					'CAD',
 					'A',
 					'12-Dec-18',
 					8.80
 				],
+				code: 'DAM500',
 				pdf: 'something.pdf'
 			},
 			{
 				info: [
-					'DAM500',
-					'CAD',
+					'EU',
 					'A',
 					'12-Dec-18',
 					8.80
 				],
+				code: 'DAM500',
 				pdf: 'something.pdf'
 			}
 		];
@@ -197,13 +213,13 @@ export default {
 			}
 		];
 
-
 		return {
 			fundSpecs,
 			reasons,
 			funds,
 			reports,
 			reportDrop: false,
+			fundDrop: false,
 			reportIdx: 0,
 			fundIdx: 0
 		};
@@ -226,6 +242,19 @@ a
 	&:before, &:after
 		display none
 
+.tab
+	background $grey
+	width calc((100% - 40px) / 5)
+	margin-right 10px
+	padding 0.5em 0
+	+below($tablet)
+		width 100%
+		background none 
+		fs(20)
+		color $blue
+
+	&:last-child
+		margin-right 0
 
 .columns
 	position relative
@@ -240,7 +269,8 @@ a
 			width 45%
 
 .funds
-	text-align center
+	+above($tablet)
+		text-align center
 	.row
 		display flex
 		&:nth-child(even)
@@ -249,8 +279,13 @@ a
 			background none 
 			border-bottom 1px solid blue
 			justify-content space-between
+			vertical-align middle
+	.dropdown
+		background $grey
 	h4
 		color $blue
+		+below($tablet)
+			fs(20)
 	p, h4
 		+above($tablet)
 			width (100% / 6)
@@ -282,19 +317,7 @@ a
 			display flex
 			text-align center
 			
-	.tab
-		background $grey
-		width calc((100% - 40px) / 5)
-		margin-right 10px
-		padding 0.5em 0
-		+below($tablet)
-			width 100%
-			background none 
-			fs(20)
-			color $blue
 
-		&:last-child
-			margin-right 0
 	.selected
 		background $lightgrey
 		color $blue
