@@ -17,7 +17,6 @@
 						:key="link.path">
 						<router-link :to="link.path"
 							:title="link.title"
-							@click.native="$store.dispatch('toggleNav')"
 							v-html="link.title"/>
 					</li>
 
@@ -103,7 +102,6 @@ export default {
 	/deep/
 		a
 			color white
-
 
 		li
 			display inline-block
