@@ -79,6 +79,7 @@
 				</div>
 
 				<div class="report-content">
+					<div class="bg" v-if="!$store.state.device.mobile"></div>
 					<div class="row" v-for="document in reports[reportIdx].documents">
 						<div>
 							<h5 v-html="document.title"></h5>
@@ -237,6 +238,7 @@ export default {
 		position relative
 		pad(3, 0);
 
+
 a
 	width auto
 	&:before, &:after
@@ -256,6 +258,19 @@ a
 	&:last-child
 		margin-right 0
 
+.row
+	display flex
+	justify-content space-between
+	align-items flex-end
+	border-bottom 1px solid $bluesat
+	+above($tablet)
+		pad(0,1.5)
+	+below($tablet)
+		&:last-child
+			border-bottom none
+
+
+
 .columns
 	position relative
 	+above($tablet)
@@ -271,25 +286,22 @@ a
 .funds
 	+above($tablet)
 		text-align center
-	.row
-		display flex
-		&:nth-child(even)
-			background $lightgrey
-		+below($tablet)
-			background none 
-			border-bottom 1px solid blue
-			justify-content space-between
-			vertical-align middle
 	.dropdown
+		position relative
+		left -5%
+		width 100vw
+		padding 5% 5%
 		background $grey
 	h4
 		color $blue
 		+below($tablet)
-			fs(20)
+			fs(24)
 	p, h4
 		+above($tablet)
 			width (100% / 6)
-
+	p
+		+below($tablet)
+			fs(17)
 .documents
 	pad(2,0)
 	
@@ -298,25 +310,29 @@ a
 		+above($tablet)
 			display inline-block
 
+	p
+		+below($tablet)
+			margin-top 0
 	h5
 		color $blk
 		font-family $cormorant
+		+below($tablet)
+			fs(24)
 	.report-content
-		background $lightgrey
-	.row
-		display flex
-		justify-content space-between
-		align-items flex-end
-		border-bottom 1px solid blue
-		+above($tablet)
-			pad(0,1.5)
-
+		position relative
 
 	.heading-tabs
 		+above($tablet)
 			display flex
 			text-align center
-			
+	
+	.bg
+		background $lightgrey
+		z-index -1
+		position absolute 
+		left (-1080px / 2)
+		width 100vw
+		height 100%
 
 	.selected
 		background $lightgrey
@@ -326,7 +342,15 @@ a
 	.dropdown
 		width 100%
 		background $grey
-
+		+below($tablet)
+			position relative
+			left -5%
+			width 100vw
+			padding 5% 5%
+			
 .disclaimer
 	fs(12)
+	width 60%
+	+below($tablet)
+		width 90%
 </style>
