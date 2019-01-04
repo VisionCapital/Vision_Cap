@@ -3,12 +3,18 @@
 		<div class="wrap">
 
 			<div class="title">
-				<h2 v-if="title"
+				<h2 v-if="data.fields.module_title.length"
+					v-html="data.text('module_title')"/>
+				<h2 v-else-if="title"
 					v-html="title"/>
-
 			</div>
 
-			<div class="copy">
+			<div v-if="data.fields.column_copy.length"
+				v-html="data.html('column_copy')"
+				class="copy"/>
+
+			<div v-else-if="copy"
+				class="copy">
 				<p v-if="copy"
 					v-html="copy"/>
 				<p v-if="heading"
@@ -50,8 +56,13 @@ export default {
 		@extend .heading
 
 .copy
-	display flex
-	justify-content space-between
-	p
-		width 46%
+	// display flex
+	// justify-content space-between
+	column-count 2
+
+	/deep/ p
+		margin-top 0
+		// width 46%
+		// max-width 100%
+
 </style>

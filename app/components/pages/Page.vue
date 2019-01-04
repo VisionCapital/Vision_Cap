@@ -2,13 +2,9 @@
 	<div class="page">
 		<transition appear v-for="module in record.getModules()"
 			:key="module.id">
-			<component :is="moduleComponent(module.component)"
-				:componentName="module.component"
-				:heading="module.heading"
-				:subheading="module.subheading"
-				:copy="module.copy"
-				:image="module.image"
-				:notes="module.notes"/>
+			<component :is="module.component"
+				:page="record"
+				:data="module"/>
 		</transition>
 	</div>
 </template>
@@ -25,11 +21,12 @@ export default {
 
 	data() {
 
-		let slugger = this.slug === 'home' ? '/' : '/' + this.slug + '/';
-		let record = this.$cms.records.find((r) => r.get('url structure') === slugger);
+		// let slugger = this.slug === 'home' ? '/' : '/' + this.slug + '/';
+		// let record = this.$cms.records.find((r) => r.get('url structure') === slugger);
+
+		let record = this.$cms.findRecord(this.slug);
 
 		return {
-			slugger,
 			record
 		};
 	}

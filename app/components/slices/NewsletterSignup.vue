@@ -54,7 +54,7 @@ export default {
 
 .wrap
 	display inline-block
-	width 75%
+	// width 75%
 .form-row
 	display flex
 	width 100%

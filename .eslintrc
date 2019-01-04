@@ -256,7 +256,7 @@
     ],                                // enforces spacing between keys and values in object literal properties
     "linebreak-style": 2,             // disallow mixed 'LF' and 'CRLF' as linebreaks
     "lines-around-comment": [
-      2,
+      0,
       {
         "beforeBlockComment": true,
         "beforeLineComment": true

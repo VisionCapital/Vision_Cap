@@ -7,6 +7,7 @@ module.exports = {
 	commonLib: [ ], // [ 'jquery', 'gsap', 'whatever' ]
 	cmsAdapter: 'airtable',
 	cmsConfig: {
+		repo: 'https://visioncap.cdn.prismic.io/api/v2',
 		apiKey: 'key8E8wSxgLapJ0Vs',
 		baseKey: 'appYCYsZJkUhB2GAY'
 	}
