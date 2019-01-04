@@ -58,13 +58,16 @@ export default {
 	@extend .slice
 	pad(2,0)
 
-.wrap
-	+below($tablet)
-		pad(0,2)
+
+em
+	font-style normal
 
 h3, p
 	color $copy
 
+h3
+	fs(32)
+	
 .contact-info
 	+above($tablet)
 		display flex
