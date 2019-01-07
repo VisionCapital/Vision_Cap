@@ -13,12 +13,12 @@
 					<div v-for="(contact, idx) in contacts" :key="idx">
 						
 						<div v-if="contact.contact_name" v-html="data.htmlField(contact.contact_name)"></div>
-						<a :href="`tel:${contact.contact_phone[0].text}`" 
+						<a :href="`tel:${data.textField(contact.contact_phone)}`" 
 							v-if="contact.contact_phone" 
 							v-html="data.textField(contact.contact_phone)"/>
 						<em v-if="contact.contact_email && contact.contact_phone">or</em>
 						<a v-if="contact.contact_email" 
-							:href="`mailto:${contact.contact_email[0].text}`" 
+							:href="`mailto:${data.textField(contact.contact_email)}`" 
 							v-html="data.textField(contact.contact_email)"/>
 
 					</div>
