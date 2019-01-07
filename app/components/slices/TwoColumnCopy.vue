@@ -32,6 +32,7 @@
 import airprops from '../../mixins/airprops';
 
 export default {
+
 	mixins: [ airprops ],
 
 	data() {
@@ -54,16 +55,20 @@ export default {
 	pad(2,0)
 
 .title
-	/deep/ h3
-		font-family $cormorant-semibold
+	/deep/
+		h2, h3
+			fs(44)
+			font-family $cormorant-semibold
+			max-width (860 / 44) * 1em
 
-		+below($tablet)
-			font-family $cormorant-medium
+			+below($tablet)
+				font-family $cormorant-medium
 
 .copy
 	column-count 2
 
 	/deep/ p
 		margin-top 0
+		letter-spacing (0.1 / $p) * 1em
 
 </style>

@@ -19,6 +19,8 @@ var filename = isProd ? '[name].[chunkhash]' : '[name]';
 
 var commonLib = config.commonLib || [];
 
+var emailConfig = require('./app/email-config.json');
+
 var webpackOptions = {
 
 	context: __dirname + '/app',
@@ -52,6 +54,8 @@ var webpackOptions = {
 			__DESCRIPTION: JSON.stringify(config.description),
 			__PATH: JSON.stringify(config.publicPath),
 			__ANALYTICS_UA: JSON.stringify(config.analyticsId),
+			__EMAIL_URL: JSON.stringify(emailConfig.action),
+			__EMAIL_FIELDS: JSON.stringify(emailConfig.fields),
 			__CMS_ADAPTER: JSON.stringify(config.cmsAdapter),
 			__CMS_CONFIG: JSON.stringify(config.cmsConfig)
 		}),
@@ -70,6 +74,7 @@ var webpackOptions = {
 		}),
 		new CopyWebpackPlugin([
 			{ from: 'favicon.ico', to: 'favicon.ico' },
+			{ from: 'email-config.json', to: 'email-config.json' },
 			{ from: 'manifest.json', to: 'manifest.json' },
 			{ from: 'apple-touch-icon.png', to: 'apple-touch-icon.png' }
 		])
