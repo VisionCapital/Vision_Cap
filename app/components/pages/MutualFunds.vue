@@ -18,10 +18,12 @@
 			</div>
 
 			<div class="funds">
+
 				<div v-if="$store.state.device.mobile">Select Code</div>
+
 				<div v-if="!$store.state.device.mobile">
 					<div class="heading row">
-						<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
+						<h4 v-for="columnTitle in fundSpecs" v-html="$cms.textField(columnTitle)"></h4>
 					</div>
 					<div class="row" v-for="(fund, idx) in fundInfo" :key="idx">
 						<p v-html="$cms.textField(fund.code)" v-if="fund.code"></p>
@@ -30,40 +32,55 @@
 
 						<!-- prismic-dom can convert to ISO date if required -->
 						<p v-html="fund.date"></p>
-						<p v-html="$cms.textField(fund.currency)"></p>
-						<a :href="fund.pdf.url" 
-							:name="fund.pdf.name" 
-							:type="fund.pdf.link_type" 
-							v-html="fund.pdf.name"/>
+						<p v-html="$cms.textField(fund.value)"></p>
+						<p>
+							<a :href="fund.pdf.url" 
+								:name="fund.pdf.name" 
+								:type="fund.pdf.link_type" 
+								v-html="fund.pdf.name"/>
+						</p>
 					</div>
 				</div>
 
 				<div v-else>
 					<div class="dropdown" @click="fundDrop = !fundDrop">
-						<div class="tab" v-html="funds[fundIdx].code"></div>
+						<div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
 					</div>
 
 					<div class="heading-tabs" v-if="fundDrop">
-						<div class="tab" v-for="(tab, idx) in funds"
-							v-html="tab.code"
-							v-if="idx !== fundIdx"
+						<div class="tab" v-for="(tab, idx) in fundInfo"
+							v-html="$cms.textField(tab.code)"
 							:key="'tab' + idx"
+							v-if="fundIdx !== idx"
 							@click="fundSelect(idx)"
 						></div>
 					</div>
 
-					<div class="row" v-for="(category, idx) in funds[fundIdx].info" :key="'category' + idx">
-						<h4 v-html="fundSpecs[idx + 1]"></h4>
-						<p  v-html="category"></p>
+					<div class="row">
+						<h4 v-html="'currency'"></h4>
+						<p v-html="$cms.textField(fundInfo[fundIdx].currency)" v-if="fundInfo[fundIdx].currency"></p>
 					</div>
 
 					<div class="row">
-						<h4 v-html="fundSpecs[fundSpecs.length - 1]"></h4>
-						<p>
-							<a :href="funds[fundIdx].pdf">pdf icon</a>
-						</p>
+						<h4 v-html="'class'"></h4>
+						<p v-html="fundInfo[fundIdx].class" v-if="fundInfo[fundIdx].class"></p>
 					</div>
+				
+					<div class="row">
+						<h4 v-html="'nav'"></h4>
+						<p v-html="$cms.textField(fundInfo[fundIdx].value)"></p>
+					</div>
+
+					<div class="row">
+						<h4 v-html="'fundfact'"></h4>
+						<a :href="fundInfo[fundIdx].pdf.url" 
+							:name="fundInfo[fundIdx].pdf.name" 
+							:type="fundInfo[fundIdx].pdf.link_type" 
+							v-html="fundInfo[fundIdx].pdf.name"/>
+					</div>
+
 				</div>
+
 			</div>
 
 
@@ -113,20 +130,17 @@ export default {
 	data() {
 		let data = this.$cms.funds.data;
 
-		console.log(this.$cms);
-		console.log(data);
 		let fundInfo = data.mutual_fund_info;
 		let reasons = data.reasons;
 
-
-		let fundSpecs = [
-			'Code',
-			'Currency',
-			'Class',
-			'As at',
-			'NAV($)',
-			'Fund Fact'
-		];
+		let fundSpecs = {
+			'code': data.code_title,
+			'currency': data.currency_title,
+			'class': data.class_title,
+			'date': data.date_title,
+			'value': data.value_title,
+			'pdf': data.pdf_title
+		};
 
 		let reports = [
 			{
@@ -187,6 +201,13 @@ export default {
 			reportIdx: 0,
 			fundIdx: 0
 		};
+	},
+	computed: {
+		fundsMobile() {
+			// let fundsInfoMob = Array.from(this.fundInfo);
+			// fundsInfoMob.splice(this.fundIdx, 1);
+			// return fundsInfoMob;
+		}
 	},
 	methods: {
 		reportSelect(idx) {
