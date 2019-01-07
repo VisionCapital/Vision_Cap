@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="cards" v-if="data.items">
-				<div class="individual-card" v-for="i in data.items" :key="i">
+				<div class="individual-card" v-for="(i, idx) in data.items" :key="idx">
 					<div class="copy"
 						v-if="i.info"
 						v-html="data.htmlField(i.info)"/>
