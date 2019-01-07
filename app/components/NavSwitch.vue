@@ -53,6 +53,12 @@ export default {
 	align-items center
 	pad(1,1)
 
+	a:after
+		background:none
+
+	a:before
+		background:none
+
 	/deep/ button
 		appearance none
 		background none
