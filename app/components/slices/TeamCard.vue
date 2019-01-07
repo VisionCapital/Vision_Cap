@@ -3,7 +3,7 @@
 
 		<div class="wrap" v-if="data.items.length">
 
-			<div class="card" v-for="card in data.items">
+			<div class="card" :v-for="card in data.items">
 
 				<div class="img-wrap">
 					<img class="profile-pic" :src="card.profile_image.url" v-if="card.profile_image.url">

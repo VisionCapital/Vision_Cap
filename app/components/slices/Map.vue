@@ -11,10 +11,18 @@
 						v-html="subheading"/>
 				</div>
 
-				<div class="cta" v-if="!$store.state.device.mobile">
-					<a href="https://www.google.com/maps?ll=43.647978,-79.384653&z=15&t=m&hl=en-US&gl=CA&mapclient=embed&cid=3974017344680135893" 
-					v-html="'View Larger Map'"
-					target="blank"></a>
+				<div class="cta" v-if="!$store.state.device.mobile"><!-- if it's desktop-->
+				<h4 v-html="data.text('map_title')"/>
+				<p v-html="data.text('map_location')"/>
+					<a :href="data.fields.map_link.url" :target="_blank">
+						<div v-html="data.text('map_link_title')"/>
+						</a>
+					<!-- <core-button label="View Larger Map"/> -->
+				</div>
+
+				<div class="cta-mobile" v-if="$store.state.device.mobile"><!-- if it's mobile-->
+				<h4 v-html="data.text('map_title')"/>
+				<p v-html="data.text('map_location')"/>
 					<!-- <core-button label="View Larger Map"/> -->
 				</div>
 
@@ -22,7 +30,7 @@
 
 			<div class="map-frame">
 				<div class="map-ratio">
-					<iframe :src="copy"></iframe>
+					<div v-html="data.text('map_embed_code')"/>
 				</div>
 			</div>
 
@@ -53,6 +61,10 @@ export default {
 	+below($tablet)
 		width 100%
 
+p
+	max-width 100%
+h4
+	color $blue
 
 .map-frame
 	width (600% / 9)
@@ -94,10 +106,9 @@ export default {
 			padding 0 5%
 
 	+above($tablet)
-		// display flex
-
-		.copy
-			// width (400%/ 6)
+		min-width 75%
+		text-align left
+		margin-right -50%
 
 		.cta
 			pad(1,0)
@@ -105,5 +116,13 @@ export default {
 
 			.button
 				width 100%
+
+	+above($mobile)
+
+		.cta-mobile
+			text-align center
+			display inline-block
+			background-color $lightgrey
+
 	
 </style>
