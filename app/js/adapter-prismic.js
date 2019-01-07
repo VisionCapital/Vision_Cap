@@ -68,8 +68,19 @@ class CMSAdapter {
 
 		this.records = docs.results.map((d) => new CMSRecord(d));
 
-	}
+		let mutualFund = await this.prismic.query(
+			Prismic.Predicates.at('document.type', 'mutual_funds')
+		);
 
+		this.funds = mutualFund.results[0];
+
+	}
+	htmlField(field) {
+		return PrismicDOM.RichText.asHtml(field);
+	}
+	textField(field) {
+		return PrismicDOM.RichText.asText(field);
+	}
 	findRecord(slug) {
 		return this.records.find((r) => r.item.uid === slug);
 	}

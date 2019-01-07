@@ -4,17 +4,18 @@
 
 			<div class="motivation">
 
-				<h2 v-html="heading"></h2>
+				<h2 v-html="data.reasons_heading[0].text"></h2>
 
 				<div class="columns">
-					<ul v-for="(reason, idx) in reasons" :key="idx">
-						<h4 v-html="reason.title" v-if="reason.title"></h4>
-						<li v-for="(item, idx) in reason.copy" :key="'item' + idx" v-html="item"></li>
-					</ul>
+					<div v-for="(reason, idx) in reasons" :key="idx">
+						<h4 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h4>
+						<ul>
+							<li v-for="(item, i) in reason.list_items" :key="'item' + i" v-html="item.text"></li>
+						</ul>
+					</div>
 				</div>
 
 			</div>
-
 
 			<div class="funds">
 				<div v-if="$store.state.device.mobile">Select Code</div>
@@ -22,12 +23,18 @@
 					<div class="heading row">
 						<h4 v-for="columnTitle in fundSpecs" v-html="columnTitle"></h4>
 					</div>
-					<div class="row" v-for="(fund, idx) in funds" :key="idx">
-						<p v-html="fund.code"></p>
-						<p v-for="(category, idx) in fund.info" :key="'category' + idx" v-html="category"></p>
-						<p>
-							<a :href="fund.pdf">pdf icon</a>
-						</p>
+					<div class="row" v-for="(fund, idx) in fundInfo" :key="idx">
+						<p v-html="$cms.textField(fund.code)" v-if="fund.code"></p>
+						<p v-html="$cms.textField(fund.currency)" v-if="fund.currency"></p>
+						<p v-html="fund.class" v-if="fund.class">
+
+						<!-- prismic-dom can convert to ISO date if required -->
+						<p v-html="fund.date"></p>
+						<p v-html="$cms.textField(fund.currency)"></p>
+						<a :href="fund.pdf.url" 
+							:name="fund.pdf.name" 
+							:type="fund.pdf.link_type" 
+							v-html="fund.pdf.name"/>
 					</div>
 				</div>
 
@@ -99,63 +106,18 @@
 
 <script>
 
-import airprops from '../../mixins/airprops';
+// import LerpScroll from '../../js/lerp-scroll.js';
 
 export default {
 
-	mixins: [ airprops ],
-
 	data() {
+		let data = this.$cms.funds.data;
 
-		let reasons = [
-			{
-				title: '<h4>Strategy</h4>',
-				copy: [
-					'Buying Real Estate cheaper in the stock market than in the property market',
-					'Profiting from declining prices on overvalued publicly traded real estate securities'
-					+ '"One cant short an overvalued mall or office building, but can short overvalued securities"'
-				]
-			},
-			{
-				title: '<h4>Strategy</h4>',
-				copy: [
-					'Buying Real Estate cheaper in the stock market than in the property market',
-					'Profiting from declining prices on overvalued publicly traded real estate securities'
-					+ '"One cant short an overvalued mall or office building, but can short overvalued securities"'
-				]
-			},
-			{
-				title: '<h4>Strategy</h4>',
-				copy: [
-					'Buying Real Estate cheaper in the stock market than in the property market',
-					'Profiting from declining prices on overvalued publicly traded real estate securities'
-					+ '"One cant short an overvalued mall or office building, but can short overvalued securities"'
-				]
-			}
-		];
+		console.log(this.$cms);
+		console.log(data);
+		let fundInfo = data.mutual_fund_info;
+		let reasons = data.reasons;
 
-		let funds = [
-			{
-				info: [
-					'CAD',
-					'A',
-					'12-Dec-18',
-					8.80
-				],
-				code: 'DAM500',
-				pdf: 'something.pdf'
-			},
-			{
-				info: [
-					'EU',
-					'A',
-					'12-Dec-18',
-					8.80
-				],
-				code: 'DAM500',
-				pdf: 'something.pdf'
-			}
-		];
 
 		let fundSpecs = [
 			'Code',
@@ -215,9 +177,10 @@ export default {
 		];
 
 		return {
+			data,
 			fundSpecs,
 			reasons,
-			funds,
+			fundInfo,
 			reports,
 			reportDrop: false,
 			fundDrop: false,
@@ -237,6 +200,10 @@ export default {
 			this.fundIdx = idx;
 			this.fundDrop = false;
 		}
+	},
+	mounted() {
+
+		// this.scroll = new LerpScroll(this.$el);
 	}
 };
 </script>
@@ -292,7 +259,7 @@ a
 		justify-content space-between
 	h4 
 		color $blue
-	ul
+	>div
 		+above($tablet)
 			width 45%
 
