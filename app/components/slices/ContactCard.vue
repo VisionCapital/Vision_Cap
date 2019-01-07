@@ -13,10 +13,10 @@
           v-html="data.textField(contact.position)"/>
 
         <p v-if="contact.email">
-          Email: <a :href="`mailto:${contact.email[0].text}`" v-html="data.textField(contact.email)"></a>
+          Email: <a :href="`mailto:${data.textField(contact.email)}`" v-html="data.textField(contact.email)"></a>
         </p>
 				<p v-if="contact.phone">
-					Tel: <a :href="`tel:${contact.phone[0].text}`" v-html="data.textField(contact.phone)"></a>
+					Tel: <a :href="`tel:${data.textField(contact.phone)}`" v-html="data.textField(contact.phone)"></a>
 				</p>
 
       </div>
