@@ -1,8 +1,10 @@
 <template>
-  <div class="funds-info"> 
+  <div class="funds-info">
     <div class="wrap">
-      
-			<h3 v-html="heading" v-if="heading"></h3>
+
+			<h3 v-if="heading"
+				v-html="heading"/>
+
 			<div class="contact-info">
 
 				<p v-html="subheading"></p>
@@ -11,8 +13,8 @@
 					<div v-for="(contact, idx) in contacts" :key="idx">
 
 						<p v-html="contact.name"></p>
-						<a :href="`tel:${contact.tel}`" v-if="contact.tel" v-html="contact.tel"/> 
-						<em v-if="contact.email && contact.tel">or</em> 
+						<a :href="`tel:${contact.tel}`" v-if="contact.tel" v-html="contact.tel"/>
+						<em v-if="contact.email && contact.tel">or</em>
 						<a v-if="contact.email" :href="`mailto:${contact.email}`" v-html="contact.email"/>
 
 					</div>
@@ -67,12 +69,12 @@ h3, p
 
 h3
 	fs(32)
-	
+
 .contact-info
 	+above($tablet)
 		display flex
 
-.contacts 
+.contacts
 	+above($tablet)
 		mgn(0,0,0,2)
 	p

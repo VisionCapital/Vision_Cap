@@ -16,7 +16,8 @@
 			</div>
 
 			<div class="chart">
-				<img :src="image[0].url"/>
+				<img v-if="image"
+					:src="image[0].url"/>
 			</div>
 
 		</div>

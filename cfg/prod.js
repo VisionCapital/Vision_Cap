@@ -5,7 +5,7 @@ module.exports = {
 	analyticsId: 'UA-XXXXXXXX-X',
 	prerenderPaths: [ ], // [ '/', '/about', '/contact' ]
 	commonLib: [ ], // [ 'jquery', 'gsap', 'whatever' ]
-	cmsAdapter: 'airtable',
+	cmsAdapter: 'prismic',
 	cmsConfig: {
 		repo: 'https://visioncap.cdn.prismic.io/api/v2',
 		apiKey: 'key8E8wSxgLapJ0Vs',

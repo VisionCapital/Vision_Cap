@@ -1,25 +1,40 @@
 <template>
 	<div class="info-card-slice">
 
-			<div class="bg"/>
+		<div class="bg"/>
 
-				<div class="wrap">
-					<div class="heroAboveCards">
+		<div class="wrap">
+
+			<div class="heroAboveCards">
+				<div class="copy">
+
+					<h1 v-if="data.fields.heading"
+						v-html="data.text('heading')"/>
+					<h1 v-else-if="heading"
+						v-html="heading"/>
+
+				</div>
+			</div>
+
+			<div class="cards" v-if="data.items">
+				<div class="individual-card" v-for="i in data.items" :key="i">
+					<div class="copy"
+						v-if="i.info"
+						v-html="data.htmlField(i.info)"/>
+				</div>
+			</div>
+
+			<div class="cards" v-else>
+				<div class="individual-card" v-for="i in 3" :key="i">
 					<div class="copy">
-					<h1 v-if="heading"
-					v-html="heading"/>
+						<p v-if="copy"
+							v-html="copy"/>
 					</div>
 				</div>
+			</div>
 
-	<div class="cards">
-		<div class="individual-card" v-for="i in 3" :key="i">
-            <div  class="copy">
-					<p v-if="copy"
-						v-html="copy"/>
-				</div>
 		</div>
-		</div>
-		</div>
+
 	</div>
 </template>
 
