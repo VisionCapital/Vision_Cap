@@ -12,9 +12,18 @@
 			
 			<form ref="form" @submit.prevent="doSubmit()">
 				<div class="left">
-					<input placeholder="Jeffrey Olin" type="text" :required="true">
-					<input placeholder="Enter your email address" type="email" :required="true">
-					<input placeholder="Enter your phone number" type="tel" :required="false">
+					<div>
+						<div class="required" v-if="isRequired">*</div>
+						<input placeholder="Jeffrey Olin" type="text" :required="isRequired">
+					</div>	
+					<div>
+						<div class="required" v-if="isRequired">*</div>
+						<input placeholder="Enter your email address" type="email" :required="isRequired">
+					</div>
+					<div>
+						<div class="required" v-if="isRequired">*</div>
+						<input placeholder="Enter your phone number" type="tel" :required="false">
+					</div>
 				</div>
 				<div class="right">
 					<textarea rows="1" placeholder="Enter your message"></textarea>
@@ -42,22 +51,23 @@ import axios from 'axios';
 
 export default {
 	mixins: [ airprops ],
+	data() {
+		return {
+			isRequired: true,
+			success: false,
+			errors: null,
+			errorMessage: null,
+			action
+		};
+	},
 	methods: {
-		data() {
-			return {
-				success: false,
-				errors: null,
-				errorMessage: null,
-				action
-			};
-		},
+
 		doSubmit() {
 			this.success = false;
 			this.errors = null;
 
 			let form = this.$refs.form;
 			let formData = new FormData(form);
-			console.log(formData);
 			let request = {};
 			for (let item of formData) {
 				request[item[0]] = item[1];
@@ -121,7 +131,11 @@ form
 .right 
 	+above($tablet)
 		width 58%
-	
+
+.required
+	position absolute
+	left -2em
+	color $copy
 
 form 
 	/deep/ input, textarea

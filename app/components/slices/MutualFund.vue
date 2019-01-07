@@ -41,7 +41,7 @@
 							v-html="tab.code"
 							v-if="idx !== fundIdx"
 							:key="'tab' + idx"
-							@click="fundIdx = idx"
+							@click="fundSelect(idx)"
 						></div>
 					</div>
 
@@ -73,7 +73,7 @@
 						v-html="tab.title"
 						:class="{selected: idx === reportIdx}"
 						:key="'tab' + idx"
-						@click="reportIdx = idx"
+						@click="reportSelect(idx)"
 					></div>
 
 				</div>
@@ -224,6 +224,19 @@ export default {
 			reportIdx: 0,
 			fundIdx: 0
 		};
+	},
+	methods: {
+		reportSelect(idx) {
+			this.reportIdx = idx;
+			if (this.$store.state.device.mobile) {
+				this.reportDrop = false;
+			}
+		},
+
+		fundSelect(idx) {
+			this.fundIdx = idx;
+			this.fundDrop = false;
+		}
 	}
 };
 </script>
@@ -288,9 +301,9 @@ a
 		text-align center
 	.dropdown
 		position relative
-		left -5%
+		left -15vw
 		width 100vw
-		padding 5% 5%
+		padding 5% 15vw
 		background $grey
 	h4
 		color $blue
@@ -318,6 +331,7 @@ a
 		font-family $cormorant
 		+below($tablet)
 			fs(24)
+			// margin-right 0
 	.report-content
 		position relative
 
@@ -332,7 +346,7 @@ a
 		position absolute 
 		left (-1080px / 2)
 		width 100vw
-		height 100%
+		height 100% 
 
 	.selected
 		background $lightgrey
@@ -344,9 +358,9 @@ a
 		background $grey
 		+below($tablet)
 			position relative
-			left -5%
+			left -15vw
 			width 100vw
-			padding 5% 5%
+			padding 5% 15vw
 			
 .disclaimer
 	fs(12)
