@@ -32,7 +32,10 @@
 
 <script>
 
+import airprops from '../../mixins/airprops';
+
 export default {
+	mixins: [ airprops ],
 	data() {
 		let contacts = this.data.items;
 		return {
