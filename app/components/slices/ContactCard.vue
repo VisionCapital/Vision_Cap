@@ -2,21 +2,21 @@
 	<div class="contact-card">
 		<div class="wrap">
 
-      <div class="contact" v-for="repeat in 2">
+      <div class="contact" v-for="(contact, idx) in contacts" :key="idx">
 
-        <div class="title">
-          <h2 v-if="heading"
-            v-html="heading"/>
+        <div class="title" 
+					v-if="contact.name"
+					v-html="data.htmlField(contact.name)">
         </div>
 
-        <h4 v-if="subheading"
-          v-html="subheading"/>
+        <h4 v-if="contact.position"
+          v-html="data.textField(contact.position)"/>
 
-        <p v-if="email">
-          Email: <a :href="`mailto:${email}`" v-html="email"></a>
+        <p v-if="contact.email">
+          Email: <a :href="`mailto:${contact.email[0].text}`" v-html="data.textField(contact.email)"></a>
         </p>
-				<p v-if="tel">
-					Tel: <a :href="`tel:${tel}`" v-html="tel"></a>
+				<p v-if="contact.phone">
+					Tel: <a :href="`tel:${contact.phone[0].text}`" v-html="data.textField(contact.phone)"></a>
 				</p>
 
       </div>
@@ -32,9 +32,9 @@ import airprops from '../../mixins/airprops';
 export default {
 	mixins: [ airprops ],
 	data() {
+		let contacts = this.data.items;
 		return {
-			email: 'kosack@visioncap.ca',
-			tel: '555-555-5555'
+			contacts
 		};
 	}
 };
