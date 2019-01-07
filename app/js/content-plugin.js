@@ -29,7 +29,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('TwoColumnCopy', () => import('../components/slices/TwoColumnCopy.vue'));
 	Vue.component('TeamCard', () => import('../components/slices/TeamCard.vue'));
 	Vue.component('ContactCard', () => import('../components/slices/ContactCard.vue'));
-	Vue.component('ContactForm', () => import('../components/slices/ContactForm.vue'));
+	Vue.component('ContactForm', () => import('../components/slices/Contact.vue'));
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
 	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
 	Vue.component('MutualFund', () => import('../components/slices/MutualFund.vue'));
