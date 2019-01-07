@@ -42,7 +42,12 @@
 
 import airprops from '../../mixins/airprops';
 
+import HeroBackground from '../HeroBackground.vue';
+
 export default {
+	components: {
+		HeroBackground
+	},
 	mixins: [ airprops ]
 };
 

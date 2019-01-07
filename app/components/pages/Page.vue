@@ -1,5 +1,5 @@
 <template>
-	<div class="page">
+	<div class="page"><div>
 		<transition appear v-for="module in record.getModules()"
 			:key="module.id">
 			<component :is="module.component"
@@ -7,12 +7,13 @@
 				:data="module"/>
 		</transition>
 		<page-footer/>
-	</div>
+	</div></div>
 </template>
 
 <script>
 
 import slices from '../../mixins/slices.js';
+import LerpScroll from '../../js/lerp-scroll.js';
 
 export default {
 
@@ -30,6 +31,9 @@ export default {
 		return {
 			record
 		};
+	},
+	mounted() {
+		this.scroll = new LerpScroll(this.$el);
 	}
 };
 

@@ -3,6 +3,10 @@
 
 		<div class="bg"/>
 
+		<!-- <div class="bg canvas">
+			<hero-background/>
+		</div> -->
+
 		<div class="wrap">
 			<div class="copy">
 
@@ -32,8 +36,12 @@
 
 import airprops from '../../mixins/airprops';
 
-export default {
+import HeroBackground from '../HeroBackground.vue';
 
+export default {
+	components: {
+		HeroBackground
+	},
 	mixins: [ airprops ]
 
 };

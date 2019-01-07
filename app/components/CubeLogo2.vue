@@ -11,6 +11,7 @@
 const THREE = require('three');
 
 import Ease from '../js/ease.js';
+import raf from '../js/global-raf.js';
 
 export default {
 	props: [],
@@ -62,9 +63,15 @@ export default {
 
 			for (let i = 0; i < 6; i++) {
 
+				let opacity = 0.75;
+
+				if (i === 1) {
+					opacity = 0;
+				}
+
 				let mat = new THREE.MeshBasicMaterial({
 					color: colors[i],
-					opacity: 0.75,
+					opacity,
 					side: THREE.DoubleSide
 				});
 
@@ -131,10 +138,6 @@ export default {
 			this.update();
 			this.renderer.render(this.scene, this.camera);
 
-			if (this.running) {
-				requestAnimationFrame(this.render);
-			}
-
 		},
 		resize() {
 
@@ -155,17 +158,6 @@ export default {
 			this.$refs.canvas.height = this.h;
 
 			this.renderer.setSize(this.w, this.h);
-
-		},
-		pause() {
-
-			this.running = false;
-
-		},
-		start() {
-
-			this.running = true;
-			requestAnimationFrame(this.render);
 
 		},
 
@@ -194,18 +186,16 @@ export default {
 
 		this.setup();
 		this.resize();
-		this.start();
 
+		raf.add(this.render);
 		window.addEventListener('resize', this.resize);
-
 		window.addEventListener('mousemove', this.momo);
 
 	},
 	beforeDestroy() {
 
-		this.pause();
+		this.$root.$off('tick', this.render);
 		window.removeEventListener('resize', this.resize);
-
 		window.removeEventListener('mousemove', this.momo);
 
 	}
