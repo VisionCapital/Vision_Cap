@@ -17,10 +17,14 @@
 			</div>
 
 			<div class="cards" v-if="data.items">
+<<<<<<< HEAD
 				<div class="individual-card" v-for="(i, idx) in data.items" :key="idx">
+=======
+				<div class="individual-card" v-for="(item, i) in data.items" :key="i">
+>>>>>>> e33a883f8525ba43decdedbb80f6945d0947f35e
 					<div class="copy"
-						v-if="i.info"
-						v-html="data.htmlField(i.info)"/>
+						v-if="item.info"
+						v-html="data.htmlField(item.info)"/>
 				</div>
 			</div>
 

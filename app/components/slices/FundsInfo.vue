@@ -2,20 +2,24 @@
   <div class="funds-info">
     <div class="wrap">
 
-			<h3 v-if="heading"
-				v-html="heading"/>
+			<div v-if="data.fields.fund_heading"
+				v-html="data.html('fund_heading')"/>
 
 			<div class="contact-info">
 
-				<p v-html="subheading"></p>
+				<p v-if="data.fields.fund_cta" v-html="data.text('fund_cta')"></p>
 
 				<div class="contacts">
 					<div v-for="(contact, idx) in contacts" :key="idx">
-
-						<p v-html="contact.name"></p>
-						<a :href="`tel:${contact.tel}`" v-if="contact.tel" v-html="contact.tel"/>
-						<em v-if="contact.email && contact.tel">or</em>
-						<a v-if="contact.email" :href="`mailto:${contact.email}`" v-html="contact.email"/>
+						
+						<div v-if="contact.contact_name" v-html="data.htmlField(contact.contact_name)"></div>
+						<a :href="`tel:${contact.contact_phone[0].text}`" 
+							v-if="contact.contact_phone" 
+							v-html="data.textField(contact.contact_phone)"/>
+						<em v-if="contact.contact_email && contact.contact_phone">or</em>
+						<a v-if="contact.contact_email" 
+							:href="`mailto:${contact.contact_email[0].text}`" 
+							v-html="data.textField(contact.contact_email)"/>
 
 					</div>
 				</div>
@@ -28,23 +32,9 @@
 
 <script>
 
-import airprops from '../../mixins/airprops';
-
 export default {
-	mixins: [ airprops ],
 	data() {
-		let contacts = [
-			{
-				name: 'Darren Kosack',
-				tel: '416-569-8498',
-				email: 'kosack@visioncap.ca'
-			},
-			{
-				name: 'Darren Kosack',
-				tel: '416-569-8498',
-				email: 'kosack@visioncap.ca'
-			}
-		];
+		let contacts = this.data.items;
 		return {
 			contacts
 		};
@@ -64,10 +54,10 @@ export default {
 em
 	font-style normal
 
-h3, p
+/deep/ h3, /deep/ p
 	color $copy
 
-h3
+/deep/ h3
 	fs(32)
 
 .contact-info
@@ -77,7 +67,7 @@ h3
 .contacts
 	+above($tablet)
 		mgn(0,0,0,2)
-	p
+	/deep/ p
 		margin-bottom 0
 		color $blk
 	a

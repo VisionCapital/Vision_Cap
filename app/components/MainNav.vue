@@ -6,7 +6,7 @@
 		<nav>
 			<ul class="links">
 
-				<li v-if="!$store.state.device.mobile">
+				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
 						class="home-link"
@@ -92,7 +92,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	+below($tablet) {
+	+below($notebook) {
 		height 100%
 		pad(5,1)
 		font-family $cormorant
@@ -108,7 +108,7 @@ export default {
 	list-style none
 	padding 0
 	position relative
-	+above($tablet)
+	+above($notebook)
 		text-align center
 
 	/deep/
@@ -119,6 +119,6 @@ export default {
 			max-width 280px
 			mgn(1,.5)
 			vertical-align middle
-			+above($tablet)
+			+above($notebook)
 				display inline-block
 </style>

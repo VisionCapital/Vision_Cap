@@ -9,14 +9,14 @@
 		</router-link>
 
 		<transition appear>
-			<main-nav v-if="!$store.state.device.mobile || $store.state.navOpen"/>
+			<main-nav v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"/>
 		</transition>
 
 		<transition appear>
 			<router-view :key="$route.fullPath"/>
 		</transition>
 
-		<nav-switch v-if="$store.state.device.mobile"/>
+		<nav-switch v-if="$store.state.device.win.x <= 1024"/>
 
 	</div>
 </template>
