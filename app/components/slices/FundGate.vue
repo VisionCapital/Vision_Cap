@@ -1,9 +1,32 @@
 <template>
 	<div class="fund-gate">
 
-		<div class="wrap">
+		<div class="wrap" v-if="data.items">
+
+			<div class="column" v-for="link in data.items" :key="link.label">
+				<router-link :to="link.gate_destination.slug">
+
+					<div class="bg" v-if="link.image"
+						:style="{ backgroundImage: `url('${link.image.url}')` }"/>
+
+					<div class="border">
+
+						<div class="border-stroke"/>
+
+						<div class="link">
+							<h3 v-html="data.textField(link.gate_heading)"/>
+						</div>
+
+					</div>
+
+				</router-link>
+			</div>
+
+		</div>
+
+		<div class="wrap" v-else>
 			<div class="column" v-for="(link) in links" :key="link.label">
-				
+
 				<router-link :to="link.url">
 
 					<div class="bg" v-if="image"
@@ -13,14 +36,14 @@
 
 				<div class="border">
 					<div class="border-stroke"/>
-						
+
 						<div class="link" v-html="link.label">
 											</div>
 
 						</div>
 						</router-link>
 			</div>
-			
+
 		</div>
 
 	</div>
@@ -90,12 +113,12 @@ export default {
 		transform scale(1.1)
 		opacity 1
 
-	&:hover 
+	&:hover
 		.border-stroke//when you hover on the link, affects border class
-			transform scale(0.9)	
+			transform scale(0.9)
 
 	> a
-		position static	
+		position static
 
 	+above($tablet) //desktop
 		&:first-child
@@ -111,17 +134,17 @@ export default {
 	transition all 0.4s $easeInCubic
 
 .border
-	position absolute 
+	position absolute
 	top 50%
 	left 50%
 	transform translate(-50%, -50%)
 	color $w
 	z-index 2
 	width auto
-	
+
 
 .link
-	position relative 
+	position relative
 	color $w
 	z-index 2
 	width auto
@@ -131,7 +154,7 @@ export default {
 	width 360px
 	+below($tablet)
 		width 280px
-	
+
 	// to kill global style
 	&:before, &:after, &:hover
 		width 360px
@@ -143,7 +166,7 @@ export default {
 		width 100%
 		text-align center
 		color $w
-		
+
 		+below($tablet)
 			fs(36)
 			mgn(0.5,0)
@@ -161,6 +184,6 @@ export default {
 	z-index 1
 	transition all 0.4s $easeInCubic
 	opacity 0.6
-	
+
 
 </style>
