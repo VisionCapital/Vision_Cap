@@ -22,16 +22,13 @@ export default {
 	mixins: [ slices ],
 
 	data() {
-
-		// let slugger = this.slug === 'home' ? '/' : '/' + this.slug + '/';
-		// let record = this.$cms.records.find((r) => r.get('url structure') === slugger);
-
 		let record = this.$cms.findRecord(this.slug);
 
 		return {
 			record
 		};
 	},
+
 	mounted() {
 		this.scroll = new LerpScroll(this.$el);
 	}
