@@ -74,7 +74,7 @@ export default {
 		};
 	},
 	methods: {
-		toggleText(idx) {
+		toggleText() {
 			// this.data.items[idx].
 		},
 		checkOverflow() {
