@@ -102,8 +102,12 @@ h4
 		margin-left 17%
 	+above($desktop)//ultra
 		margin-left 22.5%
+
 	+below($notebook)
 		text-align center
+		p
+			min-width 100%
+
 	/deep/ h2,
 	/deep/ h3
 		+below($notebook)
