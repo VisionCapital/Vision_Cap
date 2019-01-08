@@ -23,9 +23,8 @@ import airprops from '../../mixins/airprops';
 
 export default {
 	mixins: [ airprops ],
-	mounted() {
-		setTimeout(() => {
-
+	methods: {
+		formHTML() {
 			document.getElementsByClassName('ctct-form-button')[0].innerHTML =
 				` ${this.data.html('submit_button')} 
 				<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
@@ -35,7 +34,27 @@ export default {
 				</svg>`;
 			document.getElementsByClassName('ctct-form-element')[0].placeholder = this.data.text('placeholder');
 
-		}, 1000);
+		}
+	},
+	mounted() {
+		let submitHTML = this.data.html('submit_button');
+		let placeholderText = this.data.text('placeholder');
+
+		function formHTML() {
+			document.getElementsByClassName('ctct-form-button')[0].innerHTML =
+				` ${submitHTML} 
+				<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
+					<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
+						<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
+					</g>
+				</svg>`;
+			document.getElementsByClassName('ctct-form-element')[0].placeholder = placeholderText;
+
+		}
+
+		let observer = new MutationObserver(formHTML);
+		observer.observe(this.$refs.ctctForm, { childList: true });
+
 	}
 };
 </script>
