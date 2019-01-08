@@ -6,11 +6,11 @@
 			<!-- Begin Constant Contact Inline Form Code -->
 			<div class="ctct-inline-form" data-form-id="064dae77-9132-4260-8a7a-0042927baa39" ref="ctctForm"></div>
 			<!-- End Constant Contact Inline Form Code -->
-
+<!-- 
 			<h2 v-if="data.fields.heading"
 				v-html="data.text('heading')"/>
 			<h2 v-else
-				v-html="'Sign up to our newsletter:'"/>
+				v-html="'Sign up to our newsletter:'"/> -->
 
 		</div>
 
@@ -29,13 +29,13 @@ export default {
 
 		let func = () => {
 
-			console.log('mootled');
-
 			let btn = document.getElementsByClassName('ctct-form-button');
 			let input = document.getElementsByClassName('ctct-form-element');
+			let header = document.getElementsByClassName('ctct-form-header');
 
 			let hasBtn = btn && btn.length;
 			let hasInput = input && input.length;
+			let hasHeader = header && header.length;
 
 			if (hasBtn) {
 				btn[0].innerHTML =
@@ -50,8 +50,10 @@ export default {
 			if (hasInput) {
 				input[0].placeholder = this.data.text('placeholder');
 			}
-
-			if (hasBtn && hasInput) {
+			if (hasHeader) {
+				header[0].innerHTML = this.data.text('heading');
+			}
+			if (hasBtn && hasInput && hasHeader) {
 				this.observer.disconnect();
 			}
 		};
@@ -81,28 +83,33 @@ export default {
 	+below($tablet)
 		pad(2,0)
 
-	/deep/ h2
-		position absolute
+.wrap
+	display inline-block
+	position relative
+	+below($tablet)
+		width 75%
+.newsletter-signup /deep/ .ctct-inline-form
+	p
+		margin-left auto
+		margin-right auto
+	.ctct-form-custom
+		+below($tablet)
+			display flex
+			flex-direction column
+	.ctct-form-defaults
+		pad(4,0,0)
+		padding 0
+		background none
+	.ctct-form-custom .ctct-form-header
 		width 100%
 		font-family $cormorant-semibold
 		fs(40)
 		top -0.2em
 		letter-spacing -(0.2 / 40) * 1em
 		text-align center
-		margin 0
-		transform translateY(-100%)
+		margin 0 0 2rem
+		color $blue
 
-.wrap
-	display inline-block
-	position relative
-	mgn(2,0,0)
-.newsletter-signup /deep/ .ctct-inline-form
-	.ctct-form-defaults
-		pad(4,0,0)
-		padding 0
-		background none
-	.ctct-form-header
-		display none
 	.ctct-form-label
 		display none
 	.ctct-form-element
@@ -115,17 +122,25 @@ export default {
 		font-family $circular
 		padding-left 0
 		padding-left 0
+		+below($tablet)
+			width 100%
+			text-align center
+	#gdpr_text
+		order 5
 	.ctct-form-custom .ctct-form-button
-		width 36%
 		border-radius 0
-		position absolute
-		top 0
-		right 0
 		font-family $circular
 		background-color $blue
 		display flex
 		align-items center
+		width 11em
+		+above($tablet)
+			width 36%
+			position absolute 
+			top 5.4rem
+			right 0
 		p
+			text-align center
 			margin 0
 			pad(0,0.5,0)
 
