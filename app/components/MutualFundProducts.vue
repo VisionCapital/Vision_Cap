@@ -31,10 +31,11 @@
       </div>
 
       <div class="heading-tabs" v-if="fundDrop">
-        <div class="tab" v-for="(tab, idx) in fundInfo"
+        <div class="tab" 
+					:class="{hidden: fundIdx !== idx}"
+					v-for="(tab, idx) in fundInfo"
           v-html="$cms.textField(tab.code)"
           :key="'tab' + idx"
-          v-if="fundIdx !== idx"
           @click="fundSelect(idx)"
         ></div>
       </div>
@@ -113,6 +114,8 @@ a
 	margin-right 10px
 	padding 0.5em 0
 	cursor pointer
+	&.hidden
+		display none
 	+below($tablet)
 		width 100%
 		background none 

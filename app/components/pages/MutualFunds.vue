@@ -71,7 +71,7 @@ export default {
 		};
 	},
 	mounted() {
-
+		// this.scroll = new LerpScroll(this.$el.children[0]);
 	}
 };
 </script>
