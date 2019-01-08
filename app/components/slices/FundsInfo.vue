@@ -50,6 +50,9 @@ export default {
 @import "../../styl/_variables"
 
 .funds-info
+	background-color $lightgrey
+
+.funds-info
 	@extend .slice
 	pad(2,0)
 
