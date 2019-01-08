@@ -19,7 +19,7 @@
 
 			<div class="funds">
 
-				<div v-if="$store.state.device.mobile">Select Code</div>
+				<div v-if="$store.state.device.mobile && data.funds_cta" v-html="$cms.htmlField(data.funds_cta)">Select Code</div>
 
 				<div v-if="!$store.state.device.mobile">
 					<div class="heading row">
@@ -85,16 +85,16 @@
 
 
 			<div class="documents">
-				<div v-if="$store.state.device.mobile">select document type</div>
+				<div v-if="$store.state.device.mobile && data.documents_cta" v-html="$cms.htmlField(data.documents_cta)">select document type</div>
 
 				<div class="dropdown" v-if="$store.state.device.mobile" @click="reportDrop = !reportDrop">
-					<div class="tab" v-html="reports[reportIdx].title"></div>
+					<div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
 				</div>
 
 				<div class="heading-tabs" v-if="!$store.state.device.mobile || reportDrop">
 
 					<div class="tab" v-for="(tab, idx) in reports" 
-						v-html="tab.title"
+						v-html="$cms.textField(tab.primary.tab_title)"
 						:class="{selected: idx === reportIdx}"
 						:key="'tab' + idx"
 						@click="reportSelect(idx)"
@@ -104,20 +104,23 @@
 
 				<div class="report-content">
 					<div class="bg" v-if="!$store.state.device.mobile"></div>
-					<div class="row" v-for="document in reports[reportIdx].documents">
+					<div class="row" v-for="document in reports[reportIdx].items">
 						<div>
-							<h5 v-html="document.title"></h5>
+							<h5 v-html="$cms.textField(document.document_title)"></h5>
 							<p v-html="document.date"></p>
 						</div>
-						<a class="pdf" :href="document.pdf">pdf icon</a>
+						<a class="pdf" :href="document.pdf.url">pdf icon</a>
 					</div>
 				</div>
 
 			</div>
 		
-			<div class="disclaimer" v-html="'the vision opportunity funds refers to etc'"></div>
+			<div class="disclaimer" v-if="data.disclaimer" v-html="$cms.htmlField(data.disclaimer)"></div>
 
     </div>
+
+		<page-footer/>
+
   </div>
 </template>
 
@@ -125,11 +128,14 @@
 
 // import LerpScroll from '../../js/lerp-scroll.js';
 
+
 export default {
 
 	data() {
 		let data = this.$cms.funds.data;
 
+		// may have to change up reports should we add another slice type
+		let reports = data.body;
 		let fundInfo = data.mutual_fund_info;
 		let reasons = data.reasons;
 
@@ -141,54 +147,6 @@ export default {
 			'value': data.value_title,
 			'pdf': data.pdf_title
 		};
-
-		let reports = [
-			{
-				title: 'Portfolio Summary',
-				documents: [
-					{
-						title: 'Fund Facts Document',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					},
-					{
-						title: 'Fund Facts Document',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					}
-				]
-			},
-			{
-				title: 'Regulatory Filings',
-				documents: [
-					{
-						title: 'Financial Statement',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					},
-					{
-						title: 'Financial Statement',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					}
-				]
-			},
-			{
-				title: 'Regulatory Filings',
-				documents: [
-					{
-						title: 'Financial Statement',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					},
-					{
-						title: 'Financial Statement',
-						date: 'jul 27th, 2018',
-						pdf: 'something.pdf'
-					}
-				]
-			}
-		];
 
 		return {
 			data,
@@ -235,6 +193,7 @@ export default {
 
 .mutual-fund
 	@extend .slice
+	overflow hidden
 	.wrap
 		position relative
 		pad(3, 0);
@@ -250,6 +209,7 @@ a
 	width calc((100% - 40px) / 5)
 	margin-right 10px
 	padding 0.5em 0
+	cursor pointer
 	+below($tablet)
 		width 100%
 		background none 
@@ -332,7 +292,8 @@ a
 		background $lightgrey
 		z-index -1
 		position absolute 
-		left (-1080px / 2)
+		left 50%
+		transform translateX(-50%)
 		width 100vw
 		height 100% 
 

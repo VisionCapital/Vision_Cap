@@ -71,7 +71,6 @@ class CMSAdapter {
 		let mutualFund = await this.prismic.query(
 			Prismic.Predicates.at('document.type', 'mutual_funds')
 		);
-
 		this.funds = mutualFund.results[0];
 
 	}
