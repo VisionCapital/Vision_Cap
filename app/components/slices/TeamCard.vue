@@ -3,21 +3,21 @@
 
 		<div class="wrap" v-if="data.items.length">
 
-			<div class="card" :v-for="card in data.items">
+			<div v-if="data.fields.team_title" v-html="data.html('team_title')"></div>
+
+			<div class="card" v-for="(card, idx) in data.items" :key="idx" >
 
 				<div class="img-wrap">
-					<img class="profile-pic" :src="card.profile_image.url" v-if="card.profile_image.url">
+					<img class="profile-pic" ref="img" :src="card.profile_image.url" v-if="card.profile_image.url">
 				</div>
-
-				<!-- <div class="guy"></div> -->
 
 				<div class="content">
 
-					<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer"
+					<div class="copy-container" ref="copyContainer" :style="copyHeight(idx)"
 						v-html="data.htmlField(card.profile_copy)">
 					</div>
 
-					<div @click="toggleText()" v-if="!shortText" class="copy-cta">
+					<div @click="toggleText(idx)" v-if="card.largeCopy" class="copy-cta">
 						<p v-if="collapsed">read more</p>
 						<p v-else>collapse</p>
 					</div>
@@ -27,7 +27,7 @@
 			</div>
 
 		</div>
-
+<!-- 
 		<div class="wrap" v-else>
 
 			<div class="img-wrap">
@@ -35,8 +35,6 @@
 			</div>
 
 			<div class="content" :class="{'collapsed': collapsed}">
-
-				<!-- <img v-if="$store.state.device.mobile && image" class="profile-pic" :src="image[0].url"> -->
 
 				<h2 class="name" v-if="heading"
 					v-html="heading"/>
@@ -50,12 +48,6 @@
 					</p>
 				</div>
 
-				<!-- <div class="copy-container" :class="{'full-copy': collapsed}" ref="copyContainer">
-					<p ref="copy">
-						{{copy}}
-					</p>
-				</div> -->
-
 				<div @click="toggleText()" v-if="!shortText" class="copy-cta">
 					<p v-if="collapsed">read more</p>
 					<p v-else>collapse</p>
@@ -63,7 +55,7 @@
 
 			</div>
 
-		</div>
+		</div> -->
 
 	</div>
 </template>
@@ -78,21 +70,44 @@ export default {
 
 	data() {
 		return {
-			shortText: true,
-			collapsed: true
+			imageHeight: 0
 		};
 	},
 	methods: {
-		toggleText() {
-			this.collapsed = !this.collapsed;
-		}
+		toggleText(idx) {
+			// this.data.items[idx].
+		},
+		checkOverflow() {
+			let cards = this.data.items;
+			let copyContainers = this.$refs.copyContainer;
+			this.imageHeight = this.$refs.img[0].offsetHeight;
 
+			for (let idx in cards) {
+				if (copyContainers[idx].offsetHeight > this.imageHeight) {
+					this.data.items[idx].largeCopy = true;
+				} else {
+					this.data.items[idx].largeCopy = false;
+				}
+			}
+		},
+		copyHeight(idx) {
+
+			if (this.data.items[idx].largeCopy) {
+				return {
+					'max-height': `${this.imageHeight - 20}px`
+				};
+			}
+			return {
+				'max-height': '100%'
+			};
+		}
 	},
 	mounted() {
-		console.log(this.$refs);
-		if (this.$refs.copy && this.$refs.img.offsetHeight < this.$refs.copy.offsetHeight) {
-			this.shortText = false;
-		}
+		this.checkOverflow();
+
+		// if (this.$refs.copy && this.$refs.img.offsetHeight < this.$refs.copy.offsetHeight) {
+		// 	this.shortText = false;
+		// }
 	}
 };
 
@@ -158,17 +173,17 @@ img
 	overflow hidden
 
 .copy-container
-	max-height 200px
+	// max-height 200px
 	overflow hidden
 	// text-overflow ellipsis
 	transition max-height 1s
 	word-wrap break-word
-	+below($tablet)
-		max-height 80px
+	// +below($tablet)
+	// 	max-height 80px
 
 	&.full-copy
 		overflow visible
-		max-height 100%
+		// max-height 100%
 
 	/deep/
 		h2, h3, h4, p
