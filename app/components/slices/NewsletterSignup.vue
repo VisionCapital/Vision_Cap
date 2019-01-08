@@ -23,37 +23,43 @@ import airprops from '../../mixins/airprops';
 
 export default {
 	mixins: [ airprops ],
-	methods: {
-		formHTML() {
-			document.getElementsByClassName('ctct-form-button')[0].innerHTML =
-				` ${this.data.html('submit_button')} 
-				<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
-					<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
-						<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
-					</g>
-				</svg>`;
-			document.getElementsByClassName('ctct-form-element')[0].placeholder = this.data.text('placeholder');
-
-		}
-	},
 	mounted() {
-		let submitHTML = this.data.html('submit_button');
-		let placeholderText = this.data.text('placeholder');
 
-		function formHTML() {
-			document.getElementsByClassName('ctct-form-button')[0].innerHTML =
-				` ${submitHTML} 
-				<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
-					<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
-						<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
-					</g>
-				</svg>`;
-			document.getElementsByClassName('ctct-form-element')[0].placeholder = placeholderText;
+		let form = this.$refs.ctctForm;
 
-		}
+		let func = () => {
 
-		let observer = new MutationObserver(formHTML);
-		observer.observe(this.$refs.ctctForm, { childList: true });
+			console.log('mootled');
+
+			let btn = document.getElementsByClassName('ctct-form-button');
+			let input = document.getElementsByClassName('ctct-form-element');
+
+			let hasBtn = btn && btn.length;
+			let hasInput = input && input.length;
+
+			if (hasBtn) {
+				btn[0].innerHTML =
+					` ${this.data.html('submit_button')} 
+					<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
+						<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
+							<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
+						</g>
+					</svg>`;
+			}
+
+			if (hasInput) {
+				input[0].placeholder = this.data.text('placeholder');
+			}
+
+			if (hasBtn && hasInput) {
+				this.observer.disconnect();
+			}
+		};
+
+		this.observer = new MutationObserver(func);
+		func();
+
+		this.observer.observe(form, { childList: true });
 
 	}
 };
@@ -85,58 +91,7 @@ export default {
 .wrap
 	display inline-block
 	position relative
-	// width 75%
-.form-row
-	display flex
-	width 100%
-	+below($tablet)
-		flex-direction column
-		align-items center
-
-	/deep/
-		input
-			border 0
-			border-bottom 2px solid $blue
-			flex-grow 1
-			width auto
-
-			+below($tablet)
-				width 100%
-				text-align center
-
-			&:hover
-				border-color $copy
-
-			&:focus
-				border-color $blk
-
-		::placeholder
-			color #9F9F9F
-
-		button
-			align-items center
-			background $blue
-			border 0
-			color $w
-			display flex
-			pad(.25,.5)
-			letter-spacing (0.1 / 14) * 1em
-			line-height $let * 1.125em
-			flex-grow 0
-			margin-top 2em
-			+above($tablet)
-				margin-top 0
-				margin-left 1em
-
-			span
-				pad(0,.5,0,.25)
-
-			&:hover, &:focus
-				background $copy
-
-			&:active
-				background $blk
-
+	mgn(2,0,0)
 .newsletter-signup /deep/ .ctct-inline-form
 	.ctct-form-defaults
 		pad(4,0,0)
