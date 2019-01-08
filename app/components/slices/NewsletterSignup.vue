@@ -55,6 +55,10 @@ export default {
 		let observer = new MutationObserver(formHTML);
 		observer.observe(this.$refs.ctctForm, { childList: true });
 
+		if (window.ctctOnLoadCallback) {
+			window.ctctOnLoadCallback();
+		}
+
 	}
 };
 </script>
