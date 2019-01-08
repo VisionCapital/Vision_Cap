@@ -9,10 +9,10 @@
 
 		<div class="wrap">
 			<div class="copy">
-
+				<div class="hero-image">
 				<img v-if="data.fields.hero_image.url"
 					:src="data.image('hero_image')"/>
-
+		</div>
 				<h1 v-if="heading"
 					v-html="heading"/>
 				<h1 v-else-if="data.fields.hero_title.length"
@@ -51,9 +51,15 @@ export default {
 
 @import "../../styl/_variables"
 
+.hero-image
+	padding-left 15%
+	padding-right 15%
+	padding-top 4rem
+	align-content center
+	
 .hero
 	@extend .slice
-	pad(4,0)
+	pad(4,0, 2, 0)
 	position relative
 
 	.wrap

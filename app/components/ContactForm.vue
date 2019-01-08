@@ -14,7 +14,6 @@
 			<textarea rows="1" :placeholder="data.textField(data.fields.textarea_placeholder)"></textarea>
 			<div class="form-row">
 				<button id="submit" name="submit" type="submit" class="btn">
-
 					<span v-html="data.textField(data.fields.submit_button)"/>
 					<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
 						<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
