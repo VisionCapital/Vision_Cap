@@ -60,8 +60,8 @@ export default {
 				title: 'Mutual Funds'
 			},
 			{
-				path: '/visual-resources/',
-				title: 'Visual Resources'
+				path: '/resources/',
+				title: 'Resources'
 			},
 			{
 				path: '/investor-portal/',

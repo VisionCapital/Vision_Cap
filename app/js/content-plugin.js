@@ -25,14 +25,13 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('Map', () => import('../components/slices/Map.vue'));
 	Vue.component('NewsletterSignup', () => import('../components/slices/NewsletterSignup.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));
-	Vue.component('Resource', () => import('../components/slices/Resource.vue'));
 	Vue.component('TwoColumnCopy', () => import('../components/slices/TwoColumnCopy.vue'));
 	Vue.component('TeamCard', () => import('../components/slices/TeamCard.vue'));
 	Vue.component('ContactCard', () => import('../components/slices/ContactCard.vue'));
 	Vue.component('ContactForm', () => import('../components/slices/Contact.vue'));
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
 	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
-	Vue.component('MutualFund', () => import('../components/pages/MutualFunds.vue'));
+	Vue.component('Resources', () => import('../components/slices/Resources.vue'));
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 
