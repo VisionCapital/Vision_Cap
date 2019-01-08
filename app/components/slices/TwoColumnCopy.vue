@@ -49,23 +49,30 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
+	
 
 .two-column-copy
 	@extend .slice
 	pad(2,0)
 
 .title
+	width relative
+	text-align center
 	/deep/
 		h2, h3
 			fs(44)
 			font-family $cormorant-semibold
-			max-width (860 / 44) * 1em
+			max-width 100%
 
 			+below($tablet)
 				font-family $cormorant-medium
+				fs(mp(2))
 
 .copy
 	column-count 2
+	
+	+below($tablet)
+		column-count: 1;
 
 	/deep/ p
 		margin-top 0
