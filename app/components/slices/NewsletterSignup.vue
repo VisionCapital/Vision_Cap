@@ -61,6 +61,10 @@ export default {
 
 		this.observer.observe(form, { childList: true });
 
+		if (window.ctctOnLoadCallback) {
+			window.ctctOnLoadCallback();
+		}
+
 	}
 };
 </script>
