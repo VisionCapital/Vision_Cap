@@ -16,6 +16,10 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div :class="{wrap: $store.state.device.mobile}">
+
 			<div class="cards" v-if="data.items">
 				<div class="individual-card" v-for="(item, i) in data.items" :key="i">
 					<div class="copy"
@@ -34,7 +38,6 @@
 			</div>
 
 		</div>
-
 	</div>
 </template>
 
@@ -61,7 +64,8 @@ export default {
 .info-card-slice
 	@extend .slice
 	position relative
-
+	+below($tablet)
+		pad(0,0,3)
 
 	.wrap
 		position relative
@@ -84,7 +88,8 @@ export default {
 
 	background-color $darkblue
 	color $w
-
+	display flex 
+	align-items center
 
 	+below($tablet) //mobile and tablet
 		width auto
@@ -93,13 +98,17 @@ export default {
 
 	+above($tablet) //desktop plus
 		width (100%/3)
-		margin 5px
+		margin 0 5px
 		padding 0em 1vw
+		pad(2,2)
+		&:last-child, &:first-child
+			margin 0
+		
 
 
 .copy
 	text-align center
-	padding 10px
+	vertical-align middle
 
 	p
 		font-size relative
@@ -120,11 +129,12 @@ export default {
 
 .cards
 	width 100%
+	z-index 2
+	position relative
+
 	+above($tablet)
 		display flex
-		width 100%
-
-	padding-bottom 10%
+		width 100vw
 
 .heroAboveCards
 	padding-top 8em

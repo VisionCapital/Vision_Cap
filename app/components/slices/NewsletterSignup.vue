@@ -6,11 +6,6 @@
 			<!-- Begin Constant Contact Inline Form Code -->
 			<div class="ctct-inline-form" data-form-id="064dae77-9132-4260-8a7a-0042927baa39" ref="ctctForm"></div>
 			<!-- End Constant Contact Inline Form Code -->
-<!-- 
-			<h2 v-if="data.fields.heading"
-				v-html="data.text('heading')"/>
-			<h2 v-else
-				v-html="'Sign up to our newsletter:'"/> -->
 
 		</div>
 
