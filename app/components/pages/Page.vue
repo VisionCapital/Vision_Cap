@@ -31,6 +31,7 @@ export default {
 
 	mounted() {
 		this.scroll = new LerpScroll(this.$el);
+		// this.scroll = new LerpScroll(this.$el, (d) => { whatever() });
 	}
 };
 

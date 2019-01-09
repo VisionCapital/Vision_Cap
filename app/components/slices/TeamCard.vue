@@ -2,20 +2,20 @@
 	<div class="team-cards">
 
 		<div class="wrap" v-if="data.items.length">
-
 			<div v-html="data.html('team_title')"></div>
+		</div>
 
-			<div class="card" v-for="(card, idx) in data.items" :key="idx">
+		<div class="card" v-for="(card, idx) in data.items" :key="idx">
+			<div class="wrap" >
 
 				<team-member
 					ref="teamMember"
 					:data="data"
 					:card="card"
 				/>
-
 			</div>
-
 		</div>
+
 
 	</div>
 </template>
@@ -54,17 +54,8 @@ export default {
 
 .team-cards
 	@extend .slice
-	// padding 1px 0
-	+above($tablet)
-		// margin 0 (100% / 8)
-		// width (600% / 8)
-
-	.wrap
-		margin-top (100% / 8)
-		margin-bottom (100% / 8)
-		position relative
-
+	
 	.card:nth-child(even)
-		background $bg
+		background $lightgrey
 
 </style>

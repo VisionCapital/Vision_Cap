@@ -14,8 +14,8 @@
 				</div>
 
         <div @click="toggleText()" v-if="longCopy" class="copy-cta">
-          <p v-if="collapsed">read more</p>
-          <p v-else>collapse</p>
+          <p v-if="collapsed">Read More</p>
+          <p v-else>Collapse</p>
         </div>
 
       </div>
@@ -78,9 +78,6 @@ export default {
 	+above($tablet)
 		display flex
 
-	&:nth-child(even)
-		background $bg
-
 p
 	max-width 100%
 
@@ -99,6 +96,7 @@ img
 		float left
 
 .copy-cta
+	cursor pointer
 	color $blue
 	overflow hidden
 
