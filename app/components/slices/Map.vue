@@ -30,7 +30,7 @@
 				class="map-frame"
 				:center="{lat: lat, lng: lng}"
 				:zoom="16"
-				:options="{styles: mapStyles}"
+				:options="{styles: mapStyles, disableDefaultUI: true}"
 			>
 				<GmapMarker
 					:position="{lat: lat, lng: lng}"
@@ -169,9 +169,6 @@ export default {
 					{ 'lightness': 17 },
 					{ 'weight': 1.2 }
 				]
-			},
-			{
-				'disableDefaultUI': true
 			}
 		];
 
@@ -203,23 +200,6 @@ h4
 .map-frame
 	width 100%
 	height 30rem
-.map-ratio
-	overflow hidden
-	padding-bottom 50%
-	position relative
-	width 100%
-	+below($notebook)
-		padding-bottom 75%
-
-	/deep/ iframe,
-	/deep/ img
-		left 0
-		position absolute
-		top 0
-		width 100%
-
-	/deep/ iframe
-		height 100%
 
 .wrap
 	display flex
