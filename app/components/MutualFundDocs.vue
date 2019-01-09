@@ -83,7 +83,7 @@ a
 	margin-right 10px
 	padding 0.5em 0
 	cursor pointer
-	+below($tablet)
+	+below($mobile)
 		width 100%
 		background none 
 		fs(20)
@@ -97,9 +97,9 @@ a
 	justify-content space-between
 	align-items flex-end
 	border-bottom 1px solid $bluesat
-	+above($tablet)
+	+above($mobile)
 		pad(0,1.5)
-	+below($tablet)
+	+below($mobile)
 		&:last-child
 			border-bottom none
 
@@ -108,23 +108,23 @@ a
 	
 	h5, p
 		mgn(1,1,.5,0)
-		+above($tablet)
+		+above($mobile)
 			display inline-block
 
 	p
-		+below($tablet)
+		+below($mobile)
 			margin-top 0
 	h5
 		color $blk
 		font-family $cormorant
-		+below($tablet)
+		+below($mobile)
 			fs(24)
 			// margin-right 0
 	.report-content
 		position relative
 
 	.heading-tabs
-		+above($tablet)
+		+above($mobile)
 			display flex
 			text-align center
 	
@@ -140,12 +140,12 @@ a
 	.selected
 		background $lightgrey
 		color $blue
-		+below($tablet)
+		+below($mobile)
 			display none
 	.dropdown
 		width 100%
 		background $grey
-		+below($tablet)
+		+below($mobile)
 			display flex
 			justify-content space-between
 			align-items center

@@ -122,7 +122,7 @@ a
 	cursor pointer
 	&.hidden
 		display none
-	+below($tablet)
+	+below($mobile)
 		width 100%
 		background none 
 		fs(20)
@@ -136,14 +136,14 @@ a
 	justify-content space-between
 	align-items flex-end
 	border-bottom 1px solid $bluesat
-	+above($tablet)
+	+above($mobile)
 		pad(0,1.5)
-	+below($tablet)
+	+below($mobile)
 		&:last-child
 			border-bottom none
 
 .products
-	+above($tablet)
+	+above($mobile)
 		text-align center
 	.arrow-head
 		width 20px
@@ -161,13 +161,13 @@ a
 		
 	h4
 		color $blue
-		+below($tablet)
+		+below($mobile)
 			fs(24)
 	p, h4
-		+above($tablet)
+		+above($mobile)
 			width (100% / 6)
 	p
-		+below($tablet)
+		+below($mobile)
 			fs(17)
 
 </style>

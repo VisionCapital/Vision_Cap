@@ -2,7 +2,7 @@
 	<div class="main-nav">
 	
 		<transition>
-			<div class="bg" v-if="!pageTop"/>
+			<div class="bg" v-if="$store.state.device.mobile || !pageTop"/>
 		</transition>
 
 		<nav>

@@ -22,7 +22,6 @@
 				<p v-if="heading"
 					v-html="heading"/>
 			</div>
-<image-row></image-row>
 
 		</div>
 	</div>

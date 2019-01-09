@@ -71,7 +71,7 @@ export default {
 		};
 	},
 	mounted() {
-		// this.scroll = new LerpScroll(this.$el.children[0]);
+		console.log(this.$store.state);
 	}
 };
 </script>
@@ -94,19 +94,19 @@ a
 
 .columns
 	position relative
-	+above($tablet)
+	+above($mobile)
 		display flex
 		flex-wrap wrap
 		justify-content space-between
 	h4 
 		color $blue
 	>div
-		+above($tablet)
+		+above($mobile)
 			width 45%
 
 .disclaimer
 	fs(12)
 	width 60%
-	+below($tablet)
+	+below($mobile)
 		width 90%
 </style>
