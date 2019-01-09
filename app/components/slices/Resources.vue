@@ -29,7 +29,7 @@ export default {
 		};
 	},
 
-	mounted() {
+	created() {
 		this.$cms.loadTags(this.data.text('title_tag')).then((results) => {
 			this.resources = results.results;
 		});

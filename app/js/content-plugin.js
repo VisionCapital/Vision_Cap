@@ -18,10 +18,11 @@ const ContentPlugin = {
 ContentPlugin.install = (Vue) => {
 
 	Vue.component('NoSlice', () => import('../components/slices/NoSlice.vue'));
-	Vue.component('PageHeader', () => import('../components/slices/Header.vue'));
+	// Vue.component('PageHeader', () => import('../components/slices/Header.vue'));
 	Vue.component('Hero', () => import('../components/slices/Hero.vue'));
 	Vue.component('BarChart', () => import('../components/slices/BarChart.vue'));
 	Vue.component('InfoCards', () => import('../components/slices/InfoCards.vue'));
+	Vue.component('MutualFund', () => import('../components/slices/MutualFund.vue'));
 	Vue.component('Map', () => import('../components/slices/Map.vue'));
 	Vue.component('NewsletterSignup', () => import('../components/slices/NewsletterSignup.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));

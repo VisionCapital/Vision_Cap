@@ -6,14 +6,14 @@
 		<div class="wrap">
 
 			<div class="heroAboveCards">
-				<div class="copy">
 
-					<h1 v-if="data.fields.heading"
-						v-html="data.text('heading')"/>
-					<h1 v-else-if="heading"
-						v-html="heading"/>
+				<div class="copy" v-if="data.fields.heading"
+					v-html="data.html('heading')"/>
 
+				<div class="copy" v-else-if="heading">
+					<h1 v-html="heading"/>
 				</div>
+
 			</div>
 
 		</div>
@@ -88,7 +88,7 @@ export default {
 
 	background-color $darkblue
 	color $w
-	display flex 
+	display flex
 	align-items center
 
 	+below($tablet) //mobile and tablet
@@ -103,7 +103,7 @@ export default {
 		pad(2,2)
 		&:last-child, &:first-child
 			margin 0
-		
+
 
 
 .copy

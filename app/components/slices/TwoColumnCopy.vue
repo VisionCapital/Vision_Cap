@@ -49,15 +49,16 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-	
+
 
 .two-column-copy
 	@extend .slice
 	pad(2,0)
 
 .title
+	// text-align left
 	width relative
-	text-align center
+
 	/deep/
 		h2, h3
 			fs(44)
@@ -70,7 +71,8 @@ export default {
 
 .copy
 	column-count 2
-	
+	column-gap $gut*2rem
+
 	+below($tablet)
 		column-count: 1;
 
