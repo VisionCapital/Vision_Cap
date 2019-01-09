@@ -122,6 +122,9 @@ export default {
 			text-align center
 	#gdpr_text
 		order 5
+		opacity .5
+		/deep/ p
+			font-family $circular
 	.ctct-form-custom .ctct-form-button
 		border-radius 0
 		font-family $circular

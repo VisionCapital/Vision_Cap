@@ -78,15 +78,12 @@ export default {
 @import "../../styl/_variables"
 
 .fund-gate
-	@extend .slice
 	// pad(2px,0)
 	position relative
 
-	.wrap
-		width 100%
-
 .wrap
 	color $w
+	background-color $darkblue
 	position relative
 		width 100%
 

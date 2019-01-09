@@ -22,6 +22,7 @@
 				<p v-if="heading"
 					v-html="heading"/>
 			</div>
+<image-row></image-row>
 
 		</div>
 	</div>
@@ -57,7 +58,11 @@ export default {
 
 .title
 	width relative
-	text-align center
+	text-align left
+
+	+above($tablet)
+		pad(0,3)
+
 	/deep/
 		h2, h3
 			fs(44)
@@ -70,7 +75,8 @@ export default {
 
 .copy
 	column-count 2
-	
+	column-gap 4rem
+	pad(1,0)
 	+below($tablet)
 		column-count: 1;
 

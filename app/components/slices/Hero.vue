@@ -54,7 +54,7 @@ export default {
 .hero-image
 	padding-left 15%
 	padding-right 15%
-	padding-top 4rem
+	padding-top 5rem
 	align-content center
 	
 .hero
