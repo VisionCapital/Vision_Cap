@@ -30,9 +30,17 @@
 				class="map-frame"
 				:center="{lat: lat, lng: lng}"
 				:zoom="16"
-				:options="{styles: mapStyles, disableDefaultUI: true}"
+				:options="{
+					styles: mapStyles, 
+					disableDefaultUI: true,
+					zoomControl: $store.state.device.mobile ? false : true,
+					zoomControlOptions: {
+						position:	6
+					},
+				}"
 			>
 				<GmapMarker
+					:icon="{url: require('../../images/map-icon.png')}"
 					:position="{lat: lat, lng: lng}"
 				/>
 			</GmapMap>
@@ -199,8 +207,9 @@ h4
 
 .map-frame
 	width 100%
-	height 30rem
-
+	height 36vw
+	+below($tablet)
+		height 75vw
 .wrap
 	display flex
 	justify-content space-between
@@ -250,5 +259,6 @@ h4
 			text-align center
 			display inline-block
 
-	
+/deep/ .gmnoprint
+	right auto
 </style>
