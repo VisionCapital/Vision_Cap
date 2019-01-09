@@ -41,7 +41,7 @@ export default {
 	computed: {
 		maxCopyHeight() {
 			if (this.longCopy && this.collapsed) {
-				return `${this.imgHeight - 40}px`;
+				return `${this.imgHeight - 36}px`;
 			} else if (this.longCopy && !this.collapsed) {
 				return '100%';
 			}
@@ -51,14 +51,10 @@ export default {
 	methods: {
 		checkImgHeight() {
 			this.imgHeight = this.$refs.img.offsetHeight;
-
-			console.log(this.imgHeight);
-			console.log(this.$refs.copyContainer.offsetHeight);
 			if (this.$refs.copy && this.imgHeight < this.$refs.copy.offsetHeight) {
 				this.longCopy = true;
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
-			console.log(this.$refs);
 		},
 		toggleText() {
 			this.collapsed = !this.collapsed;
@@ -113,16 +109,16 @@ img
 		width 96px
 		float left
 
-.content.collapsed
-	overflow hidden
+// .content.collapsed
+// 	overflow hidden
 
 .copy-cta
 	color $blue
-	overflow hidden
+	// overflow hidden
 
 .copy-container
 	// max-height 200px
-	overflow hidden
+	// overflow hidden
 	// text-overflow ellipsis
 	transition max-height 1s
 	word-wrap break-word
@@ -140,7 +136,7 @@ img
 
 		h2, h3
 			@extend .heading
-
+			margin-left 0
 			+below($tablet)
 				fs(30)
 
