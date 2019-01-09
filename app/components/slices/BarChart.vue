@@ -7,20 +7,32 @@
 				<div class="bg"/>
 				<h2 v-if="heading"
 					v-html="heading"/>
-					<h2 v-html="data.html('vision_opp_pdf_title')"/>
-				<a :href="data.fields.pdf_link_name" target="_blank"><p v-html="data.html('pdf_link_name')"/> </a>
+				<h2 v-html="data.html('vision_opp_pdf_title')"/>
+				<a :href="data.fields.pdf_link_name" target="_blank" v-html="data.html('pdf_link_name')"/>
 			</div>
 
-			<div class="title-copy">
-				
-				<h3 v-if="subheading"
-					v-html="subheading"/>
-					<h3 v-html="data.text('bar_chart_title')"/>
+			<div class="title-copy" v-if="data.fields.bar_chart_title"
+				v-html="data.html('bar_chart_title')"/>
+
+			<div class="title-copy" v-else-if="subheading">
+				<h3 v-html="subheading"/>
 			</div>
 
 			<div class="chart">
-				<img v-if="image"
-					:src="image[0].url"/>
+
+				<div class="bars">
+					<div class="bar" v-for="(bar, idx) in indices" :key="idx">
+						{{ bar.returns + '%' }}
+						{{ bar.name }}
+					</div>
+				</div>
+
+				<div class="cagr">
+					<div class="bar" v-for="(bar, idx) in indices" :key="idx">
+						{{ bar.cagr + '%' }}
+					</div>
+				</div>
+
 			</div>
 
 		</div>
@@ -34,7 +46,21 @@ import airprops from '../../mixins/airprops';
 
 export default {
 
-	mixins: [ airprops ]
+	mixins: [ airprops ],
+
+	computed: {
+		indices() {
+			let indices = this.data.items.map((x) => {
+				return {
+					name: this.data.textField(x.index_title),
+					returns: this.data.textField(x.total_returns),
+					cagr: this.data.textField(x.cagr)
+				};
+			});
+
+			return indices;
+		}
+	}
 
 };
 </script>
@@ -90,7 +116,7 @@ export default {
 			display inline-block
 
 	+above($tablet)
-		width (200% / 7)
+		width (200% / 9)
 
 	.bg
 		background url('../../images/strip-bg.jpg')
