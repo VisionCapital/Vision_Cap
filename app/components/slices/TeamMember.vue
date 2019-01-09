@@ -7,7 +7,7 @@
 
       <div class="content" >
 
-				<div  class="copy-container" ref="copyContainer">
+				<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 					<div ref="copy"
 						v-html="data.htmlField(card.profile_copy)">
 					</div>
@@ -41,7 +41,10 @@ export default {
 	computed: {
 		maxCopyHeight() {
 			if (this.longCopy && this.collapsed) {
-				return `${this.imgHeight - 40}px`;
+				if (this.$store.state.device.mobile) {
+					return `${this.imgHeight}px`;
+				}
+				return `${this.imgHeight - 36}px`;
 			} else if (this.longCopy && !this.collapsed) {
 				return '100%';
 			}
@@ -51,22 +54,15 @@ export default {
 	methods: {
 		checkImgHeight() {
 			this.imgHeight = this.$refs.img.offsetHeight;
-
-			console.log(this.imgHeight);
-			console.log(this.$refs.copyContainer.offsetHeight);
 			if (this.$refs.copy && this.imgHeight < this.$refs.copy.offsetHeight) {
 				this.longCopy = true;
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
-			console.log(this.$refs);
 		},
 		toggleText() {
 			this.collapsed = !this.collapsed;
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
 		}
-
-	},
-	mounted() {
 
 	}
 };
@@ -78,21 +74,12 @@ export default {
 @import "../../styl/_variables"
 
 .team-member
-	display flex
-	justify-content space-between
 	pad(2,0)
+	+above($tablet)
+		display flex
 
 	&:nth-child(even)
 		background $bg
-
-img
-	width 20vw
-
-.content
-	width 60%
-	display inline-block
-		+above($tablet)
-			display flex
 
 p
 	max-width 100%
@@ -102,32 +89,23 @@ p
 	+below($tablet)
 		fs(20)
 
-.img-wrap
-	margin-right 6em
-
 img
 	width 220px
 	max-width 100vw
+	padding-right 6em
 	+below($tablet)
-		margin-right 1em
+		padding-right 1em
 		width 96px
 		float left
-
-.content.collapsed
-	overflow hidden
 
 .copy-cta
 	color $blue
 	overflow hidden
 
 .copy-container
-	// max-height 200px
 	overflow hidden
-	// text-overflow ellipsis
 	transition max-height 1s
 	word-wrap break-word
-	// +below($tablet)
-	// 	max-height 80px
 
 	&.full-copy
 		overflow visible
@@ -140,7 +118,7 @@ img
 
 		h2, h3
 			@extend .heading
-
+			margin-left 0
 			+below($tablet)
 				fs(30)
 

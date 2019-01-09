@@ -8,6 +8,7 @@
 			<div class="card" v-for="(card, idx) in data.items" :key="idx">
 
 				<team-member
+					ref="teamMember"
 					:data="data"
 					:card="card"
 				/>
@@ -28,6 +29,20 @@ export default {
 	mixins: [ airprops ],
 	components: {
 		TeamMember
+	},
+	methods: {
+		resize() {
+			let members = this.$refs.teamMember;
+			for (let member of members) {
+				member.checkImgHeight();
+			}
+		}
+	},
+	mounted() {
+		window.addEventListener('resize', this.resize);
+	},
+	destroy() {
+		window.removeEventListener('resize', this.resize);
 	}
 };
 
