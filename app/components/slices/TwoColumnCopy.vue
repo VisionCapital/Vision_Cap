@@ -50,13 +50,14 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-	
+
 
 .two-column-copy
 	@extend .slice
 	pad(2,0)
 
 .title
+	// text-align left
 	width relative
 	text-align left
 

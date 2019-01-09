@@ -82,6 +82,12 @@ class CMSAdapter {
 		);
 	}
 
+	loadType(type) {
+		return this.prismic.query(
+			Prismic.Predicates.at('document.type', type)
+		);
+	}
+
 	htmlField(field) {
 		return PrismicDOM.RichText.asHtml(field);
 	}

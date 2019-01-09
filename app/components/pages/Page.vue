@@ -28,9 +28,10 @@ export default {
 			record
 		};
 	},
-
 	mounted() {
-		this.scroll = new LerpScroll(this.$el);
+		this.scroll = new LerpScroll(this.$el, (d) => {
+			this.$emit('pageTop', d.pos > -12);
+		});
 	}
 };
 

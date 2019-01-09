@@ -11,28 +11,39 @@
 						v-html="subheading"/>
 				</div>
 
-				<div class="cta" v-if="$store.state.device.win.x > 1024"><!-- if it's desktop-->
+				<div class="cta" v-if="$store.state.device.win.x > 1024">
 				<h4 v-html="data.text('map_title')"/>
 				<p v-html="data.text('map_location')"/>
 					<a :href="data.fields.map_link.url" target="_blank">
 						<div v-html="data.text('map_link_title')"/>
-						</a>
-					<!-- <core-button label="View Larger Map"/> -->
+					</a>
 				</div>
 
-				<div class="cta-mobile" v-if="$store.state.device.win.x < 1024"><!-- if it's mobile-->
+				<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
 				<h4 v-html="data.text('map_title')"/>
 				<p v-html="data.text('map_location')"/>
-					<!-- <core-button label="View Larger Map"/> -->
 				</div>
 
 			</div>
 
-			<div class="map-frame">
-				<div class="map-ratio">
-					<div v-html="data.text('map_embed_code')"/>
-				</div>
-			</div>
+			<GmapMap
+				class="map-frame"
+				:center="{lat: lat, lng: lng}"
+				:zoom="16"
+				:options="{
+					styles: mapStyles, 
+					disableDefaultUI: true,
+					zoomControl: $store.state.device.mobile ? false : true,
+					zoomControlOptions: {
+						position:	6
+					},
+				}"
+			>
+				<GmapMarker
+					:icon="{url: require('../../images/map-icon.png')}"
+					:position="{lat: lat, lng: lng}"
+				/>
+			</GmapMap>
 
 		</div>
 	</div>
@@ -41,9 +52,140 @@
 <script>
 
 import airprops from '../../mixins/airprops';
+import Vue from 'vue';
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+Vue.use(VueGoogleMaps, {
+	load: {
+		key: 'AIzaSyCU94afFT36d12eC2eqBXR-FxkiwjpQlyo'
+	}
+});
 
 export default {
-	mixins: [ airprops ]
+	mixins: [ airprops ],
+	data() {
+
+		let mapStyles = [
+			{
+				'featureType': 'water',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#e9e9e9' },
+					{ 'lightness': 17 }
+				]
+			},
+			{
+				'featureType': 'landscape',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#f5f5f5' },
+					{ 'lightness': 20 }
+				]
+			},
+			{
+				'featureType': 'road.highway',
+				'elementType': 'geometry.fill',
+				'stylers': [
+					{ 'color': '#ffffff' },
+					{ 'lightness': 17 }
+				]
+			},
+			{
+				'featureType': 'road.highway',
+				'elementType': 'geometry.stroke',
+				'stylers': [
+					{ 'color': '#ffffff' },
+					{ 'lightness': 29 },
+					{ 'weight': 0.2 }
+				]
+			},
+			{
+				'featureType': 'road.arterial',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#ffffff' },
+					{ 'lightness': 18 }
+				]
+			},
+			{
+				'featureType': 'road.local',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#ffffff' },
+					{ 'lightness': 16 }
+				]
+			},
+			{
+				'featureType': 'poi',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#f5f5f5' },
+					{ 'lightness': 21 }
+				]
+			},
+			{
+				'featureType': 'poi.park',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#dedede' },
+					{ 'lightness': 21 }
+				]
+			},
+			{
+				'elementType': 'labels.text.stroke',
+				'stylers': [
+					{ 'visibility': 'on' },
+					{ 'color': '#ffffff' },
+					{ 'lightness': 16 }
+				]
+			},
+			{
+				'elementType': 'labels.text.fill',
+				'stylers': [
+					{ 'saturation': 36 },
+					{ 'color': '#333333' },
+					{ 'lightness': 40 }
+				]
+			},
+			{
+				'elementType': 'labels.icon',
+				'stylers': [
+					{ 'visibility': 'off' }
+				]
+			},
+			{
+				'featureType': 'transit',
+				'elementType': 'geometry',
+				'stylers': [
+					{ 'color': '#f2f2f2' },
+					{ 'lightness': 19 }
+				]
+			},
+			{
+				'featureType': 'administrative',
+				'elementType': 'geometry.fill',
+				'stylers': [
+					{ 'color': '#fefefe' },
+					{ 'lightness': 20 }
+				]
+			},
+			{
+				'featureType': 'administrative',
+				'elementType': 'geometry.stroke',
+				'stylers': [
+					{ 'color': '#fefefe' },
+					{ 'lightness': 17 },
+					{ 'weight': 1.2 }
+				]
+			}
+		];
+
+		return {
+			lat: this.data.fields.map_lat_lng.latitude,
+			lng: this.data.fields.map_lat_lng.longitude,
+			mapStyles
+		};
+	}
 };
 </script>
 
@@ -65,24 +207,9 @@ h4
 
 .map-frame
 	width 100%
-.map-ratio
-	overflow hidden
-	padding-bottom 50%
-	position relative
-	width 100%
-	+below($notebook)
-		padding-bottom 75%
-
-	/deep/ iframe,
-	/deep/ img
-		left 0
-		position absolute
-		top 0
-		width 100%
-
-	/deep/ iframe
-		height 100%
-
+	height 36vw
+	+below($tablet)
+		height 75vw
 .wrap
 	display flex
 	justify-content space-between
@@ -132,5 +259,6 @@ h4
 			text-align center
 			display inline-block
 
-	
+/deep/ .gmnoprint
+	right auto
 </style>

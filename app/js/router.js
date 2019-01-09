@@ -18,11 +18,6 @@ const router = new VueRouter({
 					component: () => import('../components/pages/Page.vue')
 				},
 				{
-					path: 'mutual-funds',
-					name: 'mutual',
-					component: () => import('../components/pages/MutualFunds.vue')
-				},
-				{
 					path: ':slug',
 					name: 'page',
 					props: true,
