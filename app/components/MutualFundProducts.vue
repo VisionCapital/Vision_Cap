@@ -28,6 +28,7 @@
     <div v-else>
       <div class="dropdown" @click="fundDrop = !fundDrop">
         <div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
+				<arrow-head :pointDown="fundDrop" class="arrow-head"/>
       </div>
 
       <div class="heading-tabs" v-if="fundDrop">
@@ -77,7 +78,12 @@
 
 <script>
 
+import ArrowHead from './svg/ArrowHead.vue';
+
 export default {
+	components: {
+		ArrowHead
+	},
 	props: [
 		'fundColumns',
 		'fundInfo',
@@ -139,12 +145,20 @@ a
 .products
 	+above($tablet)
 		text-align center
+	.arrow-head
+		width 20px
+		height 20px
 	.dropdown
 		position relative
-		left -15vw
+		left 50%
+		transform translateX(-50%)
 		width 100vw
 		padding 5% 15vw
 		background $grey
+		display flex
+		justify-content space-between
+		align-items center
+		
 	h4
 		color $blue
 		+below($tablet)

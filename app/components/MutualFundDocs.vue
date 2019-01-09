@@ -5,6 +5,7 @@
 
     <div class="dropdown" v-if="$store.state.device.mobile" @click="reportDrop = !reportDrop">
       <div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
+			<arrow-head class="arrow-head" :pointDown="reportDrop"/>
     </div>
 
     <div class="heading-tabs" v-if="!$store.state.device.mobile || reportDrop">
@@ -35,11 +36,12 @@
 
 <script>
 
-// import LerpScroll from '../../js/lerp-scroll.js';
-
+import ArrowHead from './svg/ArrowHead.vue';
 
 export default {
-
+	components: {
+		ArrowHead
+	},
 	props: [
 		'reports',
 		'documentsCta'
@@ -70,6 +72,10 @@ a
 	width auto
 	&:before, &:after
 		display none
+
+.arrow-head
+	height 20px
+	width 20px
 
 .tab
 	background $grey
@@ -140,6 +146,9 @@ a
 		width 100%
 		background $grey
 		+below($tablet)
+			display flex
+			justify-content space-between
+			align-items center
 			position relative
 			left -15vw
 			width 100vw

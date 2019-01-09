@@ -16,6 +16,7 @@
         <div @click="toggleText()" v-if="longCopy" class="copy-cta">
           <p v-if="collapsed">Read More</p>
           <p v-else>Collapse</p>
+					<arrow-head class="arrow-head" :pointDown="!collapsed"/>
         </div>
 
       </div>
@@ -26,7 +27,12 @@
 
 <script>
 
+import ArrowHead from '../svg/ArrowHead.vue';
+
 export default {
+	components: {
+		ArrowHead
+	},
 	props: [
 		'data',
 		'card'
@@ -99,6 +105,11 @@ img
 	cursor pointer
 	color $blue
 	overflow hidden
+	display flex
+	align-items center
+
+.arrow-head
+	margin-left 10px
 
 .copy-container
 	overflow hidden
