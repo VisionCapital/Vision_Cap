@@ -2,9 +2,9 @@
 
   <div class="products">
 
-    <div v-if="$store.state.device.mobile && fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
+    <div class='mobile' v-if="fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
 
-    <div v-if="!$store.state.device.mobile">
+    <div class="desktop-tablet">
       <div class="heading row">
         <h4 v-for="(columnTitle, idx) in fundColumns" v-html="$cms.textField(columnTitle)" :key="idx"></h4>
       </div>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div v-else>
+    <div class="mobile">
       <div class="dropdown" @click="fundDrop = !fundDrop">
         <div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
 				<arrow-head :pointDown="fundDrop" class="arrow-head"/>
@@ -108,6 +108,15 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
+
+.mobile
+	+above($mobile)
+		display none
+
+.desktop-tablet
+	+below($mobile)
+		display none
+
 
 a
 	width auto
