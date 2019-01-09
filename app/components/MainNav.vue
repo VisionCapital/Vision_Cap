@@ -1,7 +1,9 @@
 <template>
 	<div class="main-nav">
-
-		<div class="bg"/>
+	
+		<transition>
+			<div class="bg" v-if="!pageTop"/>
+		</transition>
 
 		<nav>
 			<ul class="links">
@@ -34,7 +36,9 @@
 import Logo from './svg/Logo.vue';
 
 export default {
-
+	props: [
+		'pageTop'
+	],
 	components: {
 		Logo
 	},
@@ -99,12 +103,15 @@ export default {
 		fs(30)
 	}
 
-
-
 .bg
 	background black
 	abs()
-
+	transition opacity 0.5s, transform 0.5s
+	&.v-enter,
+	&.v-leave-to
+		transform translateY(-100%)
+		opacity 0
+	
 .links
 	margin 0
 	list-style none

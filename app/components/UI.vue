@@ -9,11 +9,14 @@
 		</router-link>
 
 		<transition appear>
-			<main-nav v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"/>
+			<main-nav 
+				:pageTop="pageTop"
+				v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
+			/>
 		</transition>
 
 		<transition appear>
-			<router-view :key="$route.fullPath"/>
+			<router-view @pageTop="pageTop = $event" :key="$route.fullPath"/>
 		</transition>
 
 		<nav-switch v-if="$store.state.device.win.x <= 1024"/>
@@ -34,6 +37,11 @@ export default {
 		MainNav,
 		NavSwitch,
 		Hero
+	},
+	data() {
+		return {
+			pageTop: false
+		};
 	}
 };
 
