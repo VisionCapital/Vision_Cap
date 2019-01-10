@@ -6,7 +6,7 @@
 		</transition>
 
 		<nav>
-			<ul class="links">
+			<ul class="links" v-if="$store.state.navData.data">
 
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
@@ -17,9 +17,10 @@
 					</router-link>
 				</li>
 
-				<li v-for="link in this.$store.state.navData.data.links"
+				<li v-for="link in $store.state.navData.data.links"
 					:key="link.page_link.slug">
 					<router-link :to="`/${link.page_link.slug}`"
+						v-if="link.page_link.slug"
 						:title="link.link_title[0].text"
 						@click.native="$store.dispatch('toggleNav')"
 						v-html="link.link_title[0].text"/>
@@ -44,7 +45,7 @@ export default {
 	},
 
 	data() {
-		let links = this.$store.state.navData.data.links;
+		let links = [];
 		return {
 			links
 		};

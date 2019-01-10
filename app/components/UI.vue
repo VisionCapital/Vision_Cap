@@ -44,11 +44,16 @@ export default {
 		};
 	},
 	beforeCreate() {
+		console.log('ui');
+		// console.log(this.$cms.findRecord('resources'));
 		this.$cms.loadType('navigation').then((results) => {
+			// console.log(results.results[0]);
 			this.$store.dispatch('setNavData', results.results[0]);
-			console.log('============');
-			console.log(this.$store.state.navData);
 		});
+		// this.$cms.loadType('resources').then((results) => {
+		// 	console.log(results.results);
+		// 	this.$store.dispatch('setNavData', results.results[0]);
+		// });
 	}
 };
 

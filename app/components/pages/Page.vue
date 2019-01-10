@@ -23,7 +23,9 @@ export default {
 
 	data() {
 		let record = this.$cms.findRecord(this.slug);
-		// console.log(record);
+		// console.log(this.slug);
+		// console.log('slugsssss');
+		// // console.log(record);
 		return {
 			record
 		};

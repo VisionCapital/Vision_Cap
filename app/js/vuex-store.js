@@ -31,6 +31,7 @@ const store = new Vuex.Store({
 		},
 
 		setNavData(context, data) {
+			console.log('store');
 			context.commit('setNavData', data);
 		}
 	},
@@ -53,6 +54,7 @@ const store = new Vuex.Store({
 		},
 
 		setNavData(state, data) {
+			console.log('store');
 			Vue.set(state, 'navData', data);
 		}
 	}
