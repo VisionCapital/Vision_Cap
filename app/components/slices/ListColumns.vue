@@ -1,5 +1,5 @@
 <template>
-  <div class="mutual-fund">
+  <div class="list-columns">
     <div class="wrap">
 
 			<div class="motivation">
@@ -71,8 +71,9 @@ export default {
 
 @import "../../styl/_variables"
 
-.mutual-fund
+.list-columns
 	@extend .slice
+	pad(0,0,3,0)
 	overflow hidden
 	.wrap
 		position relative
