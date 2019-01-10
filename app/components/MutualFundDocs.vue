@@ -67,6 +67,7 @@ export default {
 	},
 	methods: {
 		reportSelect(idx) {
+			// might be simpler to splice and push the selected fund in the array to cut down on styling
 			this.reportIdx = idx;
 			if (window.innerWidth < 376) {
 				this.reportDrop = false;
@@ -141,9 +142,10 @@ h5
 .all-tabs
 	+below($mobile)
 		position relative
-		left -15vw
+		left 50%
 		width 100vw
-		padding 5% 15vw
+		transform translateX(-50%)
+		padding 5% ((100vw - 82vw) / 2)
 		background $grey
 
 .documents

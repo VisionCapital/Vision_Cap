@@ -103,7 +103,7 @@ export default {
 	},
 	methods: {
 		fundSelect(idx) {
-			console.log(idx);
+			// might be simpler to splice and push the selected fund in the array to cut down on styling
 			this.fundIdx = idx;
 			this.fundDrop = false;
 		}
@@ -159,7 +159,7 @@ a
 	left 50%
 	transform translateX(-50%)
 	width 100vw
-	padding 5% 15vw
+	padding 5% ((100vw - 82vw) / 2)
 	background $grey
 
 .row
