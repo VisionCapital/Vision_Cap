@@ -54,7 +54,6 @@ const store = new Vuex.Store({
 		},
 
 		setNavData(state, data) {
-			console.log('store');
 			Vue.set(state, 'navData', data);
 		}
 	}

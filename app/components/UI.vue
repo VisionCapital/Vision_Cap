@@ -44,7 +44,6 @@ export default {
 		};
 	},
 	beforeCreate() {
-		console.log('ui');
 		// console.log(this.$cms.findRecord('resources'));
 		this.$cms.loadType('navigation').then((results) => {
 			// console.log(results.results[0]);
