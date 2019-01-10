@@ -2,20 +2,22 @@
   <div class="mutual-fund">
     <div class="wrap">
 
+			<div class="motivation">
 
-			<fund-products
-				:fundColumns="fundColumns"
-				:fundInfo="data.mutual_fund_info"
-				:fundsCta="data.funds_cta"
-			/>
+				<h2 v-html="$cms.textField(data.reasons_heading)"/>
 
-			<!-- if we add another slice type to prismic we will need to adjust the prop reports for data.body -->
-			<fund-docs
-				:documentsCta="data.documents_cta"
-				:reports="data.body"
-				:disclaimer="data.disclaimer"
-			/>
+				<div class="columns">
+					<div v-for="(reason, idx) in reasons" :key="idx">
+						<h4 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h4>
+						<ul>
+							<li v-for="(item, i) in reason.list_items" :key="'item' + i" v-html="item.text"></li>
+						</ul>
+					</div>
+				</div>
 
+			</div>
+
+			
     </div>
 
   </div>

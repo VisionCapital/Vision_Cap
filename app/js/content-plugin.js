@@ -24,6 +24,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('PartnerImage', () => import('../components/slices/ImageRow.vue'));
 	Vue.component('InfoCards', () => import('../components/slices/InfoCards.vue'));
 	Vue.component('MutualFund', () => import('../components/slices/MutualFund.vue'));
+	Vue.component('WhyBuyThisFund', () => import('../components/slices/WhyBuyThisFund.vue'));
 	Vue.component('Map', () => import('../components/slices/Map.vue'));
 	Vue.component('NewsletterSignup', () => import('../components/slices/NewsletterSignup.vue'));
 	Vue.component('PageFooter', () => import('../components/slices/Footer.vue'));
