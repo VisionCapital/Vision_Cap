@@ -2,9 +2,9 @@
 
   <div class="products">
 
-    <div v-if="$store.state.device.mobile && fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
+    <div class='mobile' v-if="fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
 
-    <div v-if="!$store.state.device.mobile">
+    <div class="desktop-tablet">
       <div class="heading row">
         <h4 v-for="(columnTitle, idx) in fundColumns" v-html="$cms.textField(columnTitle)" :key="idx"></h4>
       </div>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div v-else>
+    <div class="mobile">
       <div class="dropdown" @click="fundDrop = !fundDrop">
         <div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
 				<arrow-head :pointDown="fundDrop" class="arrow-head"/>
@@ -109,6 +109,15 @@ export default {
 
 @import "../styl/_variables"
 
+.mobile
+	+above($mobile)
+		display none
+
+.desktop-tablet
+	+below($mobile)
+		display none
+
+
 a
 	width auto
 	&:before, &:after
@@ -122,7 +131,7 @@ a
 	cursor pointer
 	&.hidden
 		display none
-	+below($tablet)
+	+below($mobile)
 		width 100%
 		background none 
 		fs(20)
@@ -136,14 +145,14 @@ a
 	justify-content space-between
 	align-items flex-end
 	border-bottom 1px solid $bluesat
-	+above($tablet)
+	+above($mobile)
 		pad(0,1.5)
-	+below($tablet)
+	+below($mobile)
 		&:last-child
 			border-bottom none
 
 .products
-	+above($tablet)
+	+above($mobile)
 		text-align center
 	.arrow-head
 		width 20px
@@ -161,13 +170,13 @@ a
 		
 	h4
 		color $blue
-		+below($tablet)
+		+below($mobile)
 			fs(24)
 	p, h4
-		+above($tablet)
+		+above($mobile)
 			width (100% / 6)
 	p
-		+below($tablet)
+		+below($mobile)
 			fs(17)
 
 </style>
