@@ -53,7 +53,8 @@ export default {
 	},
 
 	data() {
-
+		// console.log('footer');
+		// console.log(this.$store.state.navData);
 		let links = [];
 
 		links = this.$store.state.navData.links;

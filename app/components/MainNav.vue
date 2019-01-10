@@ -45,8 +45,6 @@ export default {
 	},
 
 	data() {
-		console.log('mainnav');
-		console.log(this.$store.state.navData);
 		return {
 		};
 	}

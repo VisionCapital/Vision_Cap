@@ -48,6 +48,7 @@ export default {
 		this.$cms.loadType('navigation').then((results) => {
 			// console.log(results.results[0]);
 			this.$store.dispatch('setNavData', results.results[0].data);
+			// console.log(this.$store.state.navData);
 		});
 		// this.$cms.loadType('resources').then((results) => {
 		// 	console.log(results.results);
