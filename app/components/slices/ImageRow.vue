@@ -30,24 +30,23 @@ export default {
 
 .image-row
 	@extend .slice
-	pad(1,0)
-	height 5%
-	width 100%
-
-.wrap
-	flex-wrap wrap
-
-
-.image-container
-	width relative
-	max-width 20%
-	display flex
-
-img
-	height 20%
+	pad(0,2,2,0)
 
 .image-wrap
 	display flex
-	vertical-align center
+	width 50%          
+	flex-direction: row;       
+	flex-wrap: nowrap;             
+	justify-content: space-between;
+
+.image-container	
+	align-items: center;
+	display: flex;
+	height 4rem
+	max-width relative
+	width 8rem 
+	flex-direction: row;       
+	flex-wrap: nowrap;             
+	pad(2,0,3,0)
 
 </style>
