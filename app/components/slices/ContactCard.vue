@@ -57,6 +57,14 @@ export default {
 .contact
 	+above($tablet)
 		width 50%
+
+		&:not(:first-child), &:not(:last-child)
+			pad(0,1)
+		&:first-child
+			pad(0,1,0,0)
+		&:last-child
+			pad(0,0,0,1)
+
 	+below($tablet)
 		mgn(0,0,2)
 	p
