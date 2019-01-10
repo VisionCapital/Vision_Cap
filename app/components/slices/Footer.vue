@@ -15,9 +15,9 @@
 
 					<li v-for="link in links"
 						:key="link.path">
-						<router-link :to="link.path"
-							:title="link.title"
-							v-html="link.title"/>
+						<router-link :to="`/${link.page_link.slug}`"
+							:title="link.link_title[0].text"
+							v-html="link.link_title[0].text"/>
 					</li>
 
 					<li class="resources">
@@ -54,37 +54,9 @@ export default {
 
 	data() {
 
-		// console.log(this.$cms);
-
-		// console.log(this.$cms.findRecord(this.slug));
 		let links = [];
 
-		links = [
-			{
-				path: '/about/',
-				title: 'About'
-			},
-			{
-				path: '/team/',
-				title: 'Team'
-			},
-			{
-				path: '/private-funds/',
-				title: 'Private Funds'
-			},
-			{
-				path: '/mutual-funds/',
-				title: 'Mutual Funds'
-			},
-			{
-				path: '/investor-portal/',
-				title: 'Investor Portal'
-			},
-			{
-				path: '/contact-us/',
-				title: 'Contact Us'
-			}
-		];
+		links = this.$store.state.navData.data.links;
 
 		let mutualDrop = {
 			path: '/visual-resources/',

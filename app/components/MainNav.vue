@@ -17,12 +17,12 @@
 					</router-link>
 				</li>
 
-				<li v-for="link in links"
-					:key="link.path">
-					<router-link :to="link.path"
-						:title="link.title"
+				<li v-for="link in this.$store.state.navData.data.links"
+					:key="link.page_link.slug">
+					<router-link :to="`/${link.page_link.slug}`"
+						:title="link.link_title[0].text"
 						@click.native="$store.dispatch('toggleNav')"
-						v-html="link.title"/>
+						v-html="link.link_title[0].text"/>
 				</li>
 
 			</ul>
@@ -44,39 +44,7 @@ export default {
 	},
 
 	data() {
-		let links = [];
-
-		links = [
-			{
-				path: '/about/',
-				title: 'About'
-			},
-			{
-				path: '/team/',
-				title: 'Team'
-			},
-			{
-				path: '/private-funds/',
-				title: 'Private Funds'
-			},
-			{
-				path: '/mutual-funds/',
-				title: 'Mutual Funds'
-			},
-			{
-				path: '/resources/',
-				title: 'Resources'
-			},
-			{
-				path: '/investor-portal/',
-				title: 'Investor Portal'
-			},
-			{
-				path: '/contact-us/',
-				title: 'Contact Us'
-			}
-		];
-
+		let links = this.$store.state.navData.data.links;
 		return {
 			links
 		};
