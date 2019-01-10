@@ -218,11 +218,11 @@ h4
 
 .annotations
 	display flex
-	width auto
 	flex-direction column
 	justify-content center
 	+above($notebook)//laptop
 		margin-left 11%
+		width 60%
 	+above($laptop)//laptop-large
 		margin-left 13%
 	+above($laptop-large)//desktop
