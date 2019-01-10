@@ -21,14 +21,59 @@
 			<div class="chart">
 
 				<div class="bars">
-					<div class="bar" v-for="(bar, idx) in indices" :key="idx">
-						{{ bar.returns + '%' }}
-						{{ bar.name }}
+
+					<div class="y">
+						<div v-for="step in steps" :key="step"
+							:style="{ height: 1 / steps * 100 + '%' }"
+							class="step">
+							<div class="label">
+								{{ max - (step - 1) * 25 + '%' }}
+							</div>
+						</div>
+						<div class="step">
+							<div class="label">
+								0%
+							</div>
+						</div>
+					</div>
+
+					<div class="index" v-for="(bar, idx) in indices" :key="idx"
+						:style="{
+								left: idx / indices.length * 100 + '%',
+								width: 1 / indices.length * 100 + '%'
+						}">
+
+						<div class="bar-slot">
+							<div class="bar" :style="{
+								background: bar.name.includes('Vision') ? '#00227d' : '#cecece',
+								height: bar.returns / max * 100 + '%'
+							}">
+								<div class="bar-label">
+									{{ bar.returns + '%' }}
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 
+				<div class="labels">
+
+					<div class="title" v-for="(bar, idx) in indices" :key="idx"
+						:style="{ width: 1 / indices.length * 100 + '%' }">
+						{{ `${bar.name} (${idx + 1})` }}
+					</div>
+					<!-- <div class="index" v-for="(bar, idx) in indices" :key="idx">
+						{{ bar.cagr + '%' }}
+					</div> -->
+				</div>
+
 				<div class="cagr">
-					<div class="bar" v-for="(bar, idx) in indices" :key="idx">
+					<div class="index" v-for="(bar, idx) in indices" :key="idx"
+						:style="{
+							opacity: bar.name.includes('Vision') ? '1' : '0.34',
+							width: 1 / indices.length * 100 + '%'
+						}">
 						{{ bar.cagr + '%' }}
 					</div>
 				</div>
@@ -59,6 +104,14 @@ export default {
 			});
 
 			return indices;
+		},
+
+		max() {
+			return 25 * Math.ceil(this.indices[this.indices.length - 1].returns / 25);
+		},
+
+		steps() {
+			return this.max / 25;
 		}
 	}
 
@@ -137,10 +190,99 @@ export default {
 
 .chart
 	order 3
+	position relative
+
 	+below($tablet)
 		pad(2,1,0)
 
 	+above($tablet)
-		width (700% / 9)
+		// padding-left $gut * .5rem
+		margin-left (100% / 9)
+		width (600% / 9)
+
+
+.y
+	bottom 0
+	height 100%
+	left 0
+	position absolute
+	width 100%
+
+	.step
+		border-left 1px solid #979797
+		border-top 1px solid rgba(#979797,.15)
+		position relative
+
+		&:last-child
+			border-top 0
+
+	.label
+		color $b
+		fs(12)
+		line-height 0
+		letter-spacing (0.09em / 12)
+		pad(0,.5)
+		position absolute
+		text-align right
+		right 100%
+		top 0
+
+.bars
+	// height 100%
+	height 0
+	padding-bottom (290 / 699) * 100%
+	position relative
+
+	.index
+		height 100%
+		position absolute
+		text-align center
+		top 0
+
+	.bar-slot
+		border-bottom 1px solid #979797
+		height 100%
+		position relative
+
+	.bar
+		background #cecece
+		bottom 0
+		height 50%
+		left $gut*.5em
+		right $gut*.5em
+		position absolute
+
+	.bar-label
+		bottom 100%
+		left 0
+		color $b
+		fs(12)
+		letter-spacing (0.09em / 12)
+		position absolute
+		width 100%
+
+.labels,
+.cagr
+	display flex
+
+.labels
+	.title
+		color $b
+		fs(10)
+		letter-spacing (0.07em / 10)
+		line-height (13/ 10)
+		pad(.5,.5)
+		text-align center
+
+.cagr
+	border-top 1px solid #979797
+	mgn(.5, 0)
+	pad(.5, 0)
+
+	.index
+		color $b
+		fs(12)
+		letter-spacing (0.09em / 12)
+		text-align center
 
 </style>
