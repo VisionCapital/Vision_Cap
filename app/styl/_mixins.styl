@@ -5,8 +5,9 @@
 .slice
 	.wrap
 		margin 0 auto
-		max-width $laptop
+		max-width 1060px
 		width 82%
+
 		+above($mobile)//tablet
 			width 70%
 		+above($tablet)//notebook
@@ -15,10 +16,11 @@
 			width 78%
 		+above($laptop)//laptop-large
 			width 74%
-		+above($laptop-large)//desktop
-			width 66%
-		+above($desktop)//ultra
-			width 55%
+
+		// +above($laptop-large)//desktop
+		// 	width 66%
+		// +above($desktop)//ultra
+		// 	width 55%
 
 .heading
 	color $blue
