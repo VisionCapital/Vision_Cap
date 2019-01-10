@@ -3,21 +3,25 @@
   <div class="documents">
     <div class="mobile" v-if="documentsCta" v-html="$cms.htmlField(documentsCta)">select document type</div>
 
-    <div class="dropdown mobile" @click="reportDrop = !reportDrop">
-      <div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
-			<arrow-head class="arrow-head" :pointDown="reportDrop"/>
-    </div>
+		<div class="all-tabs">
 
-    <div class="heading-tabs desktop-tablet" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="current-selection mobile" @click="reportDrop = !reportDrop">
+				<div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
+				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
+			</div>
 
-      <div class="tab" v-for="(tab, idx) in reports" 
-        v-html="$cms.textField(tab.primary.tab_title)"
-        :class="{selected: idx === reportIdx}"
-        :key="'tab' + idx"
-        @click="reportSelect(idx)"
-      ></div>
+			<div class="heading-tabs desktop-tablet" :style="{display: reportDrop ? 'flex' : 'none'}">
 
-    </div>
+				<div class="tab" v-for="(tab, idx) in reports" 
+					v-html="$cms.textField(tab.primary.tab_title)"
+					:class="{selected: idx === reportIdx}"
+					:key="'tab' + idx"
+					@click="reportSelect(idx)"
+				></div>
+
+			</div>
+
+		</div>
 
     <div class="report-content">
       <div class="bg desktop-tablet"></div>
@@ -28,6 +32,9 @@
         </div>
         <a class="pdf" :href="document.pdf.url">pdf icon</a>
       </div>
+
+			<div class="disclaimer" v-if="disclaimer" v-html="$cms.htmlField(disclaimer)"></div>
+
     </div>
 
   </div>
@@ -43,6 +50,7 @@ export default {
 		ArrowHead
 	},
 	props: [
+		'disclaimer',
 		'reports',
 		'documentsCta'
 	],
@@ -60,7 +68,6 @@ export default {
 	methods: {
 		reportSelect(idx) {
 			this.reportIdx = idx;
-			console.log(window.innerWidth);
 			if (window.innerWidth < 376) {
 				this.reportDrop = false;
 			}
@@ -79,7 +86,7 @@ export default {
 		display none
 
 .desktop-tablet
-	+above($mobile)
+	+below($mobile)
 		display none
 a
 	width auto
@@ -110,29 +117,38 @@ a
 	justify-content space-between
 	align-items flex-end
 	border-bottom 1px solid $bluesat
-	+above($mobile)
+	+above($tablet)
 		pad(0,1.5)
 	+below($mobile)
 		&:last-child
 			border-bottom none
 
-.documents
-	pad(2,0)
-	
-	h5, p
-		mgn(1,1,.5,0)
-		+above($mobile)
-			display inline-block
+h5, p
+	mgn(1,1,.5,0)
+	+above($mobile)
+		display inline-block
 
-	p
-		+below($mobile)
-			margin-top 0
-	h5
-		color $blk
-		font-family $cormorant
-		+below($mobile)
-			fs(24)
-			// margin-right 0
+p
+	+below($mobile)
+		margin-top 0
+h5
+	color $blk
+	font-family $cormorant
+	+below($mobile)
+		fs(24)
+		// margin-right 0
+
+.all-tabs
+	+below($mobile)
+		position relative
+		left -15vw
+		width 100vw
+		padding 5% 15vw
+		background $grey
+
+.documents
+	pad(2,0,0)
+
 	.report-content
 		position relative
 
@@ -140,6 +156,14 @@ a
 		+above($mobile)
 			display flex
 			text-align center
+		+below($tablet)
+			position relative
+			width 100vw
+			left 50%
+			transform translateX(-50%)
+		+below($mobile)
+			left auto
+			transform none
 	
 	.bg
 		background $lightgrey
@@ -148,23 +172,26 @@ a
 		left 50%
 		transform translateX(-50%)
 		width 100vw
-		height 100% 
+		height 100%
 
 	.selected
 		background $lightgrey
 		color $blue
 		+below($mobile)
 			display none
-	.dropdown
+	.current-selection
 		width 100%
 		background $grey
 		+below($mobile)
 			display flex
 			justify-content space-between
 			align-items center
-			position relative
-			left -15vw
-			width 100vw
-			padding 5% 15vw
-			
+
+.disclaimer
+	fs(12)
+	pad(3,0)
+	+above($tablet)
+		width 60%
+	/deep/ p 
+		margin 0
 </style>

@@ -22,24 +22,29 @@
             :type="fund.pdf.link_type" 
             v-html="fund.pdf.name"/>
         </p>
+
+				<div class="bg"></div>
+
       </div>
     </div>
 
     <div class="mobile">
-      <div class="dropdown" @click="fundDrop = !fundDrop">
-        <div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
-				<arrow-head :pointDown="fundDrop" class="arrow-head"/>
-      </div>
+			<div class="dropdown">
+				<div class="current-selection" @click="fundDrop = !fundDrop">
+					<div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
+					<arrow-head :pointDown="fundDrop" class="arrow-head"/>
+				</div>
 
-      <div class="heading-tabs" v-if="fundDrop">
-        <div class="tab" 
-					:class="{hidden: fundIdx !== idx}"
-					v-for="(tab, idx) in fundInfo"
-          v-html="$cms.textField(tab.code)"
-          :key="'tab' + idx"
-          @click="fundSelect(idx)"
-        ></div>
-      </div>
+				<div class="heading-tabs" v-if="fundDrop">
+					<div class="tab" 
+						:class="{hidden: fundIdx === idx}"
+						v-for="(tab, idx) in fundInfo"
+						v-html="$cms.textField(tab.code)"
+						:key="'tab' + idx"
+						@click="fundSelect(idx)"
+					></div>
+				</div>
+			</div>
 
       <div class="row">
         <h4 v-html="$cms.textField(fundColumns.currency)"></h4>
@@ -98,6 +103,7 @@ export default {
 	},
 	methods: {
 		fundSelect(idx) {
+			console.log(idx);
 			this.fundIdx = idx;
 			this.fundDrop = false;
 		}
@@ -117,11 +123,20 @@ export default {
 	+below($mobile)
 		display none
 
-
 a
 	width auto
 	&:before, &:after
 		display none
+
+.bg
+	position absolute
+	height 100%
+	width 100%
+	z-index -1
+	left 50%
+	transform translateX(-50%)
+	+below($tablet)
+		width 100vw
 
 .tab
 	background $grey
@@ -136,41 +151,43 @@ a
 		background none 
 		fs(20)
 		color $blue
-
 	&:last-child
 		margin-right 0
 
+.dropdown
+	position relative
+	left 50%
+	transform translateX(-50%)
+	width 100vw
+	padding 5% 15vw
+	background $grey
+
 .row
+	position relative
 	display flex
 	justify-content space-between
 	align-items flex-end
-	border-bottom 1px solid $bluesat
-	+above($mobile)
-		pad(0,1.5)
 	+below($mobile)
+		border-bottom 1px solid $bluesat
 		&:last-child
 			border-bottom none
-
+	&:nth-child(even)
+		.bg 
+			background $lightgrey
 .products
 	+above($mobile)
 		text-align center
 	.arrow-head
 		width 20px
 		height 20px
-	.dropdown
-		position relative
-		left 50%
-		transform translateX(-50%)
-		width 100vw
-		padding 5% 15vw
-		background $grey
+	.current-selection
 		display flex
 		justify-content space-between
 		align-items center
 		
 	h4
 		color $blue
-		+below($mobile)
+		+below($tablet)
 			fs(24)
 	p, h4
 		+above($mobile)
