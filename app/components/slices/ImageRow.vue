@@ -31,10 +31,15 @@ export default {
 .image-row
 	@extend .slice
 	pad(0,2,2,0)
+	+below($tablet)
+		pad(0,0,2,0)
 
 .image-wrap
 	display flex
 	width 50%          
+
+	+below($tablet)
+		width 100%    
 	flex-direction: row;       
 	flex-wrap: nowrap;             
 	justify-content: space-between;
@@ -48,5 +53,6 @@ export default {
 	flex-direction: row;       
 	flex-wrap: nowrap;             
 	pad(2,0,3,0)
+	
 
 </style>
