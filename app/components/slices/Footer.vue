@@ -56,7 +56,7 @@ export default {
 
 		let links = [];
 
-		links = this.$store.state.navData.data.links;
+		links = this.$store.state.navData.links;
 
 		let mutualDrop = {
 			path: '/visual-resources/',

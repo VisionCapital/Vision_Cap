@@ -6,7 +6,7 @@
 		</transition>
 
 		<nav>
-			<ul class="links" v-if="$store.state.navData.data">
+			<ul class="links" v-if="$store.state.navData">
 
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
@@ -17,7 +17,7 @@
 					</router-link>
 				</li>
 
-				<li v-for="link in $store.state.navData.data.links"
+				<li v-for="link in $store.state.navData.links"
 					:key="link.page_link.slug">
 					<router-link :to="`/${link.page_link.slug}`"
 						v-if="link.page_link.slug"
@@ -45,9 +45,9 @@ export default {
 	},
 
 	data() {
-		let links = [];
+		console.log('mainnav');
+		console.log(this.$store.state.navData);
 		return {
-			links
 		};
 	}
 
