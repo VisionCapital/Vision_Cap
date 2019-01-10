@@ -48,6 +48,7 @@
 
 import Logo from '../svg/Logo.vue';
 import ArrowHead from '../svg/ArrowHead.vue';
+
 export default {
 
 	components: {
@@ -121,8 +122,13 @@ export default {
 				padding 0 24%
 			+below($mobile)
 				padding 0
+		&:nth-child(n+6)
+			order 7
+			
+.links /deep/ li.resources 
+	order 6
+
 .resources
-	// display flex
 	.arrow-head 
 		margin-left 1em
 
