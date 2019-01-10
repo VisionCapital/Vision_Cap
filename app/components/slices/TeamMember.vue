@@ -118,7 +118,8 @@ img
 	&.full-copy
 		overflow visible
 		max-height 100%
-
+	/deep/ ul
+		padding-left 1.8em
 	/deep/
 		h2, h3, h4, p
 			&:first-child
@@ -131,3 +132,4 @@ img
 				fs(30)
 
 </style>
+ 

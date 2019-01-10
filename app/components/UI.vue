@@ -42,6 +42,11 @@ export default {
 		return {
 			pageTop: false
 		};
+	},
+	created() {
+		this.$cms.loadType('navigation').then((results) => {
+			this.$store.dispatch('setNavData', results.results[0]);
+		});
 	}
 };
 

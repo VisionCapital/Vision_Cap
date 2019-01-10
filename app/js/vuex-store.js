@@ -9,7 +9,8 @@ const store = new Vuex.Store({
 		back: '/',
 		device: {},
 		transition: 'v',
-		navOpen: false
+		navOpen: false,
+		navData: {}
 	},
 
 	actions: {
@@ -27,6 +28,10 @@ const store = new Vuex.Store({
 
 		toggleNav(context) {
 			context.commit('toggleNav');
+		},
+
+		setNavData(context, data) {
+			context.commit('setNavData', data);
 		}
 	},
 
@@ -45,6 +50,10 @@ const store = new Vuex.Store({
 
 		toggleNav(state) {
 			Vue.set(state, 'navOpen', !state.navOpen);
+		},
+
+		setNavData(state, data) {
+			Vue.set(state, 'navData', data);
 		}
 	}
 

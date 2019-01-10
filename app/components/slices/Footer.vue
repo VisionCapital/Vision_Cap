@@ -20,6 +20,21 @@
 							v-html="link.title"/>
 					</li>
 
+					<li class="resources">
+						<div class="drop-toggle" 
+							v-html="mutualDrop.title"
+							@click="mutualOpen = !mutualOpen"
+						></div>
+						<arrow-head
+							class="arrow-head"
+							:pointDown="mutualOpen"
+							color="#fff"
+						/>
+						<div class="dropdown" v-if="mutualOpen">
+							<div></div>
+						</div>
+					</li>
+
 				</ul>
 			</nav>
 		</footer>
@@ -29,14 +44,19 @@
 <script>
 
 import Logo from '../svg/Logo.vue';
-
+import ArrowHead from '../svg/ArrowHead.vue';
 export default {
 
 	components: {
-		Logo
+		Logo,
+		ArrowHead
 	},
 
 	data() {
+
+		// console.log(this.$cms);
+
+		// console.log(this.$cms.findRecord(this.slug));
 		let links = [];
 
 		links = [
@@ -57,10 +77,6 @@ export default {
 				title: 'Mutual Funds'
 			},
 			{
-				path: '/visual-resources/',
-				title: 'Visual Resources'
-			},
-			{
 				path: '/investor-portal/',
 				title: 'Investor Portal'
 			},
@@ -70,8 +86,15 @@ export default {
 			}
 		];
 
+		let mutualDrop = {
+			path: '/visual-resources/',
+			title: 'Visual Resources'
+		};
+
 		return {
-			links
+			links,
+			mutualOpen: false,
+			mutualDrop
 		};
 	}
 
@@ -96,22 +119,35 @@ export default {
 	list-style none
 	padding 0
 	position relative
-	+above($tablet)
+	+above($mobile)
 		text-align center
+		display flex
+		flex-wrap wrap
+		justify-content center
+		align-items center
 
-	/deep/
-		a
-			color white
+	/deep/ a
+		color white
 
-		li
+	/deep/ li
+		max-width 280px
+		mgn(1,.5)
+		vertical-align middle
+		+below($mobile)
 			display inline-block
-			max-width 280px
-			mgn(1,.5)
-			vertical-align middle
+			width 40%
+			mgn(.5,.5)
+		&:first-child
 			+below($tablet)
-				width 40%
-				mgn(.5,.5)
-				&:first-child
-					max-width 100%
-					width auto
+				max-width 100%
+				width auto
+				padding 0 24%
+			+below($mobile)
+				padding 0
+.resources
+	display flex
+	.drop-toggle
+		cursor pointer
+		margin-right 1em
+
 </style>

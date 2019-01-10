@@ -193,7 +193,8 @@ h5
 	fs(12)
 	pad(3,0)
 	+above($tablet)
-		width 60%
+		width 70%
 	/deep/ p 
 		margin 0
+		max-width 100%
 </style>

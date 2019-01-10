@@ -23,7 +23,7 @@ export default {
 
 	data() {
 		let record = this.$cms.findRecord(this.slug);
-
+		// console.log(record);
 		return {
 			record
 		};
