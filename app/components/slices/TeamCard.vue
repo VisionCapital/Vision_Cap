@@ -10,7 +10,6 @@
 
 				<team-member
 					ref="teamMember"
-					:data="data"
 					:card="card"
 				/>
 			</div>

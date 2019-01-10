@@ -9,7 +9,7 @@
 
 				<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 					<div ref="copy"
-						v-html="data.htmlField(card.profile_copy)">
+						v-html="$cms.htmlField(card.profile_copy)">
 					</div>
 				</div>
 
@@ -34,7 +34,6 @@ export default {
 		ArrowHead
 	},
 	props: [
-		'data',
 		'card'
 	],
 	data() {

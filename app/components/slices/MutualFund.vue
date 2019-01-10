@@ -27,9 +27,8 @@
 			<fund-docs
 				:documentsCta="data.documents_cta"
 				:reports="data.body"
+				:disclaimer="data.disclaimer"
 			/>
-
-			<div class="disclaimer" v-if="data.disclaimer" v-html="$cms.htmlField(data.disclaimer)"></div>
 
     </div>
 
@@ -89,7 +88,7 @@ export default {
 	overflow hidden
 	.wrap
 		position relative
-		pad(3, 0);
+		pad(3, 0, 0);
 
 a
 	width auto
@@ -108,9 +107,4 @@ a
 		+above($tablet)
 			width 45%
 
-.disclaimer
-	fs(12)
-	width 60%
-	+below($tablet)
-		width 90%
 </style>
