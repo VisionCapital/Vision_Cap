@@ -78,6 +78,7 @@ export default {
 	+below($tablet)
 		pad(2,0)
 
+
 .wrap
 	display inline-block
 	position relative
@@ -95,6 +96,9 @@ export default {
 		pad(4,0,0)
 		padding 0
 		background none
+
+		a:before, a:after
+			background none
 	.ctct-form-custom .ctct-form-header
 		width 100%
 		font-family $cormorant-semibold
@@ -120,6 +124,7 @@ export default {
 		+below($tablet)
 			width 100%
 			text-align center
+
 	#gdpr_text
 		order 5
 		opacity .5
