@@ -1,4 +1,8 @@
-const events = [ 'mousewheel', 'DOMMouseScroll', 'wheel', 'MozMousePixelScroll' ];
+import { install } from 'resize-observer';
+
+if (!window.ResizeObserver) { install(); }
+
+const events = [ 'mousewheel', 'DOMMouseScroll', 'wheel', 'MozMousePixelScroll', 'touchstart', 'touchmove' ];
 
 import raf from './global-raf.js';
 
@@ -9,7 +13,7 @@ class LerpScroll {
 		this.el = this.outer.querySelector(':first-child');
 
 		this.native = false;
-		this.lerpFactor = 20;
+		this.lerpFactor = 10;
 
 		if (this.native) {
 			this.outer.style.overflow = 'auto';
@@ -29,6 +33,7 @@ class LerpScroll {
 		this.onWheel = this.onWheel.bind(this);
 		this.onMouseWheel = this.onMouseWheel.bind(this);
 		this.touchMove = this.touchMove.bind(this);
+		this.touchStart = this.touchStart.bind(this);
 		this.cb = cb;
 
 		requestAnimationFrame(() => {
@@ -68,15 +73,18 @@ class LerpScroll {
 	}
 
 	doScroll(e) {
-		e.preventDefault();
+		if (e.type !== 'touchstart') {
+			e.preventDefault();
+		}
 		this.event = e;
 		this.when = performance.now();
 
 		({
 			wheel: this.onWheel,
 			mousewheel: this.onMouseWheel,
-			touchmove: this.touchMove
-		}[e.type] || (() => console.log(`No handler for event type ${e.type}`)))();
+			touchmove: this.touchMove,
+			touchstart: this.touchStart
+		}[e.type] || (() => console.log(`No handler for event type ${e.type}`)))(); // eslint-disable=line no-console
 
 		if (!this.tick) {
 			requestAnimationFrame(this.update);
@@ -106,7 +114,7 @@ class LerpScroll {
 		let e = this.event;
 		var t = e.wheelDeltaY || -1 * e.deltaY;
 
-		if (this.isFirefox() && 1 === this.e.deltaMode) {
+		if (this.isFirefox() && 1 === e.deltaMode) {
 			t *= 60;
 		}
 		t *= 0.556;
@@ -114,7 +122,6 @@ class LerpScroll {
 		this.target += t;
 
 		this.target = Math.min(0, Math.max(this.max, this.target));
-
 	}
 
 	onMouseWheel() {
@@ -124,11 +131,16 @@ class LerpScroll {
 
 		this.target += t;
 		this.target = Math.min(0, Math.max(this.max, this.target));
+	}
 
+	touchStart() {
+		this.prevMove = this.target;
+		this.start = this.event.targetTouches[0].pageY;
 	}
 
 	touchMove() {
-
+		this.target = 2 * (this.event.targetTouches[0].pageY - this.start) + this.prevMove;
+		this.target = Math.min(0, Math.max(this.max, this.target));
 	}
 }
 
