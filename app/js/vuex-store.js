@@ -10,7 +10,8 @@ const store = new Vuex.Store({
 		device: {},
 		transition: 'v',
 		navOpen: false,
-		navData: {}
+		navData: {},
+		resourceTags: {}
 	},
 
 	actions: {
@@ -32,6 +33,10 @@ const store = new Vuex.Store({
 
 		setNavData(context, data) {
 			context.commit('setNavData', data);
+		},
+
+		setResourceTags(context, tags) {
+			context.commit('setResourceTags', tags);
 		}
 	},
 
@@ -54,6 +59,10 @@ const store = new Vuex.Store({
 
 		setNavData(state, data) {
 			Vue.set(state, 'navData', data);
+		},
+
+		setResourceTags(state, tags) {
+			Vue.set(state, 'resourceTags', tags);
 		}
 	}
 

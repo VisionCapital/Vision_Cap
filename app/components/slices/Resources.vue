@@ -1,5 +1,5 @@
 <template>
-	<div class="resources" v-if="resources.length">
+	<div class="resources" :id="resourceID" v-if="resources.length">
 		<div class="wrap">
 
 			<h2 v-if="data.fields.title_tag"
@@ -25,13 +25,17 @@ export default {
 
 	data() {
 		return {
-			resources: []
+			resources: [],
+			resourceID: ''
 		};
 	},
 
 	created() {
 		this.$cms.loadTags(this.data.text('title_tag')).then((results) => {
 			this.resources = results.results;
+			if (this.resources[0]) {
+				this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
+			}
 		});
 	}
 

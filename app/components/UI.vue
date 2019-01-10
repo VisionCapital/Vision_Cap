@@ -44,16 +44,18 @@ export default {
 		};
 	},
 	beforeCreate() {
-		// console.log(this.$cms.findRecord('resources'));
 		this.$cms.loadType('navigation').then((results) => {
-			// console.log(results.results[0]);
 			this.$store.dispatch('setNavData', results.results[0].data);
-			// console.log(this.$store.state.navData);
 		});
-		// this.$cms.loadType('resources').then((results) => {
-		// 	console.log(results.results);
-		// 	this.$store.dispatch('setNavData', results.results[0]);
-		// });
+
+		this.$cms.loadType('resource').then((results) => {
+			let resourceTags = {};
+			for (let resource of results.results) {
+				resourceTags[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
+			}
+			this.$store.dispatch('setResourceTags', resourceTags);
+		});
+
 	}
 };
 

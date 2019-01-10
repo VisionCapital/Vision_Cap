@@ -21,17 +21,20 @@
 					</li>
 
 					<li class="resources">
-						<div class="drop-toggle" 
-							v-html="mutualDrop.title"
-							@click="mutualOpen = !mutualOpen"
-						></div>
-						<arrow-head
-							class="arrow-head"
-							:pointDown="mutualOpen"
-							color="#fff"
-						/>
+						<div class="drop-toggle" @click="mutualOpen = !mutualOpen">
+							<div v-html="mutualDrop.title"></div>
+							<arrow-head
+								class="arrow-head"
+								:pointDown="mutualOpen"
+								color="#fff"
+							/>
+						</div>
 						<div class="dropdown" v-if="mutualOpen">
-							<div></div>
+							<router-link :to="`/resources#${tagID}`" 
+								v-for="(tagID, name) in resourceTags" 
+								v-html="name" 
+								:class="tagID"
+								:key="tagID"/>
 						</div>
 					</li>
 
@@ -53,11 +56,11 @@ export default {
 	},
 
 	data() {
-		// console.log('footer');
-		// console.log(this.$store.state.navData);
+
 		let links = [];
 
 		links = this.$store.state.navData.links;
+		let resourceTags = this.$store.state.resourceTags;
 
 		let mutualDrop = {
 			path: '/visual-resources/',
@@ -67,7 +70,8 @@ export default {
 		return {
 			links,
 			mutualOpen: false,
-			mutualDrop
+			mutualDrop,
+			resourceTags
 		};
 	}
 
@@ -118,9 +122,15 @@ export default {
 			+below($mobile)
 				padding 0
 .resources
-	display flex
-	.drop-toggle
-		cursor pointer
-		margin-right 1em
+	// display flex
+	.arrow-head 
+		margin-left 1em
 
+	.drop-toggle
+		display flex;
+		cursor pointer
+.dropdown
+	display flex
+	flex-direction column
+	text-align left
 </style>
