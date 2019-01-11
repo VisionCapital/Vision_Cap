@@ -71,7 +71,7 @@ export default {
 
 .hero
 	@extend .slice
-	pad(4,0,2,0)
+	pad(1,0,2,0)
 	position relative
 
 	.wrap
@@ -81,6 +81,7 @@ export default {
 		/deep/ h1
 			color $w
 			line-height 1em
+			fs(75)
 			padding-bottom 0.3em
 
 			+below($tablet)
