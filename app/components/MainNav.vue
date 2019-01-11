@@ -61,7 +61,7 @@ export default {
 
 	computed: {
 		interactive() {
-			return !/Safari/.test(navigator.userAgent);
+			return /Chrome/.test(navigator.userAgent);
 		}
 	},
 
