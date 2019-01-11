@@ -56,6 +56,8 @@ export default {
 	@extend .slice
 	pad(2,0)
 
+/deep/ a
+	color $blue
 
 em
 	font-style normal
@@ -73,20 +75,18 @@ em
 .contacts
 	+above($tablet)
 		mgn(0,0,0,2)
-	// +below($tablet)
-	// 	display flex
-	// 	justify-content space-between
 
 	/deep/ p
 		margin-bottom 0
 		color $blk
-	a
-		color $blue
 
 .contact 
 	+below($tablet)
 		display inline-block
-		width 50%
+		width 47%
+		margin-right 3%
+		vertical-align top
 	+below($mobile)
 		width 100%
+		margin 0
 </style>
