@@ -25,6 +25,7 @@
 
 // import LerpScroll from '../../js/lerp-scroll.js';
 
+import Logo from '../svg/Logo.vue';
 import FundDocs from '../MutualFundDocs.vue';
 import FundProducts from '../MutualFundProducts.vue';
 
@@ -32,7 +33,8 @@ export default {
 
 	components: {
 		FundDocs,
-		FundProducts
+		FundProducts,
+		Logo
 	},
 
 	data() {
@@ -92,5 +94,8 @@ a
 	>div
 		+above($tablet)
 			width 45%
+
+svg
+	fill $blue
 
 </style>
