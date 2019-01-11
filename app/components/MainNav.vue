@@ -107,6 +107,8 @@ export default {
 	position relative
 	display flex
 	justify-content center
+	+below($tablet)
+		flex-direction column
 	+above($notebook)
 		text-align center
 
@@ -120,7 +122,7 @@ export default {
 			vertical-align middle
 			+above($notebook)
 				display inline-block
-			&:nth-child(n+6)
+			&:nth-last-child(-n+3)
 				order 7
 
 .links /deep/ li.resources 
