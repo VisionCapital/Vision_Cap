@@ -10,7 +10,7 @@
 				<p v-if="data.fields.fund_cta" v-html="data.text('fund_cta')"></p>
 
 				<div class="contacts">
-					<div v-for="(contact, idx) in contacts" :key="idx">
+					<div class="contact" v-for="(contact, idx) in contacts" :key="idx">
 						
 						<div v-if="contact.contact_name" v-html="data.htmlField(contact.contact_name)"></div>
 						<a :href="`tel:${data.textField(contact.contact_phone)}`" 
@@ -73,11 +73,20 @@ em
 .contacts
 	+above($tablet)
 		mgn(0,0,0,2)
+	// +below($tablet)
+	// 	display flex
+	// 	justify-content space-between
+
 	/deep/ p
 		margin-bottom 0
 		color $blk
 	a
 		color $blue
 
-
+.contact 
+	+below($tablet)
+		display inline-block
+		width 50%
+	+below($mobile)
+		width 100%
 </style>

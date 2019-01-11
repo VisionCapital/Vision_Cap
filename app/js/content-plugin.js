@@ -35,6 +35,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
 	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
 	Vue.component('Resources', () => import('../components/slices/Resources.vue'));
+	Vue.component('SingleColumnCopy', () => import('../components/slices/SingleColumnCopy.vue'));
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 
