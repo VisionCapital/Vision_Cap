@@ -26,6 +26,24 @@
 						v-html="link.link_title[0].text"/>
 				</li>
 
+				<li class="resources">
+					<div class="drop-toggle" @click="mutualOpen = !mutualOpen">
+						<div v-html="'Resources'"></div>
+						<arrow-head
+							class="arrow-head"
+							:pointDown="mutualOpen"
+							color="#fff"
+						/>
+					</div>
+					<div class="dropdown" v-if="mutualOpen">
+						<router-link v-for="(tagID, name) in $store.state.resourceTags" 
+							:to="`/resources#${tagID}`" 
+							v-html="name" 
+							:class="tagID"
+							:key="tagID"/>
+					</div>
+				</li>
+
 			</ul>
 		</nav>
 
@@ -35,17 +53,20 @@
 <script>
 
 import Logo from './svg/Logo.vue';
+import ArrowHead from './svg/ArrowHead.vue';
 
 export default {
 	props: [
 		'pageTop'
 	],
 	components: {
-		Logo
+		Logo,
+		ArrowHead
 	},
 
 	data() {
 		return {
+			mutualOpen: false
 		};
 	}
 
@@ -84,6 +105,8 @@ export default {
 	list-style none
 	padding 0
 	position relative
+	display flex
+	justify-content center
 	+above($notebook)
 		text-align center
 
@@ -97,4 +120,22 @@ export default {
 			vertical-align middle
 			+above($notebook)
 				display inline-block
+			&:nth-child(n+6)
+				order 7
+
+.links /deep/ li.resources 
+	order 6
+
+.resources
+	color $w
+	.arrow-head 
+		margin-left 1em
+
+	.drop-toggle
+		display flex;
+		cursor pointer
+.dropdown
+	display flex
+	flex-direction column
+	text-align left
 </style>

@@ -65,7 +65,7 @@ export default {
 
 		let mutualDrop = {
 			path: '/visual-resources/',
-			title: 'Visual Resources'
+			title: 'Resources'
 		};
 
 		return {
@@ -102,7 +102,6 @@ export default {
 		display flex
 		flex-wrap wrap
 		justify-content center
-		align-items center
 
 	/deep/ a
 		color white
@@ -124,7 +123,7 @@ export default {
 				padding 0
 		&:nth-child(n+6)
 			order 7
-			
+
 .links /deep/ li.resources 
 	order 6
 

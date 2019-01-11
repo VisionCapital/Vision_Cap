@@ -50,6 +50,8 @@ export default {
 
 		this.$cms.loadType('resource').then((results) => {
 			let resourceTags = {};
+			console.log('results');
+			console.log(results);
 			for (let resource of results.results) {
 				resourceTags[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
 			}
