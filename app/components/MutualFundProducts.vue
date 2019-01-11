@@ -51,7 +51,7 @@
 				</div>
 
 				<div class="heading-tabs" v-if="fundDrop">
-					<div class="tab" 
+					<div class="tab"
 						:class="{hidden: fundIdx === idx}"
 						v-for="(tab, idx) in fundInfo"
 						v-html="$cms.textField(tab.code)"
@@ -75,7 +75,7 @@
         <h4 v-html="$cms.textField(fundColumns.date)"></h4>
         <p v-html="fundInfo[fundIdx].date" v-if="fundInfo[fundIdx].date"></p>
       </div>
-    
+
       <div class="row">
         <h4 v-html="$cms.textField(fundColumns.value)"></h4>
         <p v-html="$cms.textField(fundInfo[fundIdx].value)"></p>
@@ -83,9 +83,9 @@
 
       <div class="row">
         <h4 v-html="$cms.textField(fundColumns.pdf)"></h4>
-        <a :href="fundInfo[fundIdx].pdf.url" 
-          :name="fundInfo[fundIdx].pdf.name" 
-          :type="fundInfo[fundIdx].pdf.link_type" 
+        <a :href="fundInfo[fundIdx].pdf.url"
+          :name="fundInfo[fundIdx].pdf.name"
+          :type="fundInfo[fundIdx].pdf.link_type"
           v-html="fundInfo[fundIdx].pdf.name"/>
       </div>
 
@@ -134,7 +134,6 @@ svg
 	width 1.2rem
 	display: inline-block;
 	vertical-align: middle;
-<<<<<<< HEAD
 	fill $blue
 	margin-right 0.5rem
 
@@ -145,8 +144,6 @@ svg
 .desktop-tablet
 	+below($mobile)
 		display none
-=======
->>>>>>> 643acba1ad486383c8ddf669425ca71d83a6995d
 
 a
 	width auto
@@ -173,7 +170,7 @@ a
 		display none
 	+below($mobile)
 		width 100%
-		background none 
+		background none
 		fs(20)
 		color $blue
 	&:last-child
@@ -198,7 +195,7 @@ a
 		&:last-child
 			border-bottom none
 	&:nth-child(even)
-		.bg 
+		.bg
 			background $lightgrey
 .products
 	+above($mobile)
@@ -211,7 +208,7 @@ a
 		justify-content space-between
 		align-items center
 
-		
+
 	h4
 		color $blue
 		+below($tablet)

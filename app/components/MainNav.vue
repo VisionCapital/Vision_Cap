@@ -27,9 +27,10 @@
 				</li>
 
 				<li class="resources">
-					<div class="drop-toggle" @click="mutualOpen = !mutualOpen">
-						<div v-html="'Resources'"></div>
-						<arrow-head
+					<div class="drop-toggle">
+						<router-link to="/resources"
+							v-html="'Resources'"/>
+						<arrow-head @click.native="mutualOpen = !mutualOpen"
 							class="arrow-head"
 							:pointDown="mutualOpen"
 							color="#fff"
@@ -39,7 +40,8 @@
 						<router-link v-for="(tagID, name) in $store.state.resourceTags"
 							:to="`/resources#${tagID}`"
 							v-html="name"
-							:key="tagID"/>
+							:key="tagID"
+							@click.native="mutualOpen = !mutualOpen"/>
 					</div>
 				</li>
 
@@ -113,12 +115,15 @@ export default {
 		position fixed
 
 .links
-	margin 0
+	margin 0 auto
 	list-style none
 	padding 0
 	position relative
 	display flex
 	justify-content center
+	max-width 1060px
+	width 80%
+
 	+below($notebook)
 		flex-direction column
 	+above($notebook)
@@ -132,9 +137,14 @@ export default {
 			max-width 280px
 			pad(1,.5)
 			margin 0
-			vertical-align middle
-			+above($notebook)
-				display inline-block
+			// vertical-align middle
+			// +above($notebook)
+			// 	display inline-block
+
+			&:first-child
+				margin-right auto
+				padding-left 0
+
 			&:nth-last-child(-n+3)
 				order 7
 

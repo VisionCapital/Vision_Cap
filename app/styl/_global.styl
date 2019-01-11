@@ -32,18 +32,14 @@ a
 		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
 
 	&:hover
+		color: $blue;
+		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
 		&:before
 			width: 100%;
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
 
-	&:hover
-		width: 100%;
-		color: $blue;
-		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-	&:hover
 		&:after
-			font: inherit;
 			width: 100%;
 			transition: 0s;
 			background: transparent;

@@ -30,9 +30,9 @@
 							/>
 						</div>
 						<div class="dropdown" v-if="mutualOpen">
-							<router-link :to="`/resources#${tagID}`" 
-								v-for="(tagID, name) in resourceTags" 
-								v-html="name" 
+							<router-link :to="`/resources#${tagID}`"
+								v-for="(tagID, name) in resourceTags"
+								v-html="name"
 								:class="tagID"
 								:key="tagID"/>
 						</div>
@@ -93,7 +93,7 @@ export default {
 		pad(1,1)
 
 .links
-	margin 0
+	margin 0 auto
 	list-style none
 	padding 0
 	position relative
@@ -106,6 +106,9 @@ export default {
 	// 	display flex
 	// 	flex-wrap wrap
 	// 	justify-content center
+	max-width 1060px
+	width 80%
+
 	/deep/ a
 		color white
 
@@ -113,12 +116,16 @@ export default {
 		max-width 280px
 		margin 0
 		pad(1,.5)
-		vertical-align middle
+		// vertical-align middle
 		// +below($mobile)
 		// 	display inline-block
 		// 	width 40%
 		// 	mgn(.5,.5)
 		&:first-child
+			+above($tablet)
+				padding-left 0
+				margin-right auto
+
 			+below($tablet)
 				max-width 100%
 				width auto
@@ -128,12 +135,12 @@ export default {
 		&:nth-child(n+6)
 			order 7
 
-.links /deep/ li.resources 
+.links /deep/ li.resources
 	order 6
 
 .resources
 	position relative
-	.arrow-head 
+	.arrow-head
 		margin-left 1em
 
 	.drop-toggle
@@ -142,7 +149,7 @@ export default {
 .dropdown
 	display flex
 	flex-direction column
-	position absolute 
+	position absolute
 	bottom 100%
 	a
 		margin-bottom 2px
