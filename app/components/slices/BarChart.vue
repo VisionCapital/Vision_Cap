@@ -8,7 +8,7 @@
 				<h2 v-if="heading"
 					v-html="heading"/>
 				<h2 v-html="data.html('vision_opp_pdf_title')"/>
-				<a :href="data.fields.pdf_link_name" target="_blank" v-html="data.html('pdf_link_name')"/>
+				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
 			</div>
 
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
@@ -125,7 +125,9 @@ export default {
 .bar-chart
 	@extend .slice
 	pad(2,0)
-
+	+below($tablet)
+		&:nth-child(even)
+			background $lightgrey
 .wrap
 	display flex
 
@@ -156,8 +158,8 @@ export default {
 	position relative
 	pad(.5,2,2,0)
 
-	+below($tablet)
-		width 100%
+	// +below($tablet)
+	// 	width 100%
 
 	a:before, a:after
 		background none

@@ -1,16 +1,16 @@
 <template>
 
   <div class="documents">
-    <div class="mobile" v-if="documentsCta" v-html="$cms.htmlField(documentsCta)">select document type</div>
+    <div v-if="$store.state.device.win.x <= 375 && documentsCta" v-html="$cms.htmlField(documentsCta)">select document type</div>
 
 		<div class="all-tabs">
 
-			<div class="current-selection mobile" @click="reportDrop = !reportDrop">
+			<div class="current-selection" v-if="$store.state.device.win.x <= 375" @click="reportDrop = !reportDrop">
 				<div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
 				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
 			</div>
 
-			<div class="heading-tabs desktop-tablet" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="heading-tabs" v-if="$store.state.device.win.x > 375" :style="{display: reportDrop ? 'flex' : 'none'}">
 
 				<div class="tab" v-for="(tab, idx) in reports" 
 					v-html="$cms.textField(tab.primary.tab_title)"
@@ -24,7 +24,7 @@
 		</div>
 
     <div class="report-content">
-      <div class="bg desktop-tablet"></div>
+      <div class="bg" v-if="$store.state.device.win.x > 375"></div>
       <div class="row" v-for="(document, idx) in reports[reportIdx].items" :key="idx">
         <div>
           <h5 v-html="$cms.textField(document.document_title)"></h5>
@@ -82,13 +82,6 @@ export default {
 @import "../styl/_variables"
 
 
-.mobile
-	+above($mobile)
-		display none
-
-.desktop-tablet
-	+below($mobile)
-		display none
 a
 	width auto
 	&:before, &:after
