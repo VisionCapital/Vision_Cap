@@ -21,9 +21,12 @@
 					</li>
 
 					<li class="resources">
-						<div class="drop-toggle" @click="mutualOpen = !mutualOpen">
-							<div v-html="mutualDrop.title"></div>
+						<div class="drop-toggle">
+							<router-link v-html="mutualDrop.title"
+								:to="mutualDrop.path"
+							/>
 							<arrow-head
+								@click.native="mutualOpen = !mutualOpen"
 								class="arrow-head"
 								:pointDown="!mutualOpen"
 								color="#fff"
@@ -64,7 +67,7 @@ export default {
 		let resourceTags = this.$store.state.resourceTags;
 
 		let mutualDrop = {
-			path: '/visual-resources/',
+			path: '/resources',
 			title: 'Resources'
 		};
 
