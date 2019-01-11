@@ -35,11 +35,10 @@
 							color="#fff"
 						/>
 					</div>
-					<div class="dropdown" v-if="mutualOpen">
+					<div class="dropdown" v-if="mutualOpen" :class="{'page-top': !pageTop}">
 						<router-link v-for="(tagID, name) in $store.state.resourceTags"
 							:to="`/resources#${tagID}`"
 							v-html="name"
-							:class="tagID"
 							:key="tagID"/>
 					</div>
 				</li>
@@ -125,7 +124,8 @@ export default {
 
 		li
 			max-width 280px
-			mgn(1,.5)
+			pad(1,.5)
+			margin 0
 			vertical-align middle
 			+above($notebook)
 				display inline-block
@@ -137,14 +137,38 @@ export default {
 
 .resources
 	color $w
+	position relative
 	.arrow-head
 		margin-left 1em
+		+below($tablet)
+			width 0.75em
 
 	.drop-toggle
 		display flex;
 		cursor pointer
 .dropdown
+	font-family $circular
 	display flex
 	flex-direction column
-	text-align left
+	+above($tablet)
+		position absolute
+		left 50%
+		transform translateX(-50%);
+		width 100%
+	&.page-top
+		top 100%
+		a
+			background $b
+	+below($tablet)
+		fs(18)
+	a
+		margin-top 2px
+		pad(0.5,0.5)
+		&.page-top
+		&:hover::after, &:hover::before
+			display none
+		+below($tablet)
+			padding 0
+			mgn(2,0,0,1)
+
 </style>
