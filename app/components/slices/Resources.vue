@@ -58,5 +58,9 @@ export default {
 		fs(80)
 		line-height (100 / 80)
 		letter-spacing (-.97 / 80) * 1em
+		+below($tablet)
+			fs(65)
+		+below($mobile)
+			fs(30)
 
 </style>

@@ -75,20 +75,26 @@ export default {
 	display flex
 	mgn(0, 0, 2)
 	pad(1, 0)
+	position relative
 
 .body
 	order 2
-	width (600% / 9)
-
+	width 100%
+	+above($tablet)
+		width (600% / 9)
+	
 .date
 	fs(16)
+	+below($tablet)
+		fs(12)
 
 .title
 	/deep/ h2
 		fs(40)
 		font-family $cormorant-semibold
 		line-height (48 / 40)
-
+		+below($tablet)
+			fs(20)
 .copy
 	/deep/
 		p
@@ -107,7 +113,9 @@ export default {
 	order 1
 	pad(1,3,1,0)
 	width (300% / 9)
-
+	+below($tablet)
+		padding-right 4vw
+		min-width 6em
 // ----------
 // Alt styles
 // ----------
@@ -119,7 +127,8 @@ export default {
 		font-family $cormorant-semibold
 		line-height (48 / 40)
 		max-width (820 / 40) * 1em
-
+		+below($tablet)
+			fs(20)
 .news
 	.date
 		font-family $cormorant-semibold
@@ -127,5 +136,8 @@ export default {
 	/deep/ h2
 		color $blk
 
-
+/deep/ iframe 
+	+below($tablet)
+		width 100%
+		height (80vw * 270 / 480)
 </style>

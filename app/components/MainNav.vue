@@ -29,10 +29,11 @@
 				<li class="resources">
 					<div class="drop-toggle">
 						<router-link to="/resources"
+							@click.native="$store.dispatch('toggleNav')"
 							v-html="'Resources'"/>
 						<arrow-head @click.native="mutualOpen = !mutualOpen"
 							class="arrow-head"
-							:pointDown="!mutualOpen"
+							:pointDown="mutualOpen"
 							color="#fff"
 						/>
 					</div>
@@ -41,7 +42,7 @@
 							:to="`/resources#${tagID}`"
 							v-html="name"
 							:key="tagID"
-							@click.native="mutualOpen = !mutualOpen"/>
+							@click.native="mutualOpen = !mutualOpen; $store.dispatch('toggleNav')"/>
 					</div>
 				</li>
 
@@ -147,6 +148,8 @@ export default {
 
 			&:nth-last-child(-n+3)
 				order 7
+			+below($tablet)
+				padding-left 0
 
 .links /deep/ li.resources
 	order 6
