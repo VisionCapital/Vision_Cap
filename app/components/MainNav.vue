@@ -103,12 +103,14 @@ export default {
 .bg
 	background black
 	abs()
-	position fixed
 	transition opacity 0.5s, transform 0.5s
 	&.v-enter,
 	&.v-leave-to
 		transform translateY(-100%)
 		opacity 0
+
+	+below($notebook)
+		position fixed
 
 .links
 	margin 0
@@ -117,7 +119,7 @@ export default {
 	position relative
 	display flex
 	justify-content center
-	+below($tablet)
+	+below($notebook)
 		flex-direction column
 	+above($notebook)
 		text-align center
