@@ -31,7 +31,7 @@
 						<div v-html="'Resources'"></div>
 						<arrow-head
 							class="arrow-head"
-							:pointDown="mutualOpen"
+							:pointDown="!mutualOpen"
 							color="#fff"
 						/>
 					</div>

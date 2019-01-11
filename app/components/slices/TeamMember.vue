@@ -16,7 +16,7 @@
         <div @click="toggleText()" v-if="longCopy" class="copy-cta">
           <p v-if="collapsed">Read More</p>
           <p v-else>Collapse</p>
-					<arrow-head class="arrow-head" :pointDown="!collapsed"/>
+					<arrow-head class="arrow-head" :pointDown="collapsed"/>
         </div>
 
       </div>
