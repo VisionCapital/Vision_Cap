@@ -6,6 +6,7 @@
 			<fund-products
 				:fundColumns="fundColumns"
 				:fundInfo="data.mutual_fund_info"
+				
 				:fundsCta="data.funds_cta"
 			/>
 
