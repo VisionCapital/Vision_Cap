@@ -25,7 +25,7 @@
 							<div v-html="mutualDrop.title"></div>
 							<arrow-head
 								class="arrow-head"
-								:pointDown="mutualOpen"
+								:pointDown="!mutualOpen"
 								color="#fff"
 							/>
 						</div>
@@ -88,7 +88,7 @@ export default {
 	background $blue
 	color $w
 	position relative
-	overflow hidden
+	// overflow hidden
 	+below($tablet)
 		pad(1,1)
 
@@ -108,7 +108,8 @@ export default {
 
 	/deep/ li
 		max-width 280px
-		mgn(1,.5)
+		margin 0
+		pad(1,.5)
 		vertical-align middle
 		+below($mobile)
 			display inline-block
@@ -128,6 +129,7 @@ export default {
 	order 6
 
 .resources
+	position relative
 	.arrow-head 
 		margin-left 1em
 
@@ -137,5 +139,12 @@ export default {
 .dropdown
 	display flex
 	flex-direction column
-	text-align left
+	position absolute 
+	bottom 100%
+	a
+		margin-bottom 2px
+		pad(0.5,0.5)
+		background $blue
+		&:hover::after, &:hover::before
+			display none
 </style>

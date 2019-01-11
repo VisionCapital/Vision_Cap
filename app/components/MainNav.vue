@@ -35,11 +35,10 @@
 							color="#fff"
 						/>
 					</div>
-					<div class="dropdown" v-if="mutualOpen">
+					<div class="dropdown" v-if="mutualOpen" :class="{'page-top': !pageTop}">
 						<router-link v-for="(tagID, name) in $store.state.resourceTags" 
-							:to="`/resources#${tagID}`" 
+							:to="`/resources#${tagID}`"
 							v-html="name" 
-							:class="tagID"
 							:key="tagID"/>
 					</div>
 				</li>
@@ -146,17 +145,23 @@ export default {
 	flex-direction column
 	+above($tablet)
 		position absolute 
-		top 100%
 		left 50%
 		transform translateX(-50%);
 		width 100%
+	&.page-top
+		top 100%
+		a
+			background $b
 	+below($tablet)
 		fs(18)
 	a
-		background $b
 		margin-top 2px
 		pad(0.5,0.5)
+		&.page-top
+		&:hover::after, &:hover::before
+			display none		
 		+below($tablet)
 			padding 0
 			mgn(2,0,0,1)
+
 </style>
