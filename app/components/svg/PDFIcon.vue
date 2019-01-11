@@ -14,3 +14,13 @@
     </g>
   </svg>
 </template>
+
+
+<style lang="stylus" scoped>
+
+@import '../../styl/_variables'
+
+svg 
+  fill $blue
+
+</style>  

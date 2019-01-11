@@ -122,7 +122,6 @@ export default {
 	width 1.2rem
 	display: inline-block;
 	vertical-align: middle;
-	fill $blue
 	margin-right 0.5rem
 
 .mobile
