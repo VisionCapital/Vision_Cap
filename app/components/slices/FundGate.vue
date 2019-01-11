@@ -54,7 +54,9 @@
 import airprops from '../../mixins/airprops';
 
 export default {
+
 	mixins: [ airprops ],
+
 	data() {
 		let links = [
 			{
@@ -70,6 +72,7 @@ export default {
 			links
 		};
 	}
+
 };
 </script>
 
@@ -82,8 +85,9 @@ export default {
 	position relative
 
 .wrap
-	color $w
 	background-color $darkblue
+	background-color #031543
+	color $w
 	position relative
 		width 100%
 

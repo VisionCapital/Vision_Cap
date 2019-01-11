@@ -4,18 +4,16 @@
 		<div class="bg"/>
 
 		<div class="wrap">
-
 			<div class="heroAboveCards">
-				<div class="copy">
 
-					<h1 v-if="data.fields.heading"
-						v-html="data.text('heading')"/>
-					<h1 v-else-if="heading"
-						v-html="heading"/>
+				<div class="copy" v-if="data.fields.heading"
+					v-html="data.html('heading')"/>
 
+				<div class="copy" v-else-if="heading">
+					<h1 v-html="heading"/>
 				</div>
-			</div>
 
+			</div>
 		</div>
 
 		<div :class="{'individual-card-wrap': $store.state.device.mobile}">
@@ -61,29 +59,46 @@ export default {
 @import "../../styl/_variables"
 
 
-.individual-card-wrap
-	width 100%
-
 .info-card-slice
 	position relative
 	width 100%
+
 	+below($tablet)
 		width 100%
 
 	+above($notebook)
 		@extend .slice
 		width 100%
+
 	.wrap
 		position relative
-		width 60%
+		// width 60%
 		/deep/ h1
 			color $w
-			font-size 30px
+			font-family 'Cormorant Medium', sans-serif
+			fs(30)
 			line-height (37/30)
-			
+
+			+above($tablet)
+				fs(44)
+				line-height (52 / 44)
+
+			+above($notebook)
+				fs(36)
+				line-height (44 / 36)
+
+			+above($laptop)
+				fs(44)
+				line-height (52 / 44)
+
+			+below($notebook)
+				br
+					display none
+
+.individual-card-wrap
+	width 100%
 
 .individual-card // style this according to dimensions
-
 	background-color $darkblue
 	color $w
 	fs(17)
@@ -107,18 +122,18 @@ export default {
 		width (100%/3)
 		margin 0 3px
 		pad(2,1)
-	
+
 	+above($notebook) //desktop plus
 		fs(23)
 		pad(2,3.5)
-		
-		
+
+
 
 
 .copy
 	text-align center
 	vertical-align center
-	
+
 
 	//p
 	//	font-size relative

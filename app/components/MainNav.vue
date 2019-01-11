@@ -1,6 +1,6 @@
 <template>
 	<div class="main-nav">
-	
+
 		<transition>
 			<div class="bg" v-if="$store.state.device.mobile || !pageTop"/>
 		</transition>
@@ -78,7 +78,7 @@ export default {
 	&.v-leave-to
 		transform translateY(-100%)
 		opacity 0
-	
+
 .links
 	margin 0
 	list-style none
