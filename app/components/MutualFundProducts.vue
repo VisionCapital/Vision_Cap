@@ -2,9 +2,9 @@
 
   <div class="products">
 
-    <div class='mobile' v-if="fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
+    <div v-if="$store.state.device.win.x <= 375 && fundsCta" v-html="$cms.htmlField(fundsCta)">Select Code</div>
 
-    <div class="desktop-tablet">
+    <div v-if="$store.state.device.win.x > 375">
       <div class="heading row">
         <h4 v-for="(columnTitle, idx) in fundColumns" v-html="$cms.textField(columnTitle)" :key="idx"></h4>
       </div>
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="mobile">
+    <div v-if="$store.state.device.win.x <= 375">
 			<div class="dropdown">
 				<div class="current-selection" @click="fundDrop = !fundDrop">
 					<div class="tab" v-html="$cms.textField(fundInfo[fundIdx].code)"></div>
@@ -134,6 +134,7 @@ svg
 	width 1.2rem
 	display: inline-block;
 	vertical-align: middle;
+<<<<<<< HEAD
 	fill $blue
 	margin-right 0.5rem
 
@@ -144,6 +145,8 @@ svg
 .desktop-tablet
 	+below($mobile)
 		display none
+=======
+>>>>>>> 643acba1ad486383c8ddf669425ca71d83a6995d
 
 a
 	width auto
