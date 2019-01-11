@@ -3,10 +3,10 @@
 		<div class="left">
 			<div class="form-row" v-for="(field, idx) in fields" :key="idx">
 				<div class="required" v-if="field.required === 'Yes'">*</div>
-				<input :id="`field-${field.key}`" 
+				<input :id="`field-${field.key}`"
 					type="text"
-					:name="data.textField(field.key)" 
-					:placeholder="data.textField(field.placeholder)" 
+					:name="data.textField(field.key)"
+					:placeholder="data.textField(field.placeholder)"
 					:required="field.required === 'Yes'">
 			</div>
 		</div>
@@ -97,11 +97,11 @@ option {
 form
 
 	position relative
-	left 50%
-	transform translate(-50%,0)
-	width 75%
+	// left 50%
+	// transform translate(-50%,0)
+	// width 75%
 	+above($tablet)
-		width 60%
+		// width 60%
 		display flex
 		justify-content space-between
 
@@ -109,7 +109,7 @@ form
 	+above($tablet)
 		width 36%
 
-.right 
+.right
 	+above($tablet)
 		width 58%
 
@@ -118,11 +118,11 @@ form
 	left -2em
 	color $copy
 
-form 
+form
 	input, textarea
 		color $w
 		border 0
-		border-bottom 1px solid $w
+		border-bottom 1px solid #3360D9
 		padding 0
 		mgn(1,0)
 		line-height 2.5em
@@ -131,18 +131,19 @@ form
 			border-color $copy
 
 		&:focus
-			border-color $blk
+			border-color $w
 
 		&::placeholder
 			color #9F9F9F
+			color rgba($w,.37)
 			+below($tablet)
 				text-align center
-			
+
 
 	button
 		background $blk
 		+above($tablet)
-			position absolute 
+			position absolute
 			right 0
 		margin 0
 		align-items center

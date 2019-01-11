@@ -8,9 +8,10 @@
 					v-html="data.text('heading')"/>
 				<h4 v-if="data.fields.subheading"
 					v-html="data.text('subheading')"/>
+
+				<contact-form :data="data"></contact-form>
+
 			</div>
-			
-			<contact-form :data="data"></contact-form>
 
 		</div>
 
@@ -53,10 +54,14 @@ export default {
 			color $w
 		/deep/ h4
 			max-width 100%
-			color $w
-			opacity 0.7
+			color #5079E8
 			fs(26)
 			+below($tablet)
 				fs(20)
+
+	.copy
+		mgn(0,auto)
+		max-width 656px
+		width 75%
 
 </style>
