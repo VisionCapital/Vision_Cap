@@ -5,7 +5,7 @@
 			to="/"
 			class="home-link"
 			title="Home">
-			<logo class="light" :interactive="true"/>
+			<logo class="light" :interactive="interactive"/>
 		</router-link>
 
 		<button v-if="!$store.state.navOpen" @click.prevent="$store.dispatch('toggleNav')">
@@ -31,15 +31,22 @@ export default {
 	components: {
 		Logo,
 		Close
+	},
+
+	computed: {
+		interactive() {
+			return !/Safari/.test(navigator.userAgent);
+		}
 	}
+
 };
 
-</script>	
+</script>
 
 <style lang="stylus" scoped>
 
 @import "../styl/_variables";
-	
+
 
 .nav-switch
 	background $b

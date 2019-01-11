@@ -31,7 +31,8 @@
 				:center="{lat: lat, lng: lng}"
 				:zoom="16"
 				:options="{
-					styles: mapStyles, 
+					styles: mapStyles,
+			    scrollwheel: false,
 					disableDefaultUI: true,
 					zoomControl: $store.state.device.mobile ? false : true,
 					zoomControlOptions: {

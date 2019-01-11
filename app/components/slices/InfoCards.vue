@@ -77,7 +77,8 @@ export default {
 			color $w
 			font-family 'Cormorant Medium', sans-serif
 			fs(30)
-			line-height (37/30)
+			line-height (37 / 30)
+			text-align center
 
 			+above($tablet)
 				fs(44)
@@ -127,13 +128,10 @@ export default {
 		fs(23)
 		pad(2,3.5)
 
-
-
-
-.copy
-	text-align center
-	vertical-align center
-
+	.copy
+		text-align center
+		max-width 15em
+		mgn(0,auto)
 
 	//p
 	//	font-size relative

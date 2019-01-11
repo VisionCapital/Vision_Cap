@@ -171,9 +171,9 @@ export default {
 	created() {},
 	mounted() {
 
-		if (!window.WebGLRenderingContext) {
-			return;
-		}
+		// if (!window.WebGLRenderingContext) {
+		// 	return;
+		// }
 
 		this.renderer = new THREE.WebGLRenderer({
 			antialias: true,

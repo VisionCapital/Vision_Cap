@@ -5,13 +5,13 @@
 			to="/"
 			class="home-link"
 			title="Home">
-			<logo class="light"/>
+			<logo class="light" :interactive="interactive"/>
 		</router-link>
 
 		<transition appear>
-			<main-nav 
-				:pageTop="pageTop"
+			<main-nav
 				v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
+				:pageTop="pageTop"
 			/>
 		</transition>
 
@@ -38,6 +38,13 @@ export default {
 		NavSwitch,
 		Hero
 	},
+
+	computed: {
+		interactive() {
+			return !/Safari/.test(navigator.userAgent);
+		}
+	},
+
 	data() {
 		return {
 			pageTop: false
@@ -73,11 +80,11 @@ export default {
 .home-link
 	display block
 	left 0
-	pad(1,1)
+	// pad(1,1)
 	position fixed
 	top 0
-	max-width ($desktop / 8)
-	width (100% / 8)
+	// max-width ($desktop / 8)
+	// width (100% / 8)
 	z-index 11
 
 	+above($desktop)

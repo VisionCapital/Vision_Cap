@@ -126,15 +126,22 @@ export default {
 	@extend .slice
 	pad(2,0)
 
-
 .wrap
 	display flex
-	flex-wrap wrap
+
+	+above($tablet)
+		flex-wrap wrap
+
+	+below($tablet)
+		flex-direction column
 
 .title-copy
 	order 1
 	width 100%
-	padding-bottom 3rem
+	// padding-bottom 3rem
+
+	+above($tablet)
+		padding-bottom 3rem
 
 	/deep/ h3
 		fs(mp(2))
@@ -148,9 +155,6 @@ export default {
 	order 2
 	position relative
 	pad(.5,2,2,0)
-	+below($tablet)
-		pad(.5,1,2,0)
-
 
 	a:before, a:after
 		background none
@@ -168,9 +172,6 @@ export default {
 		a
 			display inline-block
 
-	+above($tablet)
-		width (200% / 9)
-
 	.bg
 		background url('../../images/strip-bg.jpg')
 		background-repeat no-repeat
@@ -179,21 +180,29 @@ export default {
 		height 100%
 		width auto
 		bottom 0
-		left -($gut * 2em)
+		left 0
 		right 0
 		top 0
 		position absolute
-		+below($tablet)
-			left -15vw
-			right auto
-			width 100vw
+
+	+below($tablet)
+		pad(.5,1,1)
+		text-align center
+
+	+above($tablet)
+		width (200% / 9)
+
+		.bg
+			left -($gut * 2em)
+			// right auto
+			// width 100vw
 
 .chart
 	order 3
 	position relative
 
 	+below($tablet)
-		pad(2,1,0)
+		pad(2,0,0)
 
 	+above($tablet)
 		// padding-left $gut * .5rem
@@ -218,7 +227,7 @@ export default {
 
 	.label
 		color $b
-		fs(12)
+		fs(10)
 		line-height 0
 		letter-spacing (0.09em / 12)
 		pad(0,.5)
@@ -227,11 +236,17 @@ export default {
 		right 100%
 		top 0
 
+		+above($tablet)
+			fs(12)
+
 .bars
 	// height 100%
 	height 0
-	padding-bottom (290 / 699) * 100%
+	padding-bottom (290 / 449) * 100%
 	position relative
+
+	+above($tablet)
+		padding-bottom (290 / 699) * 100%
 
 	.index
 		height 100%
@@ -248,18 +263,25 @@ export default {
 		background #cecece
 		bottom 0
 		height 50%
-		left $gut*.5em
-		right $gut*.5em
+		left $gut*.25em
+		right $gut*.25em
 		position absolute
+
+		+above($tablet)
+			left $gut*.5em
+			right $gut*.5em
 
 	.bar-label
 		bottom 100%
 		left 0
 		color $b
-		fs(12)
-		letter-spacing (0.09em / 12)
+		fs(10)
 		position absolute
 		width 100%
+
+		+above($tablet)
+			fs(12)
+			letter-spacing (0.09em / 12)
 
 .labels,
 .cagr
@@ -268,11 +290,17 @@ export default {
 .labels
 	.title
 		color $b
-		fs(10)
-		letter-spacing (0.07em / 10)
+		fs(8)
+		// letter-spacing (0.07em / 8)
 		line-height (13/ 10)
-		pad(.5,.5)
+		pad(.5,.25)
 		text-align center
+
+		+above($tablet)
+			fs(10)
+			letter-spacing (0.07em / 10)
+			line-height (13/ 10)
+			pad(.5,.5)
 
 .cagr
 	border-top 1px solid #979797
@@ -281,8 +309,11 @@ export default {
 
 	.index
 		color $b
-		fs(12)
-		letter-spacing (0.09em / 12)
 		text-align center
+		fs(10)
+
+		+above($tablet)
+			fs(12)
+			letter-spacing (0.09em / 12)
 
 </style>

@@ -9,10 +9,12 @@
 
 		<div class="wrap">
 			<div class="copy">
+
 				<div class="hero-image">
-				<img v-if="data.fields.hero_image.url"
-					:src="data.image('hero_image')"/>
-		</div>
+					<img v-if="data.fields.hero_image.url"
+						:src="data.image('hero_image')"/>
+				</div>
+
 				<h1 v-if="heading"
 					v-html="heading"/>
 				<h1 v-else-if="data.fields.hero_title.length"
@@ -20,6 +22,7 @@
 
 				<h3 v-if="subheading"
 					v-html="subheading"/>
+
 				<p v-if="copy"
 					v-html="copy"/>
 
@@ -52,14 +55,23 @@ export default {
 @import "../../styl/_variables"
 
 .hero-image
-	padding-left 15%
-	padding-right 15%
-	padding-top 5rem
-	align-content center
-	
+	// padding-left 15%
+	// padding-right 15%
+	// padding-top 5rem
+	// align-content center
+
+	pad(1,0,0)
+
+	+above($tablet)
+		pad(2,3)
+
+		/deep/ img
+			// max-width 920px
+			mgn(0,auto)
+
 .hero
 	@extend .slice
-	pad(4,0, 2, 0)
+	pad(4,0,2,0)
 	position relative
 
 	.wrap
@@ -73,12 +85,14 @@ export default {
 
 			+below($tablet)
 				padding-bottom 1em
-				fs (60)
+				fs(60)
 				line-height (73/60)
+
 		/deep/ p
 			+below($tablet)
 				fs(12)
 				line-height (24/12)
+
 .bg
 	background url('../../images/strip-bg.jpg')
 	background-repeat no-repeat

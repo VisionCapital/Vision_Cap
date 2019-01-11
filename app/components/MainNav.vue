@@ -13,7 +13,7 @@
 						to="/"
 						class="home-link"
 						title="Home">
-						<logo class="light" :interactive="true"/>
+						<logo class="light" :interactive="interactive"/>
 					</router-link>
 				</li>
 
@@ -36,9 +36,9 @@
 						/>
 					</div>
 					<div class="dropdown" v-if="mutualOpen">
-						<router-link v-for="(tagID, name) in $store.state.resourceTags" 
-							:to="`/resources#${tagID}`" 
-							v-html="name" 
+						<router-link v-for="(tagID, name) in $store.state.resourceTags"
+							:to="`/resources#${tagID}`"
+							v-html="name"
 							:class="tagID"
 							:key="tagID"/>
 					</div>
@@ -59,6 +59,13 @@ export default {
 	props: [
 		'pageTop'
 	],
+
+	computed: {
+		interactive() {
+			return !/Safari/.test(navigator.userAgent);
+		}
+	},
+
 	components: {
 		Logo,
 		ArrowHead
@@ -125,12 +132,12 @@ export default {
 			&:nth-last-child(-n+3)
 				order 7
 
-.links /deep/ li.resources 
+.links /deep/ li.resources
 	order 6
 
 .resources
 	color $w
-	.arrow-head 
+	.arrow-head
 		margin-left 1em
 
 	.drop-toggle
