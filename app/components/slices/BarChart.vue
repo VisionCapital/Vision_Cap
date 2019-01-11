@@ -156,6 +156,9 @@ export default {
 	position relative
 	pad(.5,2,2,0)
 
+	+below($tablet)
+		width 100%
+
 	a:before, a:after
 		background none
 

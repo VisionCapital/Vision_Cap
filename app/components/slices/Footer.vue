@@ -97,12 +97,15 @@ export default {
 	list-style none
 	padding 0
 	position relative
-	+above($mobile)
-		text-align center
-		display flex
-		flex-wrap wrap
-		justify-content center
-
+	text-align center
+	display flex
+	flex-wrap wrap
+	justify-content center
+	// +above($mobile)
+	// 	text-align center
+	// 	display flex
+	// 	flex-wrap wrap
+	// 	justify-content center
 	/deep/ a
 		color white
 
@@ -111,10 +114,10 @@ export default {
 		margin 0
 		pad(1,.5)
 		vertical-align middle
-		+below($mobile)
-			display inline-block
-			width 40%
-			mgn(.5,.5)
+		// +below($mobile)
+		// 	display inline-block
+		// 	width 40%
+		// 	mgn(.5,.5)
 		&:first-child
 			+below($tablet)
 				max-width 100%
