@@ -32,7 +32,7 @@
 							v-html="'Resources'"/>
 						<arrow-head @click.native="mutualOpen = !mutualOpen"
 							class="arrow-head"
-							:pointDown="mutualOpen"
+							:pointDown="!mutualOpen"
 							color="#fff"
 						/>
 					</div>
