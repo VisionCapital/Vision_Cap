@@ -134,21 +134,9 @@ svg
 	width 1.2rem
 	display: inline-block;
 	vertical-align: middle;
-<<<<<<< HEAD
 	fill $blue
 	margin-right 0.5rem
 
-.mobile
-	+above($mobile)
-		display none
-
-.desktop-tablet
-	+below($mobile)
-		display none
-=======
->>>>>>> 643acba1ad486383c8ddf669425ca71d83a6995d
-
-a
 	width auto
 	&:before, &:after
 		display none
