@@ -139,7 +139,8 @@ export default {
 		display none
 svg
 	width 1.2rem
-	float left
+	display: inline-block;
+	vertical-align: middle;
 
 a
 	width auto
