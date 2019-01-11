@@ -200,6 +200,10 @@ a
 		color $blue
 		+below($tablet)
 			fs(24)
+		+below(550px)
+			font-size 4vw
+		+below($mobile)
+			fs(24)
 	p, h4
 		+above($mobile)
 			width (100% / 6)

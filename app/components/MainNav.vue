@@ -2,7 +2,7 @@
 	<div class="main-nav">
 
 		<transition>
-			<div class="bg" v-if="$store.state.device.mobile || !pageTop"/>
+			<div class="bg" v-if="$store.state.device.win.x <= 1024 || !pageTop"/>
 		</transition>
 
 		<nav>
@@ -93,7 +93,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	+below($notebook) {
+	+below($notebook) 
 		height 100%
 		pad(5,1)
 		font-family $cormorant
@@ -101,8 +101,9 @@ export default {
 		-webkit-overflow-scrolling touch
 		overflow-x hidden
 		overflow-y scroll
-	}
-
+	+below($tablet)
+		padding-top 20vw
+		padding-bottom 20vw
 .bg
 	background black
 	abs()
@@ -129,27 +130,30 @@ export default {
 		flex-direction column
 	+above($notebook)
 		text-align center
+		min-height 100vh
 
 	/deep/
 		a
 			color white
-
 		li
-			max-width 280px
-			pad(1,.5)
-			margin 0
-			// vertical-align middle
-			// +above($notebook)
-			// 	display inline-block
-
 			&:first-child
 				margin-right auto
 				padding-left 0
 
 			&:nth-last-child(-n+3)
 				order 7
+		li, a
+			max-width 280px
+			pad(1,.5)
+			margin 0
+			// vertical-align middle
+			// +above($notebook)
+			// 	display inline-block
 			+below($tablet)
 				padding-left 0
+				pad(.4,0)
+			+below($mobile)
+				pad(.5,0)
 
 .links /deep/ li.resources
 	order 6
@@ -178,16 +182,14 @@ export default {
 		top 100%
 		a
 			background $b
+
 	+below($tablet)
 		fs(18)
 	a
-		margin-top 2px
-		pad(0.5,0.5)
-		&.page-top
+		// &.page-top
 		&:hover::after, &:hover::before
 			display none
 		+below($tablet)
-			padding 0
-			mgn(2,0,0,1)
+			padding-left 1em
 
 </style>

@@ -1,26 +1,25 @@
 <template>
 	<div class="team-member">
 
-      <div class="img-wrap">
-        <img class="profile-pic" ref="img" @load="checkImgHeight()" :src="card.profile_image.url" v-if="card.profile_image">
-      </div>
+		<div class="img-wrap">
+			<img class="profile-pic" ref="img" @load="checkImgHeight()" :src="card.profile_image.url" v-if="card.profile_image">
+		</div>
 
-      <div class="content" >
+		<div class="content" >
 
-				<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
-					<div ref="copy"
-						v-html="$cms.htmlField(card.profile_copy)">
-					</div>
+			<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
+				<div ref="copy"
+					v-html="$cms.htmlField(card.profile_copy)">
 				</div>
+			</div>
 
-        <div @click="toggleText()" v-if="longCopy" class="copy-cta">
-          <p v-if="collapsed">Read More</p>
-          <p v-else>Collapse</p>
-					<arrow-head class="arrow-head" :pointDown="collapsed"/>
-        </div>
+			<div @click="toggleText()" v-if="longCopy" class="copy-cta">
+				<p v-if="collapsed">Read More</p>
+				<p v-else>Collapse</p>
+				<arrow-head class="arrow-head" :pointDown="collapsed"/>
+			</div>
 
-      </div>
-
+		</div>
 
 	</div>
 </template>
