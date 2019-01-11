@@ -132,7 +132,7 @@ export default {
 	position absolute
 	height 100%
 	width 100%
-	transition all 0.4s $easeInCubic
+	transition all 0.8s $easeInOutCubic
 
 .border
 	position absolute
@@ -183,7 +183,7 @@ export default {
 	background-size cover
 	background-repeat no-repeat
 	z-index 1
-	transition all 0.4s $easeInCubic
+	transition all 0.8s $easeInOutCubic
 	opacity 0.6
 
 

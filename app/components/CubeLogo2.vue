@@ -76,12 +76,11 @@ export default {
 				});
 
 				mat.transparent = true;
-				mat.blending = THREE.CustomBlending;
 
-				mat.blendEquation = THREE.AddEquation;
-
-				mat.blendSrc = THREE.DstAlphaSaturateFactor;
-				mat.blendDst = THREE.SrcAlphaSaturateFactor;
+				// mat.blending = THREE.CustomBlending;
+				// mat.blendEquation = THREE.AddEquation;
+				// mat.blendSrc = THREE.DstAlphaSaturateFactor;
+				// mat.blendDst = THREE.SrcAlphaSaturateFactor;
 
 				let plane = new THREE.PlaneBufferGeometry(1, 1);
 				let mesh = new THREE.Mesh(plane, mat);

@@ -61,7 +61,7 @@ export default {
 
 	computed: {
 		interactive() {
-			return /Chrome/.test(navigator.userAgent);
+			return true; // /Chrome/.test(navigator.userAgent);
 		}
 	},
 
