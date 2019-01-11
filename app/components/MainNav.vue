@@ -128,29 +128,28 @@ export default {
 
 	+below($notebook)
 		flex-direction column
+		min-height 100vh
 	+above($notebook)
 		text-align center
-		min-height 100vh
+
 
 	/deep/
 		a
 			color white
 		li
-			&:first-child
-				margin-right auto
-				padding-left 0
-
-			&:nth-last-child(-n+3)
-				order 7
-		li, a
 			max-width 280px
 			pad(1,.5)
 			margin 0
+			&:first-child
+				margin-right auto
+				padding-left 0
+			&:nth-last-child(-n+3)
+				order 7
+		li, a
 			// vertical-align middle
 			// +above($notebook)
 			// 	display inline-block
-			+below($tablet)
-				padding-left 0
+			+below($notebook)
 				pad(.4,0)
 			+below($mobile)
 				pad(.5,0)
@@ -186,7 +185,10 @@ export default {
 	+below($tablet)
 		fs(18)
 	a
-		// &.page-top
+		pad(0.5,0.5)
+		margin-top 2px
+		&.page-top
+			padding 0
 		&:hover::after, &:hover::before
 			display none
 		+below($tablet)
