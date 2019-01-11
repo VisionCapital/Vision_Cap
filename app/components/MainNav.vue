@@ -95,11 +95,15 @@ export default {
 		pad(5,1)
 		font-family $cormorant
 		fs(30)
+		-webkit-overflow-scrolling touch
+		overflow-x hidden
+		overflow-y scroll
 	}
 
 .bg
 	background black
 	abs()
+	position fixed
 	transition opacity 0.5s, transform 0.5s
 	&.v-enter,
 	&.v-leave-to
