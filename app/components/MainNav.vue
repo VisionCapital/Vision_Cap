@@ -11,6 +11,7 @@
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
+						@click.native="handleClick()"
 						class="home-link"
 						title="Home">
 						<logo class="light" :interactive="interactive"/>
@@ -22,14 +23,14 @@
 					<router-link :to="`/${link.page_link.slug}`"
 						v-if="link.page_link.slug"
 						:title="link.link_title[0].text"
-						@click.native="$store.dispatch('toggleNav')"
+						@click.native="handleClick()"
 						v-html="link.link_title[0].text"/>
 				</li>
 
 				<li class="resources">
 					<div class="drop-toggle">
 						<router-link to="/resources"
-							@click.native="$store.dispatch('toggleNav')"
+							@click.native="handleClick()"
 							v-html="'Resources'"/>
 						<arrow-head @click.native="mutualOpen = !mutualOpen"
 							class="arrow-head"
@@ -42,7 +43,7 @@
 							:to="`/resources#${tagID}`"
 							v-html="name"
 							:key="tagID"
-							@click.native="mutualOpen = !mutualOpen; $store.dispatch('toggleNav')"/>
+							@click.native="handleClick()"/>
 					</div>
 				</li>
 
@@ -67,7 +68,12 @@ export default {
 			return true; // /Chrome/.test(navigator.userAgent);
 		}
 	},
-
+	methods: {
+		handleClick() {
+			this.mutualOpen = false;
+			this.$store.dispatch('toggleNav');
+		}
+	},
 	components: {
 		Logo,
 		ArrowHead
