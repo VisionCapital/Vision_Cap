@@ -6,7 +6,7 @@
 		</transition>
 
 		<nav>
-			<ul class="links" v-if="$store.state.navData">
+			<ul :class="[ 'links', { 'bg-links' : !pageTop }]" v-if="$store.state.navData">
 
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
