@@ -7,7 +7,7 @@
 				<h2 v-html="$cms.textField(data.fields.reasons_heading)"/>
 
 				<div class="columns">
-					<div v-for="(reason, idx) in data.items" :key="idx">
+					<div class="container" v-for="(reason, idx) in data.items" :key="idx">
 						<h4 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h4>
 						<ul>
 							<li v-for="(item, i) in reason.list_items" :key="'item' + i" v-html="item.text"></li>
@@ -39,6 +39,7 @@ export default {
 	@extend .slice
 	pad(0,0,1,0)
 	overflow hidden
+	transition all 4s
 	.wrap
 		position relative
 		pad(3, 0, 0);
@@ -47,6 +48,22 @@ a
 	width auto
 	&:before, &:after
 		display none
+
+h2, h4
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &
+		opacity 0
+		transform translateY(2rem)
+li 
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &
+		opacity 0
+		transform translateX(-2rem)
+
+.container
+	for i in 1..20 
+		&:nth-child({i}) li, &:nth-child({i}) h4
+			transition-delay 0.2s * i
 
 .columns
 	position relative
