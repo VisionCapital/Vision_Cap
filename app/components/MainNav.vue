@@ -6,8 +6,10 @@
 		</transition>
 
 		<nav>
-			<ul :class="[ 'links', { 'bg-links' : !pageTop }]" v-if="$store.state.navData">
-
+			<ul :class="[ 'links', { 'bg-links' : true }]" v-if="$store.state.navData">
+					<!--	<div v-if="!pageTop"/>
+					<a :style="{'background-color': red }"></a>
+				<div/> -->
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
@@ -92,6 +94,7 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
+@import "../styl/_global"
 
 .main-nav
 	left 0
@@ -191,6 +194,7 @@ export default {
 	+below($tablet)
 		fs(18)
 	a
+		background-color black
 		pad(0.5,0.5)
 		margin-top 2px
 		&.page-top
@@ -199,5 +203,46 @@ export default {
 			display none
 		+below($tablet)
 			padding-left 1em
+
+.router-link-exact-active 
+	border-bottom: 3px solid white;
+
+.bg-links
+	
+	a
+		&:before, &:after
+			content: ''
+			position: absolute;
+			height 3px
+
+		&:before
+			content: ''
+			background: $w;
+			left 0
+			top 100%
+			width: 0%
+			left: -2px;
+
+		&:after
+			background: $w;
+			right: 2px;
+			right 0
+			top 100%
+			width: 0%
+			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+
+		&:hover
+			color: $w;
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+			&:before
+				width: 100%;
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+			&:after
+				width: 100%;
+				transition: 0s;
+				background: transparent;
+
 
 </style>
