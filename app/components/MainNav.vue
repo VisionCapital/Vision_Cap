@@ -101,7 +101,7 @@ export default {
 	z-index 10
 	+below($notebook) 
 		height 100%
-		pad(5,1)
+		pad(5,1,2)
 		font-family $cormorant
 		fs(30)
 		-webkit-overflow-scrolling touch
@@ -109,7 +109,7 @@ export default {
 		overflow-y scroll
 	+below($tablet)
 		padding-top 20vw
-		padding-bottom 20vw
+		padding-bottom 5vw
 .bg
 	background black
 	abs()
@@ -134,7 +134,8 @@ export default {
 
 	+below($notebook)
 		flex-direction column
-		min-height 100vh
+		justify-content flex-start
+		min-height 100%
 	+above($notebook)
 		text-align center
 
@@ -156,7 +157,7 @@ export default {
 			// +above($notebook)
 			// 	display inline-block
 			+below($notebook)
-				pad(.4,0)
+				padding 2vh 0
 			+below($mobile)
 				pad(.5,0)
 
@@ -197,7 +198,8 @@ export default {
 			padding 0
 		&:hover::after, &:hover::before
 			display none
-		+below($tablet)
+		+below($notebook)
+			padding 2vh 0
 			padding-left 1em
-
+			fs(20)
 </style>
