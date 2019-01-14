@@ -75,7 +75,7 @@ export default {
 
 .app
 	height 100%
-
+	
 .home-link
 	display block
 	left 0
