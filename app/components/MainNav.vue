@@ -103,15 +103,16 @@ export default {
 	width 100%
 	z-index 10
 	+below($notebook) 
-		height 100%
-		pad(5,1,2)
+		height 85%
+		top 15%
+		pad(0,1,2)
 		font-family $cormorant
 		fs(30)
 		-webkit-overflow-scrolling touch
 		overflow-x hidden
 		overflow-y scroll
+		z-index 12
 	+below($tablet)
-		padding-top 20vw
 		padding-bottom 5vw
 .bg
 	background black
@@ -123,7 +124,8 @@ export default {
 		opacity 0
 
 	+below($notebook)
-		position fixed
+		display none
+
 
 .links
 	margin 0 auto

@@ -15,8 +15,12 @@
 				</g>
 			</svg>
 		</button>
-
+		
 		<close v-else @click="$store.dispatch('toggleNav')"/>
+
+		<transition>
+			<div class="bg" :class="{'nav-open': $store.state.navOpen}" v-if="!pageTop || $store.state.navOpen"></div>
+		</transition>
 
 	</div>
 </template>
@@ -27,7 +31,9 @@ import Logo from './svg/Logo.vue';
 import Close from './svg/Close.vue';
 
 export default {
-
+	props: [
+		'pageTop'
+	],
 	components: {
 		Logo,
 		Close
@@ -49,7 +55,7 @@ export default {
 
 
 .nav-switch
-	background $b
+	// background $b
 	position fixed
 	width 100%
 	right 0
@@ -57,7 +63,7 @@ export default {
 	z-index 11
 	display flex
 	justify-content space-between
-	align-items center
+	// align-items center
 	pad(1,1)
 
 	a:after
@@ -79,4 +85,16 @@ export default {
 
 .home-link
 	width 70%
+
+.bg 
+	position absolute
+	left 0
+	top 0
+	background $b
+	height 100%
+	width 100%
+	z-index -1
+	transition height 0.5s
+	&.nav-open
+		height 100vh
 </style>
