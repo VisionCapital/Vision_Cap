@@ -54,7 +54,7 @@ export default {
 .two-column-copy
 	@extend .slice
 	pad(2,0)
-	transition all 5s
+	transition all 2s
 
 .title
 	// text-align left
