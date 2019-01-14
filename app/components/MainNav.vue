@@ -206,8 +206,44 @@ export default {
 			padding 2vh 0
 			padding-left 1em
 
-.router-link-exact-active 
-	border-bottom: 3px solid white;
+.router-link-exact-active.router-link-active
+
+	&:before, &:after
+		content: ''
+		position: absolute;
+		height 3px
+
+	&:before
+		content: ''
+		background: $w;
+		right 0
+		top 100%
+		width: 100%
+		background: transparent;
+
+	&:after
+		background: $w; //should be white
+		top 100%
+		width: 100%
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+		left 0
+
+	&:hover
+		color: $w;
+		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+		&:before
+			right 0
+			width: 0%;
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+		&:after
+			right 0
+			width: 0%;
+			background: $w;
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+
 
 .bg-links
 	
@@ -220,14 +256,12 @@ export default {
 		&:before
 			content: ''
 			background: $w;
-			left 0
+			right 0
 			top 100%
 			width: 0%
-			left: -2px;
 
 		&:after
 			background: $w;
-			right: 2px;
 			right 0
 			top 100%
 			width: 0%
