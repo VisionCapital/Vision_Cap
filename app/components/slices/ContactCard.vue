@@ -47,7 +47,7 @@ export default {
 
 .contact-card
 	@extend .slice
-	pad(2,0)
+	pad(3,0,4,0)
 
 	.wrap
 		position relative

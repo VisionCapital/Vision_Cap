@@ -207,10 +207,12 @@ h4
 	color $blue
 
 .map-frame
-	width 100%
+	width 50%
 	height 36vw
 	+below($tablet)
 		height 75vw
+	+below($notebook)
+		width 100%
 .wrap
 	display flex
 	justify-content space-between
@@ -223,13 +225,16 @@ h4
 	justify-content center
 	+above($notebook)//laptop
 		margin-left 11%
-		width 60%
+		width 39%
 	+above($laptop)//laptop-large
 		margin-left 13%
+		width 37%
 	+above($laptop-large)//desktop
 		margin-left 17%
+		width 33%
 	+above($desktop)//ultra
 		margin-left 22.5%
+		width 22.5%
 
 	+below($notebook)
 		text-align center

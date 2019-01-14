@@ -37,7 +37,7 @@ export default {
 
 .list-columns
 	@extend .slice
-	pad(0,0,3,0)
+	pad(0,0,1,0)
 	overflow hidden
 	.wrap
 		position relative

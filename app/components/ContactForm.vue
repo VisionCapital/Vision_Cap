@@ -26,7 +26,6 @@
 			</div>
 		</div>
 	</form>
-
 </template>
 
 <script>
@@ -89,13 +88,12 @@ export default {
 input, select, textarea, button {
 	color: $w;
 }
-
+	
 option {
 	background-color: #222;
 }
 
 form
-
 	position relative
 	// left 50%
 	// transform translate(-50%,0)

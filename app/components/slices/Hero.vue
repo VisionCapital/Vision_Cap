@@ -63,9 +63,10 @@ export default {
 	pad(1,0,0)
 
 	+above($tablet)
-		pad(2,5)
+		pad(3,5,1,5)
 
 		/deep/ img
+			pad(1,0,0,0)
 			// max-width 920px
 			mgn(0,auto)
 
