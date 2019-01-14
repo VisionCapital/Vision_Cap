@@ -73,17 +73,43 @@ export default {
 
 </script>
 
+<style lang="stylus">
+.team-cards
+	for i in 1..40
+		.card:nth-child({i})
+			/deep/ h3, .img-wrap
+				transition-delay 0.4s * i - 0.4s
+			/deep/ h4
+				transition-delay 0.4s * i - 0.3s
+			/deep/ p
+				transition-delay 0.4s * i - 0.2s
+			.copy-cta
+				transition-delay 0.4s * i - 0.15s
+</style>
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
 
 .team-member
 	pad(2,0)
+	transition all 0.5s
 	+above($tablet)
 		display flex
 
 p
 	max-width 100%
+
+/deep/ h3, /deep/ h4, /deep/ p
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &
+		opacity 0
+		transform translateY(2rem)
+
+.copy-cta
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &
+		opacity 0
+		transform translateY(-2rem)
 
 /deep/ h4
 	margin-bottom 0
@@ -91,21 +117,31 @@ p
 		fs(20)
 
 img
+	// max-width 100vw
+	width 100%
+	object-fit cover
+
+.img-wrap
+	// position relative
 	width 220px
-	max-width 100vw
-	padding-right 6em
+	// padding-top 90px
+	margin-right 6em
+	transition max-height 1s
+	max-height 100vh
+	overflow-y hidden
+	.v-enter &
+		max-height 0px
+
 	+below($tablet)
-		padding-right 1em
+		margin-right 1em
 		width 96px
 		float left
-
 .copy-cta
 	cursor pointer
 	color $blue
 	overflow hidden
 	display flex
 	align-items center
-
 .arrow-head
 	margin-left 10px
 
