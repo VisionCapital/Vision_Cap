@@ -20,7 +20,6 @@ export default {
 	props: [ 'slug' ],
 
 	mixins: [ slices ],
-
 	data() {
 		let record = this.$cms.findRecord(this.slug);
 
@@ -29,7 +28,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.scroll = new LerpScroll(this.$el, (d) => {
+		this.record.scroll = new LerpScroll(this.$el, (d) => {
 			this.$emit('pageTop', d.pos > -12);
 		});
 	}

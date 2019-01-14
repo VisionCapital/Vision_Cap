@@ -1,8 +1,8 @@
 <template>
-	<div class="resources" :id="resourceID" v-if="resources.length">
+	<div class="resources" :id="resourceID" :ref="resourceID" v-if="resources.length">
 		<div class="wrap">
 
-			<h2 v-if="data.fields.title_tag"
+			<h2 ref="stuff" v-if="data.fields.title_tag"
 				v-html="data.text('title_tag')"/>
 
 			<resource v-for="resource in resources"
@@ -29,12 +29,19 @@ export default {
 			resourceID: ''
 		};
 	},
-
-	created() {
+	methods: {
+		hashScroll() {
+			if (this.$route.hash && `#${this.resourceID}` === this.$route.hash) {
+				this.page.scroll.target = -this.$refs[this.resourceID].offsetTop;
+			}
+		}
+	},
+	mounted() {
 		this.$cms.loadTags(this.data.text('title_tag')).then((results) => {
 			this.resources = results.results;
 			if (this.resources[0]) {
 				this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
+				this.$nextTick(this.hashScroll);
 			}
 		});
 	}
