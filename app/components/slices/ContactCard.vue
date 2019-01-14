@@ -15,6 +15,7 @@
         <p v-if="contact.email">
           Email: <a :href="`mailto:${data.textField(contact.email)}`" v-html="data.textField(contact.email)"></a>
         </p>
+				
 				<p v-if="contact.phone">
 					Tel: <a :href="`tel:${data.textField(contact.phone)}`" v-html="data.textField(contact.phone)"></a>
 				</p>
@@ -47,7 +48,7 @@ export default {
 
 .contact-card
 	@extend .slice
-	pad(3,0,4,0)
+	pad(3,0,3,0)
 
 	.wrap
 		position relative
@@ -57,13 +58,7 @@ export default {
 .contact
 	+above($tablet)
 		width 50%
-
-		&:not(:first-child), &:not(:last-child)
-			pad(0,1)
-		&:first-child
-			pad(0,1,0,0)
-		&:last-child
-			pad(0,0,0,1)
+		pad(0,1,0,0)
 
 	+below($tablet)
 		mgn(0,0,2)
