@@ -28,7 +28,7 @@
 
 			<GmapMap
 				class="map-frame"
-				:center="{lat: lat, lng: lng}"
+				:center="{lat: center.lat, lng: center.lng}"
 				:zoom="16"
 				:options="{
 					styles: mapStyles,
@@ -42,7 +42,7 @@
 			>
 				<GmapMarker
 					:icon="{url: require('../../images/map-icon.png')}"
-					:position="{lat: lat, lng: lng}"
+					:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
 				/>
 			</GmapMap>
 
@@ -55,6 +55,7 @@
 import airprops from '../../mixins/airprops';
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import TweenMax from 'gsap/TweenMax';
 
 Vue.use(VueGoogleMaps, {
 	load: {
@@ -182,10 +183,20 @@ export default {
 		];
 
 		return {
-			lat: this.data.fields.map_lat_lng.latitude,
-			lng: this.data.fields.map_lat_lng.longitude,
+			center: {
+				lat: this.data.fields.map_lat_lng.latitude,
+				lng: this.data.fields.map_lat_lng.longitude
+			},
+			markerCenter: {
+				lat: this.data.fields.map_lat_lng.latitude,
+				lng: this.data.fields.map_lat_lng.longitude
+			},
 			mapStyles
 		};
+	},
+	mounted() {
+		// doesn't really work but I don't know how else to manipulate this element
+		TweenMax.from(this.markerCenter, 1, { lat: this.data.fields.map_lat_lng.latitude + 0.0005, delay: 2 });
 	}
 };
 </script>
@@ -194,28 +205,41 @@ export default {
 
 @import "../../styl/_variables"
 
-.wrap
+.map
+	transition all 2s
 
-	width auto
-	display flex
-	background-color $lightgrey
-	margin 0 0 0 auto
+h4, p, a div
+	transition transform 0.5s, opacity 0.5s
+	.v-enter &
+		opacity 0
+		transform translateY(2rem)
 
 p
 	max-width 80%
+	transition-delay 0.3s
 h4
+	transition-delay 0.2s
 	color $blue
+a div
+	transition-delay 0.4s
 
 .map-frame
 	width 50%
 	height 36vw
+	transition width 1s
+	.v-enter &
+		width 0
 	+below($tablet)
 		height 75vw
 	+below($notebook)
 		width 100%
 .wrap
+	width auto
 	display flex
-	justify-content space-between
+	background-color $lightgrey
+	margin 0 0 0 auto
+	display flex
+	// justify-content space-between
 	+below($notebook)
 		flex-direction column
 
@@ -250,11 +274,9 @@ h4
 	+above($tablet)
 		text-align left
 
-
 		.cta
 			pad(1,0)
 			//width (200%/ 6)
-
 
 			.button
 				width 100%
