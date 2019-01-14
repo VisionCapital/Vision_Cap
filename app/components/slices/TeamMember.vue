@@ -117,25 +117,21 @@ p
 		fs(20)
 
 img
-	// max-width 100vw
-	width 100%
-	object-fit cover
-
-.img-wrap
-	// position relative
 	width 220px
-	// padding-top 90px
-	margin-right 6em
+	max-width 100vw
+	padding-right 6em
+	+below($tablet)
+		padding-right 1em
+		width 96px
+		float left
+.img-wrap
 	transition max-height 1s
 	max-height 100vh
-	overflow-y hidden
+	// .v-enter-active &
+	// 	overflow-y hidden
 	.v-enter &
 		max-height 0px
 
-	+below($tablet)
-		margin-right 1em
-		width 96px
-		float left
 .copy-cta
 	cursor pointer
 	color $blue
