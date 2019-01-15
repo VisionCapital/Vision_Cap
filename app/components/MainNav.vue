@@ -212,7 +212,7 @@ for i in 6..10
 	+below($tablet)
 		fs(18)
 	a
-		background-color black
+		background-color none
 		pad(0.5,0.5)
 		margin-top 2px
 		&.page-top
