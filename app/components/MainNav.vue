@@ -94,7 +94,7 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
-@import "../styl/_global"
+// @import "../styl/_global"
 
 .main-nav
 	left 0
@@ -103,7 +103,7 @@ export default {
 	width 100%
 	z-index 10
 	transition all 2s
-	+below($notebook) 
+	+below($notebook)
 		height 85%
 		top 15%
 		pad(0,1,2)
@@ -137,7 +137,7 @@ for i in 1..10
 			transform translateY(1rem)
 
 for i in 6..10
-	li:nth-child({i})		
+	li:nth-child({i})
 		transition-delay 0.1s * i + 0.1s
 
 .links
@@ -161,6 +161,14 @@ for i in 6..10
 	/deep/
 		a
 			color white
+
+			&::before, &::after
+				background $w
+
+			&:hover
+				&::after
+					background none
+
 		li
 			max-width 280px
 			pad(1,.5)
@@ -223,6 +231,7 @@ for i in 6..10
 			padding 2vh 0
 			padding-left 1em
 
+<<<<<<< HEAD
 
 .bg-links
 	a
@@ -291,7 +300,21 @@ for i in 6..10
 				width: 0%;
 				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
 				background: $w;
+=======
+a.router-link-exact-active
+	&::after
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+		width 100%
+>>>>>>> cd6d265b72817f8b42eda6eb452c2823a781ff39
 
+	&:hover
+		&::before
+			background none
+			width 0%
 
+		&::after
+			background $w
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width 0%
 
 </style>
