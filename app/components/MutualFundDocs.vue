@@ -26,17 +26,21 @@
     <div class="report-content">
       <div class="bg" v-if="$store.state.device.win.x > 375"></div>
       <div class="row" v-for="(document, idx) in reports[reportIdx].items" :key="idx">
-        <div>
+
+        <div class="pdf-info">
           <h5 v-html="$cms.textField(document.document_title)"></h5>
           <p v-html="document.date"></p>
         </div>
 			
-			<div class="align-pdf">
-			<a class="pdf" :href="document.pdf.url">
-				<pdf-icon class="pdf-icon"/>
-				<span>.PDF</span>
-			</a>
-			</div>
+				<div class="align-pdf">
+					<a class="pdf" :href="document.pdf.url">
+						<pdf-icon class="pdf-icon"/>
+						<span>.PDF</span>
+					</a>
+				</div>
+
+				<div class="border"></div>
+
       </div>
 
 			<div class="disclaimer" v-if="disclaimer" v-html="$cms.htmlField(disclaimer)"></div>
@@ -89,6 +93,10 @@ export default {
 
 @import "../styl/_variables"
 
+.documents
+	pad(2,0,0)
+	transition all 2s
+	
 .align-pdf
 	pad(0,0,0.2,0)
 
@@ -113,6 +121,14 @@ a
 	margin-right 10px
 	padding 0.5em 0
 	cursor pointer
+	transition transform 0.3s, opacity 0.001s
+	.v-enter &
+		transform translateY(100%)
+		opacity 0
+	for i in 0..12
+		&:nth-child({i + 1})
+			transition-delay 0.05s * i
+
 	+below($mobile)
 		width 100%
 		background none 
@@ -122,11 +138,35 @@ a
 	&:last-child
 		margin-right 0
 
+for i in 1..12
+	.row:nth-child({i})
+		.pdf-info, .align-pdf
+			transition-delay 0.2s * i
+		.border
+			transition-delay 0.15s * i
+
+.pdf-info, .align-pdf
+	transition opacity 0.3s, transform 0.3s
+	.v-enter & 
+		opacity 0
+		transform translateY(20%)
+
+.border
+	height 1px
+	width 100%
+	position absolute 
+	left 0
+	bottom 0
+	background $bluesat
+	transition width 0.45s
+	.v-enter &
+		width 0%
+
 .row
 	display flex
+	position relative
 	justify-content space-between
 	align-items flex-end
-	border-bottom 1px solid $bluesat
 	+above($tablet)
 		pad(0,1.5)
 	+below($mobile)
@@ -149,58 +189,63 @@ h5
 		// margin-right 0
 
 .all-tabs
+	position relative
+	z-index 1
 	+below($mobile)
-		position relative
 		left 50%
 		width 100vw
 		transform translateX(-50%)
 		padding 5% ((100vw - 82vw) / 2)
 		background $grey
 
-.documents
-	pad(2,0,0)
-
-	.report-content
+.report-content
+	position relative
+	z-index 2
+.heading-tabs
+	+above($mobile)
+		display flex
+		text-align center
+	+below($tablet)
 		position relative
-
-	.heading-tabs
-		+above($mobile)
-			display flex
-			text-align center
-		+below($tablet)
-			position relative
-			width 100vw
-			left 50%
-			transform translateX(-50%)
-		+below($mobile)
-			left auto
-			transform none
-	
-	.bg
-		background $lightgrey
-		z-index -1
-		position absolute 
+		width 100vw
 		left 50%
 		transform translateX(-50%)
-		width 100vw
-		height 100%
+	+below($mobile)
+		left auto
+		transform none
 
-	.selected
-		background $lightgrey
-		color $blue
-		+below($mobile)
-			display none
-	.current-selection
-		width 100%
-		background $grey
-		+below($mobile)
-			display flex
-			justify-content space-between
-			align-items center
+.bg
+	transition height 0.5s
+	.v-enter &
+		height 0
+	background $lightgrey
+	z-index -1
+	position absolute 
+	left 50%
+	transform translateX(-50%)
+	width 100vw
+	height 100%
+
+.selected
+	background $lightgrey
+	color $blue
+	+below($mobile)
+		display none
+.current-selection
+	width 100%
+	background $grey
+	+below($mobile)
+		display flex
+		justify-content space-between
+		align-items center
 
 .disclaimer
+	transition opacity 0.3s 1s, transform 0.3s 1s
+	.v-enter & 
+		opacity 0
+		transform translateY(100%)
 	fs(12)
-	pad(3,0)
+	mgn(3,0)
 	+above($tablet)
 		width 70%
 	/deep/ p 
