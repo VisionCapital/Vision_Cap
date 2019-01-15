@@ -126,6 +126,7 @@ export default {
 .bar-chart
 	@extend .slice
 	pad(2,0)
+	transition all 3s
 	+below($tablet)
 		&:nth-child(even)
 			background $lightgrey
@@ -145,8 +146,14 @@ export default {
 
 	+above($tablet)
 		padding-bottom 3rem
+	.v-enter &
+		/deep/ h3
+			opacity 0
+			line-height 1.5
+			transform translateY(10%)
 
 	/deep/ h3
+		transition line-height 0.5s, opacity 0.5s, transform 0.5s
 		fs(mp(2))
 		mgn(1,auto)
 		font-family $cormorant-medium

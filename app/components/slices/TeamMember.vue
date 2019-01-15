@@ -1,7 +1,7 @@
 <template>
 	<div class="team-member">
 
-		<div class="img-wrap">
+		<div class="img-wrap" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}">
 			<img class="profile-pic" ref="img" @load="checkImgHeight()" :src="card.profile_image.url" v-if="card.profile_image">
 		</div>
 
@@ -36,29 +36,41 @@ export default {
 		'card'
 	],
 	data() {
+		let elDimensions = this.setElDimensions();
 		return {
 			longCopy: false,
 			collapsed: true,
-			imgHeight: 374
+			elDimensions
 		};
 	},
 	computed: {
 		maxCopyHeight() {
 			if (this.longCopy && this.collapsed) {
 				if (this.$store.state.device.mobile) {
-					return `${this.imgHeight}px`;
+					return `${this.elDimensions.height}px`;
 				}
-				return `${this.imgHeight - 36}px`;
+				return `${this.elDimensions.height - 36}px`;
 			} else if (this.longCopy && !this.collapsed) {
 				return '100%';
 			}
-			return `${this.imgHeight}px`;
+			return `${this.elDimensions.height}px`;
 		}
 	},
 	methods: {
+		setElDimensions() {
+			// should probably add event listener resize for this
+			let dimensions = this.card.profile_image.dimensions;
+			let width = 220;
+			if (this.$store.state.device.mobile) {
+				width = 96;
+			}
+			return {
+				height: width * (dimensions.height / dimensions.width),
+				width: width
+			};
+		},
 		checkImgHeight() {
-			this.imgHeight = this.$refs.img.offsetHeight;
-			if (this.$refs.copy && this.imgHeight < this.$refs.copy.offsetHeight) {
+			if (this.$refs.copy && this.elDimensions.height < this.$refs.copy.offsetHeight) {
 				this.longCopy = true;
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
@@ -67,7 +79,6 @@ export default {
 			this.collapsed = !this.collapsed;
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
 		}
-
 	}
 };
 
@@ -77,14 +88,16 @@ export default {
 .team-cards
 	for i in 1..40
 		.card:nth-child({i})
-			/deep/ h3, .img-wrap
-				transition-delay 0.4s * i - 0.4s
+			img
+				transition-delay 0.5s * i - 0.5s
+			/deep/ h3
+				transition-delay 0.5s * i - 0.3s
 			/deep/ h4
-				transition-delay 0.4s * i - 0.3s
-			/deep/ p
-				transition-delay 0.4s * i - 0.2s
+				transition-delay 0.5s * i - 0.2s
+			.copy-container /deep/ p
+				transition-delay 0.5s * i - 0.1s
 			.copy-cta
-				transition-delay 0.4s * i - 0.15s
+				transition-delay 0.5s * i
 </style>
 <style lang="stylus" scoped>
 
@@ -95,18 +108,18 @@ export default {
 	transition all 0.5s
 	+above($tablet)
 		display flex
-
 p
 	max-width 100%
 
-/deep/ h3, /deep/ h4, /deep/ p
+/deep/ h3, /deep/ h4, .copy-container /deep/ p
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &
 		opacity 0
 		transform translateY(2rem)
 
+// i give up, i have no idea why this transition isn't working
 .copy-cta
-	transition opacity 0.5s, transform 0.5s
+	transition opacity 10.5s, transform 10.5s
 	.v-enter &
 		opacity 0
 		transform translateY(-2rem)
@@ -119,18 +132,25 @@ p
 img
 	width 220px
 	max-width 100vw
-	padding-right 6em
+	width 100%
+	height 100%
+	position absolute 
+	bottom 0
+	object-fit cover
+	transition height 0.5s
+	.v-enter & 
+		height 0%
 	+below($tablet)
 		padding-right 1em
 		width 96px
 		float left
 .img-wrap
-	transition max-height 1s
-	max-height 100vh
-	// .v-enter-active &
-	// 	overflow-y hidden
-	.v-enter &
-		max-height 0px
+	flex-shrink 0
+	position relative
+	margin-right 6em
+	+below($tablet)
+		margin-right 1em
+		float left
 
 .copy-cta
 	cursor pointer
