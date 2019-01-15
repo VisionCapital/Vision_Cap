@@ -66,9 +66,16 @@
 					<!-- <div class="index" v-for="(bar, idx) in indices" :key="idx">
 						{{ bar.cagr + '%' }}
 					</div> -->
+
 				</div>
+				
 
 				<div class="cagr">
+
+
+				<div class="cagr-label">
+					<p>CAGR</p>
+				</div>
 					<div class="index" v-for="(bar, idx) in indices" :key="idx"
 						:style="{
 							opacity: bar.name.includes('Vision') ? '1' : '0.34',
@@ -139,6 +146,13 @@ export default {
 	+below($tablet)
 		flex-direction column
 
+.cagr-label
+	position absolute
+	bottom 0
+	margin-left -3rem
+	color $b
+	fs(12)
+
 .title-copy
 	order 1
 	width 100%
@@ -192,6 +206,9 @@ export default {
 		a
 			display inline-block
 			transition opacity 0.5s 0.4s, transform 0.5s 0.4s
+			/deep/ p
+
+					margin-bottom -0rem
 
 			&:before, &:after
 				content: ''

@@ -81,16 +81,16 @@ export default {
 			text-align center
 
 			+above($tablet)
-				fs(44)
-				line-height (52 / 44)
+				fs(40)
+				line-height (48 / 40)
 
 			+above($notebook)
-				fs(36)
-				line-height (44 / 36)
+				fs(38)
+				line-height (48 / 38)
 
 			+above($laptop)
-				fs(44)
-				line-height (52 / 44)
+				fs(48)
+				line-height (56 / 48)
 
 			+below($notebook)
 				br

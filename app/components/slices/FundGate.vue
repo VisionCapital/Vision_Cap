@@ -141,14 +141,14 @@ export default {
 .border
 	position absolute
 	top 50%
-	left 25%
-	transform translate(0%, -50%)
+	left 50%
+	transform translate3d(-50%, -50%, 0%)
 	color $w
 	z-index 2
 	width auto
 	transition transform 2s, opacity 0.5s
 	.v-enter &
-		transform translateY(40px)
+		transform translate3d(-50%,40px,0)
 		opacity 0
 
 

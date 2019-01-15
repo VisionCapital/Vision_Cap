@@ -9,17 +9,13 @@
 			<logo class="light" :interactive="interactive"/>
 		</router-link> -->
 
-		<transition appear>
 			<main-nav
 				v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
 				:pageTop="pageTop"
 			/>
-		</transition>
 
-		<transition appear>
 			<router-view @pageTop="pageTop = $event" :key="$route.fullPath"/>
-		</transition>
-
+	
 		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
 
 	</div>
