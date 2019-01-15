@@ -99,13 +99,21 @@ export default {
 .individual-card-wrap
 	width 100%
 
+
 .individual-card // style this according to dimensions
 	background-color $darkblue
 	color $w
 	fs(17)
 	font-family $cormorant
 	line-height (30 / 23)
-	align-items center
+	align-items center 
+	transition transform 0.5s, opacity 0.5s
+	.v-enter &
+		transform translateY(40px)
+		opacity 0
+	for i in 1..20 
+		&:nth-child({i}) 
+			transition-delay 0.2s * i
 
 	h1
 		text-align center
@@ -158,9 +166,14 @@ export default {
 	+above($tablet)
 		display flex
 		width 100%
-
+	
 .heroAboveCards
 	padding-top 11rem
 	padding-bottom 4em
+	/deep/ h1
+		transition line-height 0.5s, opacity 0.5s, delay 0.5s
+		.v-enter &
+			line-height 1.5
+			opacity 0				
 
 </style>
