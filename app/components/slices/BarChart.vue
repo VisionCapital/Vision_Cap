@@ -150,7 +150,7 @@ export default {
 		/deep/ h3
 			opacity 0
 			line-height 1.5
-			transform translateY(10%)
+			transform translateY(30%)
 
 	/deep/ h3
 		transition line-height 0.5s, opacity 0.5s, transform 0.5s
@@ -172,18 +172,26 @@ export default {
 	a:before, a:after
 		background none
 
+	
+	.v-enter & 
+		/deep/ h2, /deep/ a
+			transform translateY(10%)
+			opacity 0
+
 	/deep/
 		h2, a
 			color $w
 			position relative
 
 		h2
+			transition opacity 0.5s, transform 0.5s
 			fs(mp(2))
 			letter-spacing -(0.32 / 32) * 1em
 			font-family $cormorant-medium
 
 		a
 			display inline-block
+			transition opacity 0.5s 0.4s, transform 0.5s 0.4s
 
 			&:before, &:after
 				content: ''
@@ -246,7 +254,9 @@ export default {
 .chart
 	order 3
 	position relative
-
+	transition opacity 0.5s 0.3s
+	.v-enter &
+		opacity 0
 	+below($tablet)
 		pad(2,0,0)
 
@@ -299,8 +309,11 @@ export default {
 		position absolute
 		text-align center
 		top 0
-
+	for i in 0..12
+		.bar-slot:nth-child({i + 1}) .index
+			transition-delay 0.2s * i
 	.bar-slot
+		transition height
 		border-bottom 1px solid #979797
 		height 100%
 		position relative
