@@ -223,45 +223,16 @@ for i in 6..10
 			padding 2vh 0
 			padding-left 1em
 
-.router-link-exact-active 
-	border-bottom: 3px solid white;
 
 .bg-links
+	a:before, a:after
+		background-color $w
+
+.router-link-exact-active
+	&:after	
+		width 100%
 	
-	a
-		&:before, &:after
-			content: ''
-			position: absolute;
-			height 3px
 
-		&:before
-			content: ''
-			background: $w;
-			left 0
-			top 100%
-			width: 0%
-			left: -2px;
-
-		&:after
-			background: $w;
-			right: 2px;
-			right 0
-			top 100%
-			width: 0%
-			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
-
-		&:hover
-			color: $w;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:before
-				width: 100%;
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:after
-				width: 100%;
-				transition: 0s;
-				background: transparent;
 
 
 </style>
