@@ -82,7 +82,7 @@ export default {
 		/deep/ h1
 			color $w
 			line-height 1em
-			fs(75)
+			fs(82)
 			padding-bottom 0.3em
 
 			+below($tablet)
@@ -91,6 +91,7 @@ export default {
 				line-height (73/60)
 
 		/deep/ p
+			fs(16)
 			+below($tablet)
 				fs(12)
 				line-height (24/12)
