@@ -121,6 +121,7 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
+@import "../../styl/_global"
 
 .bar-chart
 	@extend .slice
@@ -176,6 +177,39 @@ export default {
 
 		a
 			display inline-block
+
+			&:before, &:after
+				content: ''
+				position: absolute;
+				height 3px
+
+			&:before
+				content: ''
+				background: $w;
+				left 0
+				top 100%
+				width: 0%
+
+			&:after
+				background: $w;
+				right: 2px;
+				right 0
+				top 100%
+				width: 0%
+				transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+
+			&:hover
+				color: $w;
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+				&:before
+					width: 100%;
+					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+
+				&:after
+					width: 100%;
+					transition: 0s;
+					background: transparent;
 
 	.bg
 		background url('../../images/strip-bg.jpg')
