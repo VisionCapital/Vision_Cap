@@ -102,6 +102,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
+	transition all 2s
 	+below($notebook) 
 		height 85%
 		top 15%
@@ -126,6 +127,18 @@ export default {
 	+below($notebook)
 		display none
 
+for i in 1..10
+	li:nth-child({i})
+		order i
+		transition opacity 0.5s, transform 0.5s
+		transition-delay 0.1s * i
+		.v-enter &
+			opacity 0
+			transform translateY(1rem)
+
+for i in 6..10
+	li:nth-child({i})		
+		transition-delay 0.1s * i + 0.1s
 
 .links
 	margin 0 auto
@@ -166,8 +179,10 @@ export default {
 			+below($mobile)
 				pad(.5,0)
 
+
 .links /deep/ li.resources
 	order 6
+	transition-delay 0.6s
 
 .resources
 	color $w
