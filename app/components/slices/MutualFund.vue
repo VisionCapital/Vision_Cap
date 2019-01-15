@@ -2,20 +2,22 @@
   <div class="mutual-fund">
     <div class="wrap">
 
-
-			<fund-products
-				:fundColumns="fundColumns"
-				:fundInfo="data.mutual_fund_info"
-				
-				:fundsCta="data.funds_cta"
-			/>
+			<transition appear>
+				<fund-products
+					:fundColumns="fundColumns"
+					:fundInfo="data.mutual_fund_info"
+					:fundsCta="data.funds_cta"
+				/>
+			</transition>
 
 			<!-- if we add another slice type to prismic we will need to adjust the prop reports for data.body -->
-			<fund-docs
-				:documentsCta="data.documents_cta"
-				:reports="data.body"
-				:disclaimer="data.disclaimer"
-			/>
+			<transition appear>
+				<fund-docs
+					:documentsCta="data.documents_cta"
+					:reports="data.body"
+					:disclaimer="data.disclaimer"
+				/>
+			</transition>
 
     </div>
 

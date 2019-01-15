@@ -142,10 +142,16 @@ a
 	height 100%
 	width 100%
 	z-index -1
-	left 50%
-	transform translateX(-50%)
+	left 0
+	transition width 0.5s
+	.v-enter &
+		width 0
 	+below($tablet)
 		width 100vw
+
+.row:nth-child(even)
+	.bg
+		background $lightgrey
 
 .tab
 	background $grey
@@ -171,20 +177,26 @@ a
 	padding 5% ((100vw - 82vw) / 2)
 	background $grey
 
+for i in 0..12
+	.row:nth-child({i + 1})
+		p, h4
+			transition-delay 0.3s * i
+		.bg
+			transition-delay 0.1s * i
 
 .row
 	position relative
 	display flex
 	justify-content space-between
 	align-items flex-end
+
 	+below($mobile)
 		border-bottom 1px solid $bluesat
 		&:last-child
 			border-bottom none
-	&:nth-child(even)
-		.bg
-			background $lightgrey
+
 .products
+	transition all 4s
 	+above($mobile)
 		text-align center
 	.arrow-head
@@ -195,7 +207,6 @@ a
 		justify-content space-between
 		align-items center
 
-
 	h4
 		color $blue
 		+below($tablet)
@@ -204,11 +215,16 @@ a
 			font-size 4vw
 		+below($mobile)
 			fs(24)
-	p, h4
-		+above($mobile)
-			width (100% / 6)
+
 	p
 		+below($mobile)
 			fs(17)
-
+	p, h4
+		transition opacity 0.7s, transform 0.7s
+		+above($mobile)
+			width (100% / 6)			
+	&.v-enter
+		p, h4
+			opacity 0
+			transform translateY(30%)
 </style>
