@@ -54,6 +54,7 @@ export default {
 .two-column-copy
 	@extend .slice
 	pad(2,0)
+	transition all 2s
 
 .title
 	// text-align left
@@ -63,15 +64,19 @@ export default {
 	+above($tablet)
 		pad(0,3)
 
-	/deep/
-		h2, h3
-			fs(44)
-			font-family $cormorant-semibold
-			max-width 100%
+/deep/
+	h2, h3
+		fs(44)
+		font-family $cormorant-semibold
+		max-width 100%
+		transition line-height 0.5s, opacity 0.5s
+		.v-enter &
+			line-height 1.5
+			opacity 0
 
-			+below($tablet)
-				font-family $cormorant-medium
-				fs(mp(2))
+		+below($tablet)
+			font-family $cormorant-medium
+			fs(mp(2))
 
 .copy
 	column-count 2
@@ -80,8 +85,17 @@ export default {
 	+below($tablet)
 		column-count: 1;
 
-	/deep/ p
-		margin-top 0
-		letter-spacing (0.1 / $p) * 1em
-
+.copy /deep/ p
+	margin-top 0
+	letter-spacing (0.1 / $p) * 1em
+	position relative
+	transition transform 0.5s, opacity 0.5s
+	.v-enter &
+		transform translateY(40px)
+		opacity 0
+for i in 1..20 
+	/deep/ p:nth-child({i}) 
+		transition-delay 0.2s * i
+	
+	
 </style>

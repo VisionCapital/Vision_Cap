@@ -1,12 +1,13 @@
 <template>
 	<div class="app">
 
-		<router-link v-if="$store.state.device.mobile"
+		<!-- why does this exist? -->
+		<!-- <router-link v-if="$store.state.device.mobile"
 			to="/"
 			class="home-link"
 			title="Home">
 			<logo class="light" :interactive="interactive"/>
-		</router-link>
+		</router-link> -->
 
 		<transition appear>
 			<main-nav
@@ -19,7 +20,7 @@
 			<router-view @pageTop="pageTop = $event" :key="$route.fullPath"/>
 		</transition>
 
-		<nav-switch v-if="$store.state.device.win.x <= 1024"/>
+		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
 
 	</div>
 </template>
@@ -74,7 +75,7 @@ export default {
 
 .app
 	height 100%
-
+	
 .home-link
 	display block
 	left 0

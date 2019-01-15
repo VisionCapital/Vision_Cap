@@ -103,15 +103,16 @@ export default {
 	width 100%
 	z-index 10
 	+below($notebook) 
-		height 100%
-		pad(5,1,2)
+		height 85%
+		top 15%
+		pad(0,1,2)
 		font-family $cormorant
 		fs(30)
 		-webkit-overflow-scrolling touch
 		overflow-x hidden
 		overflow-y scroll
+		z-index 12
 	+below($tablet)
-		padding-top 20vw
 		padding-bottom 5vw
 .bg
 	background black
@@ -123,7 +124,8 @@ export default {
 		opacity 0
 
 	+below($notebook)
-		position fixed
+		display none
+
 
 .links
 	margin 0 auto
@@ -206,79 +208,16 @@ export default {
 			padding 2vh 0
 			padding-left 1em
 
-.router-link-exact-active.router-link-active
-
-	&:before, &:after
-		content: ''
-		position: absolute;
-		height 3px
-
-	&:before
-		content: ''
-		background: $w;
-		right 0
-		top 100%
-		width: 100%
-		background: transparent;
-
-	&:after
-		background: $w; //should be white
-		top 100%
-		width: 100%
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
-		left 0
-
-	&:hover
-		color: $w;
-		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-		&:before
-			right 0
-			width: 0%;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-		&:after
-			right 0
-			width: 0%;
-			background: $w;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-
 
 .bg-links
+	a:before, a:after
+		background-color $w
+
+.router-link-exact-active
+	&:after	
+		width 100%
 	
-	a
-		&:before, &:after
-			content: ''
-			position: absolute;
-			height 3px
 
-		&:before
-			content: ''
-			background: $w;
-			right 0
-			top 100%
-			width: 0%
-
-		&:after
-			background: $w;
-			right 0
-			top 100%
-			width: 0%
-			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
-
-		&:hover
-			color: $w;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:before
-				width: 100%;
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:after
-				width: 100%;
-				transition: 0s;
-				background: transparent;
 
 
 </style>

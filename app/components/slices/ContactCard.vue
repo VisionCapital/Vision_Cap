@@ -49,11 +49,20 @@ export default {
 .contact-card
 	@extend .slice
 	pad(3,0,3,0)
-
+	transition all 2s
 	.wrap
 		position relative
 		+above($tablet)
 			display flex
+
+for i in 1..8
+	.contact:nth-child({i}) 
+		.title
+			transition-delay (0.3s * i - 0.5)
+		h4
+			transition-delay (0.3s * i - 0.4)
+		p
+			transition-delay (0.3s * i - 0.3)
 
 .contact
 	+above($tablet)
@@ -62,10 +71,16 @@ export default {
 
 	+below($tablet)
 		mgn(0,0,2)
+
 	p
 		margin 0
 		color $copy
-
+	.v-enter &
+		p, h4
+			transform translateX(3rem)
+			opacity 0
+	p, h4
+		transition transform 0.5s, opacity 0.5s
 	a
 		color $blue
 
@@ -76,6 +91,10 @@ export default {
 			fs(20)
 
 .title
+	transition transform 0.5s, opacity 0.5s
+	.v-enter & 
+		opacity 0
+		transform translateY(2rem)
 	/deep/ h2
 		@extend .heading
 		font-family $cormorant-semibold
