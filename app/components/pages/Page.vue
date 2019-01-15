@@ -28,9 +28,15 @@ export default {
 		};
 	},
 	mounted() {
-		this.record.scroll = new LerpScroll(this.$el, (d) => {
-			this.$emit('pageTop', d.pos > -12);
-		});
+		if (this.$route.params.slug === 'resources') {
+			this.record.scroll = new LerpScroll(this.$el, (d) => {
+				this.$emit('pageTop', d.pos > -12);
+			});
+		} else {
+			this.record.scroll = new LerpScroll(this.$el, (d) => {
+				this.$emit('pageTop', d.pos > -12);
+			});
+		}
 	}
 };
 

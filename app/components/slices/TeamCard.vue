@@ -7,11 +7,12 @@
 
 		<div class="card" v-for="(card, idx) in data.items" :key="idx">
 			<div class="wrap" >
-
-				<team-member
-					ref="teamMember"
-					:card="card"
-				/>
+				<transition :duration="idx * 2000 + 500" appear>
+					<team-member
+						ref="teamMember"
+						:card="card"
+					/>
+				</transition>
 			</div>
 		</div>
 
