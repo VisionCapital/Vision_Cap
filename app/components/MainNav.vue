@@ -232,17 +232,25 @@ for i in 6..10
 			padding-left 1em
 
 a.router-link-exact-active
-	&::after
+	&:before
+		width 100%
+		left 0
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+	&:after
 		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 		width 100%
+		background none
 
 	&:hover
 		&::before
 			background none
+			
 			width 0%
 
 		&::after
 			background $w
+			right 0
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 			width 0%
 
