@@ -3,7 +3,7 @@
 
 		<div class="wrap" v-if="data.items">
 
-			<div class="column" v-for="link in data.items" :key="link.label">
+			<div class="column"  v-for="link in data.items" :key="link.label">
 				<router-link :to="link.gate_destination.slug">
 
 					<div class="bg" v-if="link.image"
@@ -11,11 +11,15 @@
 
 					<div class="border">
 
-						<div class="border-stroke"/>
-
-						<div class="link">
-							<h3 v-html="data.textField(link.gate_heading)"/>
+						<div class="border-stroke">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361 113">
+								<rect class="cls-1" x="0.5" y="0.5" width="360" height="112"/>
+							</svg>
 						</div>
+
+							<div class="link">
+								<h3 v-html="data.textField(link.gate_heading)"/>
+							</div>
 
 					</div>
 
@@ -128,7 +132,7 @@ export default {
 			margin-left 2px
 
 .border-stroke //separate border box element to be re-sized
-	border 1px solid $w
+	// border 1px solid $w
 	position absolute
 	height 100%
 	width 100%
@@ -137,11 +141,15 @@ export default {
 .border
 	position absolute
 	top 50%
-	left 50%
-	transform translate(-50%, -50%)
+	left 25%
+	transform translate(0%, -50%)
 	color $w
 	z-index 2
 	width auto
+	transition transform 2s, opacity 0.5s
+	.v-enter &
+		transform translateY(40px)
+		opacity 0
 
 
 .link
@@ -150,7 +158,11 @@ export default {
 	z-index 2
 	width auto
 	padding 5px
-	display block
+	display block	
+	transition transform 2s, opacity 0.5s
+	.v-enter &
+		transform translateY(40px)
+		opacity 0
 
 	width 360px
 	+below($tablet)
@@ -176,6 +188,11 @@ export default {
 
 .bg
 	height 100%
+	transition transform 3s, opacity 3s
+	.v-enter &
+		transform translateY(100px)
+		opacity 0
+
 	left 0
 	position absolute
 	top 0
@@ -185,6 +202,22 @@ export default {
 	z-index 1
 	transition all 0.8s $easeInOutCubic
 	opacity 0.6
+	
 
-
+.cls-1
+	fill none
+	stroke #fff
+	stroke-width 3
+	stroke-miterlimit 10
+	stroke-dasharray 944 944
+	stroke-dashoffset 0
+	animation: dash 1.5s $easeInOutCubic forwards;
+	@keyframes dash {
+		from {
+			stroke-dashoffset: 1000;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
 </style>
