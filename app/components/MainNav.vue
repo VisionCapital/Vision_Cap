@@ -94,7 +94,7 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
-@import "../styl/_global"
+// @import "../styl/_global"
 
 .main-nav
 	left 0
@@ -102,7 +102,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	+below($notebook) 
+	+below($notebook)
 		height 85%
 		top 15%
 		pad(0,1,2)
@@ -148,6 +148,14 @@ export default {
 	/deep/
 		a
 			color white
+
+			&::before, &::after
+				background $w
+
+			&:hover
+				&::after
+					background none
+
 		li
 			max-width 280px
 			pad(1,.5)
@@ -208,45 +216,19 @@ export default {
 			padding 2vh 0
 			padding-left 1em
 
-.router-link-exact-active 
-	border-bottom: 3px solid white;
+a.router-link-exact-active
+	&::after
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+		width 100%
 
-.bg-links
-	
-	a
-		&:before, &:after
-			content: ''
-			position: absolute;
-			height 3px
+	&:hover
+		&::before
+			background none
+			width 0%
 
-		&:before
-			content: ''
-			background: $w;
-			left 0
-			top 100%
-			width: 0%
-			left: -2px;
-
-		&:after
-			background: $w;
-			right: 2px;
-			right 0
-			top 100%
-			width: 0%
-			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
-
-		&:hover
-			color: $w;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:before
-				width: 100%;
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-			&:after
-				width: 100%;
-				transition: 0s;
-				background: transparent;
-
+		&::after
+			background $w
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width 0%
 
 </style>

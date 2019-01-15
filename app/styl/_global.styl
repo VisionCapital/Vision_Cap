@@ -11,38 +11,31 @@ a
 	text-decoration: none
 
 	&:before, &:after
+		background: $w
 		content: ''
-		position: absolute;
-		height 3px
+		height 2px
+		position: absolute
+		top 100%
+		width: 0%
 
 	&:before
-		content: ''
-		background: $blue;
-		left 0
-		top 100%
-		width: 0%
-		left: -2px;
+		left: 0
 
 	&:after
-		background: $blue;
-		right: 2px;
 		right 0
-		top 100%
-		width: 0%
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 
 	&:hover
-		color: $blue;
-		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+		color: $blue
 
 		&:before
-			width: 100%;
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width: 100%
 
 		&:after
-			width: 100%;
-			transition: 0s;
-			background: transparent;
+			background: transparent
+			transition: 0s
+			width: 100%
 
 img, svg
 	display: block
