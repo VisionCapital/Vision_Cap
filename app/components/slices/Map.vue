@@ -13,44 +13,43 @@
 				</div>
 
 				<div class="cta" v-if="$store.state.device.win.x > 1024">
-				<h4 v-html="data.text('map_title')"/>
-				<p v-html="data.text('map_location')"/>
+					<h4 v-html="data.text('map_title')"/>
+					<p v-html="data.text('map_location')"/>
 					<a :href="data.fields.map_link.url" target="_blank">
 						<div v-html="data.text('map_link_title')"/>
 					</a>
 				</div>
 
 				<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
-				<h4 v-html="data.text('map_title')"/>
-				<p v-html="data.text('map_location')"/>
+					<h4 v-html="data.text('map_title')"/>
+					<p v-html="data.text('map_location')"/>
 				</div>
 
 			</div>
 
-			
-
 		</div>
 	</div>
+
 	<GmapMap
-				class="map-frame"
-				:center="{lat: center.lat, lng: center.lng}"
-				:zoom="16"
-				:options="{
-					styles: mapStyles,
-			    scrollwheel: false,
-					disableDefaultUI: true,
-					zoomControl: $store.state.device.mobile ? false : true,
-					zoomControlOptions: {
-						position:	6
-					},
-				}"
-			>
-				<GmapMarker
-					:icon="{url: require('../../images/map-icon.png')}"
-					:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
-				/>
-			</GmapMap>
-	</div>
+		class="map-frame"
+		:center="{lat: center.lat, lng: center.lng}"
+		:zoom="16"
+		:options="{
+			styles: mapStyles,
+			scrollwheel: false,
+			disableDefaultUI: true,
+			zoomControl: $store.state.device.mobile ? false : true,
+			zoomControlOptions: {
+				position:	6
+			},
+		}"
+	>
+		<GmapMarker
+			:icon="{url: require('../../images/map-icon.png')}"
+			:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
+		/>
+	</GmapMap>
+</div>
 </template>
 
 <script>
