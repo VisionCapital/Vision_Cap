@@ -112,7 +112,7 @@ export default {
 	position relative
 	margin-top 4px
 	overflow hidden
-	background-color:#000;
+	background-color: $darkblue
 
 	&:hover .bg
 		transform scale(1.1)

@@ -230,7 +230,7 @@ for i in 6..10
 		+below($notebook)
 			padding 2vh 0
 			padding-left 1em
-
+			
 a.router-link-exact-active
 	&:before
 		width 100%

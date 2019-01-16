@@ -84,9 +84,6 @@ export default {
 			vertical-align middle
 
 .home-link
-	width 70%
-
-.home-link.router-link-exact-active.router-link-active
 	width 20rem
 
 .bg 
