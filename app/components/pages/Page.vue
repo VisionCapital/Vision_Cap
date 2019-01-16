@@ -8,7 +8,6 @@
 				:data="module"
 				:class="[ 'onpage', { inview : sidx >= idx }]"
 				:inview="sidx >= idx ? true : false"
-				:lastScrollTop="lastScrollTop"
 				ref="slice"/>
 		</transition>
 

@@ -31,9 +31,6 @@ export default {
 	components: {
 		TeamMember
 	},
-	props: [
-		'lastScrollTop'
-	],
 	data() {
 		return {
 			sidx: -1
@@ -46,18 +43,12 @@ export default {
 	},
 	methods: {
 		resize() {
-			// console.log(this.page.scroll.pos + this.deviceHeight * 0.75);
-			// console.log(this.$refs.teamMember[1].$el.offsetTop);
-			// console.log('=================');
 			let members = this.$refs.teamMember;
 			for (let member of members) {
 				member.checkImgHeight();
 			}
 		},
 		checkScroll(scrollTop) {
-			// console.log(scrollTop + this.deviceHeight * 0.75);
-			// console.log(this.$refs.teamMember[1].$el.offsetTop);
-			// console.log('=================');
 			for (let i = this.$refs.teamMember.length - 1; i > -1; i--) {
 				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.teamMember[i].$el.offsetTop) {
 					this.sidx = i;
@@ -67,11 +58,10 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(this.page.scroll);
 		window.addEventListener('resize', this.resize);
 
 		this.scrollInterval = setInterval(() => {
-			this.checkScroll(this.lastScrollTop);
+			this.checkScroll(Math.abs(this.page.scroll.pos));
 		}, 500);
 
 	},

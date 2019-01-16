@@ -84,21 +84,6 @@ export default {
 
 </script>
 
-<style lang="stylus">
-// .team-cards
-// 	for i in 1..40
-// 		.card:nth-child({i})
-// 			img
-// 				transition-delay 0.5s * i - 0.5s
-// 			/deep/ h3
-// 				transition-delay 0.5s * i - 0.3s
-// 			/deep/ h4
-// 				transition-delay 0.5s * i - 0.2s
-// 			.copy-container /deep/ p
-// 				transition-delay 0.5s * i - 0.1s
-// 			.copy-cta
-// 				transition-delay 0.5s * i
-</style>
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"

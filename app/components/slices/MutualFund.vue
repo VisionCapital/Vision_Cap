@@ -77,6 +77,7 @@ export default {
 .mutual-fund
 	@extend .slice
 	overflow hidden
+
 	.wrap
 		position relative
 		pad(3, 0, 0);
