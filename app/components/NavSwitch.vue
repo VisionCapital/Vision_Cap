@@ -95,6 +95,14 @@ export default {
 	width 100%
 	z-index -1
 	transition height 0.5s
+
+	&.v-leave-active, &.v-enter-active
+		transition transform 0.5s, opacity 0.5s
+
+	&.v-enter, &.v-leave-to
+		transform translate(0,-100%)
+		opacity 0
+
 	&.nav-open
 		height 100vh
 </style>

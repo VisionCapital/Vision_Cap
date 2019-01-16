@@ -58,7 +58,6 @@ export default {
 				titleDelay += 0.2;
 			}
 
-			console.log(this.$refs);
 			for (let i in children) {
 				if (children[i].style) {
 					if (this.data.data.resource_body[i].type === 'embed') {

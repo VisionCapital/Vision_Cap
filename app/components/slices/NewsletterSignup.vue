@@ -77,13 +77,17 @@ export default {
 	text-align center
 	+below($tablet)
 		pad(2,0)
-
+	&.v-enter, &.onpage:not(.inview)
+		/deep/ .ctct-form-custom .ctct-form-header
+			opacity 0
+			transform translateY(50%)
 
 .wrap
 	display inline-block
 	position relative
 	+below($tablet)
 		width 75%
+
 .newsletter-signup /deep/ .ctct-inline-form
 	p
 		margin-left auto
@@ -99,7 +103,9 @@ export default {
 
 		a:before, a:after
 			background none
+
 	.ctct-form-custom .ctct-form-header
+		transition transform 0.5s, opacity 0.5s
 		width 100%
 		font-family $cormorant-semibold
 		fs(40)
