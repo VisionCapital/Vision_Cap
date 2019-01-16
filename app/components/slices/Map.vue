@@ -70,7 +70,6 @@ export default {
 	],
 	watch: {
 		inview(newVal) {
-			console.log(newVal);
 			if (newVal) {
 				TweenMax.from(this.markerCenter, 1, {
 					lat: this.data.fields.map_lat_lng.latitude + 0.0005,

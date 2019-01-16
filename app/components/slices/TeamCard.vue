@@ -7,8 +7,9 @@
 
 		<div class="card" v-for="(card, idx) in data.items" :key="idx">
 			<div class="wrap" >
-				<transition :duration="idx * 2000 + 500" appear>
+				<transition appear>
 					<team-member
+						:class="[ 'onpage', { inview : sidx >= idx }]"
 						ref="teamMember"
 						:card="card"
 					/>
@@ -30,20 +31,53 @@ export default {
 	components: {
 		TeamMember
 	},
+	props: [
+		'lastScrollTop'
+	],
+	data() {
+		return {
+			sidx: -1
+		};
+	},
+	computed: {
+		deviceHeight() {
+			return this.$store.state.device.win.y;
+		}
+	},
 	methods: {
 		resize() {
-			console.log(this.page.scroll);
+			// console.log(this.page.scroll.pos + this.deviceHeight * 0.75);
+			// console.log(this.$refs.teamMember[1].$el.offsetTop);
+			// console.log('=================');
 			let members = this.$refs.teamMember;
 			for (let member of members) {
 				member.checkImgHeight();
 			}
+		},
+		checkScroll(scrollTop) {
+			// console.log(scrollTop + this.deviceHeight * 0.75);
+			// console.log(this.$refs.teamMember[1].$el.offsetTop);
+			// console.log('=================');
+			for (let i = this.$refs.teamMember.length - 1; i > -1; i--) {
+				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.teamMember[i].$el.offsetTop) {
+					this.sidx = i;
+					return;
+				}
+			}
 		}
 	},
 	mounted() {
+		console.log(this.page.scroll);
 		window.addEventListener('resize', this.resize);
+
+		this.scrollInterval = setInterval(() => {
+			this.checkScroll(this.lastScrollTop);
+		}, 500);
+
 	},
 	destroy() {
 		window.removeEventListener('resize', this.resize);
+		clearInterval(this.scrollInterval);
 	}
 };
 

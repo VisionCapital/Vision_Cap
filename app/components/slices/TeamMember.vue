@@ -85,19 +85,19 @@ export default {
 </script>
 
 <style lang="stylus">
-.team-cards
-	for i in 1..40
-		.card:nth-child({i})
-			img
-				transition-delay 0.5s * i - 0.5s
-			/deep/ h3
-				transition-delay 0.5s * i - 0.3s
-			/deep/ h4
-				transition-delay 0.5s * i - 0.2s
-			.copy-container /deep/ p
-				transition-delay 0.5s * i - 0.1s
-			.copy-cta
-				transition-delay 0.5s * i
+// .team-cards
+// 	for i in 1..40
+// 		.card:nth-child({i})
+// 			img
+// 				transition-delay 0.5s * i - 0.5s
+// 			/deep/ h3
+// 				transition-delay 0.5s * i - 0.3s
+// 			/deep/ h4
+// 				transition-delay 0.5s * i - 0.2s
+// 			.copy-container /deep/ p
+// 				transition-delay 0.5s * i - 0.1s
+// 			.copy-cta
+// 				transition-delay 0.5s * i
 </style>
 <style lang="stylus" scoped>
 
@@ -111,16 +111,15 @@ export default {
 p
 	max-width 100%
 
-/deep/ h3, /deep/ h4, .copy-container /deep/ p
+/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 	transition opacity 0.5s, transform 0.5s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
 
-// i give up, i have no idea why this transition isn't working
 .copy-cta
-	transition opacity 10.5s, transform 10.5s
-	.v-enter &
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(-2rem)
 
@@ -138,7 +137,7 @@ img
 	bottom 0
 	object-fit cover
 	transition height 0.5s
-	.v-enter & 
+	.v-enter &, .onpage:not(.inview) &
 		height 0%
 	+below($tablet)
 		padding-right 1em

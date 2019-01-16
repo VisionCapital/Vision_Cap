@@ -68,7 +68,7 @@ export default {
 		max-width 100%
 		transition line-height 0.5s, opacity 0.5s, transform 0.5s
 		fs(44)
-		.onpage:not(.inview) &
+		.v-enter &, .onpage:not(.inview) &
 			line-height 1.5
 			opacity 0
 			transform translateY(10%)
