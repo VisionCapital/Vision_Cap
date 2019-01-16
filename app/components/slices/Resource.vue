@@ -9,13 +9,12 @@
 			<div class="title">
 				<h2 v-if="data.data.resource_title"
 					v-html="$cms.textField(data.data.resource_title)"/>
-
 			</div>
 
-			<div class="copy" v-if="data.data.resource_body"
+			<div class="copy" ref="copy" v-if="data.data.resource_body"
 				v-html="$cms.htmlField(data.data.resource_body)"/>
 
-			<div class="copy" v-else-if="copy">
+			<div class="copy" ref="copy" v-else-if="copy">
 				<p v-html="copy"/>
 			</div>
 
@@ -51,7 +50,29 @@ export default {
 			required: true
 		}
 	},
+	methods: {
+		setDelays() {
+			let children = this.$refs.copy.children;
+			let titleDelay = 0.2;
+			if (this.data.data.resource_title) {
+				titleDelay += 0.2;
+			}
 
+			console.log(this.$refs);
+			for (let i in children) {
+				if (children[i].style) {
+					if (this.data.data.resource_body[i].type === 'embed') {
+						children[i].children[0].style['transition-delay'] = `${0.2 * i + titleDelay}s`;
+					} else {
+						children[i].style['transition-delay'] = `${0.2 * i + titleDelay}s`;
+					}
+				}
+			}
+		}
+	},
+	mounted() {
+		this.setDelays();
+	},
 	computed: {
 		renderDate() {
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM M, YYYY') : null;
@@ -77,6 +98,13 @@ export default {
 	pad(1, 0)
 	position relative
 
+
+.title, .date, .copy /deep/ p
+	transition opacity 0.5s, transform 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		transform translateY(2rem)
+		opacity 0
+
 .body
 	order 2
 	width 100%
@@ -89,6 +117,7 @@ export default {
 		fs(12)
 
 .title
+	transition-delay 0.2s
 	/deep/ h2
 		fs(40)
 		font-family $cormorant-semibold
@@ -113,6 +142,10 @@ export default {
 	order 1
 	pad(1,3,1,0)
 	width (300% / 9)
+	transition transform 0.5s 0.2s, opacity 0.5s 0.2s
+	.v-enter &, .onpage:not(.inview) &
+		transform translateY(20%)
+		opacity 0
 	+below($tablet)
 		padding-right 4vw
 		min-width 6em
@@ -136,7 +169,11 @@ export default {
 	/deep/ h2
 		color $blk
 
-/deep/ iframe 
+/deep/ iframe
+	transition transform 0.5s, opacity 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		transform translateX(20%)
+		opacity 0
 	+below($tablet)
 		width 100%
 		height (80vw * 270 / 480)

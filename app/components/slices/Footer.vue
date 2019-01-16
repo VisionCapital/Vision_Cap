@@ -92,6 +92,7 @@ export default {
 	color $w
 	position relative
 	// overflow hidden
+	z-index 2
 	+below($tablet)
 		pad(1,1)
 
