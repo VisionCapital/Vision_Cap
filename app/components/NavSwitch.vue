@@ -86,6 +86,9 @@ export default {
 .home-link
 	width 70%
 
+.home-link.router-link-exact-active.router-link-active
+	width 20rem
+
 .bg 
 	position absolute
 	left 0
