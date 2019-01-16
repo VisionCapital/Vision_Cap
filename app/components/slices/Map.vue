@@ -1,4 +1,5 @@
 <template>
+<div class="map-background">
 	<div class="map">
 		<div class="wrap">
 
@@ -26,7 +27,11 @@
 
 			</div>
 
-			<GmapMap
+			
+
+		</div>
+	</div>
+	<GmapMap
 				class="map-frame"
 				:center="{lat: center.lat, lng: center.lng}"
 				:zoom="16"
@@ -45,8 +50,6 @@
 					:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
 				/>
 			</GmapMap>
-
-		</div>
 	</div>
 </template>
 
@@ -236,9 +239,13 @@ h4
 	color $blue
 a div
 	transition-delay 0.4s
-
+.map
+	@extend .slice
+	display flex
 .map-frame
 	width 50%
+	position relative
+	left 50%
 	height 36vw
 	transition width 1s
 	.v-enter &, .onpage:not(.inview) &
@@ -248,31 +255,32 @@ a div
 	+below($notebook)
 		width 100%
 .wrap
-	width auto
-	display flex
-	background-color $lightgrey
+	width 50%
+	display inline-block
+	right 50%
 	margin 0 0 0 auto
-	display flex
 	// justify-content space-between
 	+below($notebook)
 		flex-direction column
-
+.map-background
+	background-color $lightgrey
 .annotations
 	display flex
+	width 50%
 	flex-direction column
 	justify-content center
-	+above($notebook)//laptop
-		margin-left 11%
-		width 39%
-	+above($laptop)//laptop-large
-		margin-left 13%
-		width 37%
-	+above($laptop-large)//desktop
-		margin-left 17%
-		width 33%
-	+above($desktop)//ultra
-		margin-left 22.5%
-		width 22.5%
+	// +above($notebook)//laptop
+	// 	margin-left 11%
+	// 	width 39%
+	// +above($laptop)//laptop-large
+	// 	margin-left 13%
+	// 	width 37%
+	// +above($laptop-large)//desktop
+	// 	margin-left 17%
+	// 	width 33%
+	// +above($desktop)//ultra
+	// 	margin-left auto
+	// 	width auto
 
 	+below($notebook)
 		text-align center
@@ -290,6 +298,7 @@ a div
 
 		.cta
 			pad(1,0)
+			width 100%
 			//width (200%/ 6)
 
 			.button
