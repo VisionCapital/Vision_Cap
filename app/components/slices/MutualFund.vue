@@ -1,5 +1,5 @@
 <template>
-  <div class="mutual-fund">
+  <div class="mutual-fund" ref="mutualFund">
     <div class="wrap">
 
 			<transition appear>
@@ -13,6 +13,8 @@
 			<!-- if we add another slice type to prismic we will need to adjust the prop reports for data.body -->
 			<transition appear>
 				<fund-docs
+					:class="[ 'onpage', { inview : docsInview}]"
+					ref="module"
 					:documentsCta="data.documents_cta"
 					:reports="data.body"
 					:disclaimer="data.disclaimer"
@@ -26,14 +28,17 @@
 
 <script>
 
-// import LerpScroll from '../../js/lerp-scroll.js';
-
 import Logo from '../svg/Logo.vue';
 import FundDocs from '../MutualFundDocs.vue';
 import FundProducts from '../MutualFundProducts.vue';
 
 export default {
-
+	props: {
+		page: {
+			type: Object,
+			required: false
+		}
+	},
 	components: {
 		FundDocs,
 		FundProducts,
@@ -57,14 +62,36 @@ export default {
 		return {
 			data,
 			fundColumns,
-			reasons
+			reasons,
+			docsInview: false
 		};
 	},
-
-	created() {
+	computed: {
+		deviceHeight() {
+			return this.$store.state.device.win.y;
+		}
+	},
+	methods: {
+		checkScroll(scrollTop) {
+			let top = this.$refs.mutualFund.offsetTop + this.$refs.module.$el.offsetTop;
+			if (scrollTop + this.deviceHeight * 0.75 > top) {
+				this.docsInview = true;
+				return;
+			}
+			this.docsInview = false;
+		}
+	},
+	mounted() {
 		// this.$cms.loadType('mutual_funds').then((results) => {
 		// 	this.resources = results.results;
 		// });
+
+		this.scrollInterval = setInterval(() => {
+			this.checkScroll(Math.abs(this.page.scroll.pos));
+		}, 500);
+	},
+	destroy() {
+		clearInterval(this.scrollInterval);
 	}
 
 };

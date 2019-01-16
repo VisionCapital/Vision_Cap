@@ -122,7 +122,7 @@ a
 	padding 0.5em 0
 	cursor pointer
 	transition transform 0.3s, opacity 0.001s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		transform translateY(100%)
 		opacity 0
 	for i in 0..12
@@ -147,7 +147,7 @@ for i in 1..12
 
 .pdf-info, .align-pdf
 	transition opacity 0.3s, transform 0.3s
-	.v-enter & 
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(20%)
 
@@ -159,7 +159,7 @@ for i in 1..12
 	bottom 0
 	background $bluesat
 	transition width 0.45s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		width 0%
 
 .row
@@ -186,7 +186,6 @@ h5
 	font-family $cormorant
 	+below($mobile)
 		fs(24)
-		// margin-right 0
 
 .all-tabs
 	position relative
@@ -216,7 +215,7 @@ h5
 
 .bg
 	transition height 0.5s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		height 0
 	background $lightgrey
 	z-index -1
@@ -241,7 +240,7 @@ h5
 
 .disclaimer
 	transition opacity 0.3s 1s, transform 0.3s 1s
-	.v-enter & 
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(3em)
 	fs(12)
