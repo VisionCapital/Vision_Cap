@@ -147,9 +147,12 @@ export default {
 	z-index 2
 	width auto
 	transition transform 2s, opacity 0.5s
-	.v-enter &
+	.v-enter &, .onpage &
 		transform translate3d(-50%,40px,0)
 		opacity 0
+	.inview &
+		transform translate3d(-50%,-50%,0)
+		opacity 1
 
 
 .link
@@ -160,9 +163,12 @@ export default {
 	padding 5px
 	display block	
 	transition transform 2s, opacity 0.5s
-	.v-enter &
+	.v-enter &, .onpage &
 		transform translateY(40px)
 		opacity 0
+	.inview &
+		transform translateY(0)
+		opacity 1
 
 	width 360px
 	+below($tablet)
@@ -211,13 +217,21 @@ export default {
 	stroke-miterlimit 10
 	stroke-dasharray 944 944
 	stroke-dashoffset 0
-	animation: dash 1.5s $easeInOutCubic forwards;
-	@keyframes dash {
-		from {
-			stroke-dashoffset: 1000;
-		}
-		to {
-			stroke-dashoffset: 0;
-		}
-	}
+	transition stroke-dashoffset 1s $easeInOutQuint
+
+	.v-enter &, .onpage &
+		stroke-dashoffset 944
+
+	.inview &
+		stroke-dashoffset 0
+
+	// animation: dash 1.5s $easeInOutCubic forwards;
+	// @keyframes dash {
+	// 	from {
+	// 		stroke-dashoffset: 944
+	// 	}
+	// 	to {
+	// 		stroke-dashoffset: 0;
+	// 	}
+	// }
 </style>

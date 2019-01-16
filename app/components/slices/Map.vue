@@ -210,9 +210,13 @@ export default {
 
 h4, p, a div
 	transition transform 0.5s, opacity 0.5s
-	.v-enter &
+	.v-enter &, .onpage &
 		opacity 0
 		transform translateY(2rem)
+
+	&, .inview &
+		opacity 1
+		transform translateY(0)
 
 p
 	max-width 80%

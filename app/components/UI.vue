@@ -44,7 +44,7 @@ export default {
 
 	data() {
 		return {
-			pageTop: false
+			pageTop: true
 		};
 	},
 	beforeCreate() {
@@ -75,11 +75,8 @@ export default {
 .home-link
 	display block
 	left 0
-	// pad(1,1)
 	position fixed
 	top 0
-	// max-width ($desktop / 8)
-	// width (100% / 8)
 	z-index 11
 
 	+above($desktop)
