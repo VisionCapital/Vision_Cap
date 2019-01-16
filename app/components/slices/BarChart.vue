@@ -3,13 +3,7 @@
 
 		<div class="wrap">
 
-			<div class="title-card">
-				<div class="bg"/>
-				<h2 v-if="heading"
-					v-html="heading"/>
-				<h2 v-html="data.html('vision_opp_pdf_title')"/>
-				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
-			</div>
+			
 
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
 				v-html="data.html('bar_chart_title')"/>
@@ -17,12 +11,34 @@
 			<div class="title-copy" v-else-if="subheading">
 				<h3 v-html="subheading"/>
 			</div>
+		</div>
 
+		<div class="title-card" v-if="$store.state.device.mobile">
+				<div class="bg"/>
+				<h2 v-if="heading"
+					v-html="heading"/>
+				<h2 v-html="data.html('vision_opp_pdf_title')"/>
+				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+			</div>
+		<div class="wrap">
+				<div class="title-card" v-if="!$store.state.device.mobile">
+					<div class="bg"/>
+					<h2 v-if="heading"
+						v-html="heading"/>
+					<h2 v-html="data.html('vision_opp_pdf_title')"/>
+					<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+				</div>
 			<div class="chart">
 
+				
 				<div class="bars">
 
 					<div class="y">
+						
+				<div class="title-vertical">
+					Cumulative Total Return
+					</div>
+
 						<div v-for="step in steps" :key="step"
 							:style="{ height: 1 / steps * 100 + '%' }"
 							class="step">
@@ -30,11 +46,14 @@
 								{{ max - (step - 1) * 25 + '%' }}
 							</div>
 						</div>
+						
 						<div class="step">
 							<div class="label">
 								0%
 							</div>
 						</div>
+
+						
 					</div>
 
 					<div class="index" v-for="(bar, idx) in indices" :key="idx"
@@ -150,7 +169,7 @@ export default {
 	position absolute
 	bottom 0
 	margin-left -3rem
-	color $b
+	color $blue
 	fs(12)
 
 .title-copy
@@ -202,10 +221,17 @@ export default {
 			fs(mp(2))
 			letter-spacing -(0.32 / 32) * 1em
 			font-family $cormorant-medium
+			+below($tablet)
+				fs(mp(2))
+			+above($tablet)
+				fs(mp(1))
+			+above($notebook)
+				fs(mp(2))
 
 		a
 			display inline-block
 			transition opacity 0.5s 0.4s, transform 0.5s 0.4s
+			z-index 1000
 			/deep/ p
 
 					margin-bottom -0rem
@@ -275,7 +301,7 @@ export default {
 	.v-enter &
 		opacity 0
 	+below($tablet)
-		pad(2,0,0)
+		pad(2,0,0,2)
 
 	+above($tablet)
 		// padding-left $gut * .5rem
@@ -290,6 +316,9 @@ export default {
 	position absolute
 	width 100%
 
+	+below($mobile)
+		top 0
+		height 170%
 	.step
 		border-left 1px solid #979797
 		border-top 1px solid rgba(#979797,.15)
@@ -326,6 +355,8 @@ export default {
 		position absolute
 		text-align center
 		top 0
+		+below($mobile)
+			height 170%
 	for i in 0..12
 		.bar-slot:nth-child({i + 1}) .index
 			transition-delay 0.2s * i
@@ -354,6 +385,11 @@ export default {
 		fs(10)
 		position absolute
 		width 100%
+		+below($mobile)
+			writing-mode: vertical-rl;
+			padding-top 58%
+			margin auto
+			transform rotate(180deg)
 
 		+above($tablet)
 			fs(12)
@@ -366,17 +402,49 @@ export default {
 .labels
 	.title
 		color $b
-		fs(8)
+		fs(10)
+
 		// letter-spacing (0.07em / 8)
 		line-height (13/ 10)
-		pad(.5,.25)
-		text-align center
+		pad(.5,.10)
+
+		+below($tablet)
+			border-left 1px solid $grey
+			border-right none
+	
+			&:last-child
+				border-left none
 
 		+above($tablet)
 			fs(10)
+
 			letter-spacing (0.07em / 10)
 			line-height (13/ 10)
 			pad(.5,.5)
+
+		+below($tablet)
+			writing-mode: vertical-rl;
+			margin-left 0.4rem
+			transform rotate(180deg)
+			text-align right
+		+below($mobile)
+			padding-bottom 50%
+			
+.title-vertical
+	color $blue
+	position absolute
+	margin auto
+	right 110%
+	white-space: nowrap;
+	writing-mode: vertical-rl;
+	transform rotateZ(-180deg)
+	text-align center
+	top 25%
+	fs(12)
+	+below($tablet)
+		right 118%
+	
+
 
 .cagr
 	border-top 1px solid #979797
