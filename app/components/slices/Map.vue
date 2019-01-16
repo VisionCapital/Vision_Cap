@@ -65,6 +65,20 @@ Vue.use(VueGoogleMaps, {
 
 export default {
 	mixins: [ airprops ],
+	props: [
+		'inview'
+	],
+	watch: {
+		inview(newVal) {
+			console.log(newVal);
+			if (newVal) {
+				TweenMax.from(this.markerCenter, 1, {
+					lat: this.data.fields.map_lat_lng.latitude + 0.0005,
+					delay: 0.3
+				});
+			}
+		}
+	},
 	data() {
 
 		let mapStyles = [
@@ -196,7 +210,7 @@ export default {
 	},
 	mounted() {
 		// doesn't really work but I don't know how else to manipulate this element
-		TweenMax.from(this.markerCenter, 1, { lat: this.data.fields.map_lat_lng.latitude + 0.0005, delay: 2 });
+		// TweenMax.from(this.markerCenter, 1, { lat: this.data.fields.map_lat_lng.latitude + 0.0005, delay: 2 });
 	}
 };
 </script>
@@ -205,8 +219,6 @@ export default {
 
 @import "../../styl/_variables"
 
-.map
-	transition all 2s
 
 h4, p, a div
 	transition transform 0.5s, opacity 0.5s

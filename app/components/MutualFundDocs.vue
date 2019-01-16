@@ -243,9 +243,9 @@ h5
 	transition opacity 0.3s 1s, transform 0.3s 1s
 	.v-enter & 
 		opacity 0
-		transform translateY(100%)
+		transform translateY(3em)
 	fs(12)
-	mgn(3,0)
+	pad(3,0)
 	+above($tablet)
 		width 70%
 	/deep/ p 

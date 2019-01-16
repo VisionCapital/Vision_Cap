@@ -51,10 +51,15 @@ export default {
 
 .funds-info
 	background-color $lightgrey
-	transition all 2s
+
 .funds-info
 	@extend .slice
 	pad(2,0)
+
+// .inview 
+// 	.contact, p, /deep/ h3
+// 		transform none 
+// 		opacity 1
 
 /deep/ a
 	color $blue
@@ -66,23 +71,26 @@ em
 	color $copy
 
 p
-	transition transform 0.5s, opacity 0.5s
-	.v-enter &
+	transition transform 0.5s 0.2s, opacity 0.5s 0.2s
+	.v-enter &, .onpage:not(.inview) &
 		transform translateY(2em)
 		opacity 0
+
 .contact
-	for i in 1..5 
-		&:nth-child({i}) 
-			transition-delay (1s - 0.2 * i)
-			transition transform (0.5s + 0.2s * i) $easeOutSine, opacity (0.5s + 0.2s * i)
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		transform translateX(-3em)
 		opacity 0
+	for i in 1..5 
+		&:nth-child({i}) 
+			transition transform (0.5s + 0.2s * i) $easeOutSine, opacity (0.5s + 0.2s * i)
+			transition-delay (0.1s + 0.1s * i)
+
 
 /deep/ h3
 	fs(32)
 	transition transform 0.5s, line-height 0.5s, opacity 0.5s
-	.v-enter &
+
+	.v-enter &, .onpage:not(.inview) &
 		transform translateY(20px)
 		line-height 1.5
 		opacity 0

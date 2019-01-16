@@ -39,7 +39,6 @@ export default {
 	@extend .slice
 	pad(0,0,1,0)
 	overflow hidden
-	transition all 4s
 	.wrap
 		position relative
 		pad(3, 0, 0);
@@ -51,12 +50,13 @@ a
 
 h2, h4
 	transition opacity 0.5s, transform 0.5s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
+
 li 
 	transition opacity 0.5s, transform 0.5s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateX(-2rem)
 

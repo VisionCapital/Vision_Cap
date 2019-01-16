@@ -32,6 +32,7 @@ export default {
 	},
 	methods: {
 		resize() {
+			console.log(this.page.scroll);
 			let members = this.$refs.teamMember;
 			for (let member of members) {
 				member.checkImgHeight();

@@ -7,6 +7,7 @@
 				:page="record"
 				:data="module"
 				:class="[ 'onpage', { inview : sidx >= idx }]"
+				:inview="sidx >= idx ? true : false"
 				ref="slice"/>
 		</transition>
 

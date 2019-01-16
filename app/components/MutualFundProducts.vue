@@ -140,12 +140,13 @@ a
 .bg
 	position absolute
 	height 100%
-	width 100%
+
 	z-index -1
 	left 0
 	transition width 0.5s
-	.v-enter &
-		width 0
+	width 0
+	.inview &
+		width 100%
 	+below($tablet)
 		width 100vw
 
@@ -221,10 +222,12 @@ for i in 0..12
 			fs(17)
 	p, h4
 		transition opacity 0.7s, transform 0.7s
+		opacity 0
+		transform translateY(30%)
 		+above($mobile)
 			width (100% / 6)			
-	&.v-enter
+	.inview &
 		p, h4
-			opacity 0
-			transform translateY(30%)
+			opacity 1
+			transform none
 </style>

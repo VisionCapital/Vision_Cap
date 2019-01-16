@@ -49,7 +49,6 @@ export default {
 .contact-card
 	@extend .slice
 	pad(3,0,3,0)
-	transition all 2s
 	.wrap
 		position relative
 		+above($tablet)
