@@ -6,7 +6,7 @@
 			<component :is="module.component"
 				:page="record"
 				:data="module"
-				:class="{ onpage: lastScrollTop > 0, inview : sidx >= idx }"
+				:class="[ 'onpage', { inview : sidx >= idx }]"
 				ref="slice"/>
 		</transition>
 

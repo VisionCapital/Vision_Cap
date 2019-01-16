@@ -75,7 +75,7 @@ for i in 1..8
 	p
 		margin 0
 		color $copy
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		p, h4
 			transform translateX(3rem)
 			opacity 0
@@ -92,7 +92,7 @@ for i in 1..8
 
 .title
 	transition transform 0.5s, opacity 0.5s
-	.v-enter & 
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
 	/deep/ h2
