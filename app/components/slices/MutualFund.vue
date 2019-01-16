@@ -87,7 +87,9 @@ export default {
 		// });
 
 		this.scrollInterval = setInterval(() => {
-			this.checkScroll(Math.abs(this.page.scroll.pos));
+			if (this.$refs.module && this.$refs.mutualFund) {
+				this.checkScroll(Math.abs(this.page.scroll.pos));
+			}
 		}, 500);
 	},
 	destroy() {
