@@ -18,16 +18,16 @@
 					</router-link>
 				</li>
 
-				<li v-for="link in $store.state.navData.links"
+				<li :class="link.link_type" v-for="link in $store.state.navData.links"
 					:key="link.page_link.slug">
-					
+
 					<router-link :to="`/${link.page_link.slug}`"
 						v-if="link.page_link.slug && link.link_type === 'Normal'"
 						:title="link.link_title[0].text"
 						@click.native="handleClick()"
 						v-html="link.link_title[0].text"/>
 
-					<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'Dropdown'">
+					<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'dropdown'">
 						<div class="drop-toggle">
 							<router-link :to="`/${link.page_link.slug}`"
 								@click.native="handleClick()"
@@ -38,7 +38,7 @@
 								color="#fff"
 							/>
 						</div>
-							<div class="dropdown" :class="{'page-top': !pageTop}">
+							<div class="anchor-links" :class="{'page-top': !pageTop}">
 								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
 									<router-link 
 										v-if="mutualOpen"
@@ -117,7 +117,6 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	transition all 2s
 	+below($notebook)
 		height 85%
 		top 15%
@@ -145,16 +144,11 @@ export default {
 
 for i in 1..10
 	li:nth-child({i})
-		order i
 		transition opacity 0.5s, transform 0.5s
 		transition-delay 0.1s * i
 		.v-enter &
 			opacity 0
 			transform translateY(1rem)
-
-for i in 6..10
-	li:nth-child({i})
-		transition-delay 0.1s * i + 0.1s
 
 .links
 	margin 0 auto
@@ -177,6 +171,12 @@ for i in 6..10
 	/deep/
 		a
 			color white
+			
+			+below($laptop)
+				fs(13)
+				white-space nowrap 
+			+below($notebook)
+				fs(30)
 
 			&::before, &::after
 				background $w
@@ -189,11 +189,13 @@ for i in 6..10
 			max-width 280px
 			pad(1,.5)
 			margin 0
-			&:first-child
-				margin-right auto
-				padding-left 0
-			&:nth-last-child(-n+3)
-				order 7
+			&.dropdown
+				pad(0,0)
+
+
+		li:first-child
+			margin-right auto
+			padding-left 0
 		li, a
 			+below($notebook)
 				padding 4vh 0 0 0
@@ -210,9 +212,12 @@ for i in 6..10
 			width 0.75em
 
 	.drop-toggle
+		mgn(1,.5)
 		display flex;
 		cursor pointer
-.dropdown
+		+above($notebook)
+			height: 1.5rem
+.anchor-links
 	font-family $circular
 	display flex
 	flex-direction column
@@ -230,7 +235,6 @@ for i in 6..10
 		a
 			background $b
 	
-
 	+below($notebook)
 		fs(18)
 	a
@@ -246,7 +250,7 @@ for i in 6..10
 			max-height 0vh
 		+below($notebook)
 			padding 2vh 0
-			padding-left 1em
+			margin-left 1em
 				
 	.text
 		mgn(0.5,0.5)
@@ -257,10 +261,6 @@ for i in 6..10
 			transform translate(0,-50%)
 
 			
-.links[data-v-273f981f]
-	+below($notebook)
-		/deep/ a:before
-			background $b
 a.router-link-exact-active
 	&:before
 		width 100%
