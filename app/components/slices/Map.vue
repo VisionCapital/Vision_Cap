@@ -30,25 +30,25 @@
 			
 
 	<GmapMap
-				class="map-frame"
-				:center="{lat: center.lat, lng: center.lng}"
-				:zoom="16"
-				:options="{
-					styles: mapStyles,
-			    scrollwheel: false,
-					disableDefaultUI: true,
-					zoomControl: $store.state.device.mobile ? false : true,
-					zoomControlOptions: {
-						position:	6
-					},
-				}"
-			>
-				<GmapMarker
-					:icon="{url: require('../../images/map-icon.png')}"
-					:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
-				/>
-			</GmapMap>
-	</div>
+		class="map-frame"
+		:center="{lat: center.lat, lng: center.lng}"
+		:zoom="16"
+		:options="{
+			styles: mapStyles,
+			scrollwheel: false,
+			disableDefaultUI: true,
+			zoomControl: $store.state.device.mobile ? false : true,
+			zoomControlOptions: {
+				position:	6
+			},
+		}"
+	>
+		<GmapMarker
+			:icon="{url: require('../../images/map-icon.png')}"
+			:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
+		/>
+	</GmapMap>
+</div>
 </template>
 
 <script>
@@ -224,11 +224,15 @@ export default {
 	background-color $lightgrey
 .annotations-wrap-wrap
 	@extend .slice .wrap
-.annotations-wrap
 
-	float left
+.annotations-wrap
 	margin-left auto
 	width 50%
+	+below($notebook)
+		width 100%
+		display block
+	+above($notebook)
+		float left
 
 .annotations
 
@@ -236,6 +240,7 @@ export default {
 		text-align center
 		p
 			min-width 100%
+			
 
 	/deep/ h2,
 	/deep/ h3
@@ -243,8 +248,7 @@ export default {
 			fs(30)
 			padding 0 5%
 
-	+above($tablet)
-		text-align left
+	+above($notebook)
 
 		.cta
 			pad(1,0)
@@ -254,7 +258,7 @@ export default {
 			.button
 				width 100%
 
-	+above($mobile)
+	+below($notebook)
 
 		.cta-mobile
 			text-align center
@@ -271,6 +275,7 @@ export default {
 		height 75vw
 	+below($notebook)
 		width 100%
+		left 0
 /deep/ .gmnoprint
 	right auto
 
