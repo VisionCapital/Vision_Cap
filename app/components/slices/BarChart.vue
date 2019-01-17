@@ -4,7 +4,6 @@
 		<div class="wrap">
 
 			
-
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
 				v-html="data.html('bar_chart_title')"/>
 
@@ -14,12 +13,13 @@
 		</div>
 
 		<div class="title-card" v-if="$store.state.device.mobile">
-				<div class="bg"/>
-				<h2 v-if="heading"
-					v-html="heading"/>
-				<h2 v-html="data.html('vision_opp_pdf_title')"/>
-				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
-			</div>
+			<div class="bg"/>
+			<h2 v-if="heading"
+				v-html="heading"/>
+			<h2 v-html="data.html('vision_opp_pdf_title')"/>
+			<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+		</div>
+
 		<div class="wrap">
 				<div class="title-card" v-if="!$store.state.device.mobile">
 					<div class="bg"/>
@@ -63,11 +63,11 @@
 						}">
 
 						<div class="bar-slot">
-							<div class="bar" :style="{
+							<div class="bar" ref="bar" :style="{
 								background: bar.name.includes('Vision') ? '#00227d' : '#cecece',
 								height: bar.returns / max * 100 + '%'
 							}">
-								<div class="bar-label">
+								<div class="bar-label" ref="barLabel">
 									{{ bar.returns + '%' }}
 								</div>
 							</div>
@@ -91,10 +91,9 @@
 
 				<div class="cagr">
 
-
-				<div class="cagr-label">
-					<p>CAGR</p>
-				</div>
+					<div class="cagr-label">
+						<p>CAGR</p>
+					</div>
 					<div class="index" v-for="(bar, idx) in indices" :key="idx"
 						:style="{
 							opacity: bar.name.includes('Vision') ? '1' : '0.34',
@@ -114,11 +113,34 @@
 <script>
 
 import airprops from '../../mixins/airprops';
+import { TweenMax, Power2 } from 'gsap/TweenMax';
 
 export default {
 
 	mixins: [ airprops ],
-
+	props: [
+		'inview'
+	],
+	watch: {
+		inview(newVal) {
+			if (newVal) {
+				let bars = this.$refs.bar;
+				for (let i in bars) {
+					if (bars[i]) {
+						TweenMax.from(bars[i], 0.5, {
+							height: 0,
+							ease: Power2.easeOut,
+							delay: 0.3 + i * 0.1
+						});
+						TweenMax.from(this.$refs.barLabel[i], 0.3, {
+							opacity: 0,
+							delay: 0.6 + i * 0.1
+						});
+					}
+				}
+			}
+		}
+	},
 	computed: {
 		indices() {
 			let indices = this.data.items.map((x) => {
@@ -179,7 +201,7 @@ export default {
 
 	+above($tablet)
 		padding-bottom 3rem
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		/deep/ h3
 			opacity 0
 			line-height 1.5
@@ -206,7 +228,7 @@ export default {
 		background none
 
 	
-	.v-enter & 
+	.v-enter &, .onpage:not(.inview) &
 		/deep/ h2, /deep/ a
 			transform translateY(10%)
 			opacity 0
@@ -298,7 +320,7 @@ export default {
 	order 3
 	position relative
 	transition opacity 0.5s 0.3s
-	.v-enter &
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 	+below($tablet)
 		pad(2,0,0,2)

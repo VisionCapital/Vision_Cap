@@ -44,6 +44,7 @@ export default {
 
 	methods: {
 		checkScroll(scrollTop) {
+
 			this.$emit('pageTop', scrollTop < 12);
 
 			for (let i = this.$refs.slice.length - 1; i > -1; i--) {
