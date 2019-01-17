@@ -204,9 +204,15 @@ for i in 1..10
 	
 .dropdown-container
 	color $w
+	display flex
 	position relative
+	width 7%
 	.arrow-head
-		margin-left 1em
+		position absolute
+		right 0
+		padding-top 0.7em
+		margin-left .5em
+		float right
 		+below($notebook)
 			margin: 5vh 0 0 2vh;
 			width 0.75em
