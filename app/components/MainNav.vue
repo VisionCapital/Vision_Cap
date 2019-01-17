@@ -7,9 +7,7 @@
 
 		<nav>
 			<ul :class="[ 'links', { 'bg-links' : true }]" v-if="$store.state.navData">
-					<!--	<div v-if="!pageTop"/>
-					<a :style="{'background-color': red }"></a>
-				<div/> -->
+	
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
@@ -22,40 +20,43 @@
 
 				<li v-for="link in $store.state.navData.links"
 					:key="link.page_link.slug">
+					
 					<router-link :to="`/${link.page_link.slug}`"
-						v-if="link.page_link.slug"
+						v-if="link.page_link.slug && link.link_type === 'Normal'"
 						:title="link.link_title[0].text"
 						@click.native="handleClick()"
 						v-html="link.link_title[0].text"/>
+
+					<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'Dropdown'">
+						<div class="drop-toggle">
+							<router-link :to="`/${link.page_link.slug}`"
+								@click.native="handleClick()"
+								v-html="link.link_title[0].text"/>
+							<arrow-head @click.native="mutualOpen = !mutualOpen"
+								class="arrow-head"
+								:pointDown="mutualOpen"
+								color="#fff"
+							/>
+						</div>
+							<div class="dropdown" :class="{'page-top': !pageTop}">
+								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
+									<router-link 
+										v-if="mutualOpen"
+										:to="`/${link.page_link.slug}#${tag.slug}`"
+										:style="{'transition-delay': `${(idx) * 0.4}s`}"
+										@click.native="handleClick()"
+									>
+										<div class="text" 
+											:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
+											v-html="tag.title">
+										</div>
+									</router-link>
+								</transition>					
+							</div>
+					</div>
+
 				</li>
 
-				<li class="resources">
-					<div class="drop-toggle">
-						<router-link to="/resources"
-							@click.native="handleClick()"
-							v-html="'Resources'"/>
-						<arrow-head @click.native="mutualOpen = !mutualOpen"
-							class="arrow-head"
-							:pointDown="mutualOpen"
-							color="#fff"
-						/>
-					</div>
-						<div class="dropdown" :class="{'page-top': !pageTop}">
-							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-								<router-link 
-									v-if="mutualOpen"
-									:to="`/resources#${tag.slug}`"
-									:style="{'transition-delay': `${(idx) * 0.4}s`}"
-									@click.native="handleClick()"
-								>
-									<div class="text" 
-										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
-										v-html="tag.title">
-									</div>
-								</router-link>
-							</transition>					
-						</div>
-				</li>
 
 			</ul>
 		</nav>
@@ -129,6 +130,7 @@ export default {
 		z-index 12
 	+below($tablet)
 		padding-bottom 5vw
+
 .bg
 	background black
 	abs()
@@ -193,25 +195,18 @@ for i in 6..10
 			&:nth-last-child(-n+3)
 				order 7
 		li, a
-			// vertical-align middle
-			// +above($notebook)
-			// 	display inline-block
 			+below($notebook)
-				padding 2vh 0
+				padding 4vh 0 0 0
 			+below($mobile)
 				pad(.5,0)
-
-
-.links /deep/ li.resources
-	order 6
-	transition-delay 0.6s
-
-.resources
+	
+.dropdown-container
 	color $w
 	position relative
 	.arrow-head
 		margin-left 1em
-		+below($tablet)
+		+below($notebook)
+			margin: 5vh 0 0 2vh;
 			width 0.75em
 
 	.drop-toggle
@@ -221,7 +216,7 @@ for i in 6..10
 	font-family $circular
 	display flex
 	flex-direction column
-	+above($tablet)
+	+above($notebook)
 		position absolute
 		left 50%
 		transform translateX(-50%);
@@ -236,6 +231,8 @@ for i in 6..10
 			background $b
 	
 
+	+below($notebook)
+		fs(18)
 	a
 		max-height 8rem
 		transition max-height 0.5s
@@ -259,6 +256,11 @@ for i in 6..10
 			opacity 0
 			transform translate(0,-50%)
 
+			
+.links[data-v-273f981f]
+	+below($notebook)
+		/deep/ a:before
+			background $b
 a.router-link-exact-active
 	&:before
 		width 100%
