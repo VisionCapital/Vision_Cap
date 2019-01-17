@@ -22,7 +22,7 @@
 					:key="link.page_link.slug">
 
 					<router-link :to="`/${link.page_link.slug}`"
-						v-if="link.page_link.slug && link.link_type === 'Normal'"
+						v-if="link.page_link.slug && link.link_type === 'normal'"
 						:title="link.link_title[0].text"
 						@click.native="handleClick()"
 						v-html="link.link_title[0].text"/>
@@ -38,21 +38,23 @@
 								color="#fff"
 							/>
 						</div>
-							<div class="anchor-links" :class="{'page-top': !pageTop}">
-								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-									<router-link 
-										v-if="mutualOpen"
-										:to="`/${link.page_link.slug}#${tag.slug}`"
-										:style="{'transition-delay': `${(idx) * 0.4}s`}"
-										@click.native="handleClick()"
-									>
-										<div class="text" 
-											:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
-											v-html="tag.title">
-										</div>
-									</router-link>
-								</transition>					
-							</div>
+
+						<div class="anchor-links" :class="{'page-top': !pageTop}">
+							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
+								<router-link 
+									v-if="mutualOpen"
+									:to="`/${link.page_link.slug}#${tag.slug}`"
+									:style="{'transition-delay': `${(idx) * 0.4}s`}"
+									@click.native="handleClick()"
+								>
+									<div class="text" 
+										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
+										v-html="tag.title">
+									</div>
+								</router-link>
+							</transition>					
+						</div>
+						
 					</div>
 
 				</li>
