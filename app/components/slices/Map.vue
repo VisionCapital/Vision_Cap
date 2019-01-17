@@ -1,36 +1,34 @@
 <template>
 <div class="map-background">
-	<div class="map">
-		<div class="wrap">
+	<div class="annotations-wrap-wrap">
+			<div class="annotations-wrap">
+				<div class="annotations">
 
-			<div class="annotations">
+					<div class="copy">
+						<h2 v-if="heading"
+							v-html="heading"/>
+						<p v-if="subheading"
+							v-html="subheading"/>
+					</div>
 
-				<div class="copy">
-					<h2 v-if="heading"
-						v-html="heading"/>
-					<p v-if="subheading"
-						v-html="subheading"/>
+					<div class="cta" v-if="$store.state.device.win.x > 1024">
+					<h4 v-html="data.text('map_title')"/>
+					<p v-html="data.text('map_location')"/>
+						<a :href="data.fields.map_link.url" target="_blank">
+							<div v-html="data.text('map_link_title')"/>
+						</a>
+					</div>
+
+					<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
+					<h4 v-html="data.text('map_title')"/>
+					<p v-html="data.text('map_location')"/>
+					</div>
+
 				</div>
-
-				<div class="cta" v-if="$store.state.device.win.x > 1024">
-				<h4 v-html="data.text('map_title')"/>
-				<p v-html="data.text('map_location')"/>
-					<a :href="data.fields.map_link.url" target="_blank">
-						<div v-html="data.text('map_link_title')"/>
-					</a>
-				</div>
-
-				<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
-				<h4 v-html="data.text('map_title')"/>
-				<p v-html="data.text('map_location')"/>
-				</div>
-
 			</div>
-
+			</div>
 			
 
-		</div>
-	</div>
 	<GmapMap
 				class="map-frame"
 				:center="{lat: center.lat, lng: center.lng}"
@@ -222,65 +220,17 @@ export default {
 @import "../../styl/_variables"
 
 
-h4, p, a div
-	transition transform 0.5s, opacity 0.5s
-	opacity 1
-	transform translateY(0)
-	
-	.v-enter &, .onpage:not(.inview) &
-		opacity 0
-		transform translateY(2rem)
-
-p
-	max-width 80%
-	transition-delay 0.3s
-h4
-	transition-delay 0.2s
-	color $blue
-a div
-	transition-delay 0.4s
-.map
-	@extend .slice
-	display flex
-.map-frame
-	width 50%
-	position relative
-	left 50%
-	height 36vw
-	transition width 1s
-	.v-enter &, .onpage:not(.inview) &
-		width 0
-	+below($tablet)
-		height 75vw
-	+below($notebook)
-		width 100%
-.wrap
-	width 50%
-	display inline-block
-	right 50%
-	margin 0 0 0 auto
-	// justify-content space-between
-	+below($notebook)
-		flex-direction column
 .map-background
 	background-color $lightgrey
-.annotations
-	display flex
+.annotations-wrap-wrap
+	@extend .slice .wrap
+.annotations-wrap
+
+	float left
+	margin-left auto
 	width 50%
-	flex-direction column
-	justify-content center
-	// +above($notebook)//laptop
-	// 	margin-left 11%
-	// 	width 39%
-	// +above($laptop)//laptop-large
-	// 	margin-left 13%
-	// 	width 37%
-	// +above($laptop-large)//desktop
-	// 	margin-left 17%
-	// 	width 33%
-	// +above($desktop)//ultra
-	// 	margin-left auto
-	// 	width auto
+
+.annotations
 
 	+below($notebook)
 		text-align center
@@ -310,6 +260,37 @@ a div
 			text-align center
 			display inline-block
 
+.map-frame
+	width 50%
+	left 50%
+	height 36vw
+	transition width 1s
+	.v-enter &, .onpage:not(.inview) &
+		width 0
+	+below($tablet)
+		height 75vw
+	+below($notebook)
+		width 100%
 /deep/ .gmnoprint
 	right auto
+
+//--------------------------------------------------
+h4, p, a div
+	transition transform 0.5s, opacity 0.5s
+	opacity 1
+	transform translateY(0)
+	
+	.v-enter &, .onpage:not(.inview) &
+		opacity 0
+		transform translateY(2rem)
+
+p
+	max-width 80%
+	transition-delay 0.3s
+h4
+	transition-delay 0.2s
+	color $blue
+a div
+	transition-delay 0.4s
+
 </style>
