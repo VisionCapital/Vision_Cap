@@ -40,13 +40,21 @@
 							color="#fff"
 						/>
 					</div>
-					<div class="dropdown" v-if="mutualOpen" :class="{'page-top': !pageTop}">
-						<router-link v-for="(tagID, name) in $store.state.resourceTags"
-							:to="`/resources#${tagID}`"
-							v-html="name"
-							:key="tagID"
-							@click.native="handleClick()"/>
-					</div>
+						<div class="dropdown" :class="{'page-top': !pageTop}">
+							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
+								<router-link 
+									v-if="mutualOpen"
+									:to="`/resources#${tag.slug}`"
+									:style="{'transition-delay': `${(idx) * 0.4}s`}"
+									@click.native="handleClick()"
+								>
+									<div class="text" 
+										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
+										v-html="tag.title">
+									</div>
+								</router-link>
+							</transition>					
+						</div>
 				</li>
 
 			</ul>
@@ -71,6 +79,12 @@ export default {
 		}
 	},
 	methods: {
+		// linkDelay(idx) {
+		// 	if (this.mutualOpen) {
+		// 		return `${idx * 0.4}s`;
+		// 	}
+		// 	return `${(this.$store.state.resourceTags.length - idx) * 0.5}s`;
+		// },
 		handleClick() {
 			this.mutualOpen = false;
 			this.$store.dispatch('toggleNav');
@@ -212,25 +226,39 @@ for i in 6..10
 		left 50%
 		transform translateX(-50%);
 		width 100%
+
+	+below($tablet)
+		fs(18)
+
 	&.page-top
 		top 100%
 		a
 			background $b
+	
 
-	+below($tablet)
-		fs(18)
 	a
+		max-height 8rem
+		transition max-height 0.5s
 		background-color none
-		pad(0.5,0.5)
 		margin-top 2px
 		&.page-top
 			padding 0
 		&:hover::after, &:hover::before
 			display none
+		&.v-enter, &.v-leave-to
+			max-height 0vh
 		+below($notebook)
 			padding 2vh 0
 			padding-left 1em
-			
+				
+	.text
+		mgn(0.5,0.5)
+		transition opacity 0.3s, transform 0.3s
+	.v-enter, .v-leave-to 
+		.text
+			opacity 0
+			transform translate(0,-50%)
+
 a.router-link-exact-active
 	&:before
 		width 100%

@@ -33,11 +33,11 @@
 							/>
 						</div>
 						<div class="dropdown" v-if="mutualOpen">
-							<router-link :to="`/resources#${tagID}`"
-								v-for="(tagID, name) in resourceTags"
-								v-html="name"
-								:class="tagID"
-								:key="tagID"/>
+							<router-link :to="`/resources#${tag.slug}`"
+								v-for="(tag, idx) in resourceTags"
+								v-html="tag.title"
+								:class="tag.slug"
+								:key="idx"/>
 						</div>
 					</li>
 
@@ -74,8 +74,8 @@ export default {
 		return {
 			links,
 			mutualOpen: false,
-			mutualDrop,
-			resourceTags
+			resourceTags,
+			mutualDrop
 		};
 	}
 

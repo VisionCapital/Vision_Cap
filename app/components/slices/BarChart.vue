@@ -113,7 +113,7 @@
 <script>
 
 import airprops from '../../mixins/airprops';
-import { TweenMax, Power2 } from 'gsap/TweenMax';
+import { TweenMax } from 'gsap/TweenMax';
 
 export default {
 
@@ -129,7 +129,6 @@ export default {
 					if (bars[i]) {
 						TweenMax.from(bars[i], 0.5, {
 							height: 0,
-							ease: Power2.easeOut,
 							delay: 0.3 + i * 0.1
 						});
 						TweenMax.from(this.$refs.barLabel[i], 0.3, {

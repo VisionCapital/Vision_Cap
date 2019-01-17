@@ -53,9 +53,19 @@ export default {
 		});
 
 		this.$cms.loadType('resource').then((results) => {
-			let resourceTags = {};
+			let resourceTitles = {};
+			let resourceTags = [];
+			// there's probably a better way to remove duplicate tags than this
 			for (let resource of results.results) {
-				resourceTags[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
+				resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
+			}
+			for (let title in resourceTitles) {
+				if (title) {
+					resourceTags.push({
+						title: title,
+						slug: resourceTitles[title]
+					});
+				}
 			}
 			this.$store.dispatch('setResourceTags', resourceTags);
 		});

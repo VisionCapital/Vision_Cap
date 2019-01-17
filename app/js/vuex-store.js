@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 		transition: 'v',
 		navOpen: false,
 		navData: {},
-		resourceTags: {}
+		resourceTags: []
 	},
 
 	actions: {
