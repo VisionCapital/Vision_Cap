@@ -217,8 +217,6 @@ for i in 1..10
 		mgn(1,.5)
 		display flex;
 		cursor pointer
-		+above($notebook)
-			height: 1.5rem
 .anchor-links
 	font-family $circular
 	display flex
@@ -228,12 +226,13 @@ for i in 1..10
 		left 50%
 		transform translateX(-50%);
 		width 100%
+		top 100%
 
 	+below($tablet)
 		fs(18)
 
 	&.page-top
-		top 100%
+		top auto
 		a
 			background $b
 	
