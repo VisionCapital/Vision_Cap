@@ -115,6 +115,7 @@ export default {
 		z-index 12
 	+below($tablet)
 		padding-bottom 5vw
+
 .bg
 	background black
 	abs()
@@ -183,7 +184,7 @@ for i in 6..10
 			// +above($notebook)
 			// 	display inline-block
 			+below($notebook)
-				padding 2vh 0
+				padding 4vh 0 0 0
 			+below($mobile)
 				pad(.5,0)
 
@@ -191,13 +192,14 @@ for i in 6..10
 .links /deep/ li.resources
 	order 6
 	transition-delay 0.6s
-
+	
 .resources
 	color $w
 	position relative
 	.arrow-head
 		margin-left 1em
-		+below($tablet)
+		+below($notebook)
+			margin: 5vh 0 0 2vh;
 			width 0.75em
 
 	.drop-toggle
@@ -207,7 +209,7 @@ for i in 6..10
 	font-family $circular
 	display flex
 	flex-direction column
-	+above($tablet)
+	+above($notebook)
 		position absolute
 		left 50%
 		transform translateX(-50%);
@@ -217,10 +219,11 @@ for i in 6..10
 		a
 			background $b
 
-	+below($tablet)
+	+below($notebook)
 		fs(18)
 	a
 		background-color none
+		font-family $cormorant	
 		pad(0.5,0.5)
 		margin-top 2px
 		&.page-top
@@ -231,6 +234,10 @@ for i in 6..10
 			padding 2vh 0
 			padding-left 1em
 			
+.links[data-v-273f981f]
+	+below($notebook)
+		/deep/ a:before
+			background $b
 a.router-link-exact-active
 	&:before
 		width 100%

@@ -54,6 +54,10 @@ export default {
 @import "../styl/_variables";
 
 
+.close-outer
+	top: 30px;
+	right: 49px;
+
 .nav-switch
 	// background $b
 	position fixed

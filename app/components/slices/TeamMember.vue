@@ -151,7 +151,7 @@ img
 	word-wrap break-word
 
 	&.full-copy
-		overflow visible
+		overflow hidden
 		max-height 100%
 	/deep/ ul
 		padding-left 1.8em
