@@ -203,10 +203,18 @@ for i in 1..10
 				padding 4vh 0 0 0
 			+below($mobile)
 				pad(.5,0)
+
+
+.anchor-links
+	.links
+	/deep/ a::before,a::after
+		background: #000;
 	
 .dropdown-container
 	color $w
 	position relative
+	
+
 	.arrow-head
 		margin-left 1em
 		+below($notebook)
@@ -221,6 +229,8 @@ for i in 1..10
 	font-family $circular
 	display flex
 	flex-direction column
+	+below($notebook)
+		font-family $cormorant
 	+above($notebook)
 		position absolute
 		left 50%
