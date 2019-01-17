@@ -102,7 +102,6 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	transition all 2s
 	+below($notebook)
 		height 85%
 		top 15%
@@ -162,6 +161,12 @@ for i in 6..10
 	/deep/
 		a
 			color white
+			
+			+below($laptop)
+				fs(13)
+				white-space nowrap 
+			+below($notebook)
+				fs(30)
 
 			&::before, &::after
 				background $w
@@ -173,6 +178,7 @@ for i in 6..10
 		li
 			max-width 280px
 			pad(1,.5)
+
 			margin 0
 			&:first-child
 				margin-right auto
@@ -205,6 +211,8 @@ for i in 6..10
 	.drop-toggle
 		display flex;
 		cursor pointer
+		+above($notebook)
+			height: 1.5rem
 .dropdown
 	font-family $circular
 	display flex
@@ -232,12 +240,8 @@ for i in 6..10
 			display none
 		+below($notebook)
 			padding 2vh 0
-			padding-left 1em
+			margin-left 1em
 			
-.links[data-v-273f981f]
-	+below($notebook)
-		/deep/ a:before
-			background $b
 a.router-link-exact-active
 	&:before
 		width 100%
