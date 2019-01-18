@@ -56,6 +56,7 @@
 						</div>
 						
 					</div>
+					
 
 				</li>
 
@@ -173,10 +174,12 @@ for i in 1..10
 	/deep/
 		a
 			color white
-			
+			white-space nowrap 
+			fs(14)
+
 			+below($laptop)
-				fs(13)
-				white-space nowrap 
+				fs(10.5)
+				mgn(0,0)
 			+below($notebook)
 				fs(30)
 
@@ -193,6 +196,8 @@ for i in 1..10
 			margin 0
 			&.dropdown
 				pad(0,0)
+				/deep/ a:after, a:before
+					top 20.5px
 
 
 		li:first-child
@@ -205,26 +210,26 @@ for i in 1..10
 				pad(.5,0)
 
 
-.anchor-links
-	.links
-	/deep/ a::before,a::after
-		background: #000;
 	
 .dropdown-container
 	color $w
 	position relative
 	
+	svg 
+		width: 1em;
 
 	.arrow-head
-		margin-left 1em
+		margin-left 0.4vw
 		+below($notebook)
-			margin: 5vh 0 0 2vh;
+			margin: 4vh 0 0 2vh;
 			width 0.75em
 
 	.drop-toggle
-		mgn(1,.5)
 		display flex;
 		cursor pointer
+		+above($notebook)
+			mgn(1,.5)
+			
 .anchor-links
 	font-family $circular
 	display flex
@@ -252,7 +257,10 @@ for i in 1..10
 		max-height 8rem
 		transition max-height 0.5s
 		background-color none
+		padding 0.5rem 0
 		margin-top 2px
+		&:first-child
+			padding 2vh 0
 		&.page-top
 			padding 0
 		&:hover::after, &:hover::before
@@ -260,12 +268,18 @@ for i in 1..10
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
-			padding 2vh 0
+			&:first-child
+				padding 3vh 0
 			margin-left 1em
 				
 	.text
-		mgn(0.5,0.5)
+		mgn(0,0.5)
+		display inline-block
 		transition opacity 0.3s, transform 0.3s
+		+above($notebook)
+			white-space: normal;
+			line-height 1.5
+
 	.v-enter, .v-leave-to 
 		.text
 			opacity 0
