@@ -60,7 +60,7 @@ export default {
 	// padding-top 5rem
 	// align-content center
 
-	pad(1,0,0)
+	pad(2,0,1)
 
 	+above($tablet)
 		pad(0,5,1,5)

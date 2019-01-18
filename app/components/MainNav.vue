@@ -166,6 +166,7 @@ for i in 1..10
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
+		// margin-left: 4rem;
 
 	+above($notebook)
 		text-align center
@@ -193,14 +194,18 @@ for i in 1..10
 				&::after
 					background none
 
-		li
+		li //underline link resources
 			max-width 280px
 			pad(1,.5)
+
 			margin 0
 			&.dropdown
 				pad(0,0)
 				/deep/ a:after, a:before
-					top 20.5px
+					top 4.5rem
+				+above($notebook)
+					/deep/ a:after, a:before
+						top 20.5px
 
 
 		li:first-child
