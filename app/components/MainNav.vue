@@ -296,7 +296,6 @@ for i in 1..10
 			opacity 0
 			transform translate(0,-50%)
 
-
 a.router-link-exact-active
 	&:before
 		width 100%
