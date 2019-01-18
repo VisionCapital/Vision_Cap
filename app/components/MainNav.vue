@@ -7,7 +7,7 @@
 
 		<nav>
 			<ul :class="[ 'links', { 'bg-links' : true }]" v-if="$store.state.navData">
-	
+
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
@@ -41,22 +41,22 @@
 
 						<div class="anchor-links" :class="{'page-top': !pageTop}">
 							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-								<router-link 
+								<router-link
 									v-if="mutualOpen"
 									:to="`/${link.page_link.slug}#${tag.slug}`"
 									:style="{'transition-delay': `${(idx) * 0.4}s`}"
 									@click.native="handleClick()"
 								>
-									<div class="text" 
+									<div class="text"
 										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
 										v-html="tag.title">
 									</div>
 								</router-link>
-							</transition>					
+							</transition>
 						</div>
-						
+
 					</div>
-					
+
 
 				</li>
 
@@ -154,27 +154,30 @@ for i in 1..10
 			transform translateY(1rem)
 
 .links
+	display flex
 	margin 0 auto
 	list-style none
 	padding 0
 	position relative
-	display flex
 	justify-content center
-	max-width 1060px
-	width 80%
+	margin 0 12px
 
 	+below($notebook)
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
+
 	+above($notebook)
 		text-align center
+		margin 0 auto
+		max-width 1060px
+		width 80%
 
 
 	/deep/
 		a
 			color white
-			white-space nowrap 
+			white-space nowrap
 			fs(14)
 
 			+below($laptop)
@@ -210,18 +213,20 @@ for i in 1..10
 				pad(.5,0)
 
 
-	
+
 .dropdown-container
 	color $w
 	position relative
-	
-	svg 
+
+	svg
 		width: 1em;
 
 	.arrow-head
 		margin-left 0.4vw
+
 		+below($notebook)
-			margin: 4vh 0 0 2vh;
+			// margin: 4vh 0 0 2vh
+			margin: 0 0 0 .5em
 			width 0.75em
 
 	.drop-toggle
@@ -229,7 +234,7 @@ for i in 1..10
 		cursor pointer
 		+above($notebook)
 			mgn(1,.5)
-			
+
 .anchor-links
 	font-family $circular
 	display flex
@@ -250,7 +255,7 @@ for i in 1..10
 		top auto
 		a
 			background $b
-	
+
 	+below($notebook)
 		fs(18)
 	a
@@ -268,10 +273,11 @@ for i in 1..10
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
-			&:first-child
-				padding 3vh 0
-			margin-left 1em
-				
+			// &:first-child
+			// 	padding 3vh 0
+			// margin-left 1em
+			margin 0
+
 	.text
 		mgn(0,0.5)
 		display inline-block
@@ -280,12 +286,12 @@ for i in 1..10
 			white-space: normal;
 			line-height 1.5
 
-	.v-enter, .v-leave-to 
+	.v-enter, .v-leave-to
 		.text
 			opacity 0
 			transform translate(0,-50%)
 
-			
+
 a.router-link-exact-active
 	&:before
 		width 100%
@@ -300,7 +306,7 @@ a.router-link-exact-active
 	&:hover
 		&::before
 			background none
-			
+
 			width 0%
 
 		&::after

@@ -15,7 +15,7 @@
 				</g>
 			</svg>
 		</button>
-		
+
 		<close v-else @click="$store.dispatch('toggleNav')"/>
 
 		<transition>
@@ -54,9 +54,12 @@ export default {
 @import "../styl/_variables";
 
 
-.close-outer
-	top: 30px;
-	right: 49px;
+.close-outer.close-outer
+	top: 0
+	right: 0
+	position relative
+	height 23px
+	width 23px
 
 .nav-switch
 	// background $b
@@ -80,6 +83,7 @@ export default {
 		appearance none
 		background none
 		border 0
+		padding 0
 		mgn(0,0)
 		text-align center
 
@@ -88,9 +92,9 @@ export default {
 			vertical-align middle
 
 .home-link
-	width 20rem
+	width 210px
 
-.bg 
+.bg
 	position absolute
 	left 0
 	top 0

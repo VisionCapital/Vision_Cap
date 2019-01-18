@@ -12,7 +12,7 @@
 		</transition>
 
 		<page-footer/>
-		
+
 	</div></div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
 		return {
 			lastScrollTop: 0,
 			sidx: 0,
+			// tops: 0,
 			record
 		};
 	},
@@ -44,7 +45,7 @@ export default {
 
 	methods: {
 		checkScroll(scrollTop) {
-
+			// this.tops = [];
 			this.$emit('pageTop', scrollTop < 12);
 
 			for (let i = this.$refs.slice.length - 1; i > -1; i--) {
@@ -61,7 +62,7 @@ export default {
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(this.lastScrollTop);
-		}, 500);
+		}, 1000);
 	}
 
 };

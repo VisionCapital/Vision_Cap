@@ -1,54 +1,54 @@
 <template>
-<div class="map-background">
-	<div class="annotations-wrap-wrap">
+	<div class="map-background">
+		<div class="annotations-wrap-wrap">
 			<div class="annotations-wrap">
 				<div class="annotations">
 
-					<div class="copy">
+					<!-- <div class="copy">
 						<h2 v-if="heading"
 							v-html="heading"/>
 						<p v-if="subheading"
 							v-html="subheading"/>
-					</div>
+					</div> -->
 
 					<div class="cta" v-if="$store.state.device.win.x > 1024">
-					<h4 v-html="data.text('map_title')"/>
-					<p v-html="data.text('map_location')"/>
+						<h4 v-html="data.text('map_title')"/>
+						<p v-html="data.text('map_location')"/>
 						<a :href="data.fields.map_link.url" target="_blank">
 							<div v-html="data.text('map_link_title')"/>
 						</a>
 					</div>
 
 					<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
-					<h4 v-html="data.text('map_title')"/>
-					<p v-html="data.text('map_location')"/>
+						<h4 v-html="data.text('map_title')"/>
+						<p v-html="data.text('map_location')"/>
 					</div>
 
 				</div>
 			</div>
-			</div>
-			
+		</div>
 
-	<GmapMap
-		class="map-frame"
-		:center="{lat: center.lat, lng: center.lng}"
-		:zoom="16"
-		:options="{
-			styles: mapStyles,
-			scrollwheel: false,
-			disableDefaultUI: true,
-			zoomControl: $store.state.device.mobile ? false : true,
-			zoomControlOptions: {
-				position:	6
-			},
-		}"
-	>
-		<GmapMarker
-			:icon="{url: require('../../images/map-icon.png')}"
-			:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
-		/>
-	</GmapMap>
-</div>
+		<GmapMap
+			class="map-frame"
+			:center="{lat: center.lat, lng: center.lng}"
+			:zoom="16"
+			:options="{
+				styles: mapStyles,
+				scrollwheel: false,
+				disableDefaultUI: true,
+				zoomControl: $store.state.device.mobile ? false : true,
+				zoomControlOptions: {
+					position:	6
+				},
+			}"
+		>
+			<GmapMarker
+				:icon="{url: require('../../images/map-icon.png')}"
+				:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
+			/>
+		</GmapMap>
+
+	</div>
 </template>
 
 <script>
@@ -207,21 +207,19 @@ export default {
 			},
 			mapStyles
 		};
-	},
-	mounted() {
-		// doesn't really work but I don't know how else to manipulate this element
-		// TweenMax.from(this.markerCenter, 1, { lat: this.data.fields.map_lat_lng.latitude + 0.0005, delay: 2 });
 	}
+
 };
+
 </script>
 
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
 
-
 .map-background
 	background-color $lightgrey
+
 .annotations-wrap-wrap
 	@extend .slice .wrap
 
@@ -240,7 +238,7 @@ export default {
 		text-align center
 		p
 			min-width 100%
-			
+
 
 	/deep/ h2,
 	/deep/ h3
@@ -251,9 +249,18 @@ export default {
 	+above($notebook)
 
 		.cta
+			align-items flex-start
+			display flex
+			flex-direction column
+			justify-content center
+			height 36vw
 			pad(1,0)
 			width 100%
 			//width (200%/ 6)
+
+			/deep/
+				h4
+					margin 0
 
 			.button
 				width 100%
@@ -284,7 +291,7 @@ h4, p, a div
 	transition transform 0.5s, opacity 0.5s
 	opacity 1
 	transform translateY(0)
-	
+
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
