@@ -4,7 +4,7 @@
 
       <div class="contact" v-for="(contact, idx) in contacts" :key="idx">
 
-        <div class="title" 
+        <div class="title"
 					v-if="contact.name"
 					v-html="data.htmlField(contact.name)">
         </div>
@@ -15,9 +15,9 @@
         <p v-if="contact.email">
           Email: <a :href="`mailto:${data.textField(contact.email)}`" v-html="data.textField(contact.email)"></a>
         </p>
-				
+
 				<p v-if="contact.phone">
-					Tel: <a :href="`tel:${data.textField(contact.phone)}`" v-html="data.textField(contact.phone)"></a>
+					Tel: <a :href="`tel:${sanitiseNum(contact.phone)}`" v-html="data.textField(contact.phone)"></a>
 				</p>
 
       </div>
@@ -32,6 +32,20 @@ import airprops from '../../mixins/airprops';
 
 export default {
 	mixins: [ airprops ],
+
+	methods: {
+		sanitiseNum(field) {
+			let num = this.data.textField(field);
+
+			num = num.replace('-', '');
+			num = num.replace('(', '');
+			num = num.replace(')', '');
+			num = num.replace(' ', '');
+
+			return '+1' + num;
+		}
+	},
+
 	data() {
 		let contacts = this.data.items;
 		return {
@@ -55,7 +69,7 @@ export default {
 			display flex
 
 for i in 1..8
-	.contact:nth-child({i}) 
+	.contact:nth-child({i})
 		.title
 			transition-delay (0.3s * i - 0.5)
 		h4
