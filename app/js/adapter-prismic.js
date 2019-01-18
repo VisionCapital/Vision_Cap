@@ -78,7 +78,9 @@ class CMSAdapter {
 
 	loadTags(tag) {
 		return this.prismic.query(
-			Prismic.Predicates.at('document.tags', [ tag ])
+			// Prismic.Predicates.at('document.type', 'resource'),
+			Prismic.Predicates.at('document.tags', [ tag ]),
+			{ orderings: '[my.resource.publish_date desc]' }
 		);
 	}
 
