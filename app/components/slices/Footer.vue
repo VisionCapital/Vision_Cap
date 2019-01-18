@@ -121,11 +121,13 @@ export default {
 	padding 0
 	position relative
 	text-align center
-	display flex
 	flex-wrap wrap
 	justify-content center
 	max-width 1060px
 	width 80%
+
+	+above($notebook)
+		display flex
 
 	/deep/ a
 		color white
@@ -135,11 +137,17 @@ export default {
 		margin 0
 		position relative
 		pad(1,.5)
+		fs(14)
+
+		+below($laptop)
+			fs(10.5)
+			mgn(0,0)
 	
 		&:first-child
 			+above($tablet)
 				padding-left 0
 				margin-right auto
+				
 
 			+below($tablet)
 				max-width 100%
@@ -147,21 +155,29 @@ export default {
 				padding 0 24%
 			+below($mobile)
 				padding 0
-
+.logo
+	+below($tablet)
+		width 100%
 
 .arrow-head
 	margin-left 1em
 	display inline-block
+
+	svg 
+		width: 1em;
 .drop-toggle
 	display flex;
 	cursor pointer
-	pad(1,.5)
+	pad(0,0)
+	/deep/ a:after, a:before
+		top 19px
 	
 .dropdown
 	display flex
 	flex-direction column
 	position absolute
 	bottom 100%
+
 	a
 		margin-bottom 2px
 		pad(0.5,0.5)
