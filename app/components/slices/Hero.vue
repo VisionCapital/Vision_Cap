@@ -86,6 +86,7 @@ export default {
 			color $w
 			// line-height 1
 			fs(82)
+			mgn(1,0,2)
 			// padding-bottom 0.3em
 
 			+below($tablet)
