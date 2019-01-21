@@ -2,7 +2,7 @@
 	<div class="main-nav">
 
 		<transition>
-			<div class="bg" v-if="$store.state.device.win.x <= 1024 || !pageTop"/>
+			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"/>
 		</transition>
 
 		<nav>

@@ -107,6 +107,55 @@ export default {
 @import "../../styl/_variables"
 
 .footer
+	left 0
+	position fixed
+	top 0
+	width 100%
+	z-index 10
+	+below($notebook)
+		position fixed
+		width 100%
+		right 0
+		top 0
+		z-index 11
+		display flex
+		justify-content space-between
+		// align-items center
+		pad(1,1)
+
+		a:after
+			background:none
+
+		a:before
+			background:none
+
+		/deep/ button
+			appearance none
+			background none
+			border 0
+			padding 0
+			mgn(0,0)
+			text-align center
+
+			svg
+				display inline-block
+				vertical-align middle
+	+below($tablet)
+		padding-bottom 5vw
+
+.logo-outer
+	max-width: 280px;
+	width 98%
+	height 100%
+	+below(1024px)
+		position relative
+		width 14rem
+		height 100%
+
+.home-link
+	margin 0 auto
+
+.footer
 	background $blue
 	color $w
 	position relative
@@ -121,11 +170,13 @@ export default {
 	padding 0
 	position relative
 	text-align center
-	flex-wrap wrap
+	flex-wrap nowrap
 	justify-content center
 	max-width 1060px
 	width 80%
 
+	+below($notebook)
+		width 100%
 	+above($notebook)
 		display flex
 
@@ -134,20 +185,22 @@ export default {
 
 	/deep/ li
 		max-width 280px
+		white-space nowrap
 		margin 0
 		position relative
+		display inline
 		pad(1,.5)
 		fs(14)
 
 		+below($laptop)
 			fs(10.5)
 			mgn(0,0)
-	
+		&:nth-child(5n)
+			display flex
 		&:first-child
 			+above($tablet)
 				padding-left 0
 				margin-right auto
-				
 
 			+below($tablet)
 				max-width 100%
@@ -166,7 +219,7 @@ export default {
 	svg 
 		width: 1em;
 .drop-toggle
-	display flex;
+	display inline
 	cursor pointer
 	pad(0,0)
 	/deep/ a:after, a:before
