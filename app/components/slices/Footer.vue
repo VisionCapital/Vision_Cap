@@ -20,8 +20,8 @@
 							v-html="link.link_title[0].text"/>
 
 						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">	
-							<router-link v-html="mutualDrop.title"
-								:to="mutualDrop.path"
+							<router-link v-html="link.link_title[0].text"
+								:to="`/${link.page_link.slug}`"
 							/>
 							<arrow-head
 								@click.native="mutualOpen = !mutualOpen"
@@ -31,34 +31,13 @@
 							/>
 						</div>
 						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown'">
-							<router-link :to="`/resources#${tag.slug}`"
+							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
 								:class="tag.slug"
 								:key="idx"/>
 						</div>
 					</li>
-
-					<!-- <li class="resources">
-						<div class="drop-toggle">
-							<router-link v-html="mutualDrop.title"
-								:to="mutualDrop.path"
-							/>
-							<arrow-head
-								@click.native="mutualOpen = !mutualOpen"
-								class="arrow-head"
-								:pointDown="!mutualOpen"
-								color="#fff"
-							/>
-						</div>
-						<div class="dropdown" v-if="mutualOpen">
-							<router-link :to="`/resources#${tag.slug}`"
-								v-for="(tag, idx) in resourceTags"
-								v-html="tag.title"
-								:class="tag.slug"
-								:key="idx"/>
-						</div>
-					</li> -->
 
 				</ul>
 			</nav>
@@ -221,6 +200,7 @@ export default {
 .drop-toggle
 	display inline
 	cursor pointer
+
 	pad(0,0)
 	/deep/ a:after, a:before
 		top 19px

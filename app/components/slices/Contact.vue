@@ -64,4 +64,11 @@ export default {
 		max-width 656px
 		width 75%
 
+h3, h4
+	transition opacity 0.5s, transform 0.5s $easeOutCubic
+	.v-enter &, .onpage:not(.inview) &
+		transform translate(0,50%)
+		opacity 0
+h4 
+	transition-delay 0.25s
 </style>

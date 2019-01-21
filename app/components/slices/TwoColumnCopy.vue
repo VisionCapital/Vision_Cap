@@ -59,9 +59,6 @@ export default {
 	width relative
 	text-align left
 
-	+above($tablet)
-		pad(0,3)
-
 /deep/
 	h2, h3
 		font-family $cormorant-semibold
@@ -79,7 +76,7 @@ export default {
 
 .copy
 	column-count 2
-	column-gap 4rem
+	column-gap 6rem
 	pad(1,0)
 	+below($tablet)
 		column-count: 1;

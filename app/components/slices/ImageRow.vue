@@ -30,9 +30,7 @@ export default {
 
 .image-row
 	@extend .slice
-	pad(0,2,2,0)
-	+below($tablet)
-		pad(0,0,2,0)
+	pad(0,0,2,0)
 
 .image-wrap
 	align-items center

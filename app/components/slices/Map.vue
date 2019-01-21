@@ -12,7 +12,7 @@
 					</div> -->
 
 					<div class="cta" v-if="$store.state.device.win.x > 1024">
-						<h4 v-html="data.text('map_title')"/>
+						<h2 v-html="data.text('map_title')"/>
 						<p v-html="data.text('map_location')"/>
 						<a :href="data.fields.map_link.url" target="_blank">
 							<div v-html="data.text('map_link_title')"/>
@@ -20,7 +20,7 @@
 					</div>
 
 					<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
-						<h4 v-html="data.text('map_title')"/>
+						<h2 v-html="data.text('map_title')"/>
 						<p v-html="data.text('map_location')"/>
 					</div>
 
@@ -258,10 +258,9 @@ export default {
 			width 100%
 			//width (200%/ 6)
 
-			/deep/
-				h4
-					margin 0
-
+			// /deep/
+			// 	h2
+			// 		margin 0
 			.button
 				width 100%
 
@@ -287,7 +286,7 @@ export default {
 	right auto
 
 //--------------------------------------------------
-h4, p, a div
+p, a div, h2
 	transition transform 0.5s, opacity 0.5s
 	opacity 1
 	transform translateY(0)
@@ -295,13 +294,22 @@ h4, p, a div
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
-
+a
+	&:before, &:after
+		background $blue
+	&:hover:after
+		background transparent
 p
 	max-width 80%
 	transition-delay 0.3s
-h4
+h2
+	@extend .heading
+	font-family $cormorant-semibold
 	transition-delay 0.2s
 	color $blue
+	mgn(0,1,0,0)
+	+below($tablet)
+		fs(30)
 a div
 	transition-delay 0.4s
 

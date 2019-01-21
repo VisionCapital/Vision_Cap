@@ -200,10 +200,10 @@ for i in 1..10
 
 			margin 0
 			&.dropdown
-				pad(0,0)
 				/deep/ a:after, a:before
 					top 4.5rem
 				+above($notebook)
+					pad(0,0)
 					/deep/ a:after, a:before
 						top 20.5px
 
@@ -222,23 +222,26 @@ for i in 1..10
 .dropdown-container
 	color $w
 	position relative
+	height 100%
 
 	svg
 		width: 1em;
 
 	.arrow-head
 		margin-left 0.4vw
-
+		display inline-block
 		+below($notebook)
-			// margin: 4vh 0 0 2vh
 			margin: 0 0 0 .5em
 			width 0.75em
 
 	.drop-toggle
-		display flex;
+		// display flex;
+		// display inline-block
+		// align-items flex-start
 		cursor pointer
 		+above($notebook)
-			mgn(1,.5)
+			height 100%
+			pad(1,.5)
 
 .anchor-links
 	font-family $circular
@@ -267,10 +270,11 @@ for i in 1..10
 		max-height 8rem
 		transition max-height 0.5s
 		background-color none
-		padding 0.5rem 0
+		// padding 0.5rem 0
+		pad(0.5,0)
 		margin-top 2px
-		&:first-child
-			padding 2vh 0
+		// &:first-child
+		// 	padding 2vh 0
 		&.page-top
 			padding 0
 		&:hover::after, &:hover::before
@@ -281,6 +285,7 @@ for i in 1..10
 			// &:first-child
 			// 	padding 3vh 0
 			// margin-left 1em
+			pad(1,0,0)
 			margin 0
 
 	.text
