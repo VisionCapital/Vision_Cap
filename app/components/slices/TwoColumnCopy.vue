@@ -76,7 +76,7 @@ export default {
 
 .copy
 	column-count 2
-	column-gap 4rem
+	column-gap 6rem
 	pad(1,0)
 	+below($tablet)
 		column-count: 1;
