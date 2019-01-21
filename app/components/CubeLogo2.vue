@@ -155,7 +155,7 @@ export default {
 				this.w = 43;
 				this.h = 43;
 				this.camera.updateProjectionMatrix();
-			} 
+			}
 
 			this.$refs.canvas.width = this.w;
 			this.$refs.canvas.height = this.h;
