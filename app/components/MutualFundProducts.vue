@@ -72,7 +72,11 @@
         <a :href="fundInfo[fundIdx].pdf.url"
           :name="fundInfo[fundIdx].pdf.name"
           :type="fundInfo[fundIdx].pdf.link_type"
-          v-html="fundInfo[fundIdx].pdf.name"/>
+        >
+					<pdf-icon class="pdf-icon"/>
+					<span>.PDF</span>
+        </a>
+					
       </div>
 
     </div>
@@ -197,6 +201,7 @@ for i in 0..12
 		border-bottom 1px solid $bluesat
 		&:last-child
 			border-bottom none
+			align-items center
 
 .products
 	transition all 4s

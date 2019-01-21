@@ -10,7 +10,7 @@
 				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
 			</div>
 
-			<div class="heading-tabs" v-if="$store.state.device.win.x > 375" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="heading-tabs" v-if="$store.state.device.win.x < 375" :style="{display: reportDrop ? 'flex' : 'none'}">
 
 				<div class="tab" v-for="(tab, idx) in reports"
 					v-html="$cms.textField(tab.primary.tab_title)"
