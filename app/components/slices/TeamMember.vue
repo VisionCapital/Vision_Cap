@@ -50,7 +50,7 @@ export default {
 				if (this.$store.state.device.mobile) {
 					return `${this.elDimensions.height}px`;
 				}
-				return `${this.elDimensions.height - 36}px`;
+				return `${this.elDimensions.height - 2 * 26}px`;
 			} else if (this.longCopy && !this.collapsed) {
 				return '100%';
 			}
@@ -61,12 +61,18 @@ export default {
 		setElDimensions() {
 			// should probably add event listener resize for this
 			let dimensions = this.card.profile_image.dimensions;
+
 			let width = 220;
+
 			if (this.$store.state.device.mobile) {
 				width = 96;
 			}
+
+			let height = width * (dimensions.height / dimensions.width);
+			height = 26 * Math.floor(height / 26);
+
 			return {
-				height: width * (dimensions.height / dimensions.width),
+				height: height,
 				width: width
 			};
 		},
@@ -89,19 +95,19 @@ export default {
 		toggleText() {
 			this.collapsed = !this.collapsed;
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
-			if (this.collapsed) {
-				for (let item of this.cutOffText) {
-					item.classList.add('cut-off-text');
-				}
-			} else {
-				for (let item of this.cutOffText) {
-					item.classList.remove('cut-off-text');
-				}
-			}
+			// if (this.collapsed) {
+			// 	for (let item of this.cutOffText) {
+			// 		item.classList.add('cut-off-text');
+			// 	}
+			// } else {
+			// 	for (let item of this.cutOffText) {
+			// 		item.classList.remove('cut-off-text');
+			// 	}
+			// }
 		}
 	},
 	mounted() {
-		this.paragraphCutOff();
+		// this.paragraphCutOff();
 	}
 };
 
@@ -116,20 +122,16 @@ export default {
 	transition all 0.5s
 	+above($tablet)
 		display flex
-p
-	max-width 100%
+
+	/deep/ p
+		max-width 100%
 
 .copy
 	position relative
-	/deep/ .cut-off-text
-		opacity 0
 
-
-/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
-	transition opacity 0.5s, transform 0.5s
-	.v-enter &, .onpage:not(.inview) &
-		opacity 0
-		transform translateY(2rem)
+	/deep/
+		.cut-off-text
+			opacity 0
 
 .copy-cta
 	transition opacity 0.5s, transform 0.5s
@@ -137,26 +139,37 @@ p
 		opacity 0
 		transform translateY(-2rem)
 
-/deep/ h4
-	margin-bottom 0
-	+below($tablet)
-		fs(20)
+.team-member
+	/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
+		transition opacity 0.5s, transform 0.5s
+		.v-enter &, .onpage:not(.inview) &
+			opacity 0
+			transform translateY(2rem)
 
-img
-	width 220px
-	max-width 100vw
-	width 100%
-	height 100%
-	position absolute 
-	bottom 0
-	object-fit cover
-	transition height 0.5s
-	.v-enter &, .onpage:not(.inview) &
-		height 0%
-	+below($tablet)
-		padding-right 1em
-		width 96px
-		float left
+	/deep/
+		h4
+			// margin-bottom 0
+			line-height $let*1rem
+
+			+below($tablet)
+				fs(20)
+
+		img
+			width 220px
+			max-width 100vw
+			width 100%
+			height 100%
+			position absolute
+			bottom 0
+			object-fit cover
+			transition height 0.5s
+			.v-enter &, .onpage:not(.inview) &
+				height 0%
+			+below($tablet)
+				padding-right 1em
+				width 96px
+				float left
+
 .img-wrap
 	flex-shrink 0
 	position relative
@@ -166,11 +179,13 @@ img
 		float left
 
 .copy-cta
-	cursor pointer
-	color $blue
-	overflow hidden
-	display flex
 	align-items center
+	color $blue
+	cursor pointer
+	display flex
+	overflow hidden
+	transform translate3d(0, .4em, 0)
+
 .arrow-head
 	margin-left 10px
 
@@ -182,9 +197,10 @@ img
 	&.full-copy
 		overflow hidden
 		max-height 100%
-	/deep/ ul
-		padding-left 1.8em
 	/deep/
+		ul
+			padding-left 1.8em
+
 		h2, h3, h4, p
 			&:first-child
 				margin-top 0
@@ -196,4 +212,3 @@ img
 				fs(30)
 
 </style>
- 
