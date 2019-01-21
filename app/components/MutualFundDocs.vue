@@ -99,9 +99,6 @@ export default {
 	pad(5,0,0)
 	transition all 2s
 
-.align-pdf
-	pad(0,0,0.2,0)
-
 .pdf-icon
 	width 1.2rem
 	vertical-align: top;

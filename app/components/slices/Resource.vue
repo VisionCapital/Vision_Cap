@@ -2,7 +2,7 @@
 	<div :class="[ 'resource', resourceType ]">
 
 		<div class="body">
-			<h5 class="date"
+			<p class="date"
 				v-if="renderDate"
 				v-html="renderDate"/>
 
@@ -111,31 +111,35 @@ export default {
 		width (600% / 9)
 	
 .date
+	font-family $circular
 	fs(16)
 	+below($tablet)
 		fs(12)
 
 .title
 	transition-delay 0.2s
+	width 78vw
 	/deep/ h2
 		fs(40)
 		font-family $cormorant-semibold
 		line-height (48 / 40)
 		+below($tablet)
 			fs(20)
-.copy
-	/deep/
-		p
-			fs(12)
-			letter-spacing (0.09 / 12) * 1em
-			line-height (20 / 12)
+.copy /deep/ p, .media .date
+	fs(12)
+	letter-spacing (0.09 / 12) * 1em
+	line-height (20 / 12)
+	max-width 100%
+	// strong
+	// 	font-family $circular-bold
+	// 	font-weight bold
 
-			strong
-				font-family $circular-bold
-				font-weight bold
+	// 	&:only-child
+	// 		color $blk
 
-				&:only-child
-					color $blk
+.copy /deep/ strong 
+	position relative 
+	top 1em
 
 .image
 	order 1
@@ -170,10 +174,12 @@ export default {
 
 /deep/ iframe
 	transition transform 0.5s, opacity 0.5s
+	width 100%
+	height (78vw * (2 / 3) * 270 / 480)
 	.v-enter &, .onpage:not(.inview) &
 		transform translateX(20%)
 		opacity 0
 	+below($tablet)
 		width 100%
-		height (80vw * 270 / 480)
+		height (78vw * 270 / 480)
 </style>
