@@ -63,6 +63,7 @@ class LerpScroll {
 
 	resize() {
 		this.max = -(this.el.clientHeight - this.outer.getBoundingClientRect().height);
+		this.target = Math.min(0, Math.max(this.max, this.target));
 	}
 
 	scrollToTop(immediate = false) {

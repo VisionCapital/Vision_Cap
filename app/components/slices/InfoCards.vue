@@ -107,13 +107,14 @@ export default {
 	font-family $cormorant
 	line-height (30 / 23)
 	align-items center
-	transition transform 0.5s, opacity 0.5s
+	transition transform 0.5s, opacity 0.5s, delay 2s
+	transition-delay 0.8s
 	.v-enter &
 		transform translateY(40px)
 		opacity 0
 	for i in 1..20
 		&:nth-child({i})
-			transition-delay 0.2s * i
+			transition-delay (0.4s * i) + 0.8s
 
 	h1
 		text-align center
@@ -177,6 +178,7 @@ export default {
 
 	/deep/ h1
 		transition line-height 0.5s, opacity 0.5s, delay 0.5s
+		transition-delay 0.7s
 		.v-enter &
 			line-height 1.5
 			opacity 0
