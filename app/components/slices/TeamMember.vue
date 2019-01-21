@@ -8,7 +8,7 @@
 		<div class="content" >
 
 			<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
-				<div ref="copy"
+				<div class="copy" ref="copy"
 					v-html="$cms.htmlField(card.profile_copy)">
 				</div>
 			</div>
@@ -40,7 +40,8 @@ export default {
 		return {
 			longCopy: false,
 			collapsed: true,
-			elDimensions
+			elDimensions,
+			cutOffText: []
 		};
 	},
 	computed: {
@@ -75,10 +76,32 @@ export default {
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
 		},
+		paragraphCutOff() {
+			let cycleCopy = this.$refs.copy.querySelectorAll('li, p');
+
+			for (let text of cycleCopy) {
+				if (this.elDimensions.height < text.offsetTop + text.offsetHeight) {
+					text.classList.add('cut-off-text');
+					this.cutOffText.push(text);
+				}
+			}
+		},
 		toggleText() {
 			this.collapsed = !this.collapsed;
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+			if (this.collapsed) {
+				for (let item of this.cutOffText) {
+					item.classList.add('cut-off-text');
+				}
+			} else {
+				for (let item of this.cutOffText) {
+					item.classList.remove('cut-off-text');
+				}
+			}
 		}
+	},
+	mounted() {
+		this.paragraphCutOff();
 	}
 };
 
@@ -95,6 +118,12 @@ export default {
 		display flex
 p
 	max-width 100%
+
+.copy
+	position relative
+	/deep/ .cut-off-text
+		opacity 0
+
 
 /deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 	transition opacity 0.5s, transform 0.5s

@@ -34,7 +34,7 @@
 								v-html="link.link_title[0].text"/>
 							<arrow-head @click.native="mutualOpen = !mutualOpen"
 								class="arrow-head"
-								:pointDown="mutualOpen"
+								:pointDown="!mutualOpen"
 								color="#fff"
 							/>
 						</div>
