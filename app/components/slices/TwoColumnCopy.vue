@@ -11,16 +11,22 @@
 				v-html="title">
 			</div>
 
-			<div v-if="data.fields.column_copy.length"
-				v-html="data.html('column_copy')"
-				class="copy"/>
+			<div class="copy-container">
+				<div v-if="data.fields.column_copy.length"
+					v-html="data.html('column_copy')"
+					class="copy"/>
 
-			<div v-else-if="copy"
-				class="copy">
-				<p v-if="copy"
-					v-html="copy"/>
-				<p v-if="heading"
-					v-html="heading"/>
+				<div v-if="data.fields.second_column_copy.length"
+					v-html="data.html('second_column_copy')"
+					class="copy"/>
+
+				<div v-else-if="copy"
+					class="copy">
+					<p v-if="copy"
+						v-html="copy"/>
+					<p v-if="heading"
+						v-html="heading"/>
+				</div>
 			</div>
 
 		</div>
@@ -75,11 +81,20 @@ export default {
 			fs(mp(2))
 
 .copy
-	column-count 2
-	column-gap 6rem
+	// column-count 2
+	// column-gap 6rem
+	+above($tablet)
+		&:first-child
+			margin-right 3rem
+		&:last-child
+			margin-left 3rem
+
+.copy-container
 	pad(1,0)
-	+below($tablet)
-		column-count: 1;
+	+above($tablet) {
+		display flex
+	}
+
 
 .copy /deep/ p
 	margin-top 0
