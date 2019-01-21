@@ -10,8 +10,8 @@
 		<div class="wrap">
 			<div class="copy">
 
-				<div class="hero-image">
-					<img v-if="data.fields.hero_image.url"
+				<div class="hero-image" v-if="data.fields.hero_image.url">
+					<img
 						:src="data.image('hero_image')"/>
 				</div>
 
@@ -60,10 +60,10 @@ export default {
 	// padding-top 5rem
 	// align-content center
 
-	pad(1,0,0)
+	pad(2,0,1)
 
 	+above($tablet)
-		pad(3,5,1,5)
+		pad(0,5,1,5)
 
 		/deep/ img
 			pad(1,0,0,0)
@@ -72,8 +72,11 @@ export default {
 
 .hero
 	@extend .slice
-	pad(1,0,2,0)
+	pad(2,0,1)
 	position relative
+
+	+above($notebook)
+		pad(4,0,2)
 
 	.wrap
 		color $w
@@ -81,12 +84,12 @@ export default {
 
 		/deep/ h1
 			color $w
-			line-height 1em
+			// line-height 1
 			fs(82)
-			padding-bottom 0.3em
+			// padding-bottom 0.3em
 
 			+below($tablet)
-				padding-bottom 1em
+				// padding-bottom 1em
 				fs(60)
 				line-height (73/60)
 

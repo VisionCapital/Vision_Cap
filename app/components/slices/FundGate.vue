@@ -113,6 +113,7 @@ export default {
 	margin-top 4px
 	overflow hidden
 	background-color: $darkblue
+	background-color #031543
 
 	&:hover .bg
 		transform scale(1.1)
@@ -131,6 +132,11 @@ export default {
 		&:last-child
 			margin-left 2px
 
+			.bg,
+			.link,
+			.cls-1
+				transition-delay 200ms
+
 .border-stroke //separate border box element to be re-sized
 	// border 1px solid $w
 	position absolute
@@ -147,7 +153,7 @@ export default {
 	z-index 2
 	width auto
 	transition transform 2s, opacity 0.5s
-	
+
 	.v-enter &, .onpage:not(.inview) &
 		transform translate3d(-50%,40px,0)
 		opacity 0
@@ -159,7 +165,7 @@ export default {
 	z-index 2
 	width auto
 	padding 5px
-	display block	
+	display block
 	transition transform 2s, opacity 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		transform translateY(40px)
@@ -203,7 +209,7 @@ export default {
 	z-index 1
 	transition all 0.8s $easeInOutCubic
 	opacity 0.6
-	
+
 
 .cls-1
 	fill none

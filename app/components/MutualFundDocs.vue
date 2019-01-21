@@ -12,7 +12,7 @@
 
 			<div class="heading-tabs" v-if="$store.state.device.win.x > 375" :style="{display: reportDrop ? 'flex' : 'none'}">
 
-				<div class="tab" v-for="(tab, idx) in reports" 
+				<div class="tab" v-for="(tab, idx) in reports"
 					v-html="$cms.textField(tab.primary.tab_title)"
 					:class="{selected: idx === reportIdx}"
 					:key="'tab' + idx"
@@ -31,7 +31,7 @@
           <h5 v-html="$cms.textField(document.document_title)"></h5>
           <p v-html="document.date"></p>
         </div>
-			
+
 				<div class="align-pdf">
 					<a class="pdf" :href="document.pdf.url">
 						<pdf-icon class="pdf-icon"/>
@@ -43,7 +43,9 @@
 
       </div>
 
-			<div class="disclaimer" v-if="disclaimer" v-html="$cms.htmlField(disclaimer)"></div>
+			<div class="disclaimer" v-if="disclaimer">
+				<p v-html="$cms.textField(disclaimer)"/>
+			</div>
 
     </div>
 
@@ -96,7 +98,7 @@ export default {
 .documents
 	pad(2,0,0)
 	transition all 2s
-	
+
 .align-pdf
 	pad(0,0,0.2,0)
 
@@ -131,7 +133,7 @@ a
 
 	+below($mobile)
 		width 100%
-		background none 
+		background none
 		fs(20)
 		color $blue
 
@@ -154,7 +156,7 @@ for i in 1..12
 .border
 	height 1px
 	width 100%
-	position absolute 
+	position absolute
 	left 0
 	bottom 0
 	background $bluesat
@@ -219,7 +221,7 @@ h5
 		height 0
 	background $lightgrey
 	z-index -1
-	position absolute 
+	position absolute
 	left 50%
 	transform translateX(-50%)
 	width 100vw
@@ -247,7 +249,7 @@ h5
 	pad(3,0)
 	+above($tablet)
 		width 70%
-	/deep/ p 
+	/deep/ p
 		margin 0
 		max-width 100%
 </style>

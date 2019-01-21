@@ -7,7 +7,7 @@
 
 		<nav>
 			<ul :class="[ 'links', { 'bg-links' : true }]" v-if="$store.state.navData">
-	
+
 				<li v-if="$store.state.device.win.x > 1024">
 					<router-link
 						to="/"
@@ -41,21 +41,22 @@
 
 						<div class="anchor-links" :class="{'page-top': !pageTop}">
 							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-								<router-link 
+								<router-link
 									v-if="mutualOpen"
 									:to="`/${link.page_link.slug}#${tag.slug}`"
 									:style="{'transition-delay': `${(idx) * 0.4}s`}"
 									@click.native="handleClick()"
 								>
-									<div class="text" 
+									<div class="text"
 										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
 										v-html="tag.title">
 									</div>
 								</router-link>
-							</transition>					
+							</transition>
 						</div>
-						
+
 					</div>
+
 
 				</li>
 
@@ -153,30 +154,36 @@ for i in 1..10
 			transform translateY(1rem)
 
 .links
+	display flex
 	margin 0 auto
 	list-style none
 	padding 0
 	position relative
-	display flex
 	justify-content center
-	max-width 1060px
-	width 80%
+	margin 0 12px
 
 	+below($notebook)
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
+		// margin-left: 4rem;
+
 	+above($notebook)
 		text-align center
+		margin 0 auto
+		max-width 1060px
+		width 80%
 
 
 	/deep/
 		a
 			color white
-			
+			white-space nowrap
+			fs(14)
+
 			+below($laptop)
-				fs(13)
-				white-space nowrap 
+				fs(10.5)
+				mgn(0,0)
 			+below($notebook)
 				fs(30)
 
@@ -187,12 +194,18 @@ for i in 1..10
 				&::after
 					background none
 
-		li
+		li //underline link resources
 			max-width 280px
 			pad(1,.5)
+
 			margin 0
 			&.dropdown
-				pad(0,0)
+				/deep/ a:after, a:before
+					top 4.5rem
+				+above($notebook)
+					pad(0,0)
+					/deep/ a:after, a:before
+						top 20.5px
 
 
 		li:first-child
@@ -205,26 +218,31 @@ for i in 1..10
 				pad(.5,0)
 
 
-.anchor-links
-	.links
-	/deep/ a::before,a::after
-		background: #000;
-	
+
 .dropdown-container
 	color $w
 	position relative
-	
+	height 100%
+
+	svg
+		width: 1em;
 
 	.arrow-head
-		margin-left 1em
+		margin-left 0.4vw
+		display inline-block
 		+below($notebook)
-			margin: 5vh 0 0 2vh;
+			margin: 0 0 0 .5em
 			width 0.75em
 
 	.drop-toggle
-		mgn(1,.5)
-		display flex;
+		// display flex;
+		// display inline-block
+		// align-items flex-start
 		cursor pointer
+		+above($notebook)
+			height 100%
+			pad(1,.5)
+
 .anchor-links
 	font-family $circular
 	display flex
@@ -245,14 +263,18 @@ for i in 1..10
 		top auto
 		a
 			background $b
-	
+
 	+below($notebook)
 		fs(18)
 	a
 		max-height 8rem
 		transition max-height 0.5s
 		background-color none
+		// padding 0.5rem 0
+		pad(0.5,0)
 		margin-top 2px
+		// &:first-child
+		// 	padding 2vh 0
 		&.page-top
 			padding 0
 		&:hover::after, &:hover::before
@@ -260,18 +282,25 @@ for i in 1..10
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
-			padding 2vh 0
-			margin-left 1em
-				
+			// &:first-child
+			// 	padding 3vh 0
+			// margin-left 1em
+			pad(1,0,0)
+			margin 0
+
 	.text
-		mgn(0.5,0.5)
+		mgn(0,0.5)
+		display inline-block
 		transition opacity 0.3s, transform 0.3s
-	.v-enter, .v-leave-to 
+		+above($notebook)
+			white-space: normal;
+			line-height 1.5
+
+	.v-enter, .v-leave-to
 		.text
 			opacity 0
 			transform translate(0,-50%)
 
-			
 a.router-link-exact-active
 	&:before
 		width 100%
@@ -286,7 +315,7 @@ a.router-link-exact-active
 	&:hover
 		&::before
 			background none
-			
+
 			width 0%
 
 		&::after

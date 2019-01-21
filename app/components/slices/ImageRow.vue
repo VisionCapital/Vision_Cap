@@ -35,24 +35,30 @@ export default {
 		pad(0,0,2,0)
 
 .image-wrap
+	align-items center
 	display flex
-	width 50%          
+	// width 50%
 
 	+below($tablet)
-		width 100%    
-	flex-direction: row;       
-	flex-wrap: nowrap;             
-	justify-content: space-between;
+		width 100%
 
-.image-container	
-	align-items: center;
-	display: flex;
-	height 4rem
-	max-width relative
-	width 8rem 
-	flex-direction: row;       
-	flex-wrap: nowrap;             
-	pad(2,0,3,0)
-	
+	// flex-direction: row;
+	// flex-wrap: nowrap;
+	// justify-content: space-between;
+
+.image-container
+	// align-items: center;
+	// display: flex;
+	// max-width relative
+	// flex-direction: row;
+	// flex-wrap: nowrap;
+	// pad(2,0,3,0)
+	mgn(.5,2,.5,0)
+
+	/deep/
+		img
+			max-height 8rem
+			max-width 12rem
+
 
 </style>

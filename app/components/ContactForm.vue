@@ -1,19 +1,34 @@
 <template>
-	<form ref="form" @submit.prevent="doSubmit()">
+	<form ref="form" class="dss" @submit.prevent="doSubmit()">
 		<div class="left">
 			<div class="form-row" v-for="(field, idx) in fields" :key="idx">
-				<div class="required" v-if="field.required === 'Yes'">*</div>
-				<input :id="`field-${field.key}`"
-					type="text"
-					:name="data.textField(field.key)"
-					:placeholder="data.textField(field.placeholder)"
-					:required="field.required === 'Yes'">
+				<div class="required" v-if="field.required === 'Yes'" :style="{'transition-delay': `${0.3 * idx}s`}"/>*</div>
+				<div class="input-container">
+					<input :id="`field-${idx}`"
+						type="text"
+						:name="data.textField(field.key)"
+						:style="{'transition-delay': `${0.3 * idx + 0.2}s`}"
+						:placeholder="data.textField(field.placeholder)"
+						:required="field.required === 'Yes'">
+					<div class="bottom-border"
+						:style="{'transition-delay': `${0.3 * idx}s`}"/>
+				</div>
 			</div>
 		</div>
 		<div class="right">
-			<textarea rows="1" :placeholder="data.textField(data.fields.textarea_placeholder)"></textarea>
-			<div class="form-row">
-				<button id="submit" name="submit" type="submit" class="btn">
+			<div class="input-container">
+				<textarea rows="1" 
+					v-if="data.fields.textarea_placeholder" 
+					:placeholder="data.textField(data.fields.textarea_placeholder)"
+					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
+				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
+			</div>
+				<button id="submit" 
+					@click="doSubmit()" 
+					name="submit" 
+					type="submit" 
+					:style="{'transition-delay': `${fields.length * 0.3 + 0.3}s`}"
+					class="btn">
 					<span v-html="data.textField(data.fields.submit_button)"/>
 					<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
 						<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
@@ -23,7 +38,6 @@
 
 				</button>
 
-			</div>
 		</div>
 	</form>
 </template>
@@ -51,7 +65,7 @@ export default {
 	},
 	methods: {
 		doSubmit() {
-
+			console.log('do submit');
 			this.success = false;
 			this.errors = null;
 
@@ -95,9 +109,7 @@ option {
 
 form
 	position relative
-	// left 50%
-	// transform translate(-50%,0)
-	// width 75%
+	
 	+above($tablet)
 		// width 60%
 		display flex
@@ -110,20 +122,45 @@ form
 .right
 	+above($tablet)
 		width 58%
-
+	.input-container
+		mgn(1,0)
 .required
 	position absolute
 	left -2em
 	color $copy
+	transition opacity 0.4s
+	.v-enter &, .onpage:not(.inview) &
+		opacity 0
+
+
+.form-row
+	mgn(1,0)
+
+.input-container
+	position relative
+	overflow hidden
+
+.bottom-border
+	height 1px
+	width 100%
+	position absolute
+	bottom 0
+	left 0
+	z-index 2
+	background #3360D9
+	transition width 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		width 0%
 
 form
 	input, textarea
 		color $w
 		border 0
-		border-bottom 1px solid #3360D9
+		width 100%
+		// border-bottom 1px solid #3360D9
 		padding 0
-		mgn(1,0)
 		line-height 2.5em
+		transition transform 0.5s
 
 		&:hover
 			border-color $copy
@@ -137,7 +174,12 @@ form
 			+below($tablet)
 				text-align center
 
-
+	.v-enter &, .onpage:not(.inview) &
+		input, textarea
+			transform translate(0,100%)
+		button
+			max-width 0px
+			pad(0,0)
 	button
 		background $blk
 		+above($tablet)
@@ -150,10 +192,15 @@ form
 		color $w
 		display flex
 		pad(.25,.5)
+		// padding 0.5rem 1rem
 		letter-spacing (0.1 / 14) * 1em
 		line-height $let * 1.125em
 		flex-grow 0
-		margin-left 1em
+		// margin-left 1em
+		overflow hidden
+		max-width 600px
+		transition max-width 0.75s, padding-left 0.5s, padding-right 0.5s
+
 		+below($tablet)
 			mgn(1.5,auto,0)
 

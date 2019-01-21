@@ -23,7 +23,7 @@
 						<span>.PDF</span>
 					</a>
 				</p>
- 
+
 				<div class="bg"></div>
 
       </div>
@@ -143,8 +143,12 @@ a
 	z-index -1
 	left 0
 	transition width 0.5s
+	top 0
+	width 100%
+
 	.v-enter &, .onpage:not(.inview) &
 		width 0
+
 	+below($tablet)
 		width 100vw
 
@@ -221,7 +225,7 @@ for i in 0..12
 	p, h4
 		transition opacity 0.7s, transform 0.7s
 		+above($mobile)
-			width (100% / 6)			
+			width (100% / 6)
 	.v-enter &, .onpage:not(.inview) &
 		p, h4
 			opacity 0
