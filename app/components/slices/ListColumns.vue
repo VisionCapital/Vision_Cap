@@ -8,7 +8,7 @@
 
 				<div class="columns">
 					<div class="container" v-for="(reason, idx) in data.items" :key="idx">
-						<h4 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h4>
+						<h3 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h3>
 						<ul>
 							<li v-for="(item, i) in reason.list_items" :key="'item' + i" v-html="item.text"></li>
 						</ul>
@@ -48,7 +48,10 @@ a
 	&:before, &:after
 		display none
 
-h2, h4
+h2
+	font-family $cormorant-medium
+
+h2, h3
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
@@ -71,7 +74,8 @@ li
 		display flex
 		flex-wrap wrap
 		justify-content space-between
-	h4
+	h3
+		font-family $cormorant-semibold
 		color $blue
 	>div
 		+above($tablet)

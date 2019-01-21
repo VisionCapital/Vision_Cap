@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="resize">
 		<canvas ref="canvas"></canvas>
 	</div>
 </template>
@@ -139,7 +139,6 @@ export default {
 
 		},
 		resize() {
-
 			this.w = this.$el.clientWidth;
 			this.h = this.$el.clientHeight;
 
@@ -152,6 +151,11 @@ export default {
 
 				this.camera.updateProjectionMatrix();
 			}
+			if (this.$store.state.device.win.x <= 1024) {
+				this.w = 43;
+				this.h = 43;
+				this.camera.updateProjectionMatrix();
+			} 
 
 			this.$refs.canvas.width = this.w;
 			this.$refs.canvas.height = this.h;
@@ -202,22 +206,30 @@ export default {
 
 </script>
 
-<style lang="sass" scoped>
+<style lang="stylus" scoped>
+@import "../styl/_variables"
 
-div {
+div 
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
-}
 
-canvas {
-	position: absolute;
+
+canvas 
+	position: relative;
 	width: 100%;
 	height: 100%;
 	top: 0;
-	left: 0;
-}
-
+	+below(1060px)
+		top -12%
+	+below($notebook)
+		left -9%
+		top 10%
+		display block
+		width 60%
+// .resize
+// 	display flex
+// 	width 50%
 </style>

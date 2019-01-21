@@ -10,7 +10,7 @@
 				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
 			</div>
 
-			<div class="heading-tabs" v-if="$store.state.device.win.x > 375" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="heading-tabs" v-if="$store.state.device.win.x < 375" :style="{display: reportDrop ? 'flex' : 'none'}">
 
 				<div class="tab" v-for="(tab, idx) in reports"
 					v-html="$cms.textField(tab.primary.tab_title)"
@@ -96,17 +96,17 @@ export default {
 @import "../styl/_variables"
 
 .documents
-	pad(2,0,0)
+	pad(5,0,0)
 	transition all 2s
-
-.align-pdf
-	pad(0,0,0.2,0)
 
 .pdf-icon
 	width 1.2rem
-	display: inline-block;
 	vertical-align: top;
-	margin-right 0.5rem
+	margin 0 auto
+	+above($mobile)
+		display: inline-block;
+		margin-right 0.5rem
+
 
 a
 	width auto
@@ -168,7 +168,7 @@ for i in 1..12
 	display flex
 	position relative
 	justify-content space-between
-	align-items flex-end
+	align-items center
 	+above($tablet)
 		pad(0,1.5)
 	+below($mobile)
@@ -176,7 +176,7 @@ for i in 1..12
 			border-bottom none
 
 h5, p
-	mgn(1,1,.5,0)
+	mgn(.5,1,.5,0)
 	+above($mobile)
 		display inline-block
 
@@ -185,9 +185,8 @@ p
 		margin-top 0
 h5
 	color $blk
-	font-family $cormorant
-	+below($mobile)
-		fs(24)
+	font-family $cormorant-semibold
+	fs(24)
 
 .all-tabs
 	position relative

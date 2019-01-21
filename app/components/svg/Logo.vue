@@ -25,6 +25,7 @@
 				Vision Capital Corporation
 			</title>
 			<g v-if="!interactive">
+				<!-- <g> -->
 				<path fill="#007" d="M118.17 265.55l58.14-65.74 58.1 65.67-116.24.07z"/>
 				<path fill="#003ea6" d="M176.31 199.81l-58.14 65.74L2 134.2h116.21l58.1 65.61z"/>
 				<path fill="#009eff" d="M176.31 68.48l-58.1 65.72H2L118.17 2.77l58.14 65.71z"/>

@@ -85,12 +85,17 @@ export default {
 
 @import "../../styl/_variables"
 
+div.footer
+
+	display block
 .footer
 	left 0
 	position fixed
 	top 0
 	width 100%
 	z-index 10
+
+	display block
 	+below($notebook)
 		position fixed
 		width 100%
@@ -128,11 +133,12 @@ export default {
 	height 100%
 	+below(1024px)
 		position relative
-		width 14rem
+		max-width: 210px;
 		height 100%
 
 .home-link
 	margin 0 auto
+	display inline-block
 
 .footer
 	background $blue
@@ -153,6 +159,7 @@ export default {
 	justify-content center
 	max-width 1060px
 	width 80%
+	display inline-block
 
 	+below($notebook)
 		width 100%
@@ -174,8 +181,18 @@ export default {
 		+below($laptop)
 			fs(10.5)
 			mgn(0,0)
+
+		&:nth-child(1)
+			&:after
+				content ''
+				margin-bottom 2rem
+				display flex
+
 		&:nth-child(5n)
-			display flex
+			&:after
+				content ''
+				display flex
+
 		&:first-child
 			+above($tablet)
 				padding-left 0
@@ -184,7 +201,6 @@ export default {
 			+below($tablet)
 				max-width 100%
 				width auto
-				padding 0 24%
 			+below($mobile)
 				padding 0
 .logo

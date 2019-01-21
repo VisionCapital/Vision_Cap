@@ -127,7 +127,7 @@ form
 .required
 	position absolute
 	left -2em
-	color $copy
+	color #3360D9
 	transition opacity 0.4s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
@@ -158,7 +158,6 @@ form
 		color $w
 		border 0
 		width 100%
-		// border-bottom 1px solid #3360D9
 		padding 0
 		line-height 2.5em
 		transition transform 0.5s

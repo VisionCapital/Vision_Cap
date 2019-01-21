@@ -422,6 +422,7 @@ export default {
 
 .labels
 	.title
+		text-align center
 		color $b
 		fs(10)
 

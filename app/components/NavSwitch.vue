@@ -53,7 +53,8 @@ export default {
 
 @import "../styl/_variables";
 
-
+canvas
+	width 50%
 .close-outer.close-outer
 	top: 0
 	right: 0
