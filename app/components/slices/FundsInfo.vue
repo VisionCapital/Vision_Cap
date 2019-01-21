@@ -87,7 +87,7 @@ p
 
 
 /deep/ h3
-	// fs(32)
+	// fs(38)
 	font-family $cormorant-semibold
 	transition transform 0.5s, line-height 0.5s, opacity 0.5s
 
