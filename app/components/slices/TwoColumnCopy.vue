@@ -59,9 +59,6 @@ export default {
 	width relative
 	text-align left
 
-	+above($tablet)
-		pad(0,3)
-
 /deep/
 	h2, h3
 		font-family $cormorant-semibold
