@@ -4,7 +4,7 @@
 			<nav>
 				<ul class="links">
 
-					<li>
+					<li class="logo">
 						<router-link
 							to="/"
 							class="home-link"
@@ -12,7 +12,6 @@
 							<logo class="light"/>
 						</router-link>
 					</li>
-
 					<li v-for="link in links"
 						:key="link.path">
 						<router-link :to="`/${link.page_link.slug}`" v-if="link.link_type === 'normal'"
@@ -38,7 +37,6 @@
 								:key="idx"/>
 						</div>
 					</li>
-
 				</ul>
 			</nav>
 		</footer>
@@ -129,8 +127,9 @@ div.footer
 
 .logo-outer
 	max-width: 280px;
-	width 98%
+	width 100%
 	height 100%
+	
 	+below(1024px)
 		position relative
 		max-width: 210px;
@@ -140,6 +139,7 @@ div.footer
 	margin 0 auto
 	display inline-block
 
+
 .footer
 	background $blue
 	color $w
@@ -148,68 +148,116 @@ div.footer
 	z-index 2
 	+below($tablet)
 		pad(1,1)
-
+.linkwrap
+	vertical-align middle
+	float right
+	display inline-block
+	margin auto 0
+	li
+		&:first-child
+			+above($tablet)
+				padding-left auto
+	// column-count 2
 .links
 	margin 0 auto
+	display flex
 	list-style none
 	padding 0
 	position relative
 	text-align center
-	flex-wrap nowrap
 	justify-content center
 	max-width 1060px
 	width 80%
-	display inline-block
-
+	
 	+below($notebook)
-		width 100%
-	+above($notebook)
-		display flex
+		width 376px
+		margin auto
+		flex-wrap wrap
+	+below($mobile)
+		display inline-block
+		width auto
+		
 
 	/deep/ a
 		color white
-
-	/deep/ li
+		+below($mobile)
+			fs(16)
+			line-height 8px
+	li
 		max-width 280px
 		white-space nowrap
 		margin 0
 		position relative
+		display flex
+		flex-direction column
 		display inline
 		pad(1,.5)
 		fs(14)
+
+		+below($mobile)
+			column-count 2
+			width 40%
+			float left
+			text-align left
+			padding-bottom: 4px;
 
 		+below($laptop)
 			fs(10.5)
 			mgn(0,0)
 
-		&:nth-child(1)
-			&:after
-				content ''
-				margin-bottom 2rem
-				display flex
+		// &:nth-child(1) //starts next line after the logo
+		// 	&:after
+		// 		content ''
+		// 		margin-bottom 2rem
+		// 		display flex
 
-		&:nth-child(5n)
-			&:after
-				content ''
-				display flex
+		// &:nth-child(4n)//starts next line after every 4
+		// 	&:after
+		// 		content ''
+		// 		display flex
 
-		&:first-child
-			+above($tablet)
-				padding-left 0
-				margin-right auto
+		// &:first-child
+		// 	+above($tablet)
+		// 		padding-left 0
+		// 		margin-right auto
 
-			+below($tablet)
-				max-width 100%
-				width auto
-			+below($mobile)
-				padding 0
-.logo
-	+below($tablet)
-		width 100%
+		// 	+below($tablet)
+		// 		max-width 100%
+		// 		width auto
+		// 	+below($mobile)
+		// 		padding 0
+				
+	.logo
+		/deep/ a
+			&::before, &::after
+				background none
 
-.arrow-head
-	margin-left 1em
-	display inline-block
+		+below($notebook)
+			width 100%
+			max-width 100%
+		+below($mobile)
+			display flex
+			padding-bottom 2rem
+			max-width 90%
+		+above($notebook)
+			margin-right auto
+			padding-left 0
+		
+	.arrow-head
+		margin-left 0.4vw
+		display inline-block
+		+below($notebook)
+			margin: 0 0 0 .5em
+			width 0.75em
+
+		.drop-toggle
+			// display flex;
+			// display inline-block
+			// align-items flex-start
+			cursor pointer
+			+above($notebook)
+				height 100%
+				pad(1,.5)
 
 	svg 
 		width: 1em;
@@ -223,7 +271,7 @@ div.footer
 	
 .dropdown
 	display flex
-	flex-direction column
+	// flex-direction column
 	position absolute
 	bottom 100%
 
