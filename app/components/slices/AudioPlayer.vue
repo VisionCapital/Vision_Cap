@@ -18,7 +18,11 @@
 			</div>
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider" ref="volumeBar" @mousedown="volDown" @click="clickVolume($event)">
+			<div class="volume-slider" 
+				v-if="!$store.state.device.mobile"
+				ref="volumeBar" 
+				@mousedown="volDown" 
+				@click="clickVolume($event)">
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -158,33 +162,37 @@ export default {
 @import "../../styl/_variables"
 
 .audio-container
-	height 60px
+	height 36px
 	background $grey
 	width 100%
 	color $blue
 	display flex
 	align-items center
 	justify-content space-between
-	pad(0,1)
-
+	pad(0,.5)
+	fs(12);
+	>*
+		mgn(0,.25)
+	
 .progress-bar
-	width 300px
+	width 60%
 	background $copy
-	height 10px
+	height 6px
 	position relative
-
+	+below($notebook)
+		width 50%
 .finished
 	height 100%
 	background $blue
 
 .volume-slider
 	position relative
-	height 10px
+	height 6px
 	width 60px
 	background $copy
 
 .volume-level 
 	height 100%
-	width 10px
+	width 6px
 	background $blue
 </style>

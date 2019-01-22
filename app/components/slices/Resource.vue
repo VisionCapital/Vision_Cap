@@ -166,6 +166,8 @@ export default {
 .media
 	.title 
 		width 78vw
+		+above($laptop)
+			width 74vw
 	/deep/ h2
 		color $blk
 		fs(40)
