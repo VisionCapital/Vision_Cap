@@ -18,8 +18,8 @@
 			</div>
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider">
-				<div class="volume-level"></div>
+			<div class="volume-slider" ref="volumeBar" @click="setVolume($event)">
+				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
 
@@ -46,7 +46,8 @@ export default {
 			durationPrint: false,
 			durationNum: 0,
 			currentNum: 0,
-			progress: '0%'
+			progress: '0%',
+			audioVolume: 0.75
 		};
 	},
 	computed: {
@@ -66,8 +67,13 @@ export default {
 		},
 		volumeSlide() {
 		},
+		setVolume(evt) {
+			let volPercent = evt.clientX - this.$refs.volumeBar.getBoundingClientRect().left;
+			volPercent = volPercent / this.$refs.volumeBar.offsetWidth;
+			this.$refs.audioFile.volume = volPercent;
+			this.audioVolume = volPercent;
+		},
 		setProgress() {
-			console.log(this.currentNum / this.durationNum);
 			if (this.durationNum && this.currentNum) {
 				this.progress = `${this.currentNum / this.durationNum * this.$refs.progressBar.offsetWidth}px`;
 			}
@@ -84,6 +90,8 @@ export default {
 			}
 		},
 		loaded() {
+			this.$refs.audioFile.volume = 0.75;
+			this.audioVolume = 0.75;
 			this.durationNum = this.$refs.audioFile.duration;
 			this.durationPrint = this.timeFormat(this.$refs.audioFile.duration * 1000);
 		},
@@ -97,11 +105,9 @@ export default {
 		this.setProgress();
 
 		this.timeInterval = setInterval(() => {
-			if (this.$refs.audioFile) {
-				if (!this.$refs.audioFile.paused) {
-					this.setTime(this.$refs.audioFile.currentTime);
-					this.setProgress();
-				}
+			if (this.$refs.audioFile && !this.$refs.audioFile.paused) {
+				this.setTime(this.$refs.audioFile.currentTime);
+				this.setProgress();
 			}
 		}, 200);
 	},
