@@ -74,7 +74,6 @@ export default {
 			this.audioVolume = volPercent;
 		},
 		clickProgress(evt) {
-			console.log(evt);
 			let progPercent = evt.clientX - this.$refs.progressBar.getBoundingClientRect().left;
 			progPercent /= this.$refs.progressBar.offsetWidth;
 			this.progress = `${progPercent * 100}%`;
