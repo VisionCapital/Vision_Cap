@@ -12,13 +12,13 @@
 		<div v-if="audio" class="audio-container">
 			<div class="play-button" @click="playToggle()">play</div>
 			<div class="time elapsed" v-html="currentPrint"></div>
-			<div class="progress-bar" ref="progressBar">
+			<div class="progress-bar" ref="progressBar" @click="clickProgress($event)">
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider" ref="volumeBar" @click="setVolume($event)">
+			<div class="volume-slider" ref="volumeBar" @mouseDown="clickVolume($event)" @click="clickVolume($event)">
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -67,11 +67,19 @@ export default {
 		},
 		volumeSlide() {
 		},
-		setVolume(evt) {
+		clickVolume(evt) {
 			let volPercent = evt.clientX - this.$refs.volumeBar.getBoundingClientRect().left;
-			volPercent = volPercent / this.$refs.volumeBar.offsetWidth;
+			volPercent /= this.$refs.volumeBar.offsetWidth;
 			this.$refs.audioFile.volume = volPercent;
 			this.audioVolume = volPercent;
+		},
+		clickProgress(evt) {
+			console.log(evt);
+			let progPercent = evt.clientX - this.$refs.progressBar.getBoundingClientRect().left;
+			progPercent /= this.$refs.progressBar.offsetWidth;
+			this.progress = `${progPercent * 100}%`;
+			this.$refs.audioFile.currentTime = progPercent * this.durationNum;
+			this.setTime(progPercent * this.durationNum);
 		},
 		setProgress() {
 			if (this.durationNum && this.currentNum) {
