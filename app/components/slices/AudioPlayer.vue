@@ -10,7 +10,7 @@
 		</audio>
 
 		<div v-if="audio" class="audio-container">
-			<div class="play-button" @click="playToggle()">play</div>
+			<div class="play-button" @click="playToggle()">{{ playText }}</div>
 			<div class="time elapsed" v-html="currentPrint"></div>
 			<div class="progress-bar" ref="progressBar" @click="clickProgress($event)">
 				<div class="finished" :style="{width: progress}"></div>
@@ -18,7 +18,7 @@
 			</div>
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider" ref="volumeBar" @mouseDown="clickVolume($event)" @click="clickVolume($event)">
+			<div class="volume-slider" ref="volumeBar" @mousedown="volDown" @click="clickVolume($event)">
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -47,11 +47,18 @@ export default {
 			durationNum: 0,
 			currentNum: 0,
 			progress: '0%',
-			audioVolume: 0.75
+			audioVolume: 0,
+			playText: 'play'
 		};
 	},
 	computed: {
-
+	},
+	watch: {
+		audioVolume() {
+			if (this.$refs.audioFile) {
+				this.$refs.audioFile.volume = this.audioVolume;
+			}
+		}
 	},
 	methods: {
 		timeFormat(time) {
@@ -65,13 +72,32 @@ export default {
 			}
 			return millisec(time).format(`${minutes}mm:${seconds}ss`);
 		},
-		volumeSlide() {
+		volDown() {
+			window.addEventListener('mousemove', this.volumeSlide);
+			window.addEventListener('mouseup', this.volUp);
+		},
+		volumeSlide(evt) {
+
+			let box = this.$refs.volumeBar.getBoundingClientRect();
+			let mx = evt.pageX;
+			let bx = box.left;
+			let bw = box.width;
+
+			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
+			this.audioVolume = amt;
+
+		},
+		volUp() {
+			window.removeEventListener('mousemove', this.volumeSlide);
+			window.removeEventListener('mouseup', this.volUp);
 		},
 		clickVolume(evt) {
+
 			let volPercent = evt.clientX - this.$refs.volumeBar.getBoundingClientRect().left;
 			volPercent /= this.$refs.volumeBar.offsetWidth;
-			this.$refs.audioFile.volume = volPercent;
+
 			this.audioVolume = volPercent;
+
 		},
 		clickProgress(evt) {
 			let progPercent = evt.clientX - this.$refs.progressBar.getBoundingClientRect().left;
@@ -92,12 +118,13 @@ export default {
 		playToggle() {
 			if (this.$refs.audioFile.paused) {
 				this.$refs.audioFile.play();
+				this.playText = 'pause';
 			} else {
 				this.$refs.audioFile.pause();
+				this.playText = 'play';
 			}
 		},
 		loaded() {
-			this.$refs.audioFile.volume = 0.75;
 			this.audioVolume = 0.75;
 			this.durationNum = this.$refs.audioFile.duration;
 			this.durationPrint = this.timeFormat(this.$refs.audioFile.duration * 1000);
