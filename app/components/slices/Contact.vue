@@ -54,7 +54,8 @@ export default {
 			color $w
 		/deep/ h4
 			max-width 100%
-			color #5079E8
+			// color #5079E8
+			color #00b7f5
 			fs(26)
 			+below($tablet)
 				fs(20)
