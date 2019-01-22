@@ -65,7 +65,7 @@ export default {
 			let width = 220;
 
 			if (this.$store.state.device.mobile) {
-				width = 96;
+				width = 104;
 			}
 
 			let height = width * (dimensions.height / dimensions.width);
@@ -142,7 +142,8 @@ export default {
 .team-member
 	/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 		transition opacity 0.5s, transform 0.5s
-		.v-enter &, .onpage:not(.inview) &
+	&.v-enter, &.onpage:not(.inview)
+		/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 			opacity 0
 			transform translateY(2rem)
 
@@ -163,12 +164,15 @@ export default {
 			bottom 0
 			object-fit cover
 			transition height 0.5s
-			.v-enter &, .onpage:not(.inview) &
-				height 0%
+
 			+below($tablet)
 				padding-right 1em
 				width 96px
 				float left
+
+	&.v-enter, &.onpage:not(.inview)
+		/deep/ img
+			height 0%
 
 .img-wrap
 	flex-shrink 0
@@ -198,6 +202,8 @@ export default {
 		overflow hidden
 		max-height 100%
 	/deep/
+		li 
+			mgn(1, 0)
 		ul
 			padding-left 1.8em
 

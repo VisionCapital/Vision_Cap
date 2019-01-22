@@ -1,8 +1,8 @@
 <template>
 	<div class="team-cards">
 
-		<div class="wrap" v-if="data.items.length">
-			<div v-html="data.html('team_title')"></div>
+		<div class="wrap" v-if="data.items.length && data.fields.team_title[0].text">
+			<div class="heading" v-html="data.html('team_title')"></div>
 		</div>
 
 		<div class="card" v-for="(card, idx) in data.items" :key="idx">
@@ -83,4 +83,8 @@ export default {
 	.card:nth-child(even)
 		background $lightgrey
 
+.heading /deep/ h2 
+	font-family $cormorant
+	font-weight bold
+	mgn(2,0)
 </style>
