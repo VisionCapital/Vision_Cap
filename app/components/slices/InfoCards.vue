@@ -135,12 +135,13 @@ export default {
 
 	+above($notebook) //desktop plus
 		fs(23)
-		pad(2,3.5)
+		pad(2,3)
 
 	.copy
 		text-align center
 		max-width 20em
 		mgn(0,auto)
+		display block
 	//p
 	//	font-size relative
 	//	+below($notebook) //mobile and tablet
