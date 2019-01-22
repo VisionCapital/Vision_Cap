@@ -22,7 +22,7 @@
 				<div class="individual-card" v-for="(item, i) in data.items" :key="i">
 					<div class="copy"
 						v-if="item.info"
-						v-html="data.textField(item.info)"/>
+					><p v-html="data.textField(item.info)"></p></div>
 				</div>
 			</div>
 
@@ -139,9 +139,8 @@ export default {
 
 	.copy
 		text-align center
-		max-width 15em
+		max-width 20em
 		mgn(0,auto)
-
 	//p
 	//	font-size relative
 	//	+below($notebook) //mobile and tablet

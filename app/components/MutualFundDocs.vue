@@ -9,8 +9,7 @@
 				<div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
 				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
 			</div>
-
-			<div class="heading-tabs" v-if="$store.state.device.win.x < 375" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="heading-tabs" v-if="$store.state.device.win.x > 375" :style="{display: reportDrop ? 'flex' : 'none'}">
 
 				<div class="tab" v-for="(tab, idx) in reports"
 					v-html="$cms.textField(tab.primary.tab_title)"
@@ -190,7 +189,7 @@ h5
 
 .all-tabs
 	position relative
-	z-index 1
+	z-index 1000
 	+below($mobile)
 		left 50%
 		width 100vw
