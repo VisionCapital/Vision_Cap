@@ -136,7 +136,7 @@ export default {
 .bg
 	background black
 	abs()
-	transition opacity 0.5s, transform 0.5s
+	transition opacity 0.2s, transform 0.2s
 	&.v-enter,
 	&.v-leave-to
 		transform translateY(-100%)
@@ -161,11 +161,11 @@ for i in 1..10
 	position relative
 	justify-content center
 	margin 0 12px
-
 	+below($notebook)
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
+		
 		// margin-left: 4rem;
 
 	+above($notebook)
@@ -197,15 +197,15 @@ for i in 1..10
 		li //underline link resources
 			max-width 280px
 			pad(1,.5)
-
-			margin 0
+			display flex
+			margin auto 0
 			&.dropdown
 				/deep/ a:after, a:before
 					top 4.5rem
 				+above($notebook)
 					pad(0,0)
 					/deep/ a:after, a:before
-						top 20.5px
+						top 22px
 
 
 		li:first-child

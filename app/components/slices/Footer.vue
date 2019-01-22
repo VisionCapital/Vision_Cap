@@ -186,7 +186,7 @@ div.footer
 	li
 		max-width 280px
 		white-space nowrap
-		margin 0
+		margin auto 0
 		position relative
 		display flex
 		flex-direction column
@@ -267,7 +267,7 @@ div.footer
 
 	pad(0,0)
 	/deep/ a:after, a:before
-		top 19px
+		top 22px
 	
 .dropdown
 	display flex
