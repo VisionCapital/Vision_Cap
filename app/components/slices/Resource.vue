@@ -126,7 +126,6 @@ export default {
 
 .title
 	transition-delay 0.2s
-	width 78vw
 	/deep/ h2
 		fs(40)
 		font-family $cormorant-semibold
@@ -165,12 +164,14 @@ export default {
 // ----------
 
 .media
+	.title 
+		width 78vw
 	/deep/ h2
 		color $blk
 		fs(40)
 		font-family $cormorant-semibold
 		line-height (48 / 40)
-		max-width (820 / 40) * 1em
+		// max-width (820 / 40) * 1em
 		+below($tablet)
 			fs(20)
 .news
