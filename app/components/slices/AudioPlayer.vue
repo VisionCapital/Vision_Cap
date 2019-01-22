@@ -11,12 +11,12 @@
 
 		<div v-if="audio" class="audio-container">
 			<div class="play-button" @click="playToggle()">play</div>
-			<div class="time elapsed" v-html="currentTime"></div>
+			<div class="time elapsed" v-html="currentPrint"></div>
 			<div class="progress-bar" ref="progressBar">
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
-			<div class="time remaining" v-html="durationTime">remaining time</div>
+			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
 			<div class="volume-slider">
 				<div class="volume-level"></div>
@@ -29,7 +29,7 @@
 
 <script>
 
-// import millisec from 'millisec';
+import millisec from 'millisec';
 
 export default {
 
@@ -42,8 +42,8 @@ export default {
 	data() {
 
 		return {
-			currentTime: 0.00,
-			durationTime: false,
+			currentPrint: 0.00,
+			durationPrint: false,
 			durationNum: 0,
 			currentNum: 0,
 			progress: '0%'
@@ -53,21 +53,25 @@ export default {
 
 	},
 	methods: {
+		timeFormat(time) {
+			let minutes = '';
+			let seconds = '';
+			if (millisec(time).getSeconds() < 10) {
+				seconds = '0';
+			}
+			if (millisec(time).getMinutes() < 10) {
+				minutes = '0';
+			}
+			return millisec(time).format(`${minutes}mm:${seconds}ss`);
+		},
 		volumeSlide() {
 		},
 		setProgress() {
-			console.log('setProgress');
+			console.log(this.currentNum / this.durationNum);
 			if (this.durationNum && this.currentNum) {
-				this.progress = `${this.currentNum / this.durationNum * this.$refs.progressBar.offsetWidth}%`;
-				// console.log(percentTime);
+				this.progress = `${this.currentNum / this.durationNum * this.$refs.progressBar.offsetWidth}px`;
 			}
 			return;
-		},
-		loaded() {
-			this.durationNum = this.$refs.audioFile.duration;
-			let durationDate = new Date(null);
-			durationDate.setSeconds(this.durationNum);
-			this.durationTime = durationDate.toISOString().substr(11, 8);
 		},
 		volumeToggle() {
 			this.$refs.audioFile.muted = !this.$refs.audioFile.muted;
@@ -79,15 +83,16 @@ export default {
 				this.$refs.audioFile.pause();
 			}
 		},
-		setTime(numberElapsed) {
-			this.currentNum = numberElapsed;
-			this.date.setSeconds(numberElapsed);
-			this.currentTime = this.date.toISOString().substr(11, 8);
+		loaded() {
+			this.durationNum = this.$refs.audioFile.duration;
+			this.durationPrint = this.timeFormat(this.$refs.audioFile.duration * 1000);
+		},
+		setTime(timeSeconds) {
+			this.currentNum = timeSeconds;
+			this.currentPrint = this.timeFormat(timeSeconds * 1000);
 		}
 	},
 	mounted() {
-		this.date = new Date(null);
-		this.date.setSeconds(0);
 		this.setTime(0);
 		this.setProgress();
 
@@ -98,7 +103,7 @@ export default {
 					this.setProgress();
 				}
 			}
-		}, 500);
+		}, 200);
 	},
 	destroy() {
 		clearInterval(this.timeInterval);
