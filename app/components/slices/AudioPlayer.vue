@@ -12,7 +12,10 @@
 		<div v-if="audio" class="audio-container">
 			<div class="play-button" @click="playToggle()">{{ playText }}</div>
 			<div class="time elapsed" v-html="currentPrint"></div>
-			<div class="progress-bar" ref="progressBar" @click="clickProgress($event)">
+			<div class="progress-bar" 
+				ref="progressBar" 
+				@mousedown="progDown"
+				@click="clickProgress($event)">
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
@@ -76,6 +79,25 @@ export default {
 			}
 			return millisec(time).format(`${minutes}mm:${seconds}ss`);
 		},
+		progDown() {
+			window.addEventListener('mousemove', this.progSlide);
+			window.addEventListener('mouseup', this.progUp);
+		},
+		progSlide(evt) {
+			let box = this.$refs.progressBar.getBoundingClientRect();
+			let mx = evt.pageX;
+			let bx = box.left;
+			let bw = box.width;
+
+			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
+			console.log(amt);
+			this.progress = `${amt * 100}%`;
+			this.$refs.audioFile.currentTime = amt * this.durationNum;
+		},
+		progUp() {
+			window.removeEventListener('mousemove', this.progSlide);
+			window.removeEventListener('mouseup', this.progUp);
+		},
 		volDown() {
 			window.addEventListener('mousemove', this.volumeSlide);
 			window.addEventListener('mouseup', this.volUp);
@@ -89,7 +111,6 @@ export default {
 
 			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
 			this.audioVolume = amt;
-
 		},
 		volUp() {
 			window.removeEventListener('mousemove', this.volumeSlide);
