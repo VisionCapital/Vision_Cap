@@ -12,13 +12,22 @@
 		<div v-if="audio" class="audio-container">
 			<div class="play-button" @click="playToggle()">{{ playText }}</div>
 			<div class="time elapsed" v-html="currentPrint"></div>
-			<div class="progress-bar" ref="progressBar" @click="clickProgress($event)">
+			<div class="progress-bar" 
+				ref="progressBar" 
+				@mousedown="progDown"
+				@click="clickProgress($event)"
+			>
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider" ref="volumeBar" @mousedown="volDown" @click="clickVolume($event)">
+			<div class="volume-slider" 
+				v-if="!$store.state.device.mobile"
+				ref="volumeBar" 
+				@mousedown="volDown" 
+				@click="clickVolume($event)"
+			>
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -72,6 +81,24 @@ export default {
 			}
 			return millisec(time).format(`${minutes}mm:${seconds}ss`);
 		},
+		progDown() {
+			window.addEventListener('mousemove', this.progSlide);
+			window.addEventListener('mouseup', this.progUp);
+		},
+		progSlide(evt) {
+			let box = this.$refs.progressBar.getBoundingClientRect();
+			let mx = evt.pageX;
+			let bx = box.left;
+			let bw = box.width;
+
+			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
+			this.progress = `${amt * 100}%`;
+			this.$refs.audioFile.currentTime = amt * this.durationNum;
+		},
+		progUp() {
+			window.removeEventListener('mousemove', this.progSlide);
+			window.removeEventListener('mouseup', this.progUp);
+		},
 		volDown() {
 			window.addEventListener('mousemove', this.volumeSlide);
 			window.addEventListener('mouseup', this.volUp);
@@ -85,7 +112,6 @@ export default {
 
 			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
 			this.audioVolume = amt;
-
 		},
 		volUp() {
 			window.removeEventListener('mousemove', this.volumeSlide);
@@ -158,33 +184,40 @@ export default {
 @import "../../styl/_variables"
 
 .audio-container
-	height 60px
+	height 36px
 	background $grey
 	width 100%
 	color $blue
 	display flex
 	align-items center
 	justify-content space-between
-	pad(0,1)
+	pad(0,.5)
+	fs(12);
+	>*
+		mgn(0,.25)
+
+.play-button, .volume-toggle
+	cursor pointer
 
 .progress-bar
-	width 300px
+	width 60%
 	background $copy
-	height 10px
+	height 6px
 	position relative
-
+	+below($notebook)
+		width 50%
 .finished
 	height 100%
 	background $blue
 
 .volume-slider
 	position relative
-	height 10px
+	height 6px
 	width 60px
 	background $copy
 
 .volume-level 
 	height 100%
-	width 10px
+	width 6px
 	background $blue
 </style>

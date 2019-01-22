@@ -104,6 +104,8 @@ export default {
 	mgn(0, 0, 2)
 	pad(1, 0)
 	position relative
+	+below($mobile)
+		pad(0,0,1)
 
 
 .title, .date, .copy /deep/ p
@@ -126,7 +128,6 @@ export default {
 
 .title
 	transition-delay 0.2s
-	width 78vw
 	/deep/ h2
 		fs(40)
 		font-family $cormorant-semibold
@@ -165,12 +166,16 @@ export default {
 // ----------
 
 .media
+	.title 
+		width 78vw
+		+above($laptop)
+			width 74vw
 	/deep/ h2
 		color $blk
 		fs(40)
 		font-family $cormorant-semibold
 		line-height (48 / 40)
-		max-width (820 / 40) * 1em
+		// max-width (820 / 40) * 1em
 		+below($tablet)
 			fs(20)
 .news

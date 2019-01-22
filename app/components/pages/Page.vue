@@ -45,7 +45,7 @@ export default {
 
 	methods: {
 		checkScroll(scrollTop) {
-			this.$emit('pageTop', scrollTop < 10);
+			this.$emit('pageTop', scrollTop < 30);
 
 			for (let i = this.$refs.slice.length - 1; i > -1; i--) {
 				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.slice[i].$el.offsetTop) {

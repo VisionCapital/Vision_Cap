@@ -270,8 +270,6 @@ for i in 1..10
 		max-height 8rem
 		transition max-height 0.5s
 		background-color none
-		// padding 0.5rem 0
-		pad(0.5,0)
 		margin-top 2px
 		// &:first-child
 		// 	padding 2vh 0
@@ -289,7 +287,8 @@ for i in 1..10
 			margin 0
 
 	.text
-		mgn(0,0.5)
+		// mgn(0,0.5)
+		pad(0.5,0.5)
 		display inline-block
 		transition opacity 0.3s, transform 0.3s
 		+above($notebook)
