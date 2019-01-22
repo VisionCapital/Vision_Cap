@@ -20,6 +20,11 @@
 
 			<!-- included media e.g. audio -->
 
+			<audio-player
+				v-if="data.data.audio && data.data.audio.url"
+				:audio="data.data.audio"
+			/>
+
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
@@ -41,9 +46,12 @@
 <script>
 
 import moment from 'moment';
+import AudioPlayer from './AudioPlayer.vue';
 
 export default {
-
+	components: {
+		AudioPlayer
+	},
 	props: {
 		data: {
 			type: Object,
