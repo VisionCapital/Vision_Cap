@@ -3,9 +3,9 @@
 
 		<div class="wrap">
 			<div class="image-wrap">
-			<div class="image-container" v-for="(image, i) in data.items" :key="i">
+				<div class="image-container" v-for="(image, i) in data.items" :key="i">
 					<img :src="image.row_image.url"/>
-			</div>
+				</div>
 			</div>
 
 		</div>
@@ -36,9 +36,11 @@ export default {
 	align-items center
 	display flex
 	// width 50%
-
 	+below($tablet)
 		width 100%
+
+	+below($mobile)
+		flex-wrap wrap
 
 	// flex-direction: row;
 	// flex-wrap: nowrap;
@@ -52,6 +54,8 @@ export default {
 	// flex-wrap: nowrap;
 	// pad(2,0,3,0)
 	mgn(.5,2,.5,0)
+	&:last-child
+		mgn(.5,0)
 
 	/deep/
 		img

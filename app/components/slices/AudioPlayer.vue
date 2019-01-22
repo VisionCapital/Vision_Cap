@@ -15,7 +15,8 @@
 			<div class="progress-bar" 
 				ref="progressBar" 
 				@mousedown="progDown"
-				@click="clickProgress($event)">
+				@click="clickProgress($event)"
+			>
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
@@ -25,7 +26,8 @@
 				v-if="!$store.state.device.mobile"
 				ref="volumeBar" 
 				@mousedown="volDown" 
-				@click="clickVolume($event)">
+				@click="clickVolume($event)"
+			>
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -90,7 +92,6 @@ export default {
 			let bw = box.width;
 
 			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
-			console.log(amt);
 			this.progress = `${amt * 100}%`;
 			this.$refs.audioFile.currentTime = amt * this.durationNum;
 		},
@@ -194,7 +195,10 @@ export default {
 	fs(12);
 	>*
 		mgn(0,.25)
-	
+
+.play-button, .volume-toggle
+	cursor pointer
+
 .progress-bar
 	width 60%
 	background $copy

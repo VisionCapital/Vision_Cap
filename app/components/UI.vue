@@ -51,7 +51,6 @@ export default {
 		this.$cms.loadType('navigation').then((results) => {
 			this.$store.dispatch('setNavData', results.results[0].data);
 		});
-		console.log(this.$cms);
 		this.$cms.loadType('resource').then((results) => {
 			let resourceTitles = {};
 			let resourceTags = [];

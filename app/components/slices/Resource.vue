@@ -104,6 +104,8 @@ export default {
 	mgn(0, 0, 2)
 	pad(1, 0)
 	position relative
+	+below($mobile)
+		pad(0,0,1)
 
 
 .title, .date, .copy /deep/ p
