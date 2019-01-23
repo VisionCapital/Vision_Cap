@@ -87,23 +87,30 @@ export default {
 		pad(2,0)
 	&.v-enter, &.onpage:not(.inview)
 
-		/deep/ .ctct-form-custom .ctct-form-button
-			width 0%
-			opacity 0
-		/deep/ .ctct-form-field span
-			width 0%
-		/deep/ .ctct-gdpr-text, /deep/ .ctct-form-footer,	/deep/ .ctct-form-custom .ctct-form-header
-			transform translate(0,50%)
-			opacity 0
-		/deep/ .g-recaptcha
-			opacity 0
-		/deep/ .ctct-form-element
-			transform translate(0,100%)
+		/deep/
+			.ctct-form-custom .ctct-form-button
+				width 0%
+				opacity 0
+
+			.ctct-form-field span
+				width 0%
+
+			.ctct-gdpr-text, .ctct-form-footer,	.ctct-form-custom .ctct-form-header
+				transform translate(0,50%)
+				opacity 0
+
+			.g-recaptcha
+				opacity 0
+
+			.ctct-form-element
+				transform translate(0,100%)
 
 	/deep/
 		.grecaptcha-badge
 			bottom 2px !important
+			box-shadow none !important
 			position absolute !important
+
 		.ctct-inline-form
 			overflow hidden
 			position relative
@@ -122,13 +129,15 @@ export default {
 		overflow hidden
 		span
 			background $blue
-			position absolute 
+			position absolute
 			width 60%
 			left 0
 			bottom 0
 			height 2px
 			transition width 0.5s 0.2s
 	.ctct-form-custom
+		padding 0 0 46px
+
 		+below($tablet)
 			display flex
 			flex-direction column
@@ -175,10 +184,12 @@ export default {
 			font-family $circular
 			+below($tablet)
 				margin-bottom 0
+
 	.ctct-form-footer
-		padding 0 0 80px
-		transition transform 0.5s 0.8s, opacity 0.5s 0.8s
-	.ctct-gdpr-text 
+		display none
+		// transition transform 0.5s 0.8s, opacity 0.5s 0.8s
+
+	.ctct-gdpr-text
 		transition transform 0.5s 0.7s, opacity 0.5s 0.7s
 
 	.ctct-form-custom .ctct-form-button
@@ -191,11 +202,11 @@ export default {
 		overflow hidden
 		transition width 0.5s 0.6s, opacity 0.01s 0.6s
 		pad(.5,0)
+
 		+above($tablet)
+			top ($let * 2 + 2) * 1rem
 			width 36%
 			position absolute
-			bottom 16.2rem
-			// right 0
 			left 64%
 		p
 			text-align center

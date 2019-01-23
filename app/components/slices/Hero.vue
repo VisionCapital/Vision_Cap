@@ -60,7 +60,7 @@ export default {
 		/deep/
 			h1
 				color $w
-				fs(82)
+				// fs(82)
 				mgn(1,0,2)
 
 				+below($tablet)
