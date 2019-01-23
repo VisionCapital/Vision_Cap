@@ -273,8 +273,9 @@ for i in 1..10
 		// 	padding 2vh 0
 		&.page-top
 			padding 0
-		&:hover::after, &:hover::before
+		&:after, &::before
 			display none
+			width 0
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
@@ -298,7 +299,11 @@ for i in 1..10
 			opacity 0
 			transform translate(0,-50%)
 
-a.router-link-exact-active
+.home-link 
+	&:before, &:after
+		display none
+
+a.router-link-exact-active, .drop-toggle .router-link-active
 	&:before
 		width 100%
 		left 0
