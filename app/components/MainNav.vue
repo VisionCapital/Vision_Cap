@@ -206,6 +206,10 @@ for i in 1..10
 					pad(0,0)
 					/deep/ a:after, a:before
 						top 22px
+			
+			.home-link
+				&::before, &::after
+					background $b
 
 
 		li:first-child
@@ -219,6 +223,7 @@ for i in 1..10
 
 .light
 	max-width 300px
+
 
 .dropdown-container
 	color $w
