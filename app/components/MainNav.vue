@@ -217,7 +217,8 @@ for i in 1..10
 			+below($mobile)
 				pad(.5,0)
 
-
+.light
+	max-width 300px
 
 .dropdown-container
 	color $w

@@ -35,6 +35,7 @@
 			:options="{
 				styles: mapStyles,
 				scrollwheel: false,
+				draggable: $store.state.device.mobile ? false : true,
 				disableDefaultUI: true,
 				zoomControl: $store.state.device.mobile ? false : true,
 				zoomControlOptions: {
