@@ -1,7 +1,7 @@
 <template>
 	<div class="main-nav">
 
-		<transition>
+		<transition appear>
 			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"/>
 		</transition>
 
@@ -79,6 +79,7 @@ export default {
 			return true; // /Chrome/.test(navigator.userAgent);
 		}
 	},
+
 	methods: {
 		// linkDelay(idx) {
 		// 	if (this.mutualOpen) {
@@ -116,6 +117,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
+
 	+below($notebook)
 		height 85%
 		top 15%
@@ -126,17 +128,18 @@ export default {
 		overflow-x hidden
 		overflow-y scroll
 		z-index 12
+
 	+below($tablet)
 		padding-bottom 5vw
 
 .bg
-	background black
+	background $b
 	abs()
-	transition opacity 0.2s, transform 0.2s
+	transition transform 0.2s
+
 	&.v-enter,
 	&.v-leave-to
-		transform translateY(-100%)
-		opacity 0
+		transform translate3d(0, -100%, 0)
 
 	+below($notebook)
 		display none
@@ -215,6 +218,7 @@ for i in 1..10
 
 .light
 	max-width 300px
+
 
 .dropdown-container
 	color $w
@@ -298,7 +302,7 @@ for i in 1..10
 			opacity 0
 			transform translate(0,-50%)
 
-.home-link 
+.home-link
 	&:before, &:after
 		display none
 

@@ -23,13 +23,14 @@
 								:to="`/${link.page_link.slug}`"
 							/>
 							<arrow-head
+								v-if="$store.state.device.win.x > 1024"
 								@click.native="mutualOpen = !mutualOpen"
 								class="arrow-head"
 								:pointDown="mutualOpen"
 								color="#fff"
 							/>
 						</div>
-						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown'">
+						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1024">
 							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"

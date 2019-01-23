@@ -53,6 +53,8 @@ export default {
 
 @import "../styl/_variables";
 
+
+
 canvas
 	width 50%
 .close-outer.close-outer
@@ -88,13 +90,15 @@ canvas
 		mgn(0,0)
 		text-align center
 
-		svg
+		/deep/ svg
 			display inline-block
 			vertical-align middle
 
 .home-link
-	width 210px
-
+	.logo-outer
+		/deep/ svg
+			width 210px
+			height (268/2040)*210px
 .bg
 	position absolute
 	left 0
