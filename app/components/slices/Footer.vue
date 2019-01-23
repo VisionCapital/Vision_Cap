@@ -18,7 +18,7 @@
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/>
 
-						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">	
+						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">
 							<router-link v-html="link.link_title[0].text"
 								:to="`/${link.page_link.slug}`"
 							/>
@@ -129,7 +129,7 @@ div.footer
 	max-width: 280px;
 	width 100%
 	height 100%
-	
+
 	+below(1024px)
 		position relative
 		max-width: 210px;
@@ -168,7 +168,7 @@ div.footer
 	justify-content center
 	max-width 1060px
 	width 80%
-	
+
 	+below($notebook)
 		width 376px
 		margin auto
@@ -176,10 +176,12 @@ div.footer
 	+below($mobile)
 		display inline-block
 		width auto
-		
+
 
 	/deep/ a
-		color white
+		color $w
+		font-smoothing()
+
 		+below($mobile)
 			fs(16)
 			line-height 8px
@@ -226,7 +228,7 @@ div.footer
 		// 		width auto
 		// 	+below($mobile)
 		// 		padding 0
-				
+
 	.logo
 		/deep/ a
 			&::before, &::after
@@ -242,7 +244,7 @@ div.footer
 		+above($notebook)
 			margin-right auto
 			padding-left 0
-		
+
 	.arrow-head
 		margin-left 0.4vw
 		display inline-block
@@ -259,7 +261,7 @@ div.footer
 				height 100%
 				pad(1,.5)
 
-	svg 
+	svg
 		width: 1em;
 .drop-toggle
 	display inline
@@ -268,7 +270,7 @@ div.footer
 	pad(0,0)
 	/deep/ a:after, a:before
 		top 22px
-	
+
 .dropdown
 	display flex
 	// flex-direction column

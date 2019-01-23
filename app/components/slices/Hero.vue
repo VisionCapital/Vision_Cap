@@ -55,11 +55,6 @@ export default {
 @import "../../styl/_variables"
 
 .hero-image
-	// padding-left 15%
-	// padding-right 15%
-	// padding-top 5rem
-	// align-content center
-
 	pad(2,0,1)
 
 	+above($tablet)
@@ -82,23 +77,23 @@ export default {
 		color $w
 		position relative
 
-		/deep/ h1
-			color $w
-			// line-height 1
-			fs(82)
-			mgn(1,0,2)
-			// padding-bottom 0.3em
+		/deep/
+			h1
+				color $w
+				fs(82)
+				mgn(1,0,2)
 
-			+below($tablet)
-				// padding-bottom 1em
-				fs(60)
-				line-height (73/60)
+				+below($tablet)
+					fs(60)
+					line-height (73/60)
 
-		/deep/ p
-			fs(16)
-			+below($tablet)
-				fs(12)
-				line-height (24/12)
+			p
+				fs(16)
+				font-smoothing()
+
+				+below($tablet)
+					fs(12)
+					line-height (24/12)
 
 .bg
 	background url('../../images/strip-bg.jpg')

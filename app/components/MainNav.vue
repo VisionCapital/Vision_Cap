@@ -45,8 +45,7 @@
 									v-if="mutualOpen"
 									:to="`/${link.page_link.slug}#${tag.slug}`"
 									:style="{'transition-delay': `${(idx) * 0.4}s`}"
-									@click.native="handleClick()"
-								>
+									@click.native="handleClick()">
 									<div class="text"
 										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
 										v-html="tag.title">
@@ -57,9 +56,7 @@
 
 					</div>
 
-
 				</li>
-
 
 			</ul>
 		</nav>
@@ -112,7 +109,6 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
-// @import "../styl/_global"
 
 .main-nav
 	left 0
@@ -165,7 +161,7 @@ for i in 1..10
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
-		
+
 		// margin-left: 4rem;
 
 	+above($notebook)
@@ -178,8 +174,9 @@ for i in 1..10
 	/deep/
 		a
 			color white
-			white-space nowrap
 			fs(14)
+			font-smoothing()
+			white-space nowrap
 
 			+below($laptop)
 				fs(10.5)
