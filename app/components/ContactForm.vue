@@ -1,5 +1,5 @@
 <template>
-	<form ref="form" class="dss" @submit.prevent="doSubmit()">
+	<form ref="form" @submit.prevent="doSubmit()">
 		<div class="left">
 			<div class="form-row" v-for="(field, idx) in fields" :key="idx">
 				<div class="required" v-if="field.required === 'Yes'" :style="{'transition-delay': `${0.3 * idx}s`}">*</div>

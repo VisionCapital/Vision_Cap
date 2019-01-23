@@ -134,14 +134,18 @@ export default {
 			opacity 0
 
 .copy-cta
-	transition opacity 0.5s, transform 0.5s
+	transition opacity 0.5s 0.4s, transform 0.5s 0.4s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(-2rem)
 
 .team-member
-	/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
+	/deep/ h3
 		transition opacity 0.5s, transform 0.5s
+	/deep/ h4
+		transition opacity 0.5s 0.2s, transform 0.5s 0.2s
+	.copy-container /deep/ p, /deep/ ul
+		transition opacity 0.5s 0.4s, transform 0.5s 0.4s
 	&.v-enter, &.onpage:not(.inview)
 		/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 			opacity 0

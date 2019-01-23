@@ -165,6 +165,10 @@ export default {
 // Alt styles
 // ----------
 
+.awards
+	.date
+		line-height 1
+
 .media
 	.title 
 		width 78vw
