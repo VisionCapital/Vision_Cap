@@ -138,7 +138,8 @@ div.footer
 .home-link
 	margin 0 auto
 	display inline-block
-
+	&:before, &:after
+		display none
 
 .footer
 	background $blue
@@ -268,8 +269,8 @@ div.footer
 	cursor pointer
 
 	pad(0,0)
-	/deep/ a:after, a:before
-		top 22px
+	// /deep/ a:after, a:before
+	// 	top 22px
 
 .dropdown
 	display flex
@@ -283,11 +284,6 @@ div.footer
 		background $blue
 		&:hover::after, &:hover::before
 			display none
-
-
-.home-link 
-	&:before, &:after
-		display none
 
 a.router-link-exact-active, .drop-toggle .router-link-active
 	&:before
