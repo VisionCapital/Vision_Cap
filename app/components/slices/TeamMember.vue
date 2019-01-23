@@ -70,7 +70,6 @@ export default {
 
 			let height = width * (dimensions.height / dimensions.width);
 			height = 26 * Math.floor(height / 26);
-
 			return {
 				height: height,
 				width: width

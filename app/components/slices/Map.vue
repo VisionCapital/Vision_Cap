@@ -35,6 +35,7 @@
 			:options="{
 				styles: mapStyles,
 				scrollwheel: false,
+				draggable: $store.state.device.mobile ? false : true,
 				disableDefaultUI: true,
 				zoomControl: $store.state.device.mobile ? false : true,
 				zoomControlOptions: {
@@ -275,6 +276,7 @@ export default {
 	left 50%
 	height 36vw
 	transition width 1s
+	overflow hidden
 	.v-enter &, .onpage:not(.inview) &
 		width 0
 	+below($tablet)
