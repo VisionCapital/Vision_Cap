@@ -39,7 +39,7 @@ export default {
 	},
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y;
+			return this.$store.state.device.win.y * 0.75;
 		}
 	},
 	methods: {
@@ -51,7 +51,7 @@ export default {
 		},
 		checkScroll(scrollTop) {
 			for (let i = this.$refs.teamMember.length - 1; i > -1; i--) {
-				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.teamMember[i].$el.offsetTop) {
+				if (scrollTop + this.deviceHeight > this.$refs.teamMember[i].$el.offsetTop) {
 					this.sidx = i;
 					return;
 				}
@@ -59,7 +59,7 @@ export default {
 		}
 	},
 	mounted() {
-		window.addEventListener('resize', this.resize);
+		window.addEventListener('resize', this.resize, { passive: true });
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(Math.abs(this.page.scroll.pos));
@@ -67,7 +67,7 @@ export default {
 
 	},
 	destroy() {
-		window.removeEventListener('resize', this.resize);
+		window.removeEventListener('resize', this.resize, { passive: true });
 		clearInterval(this.scrollInterval);
 	}
 };
@@ -81,14 +81,7 @@ export default {
 .team-cards
 	@extend .slice
 
-	/deep/ header
-		background $bg
-		padding 1px 0
-
 	.card
-		&:nth-of-type(odd)
-			background $bg
-
 		&:nth-of-type(even)
 			background $lightgrey
 

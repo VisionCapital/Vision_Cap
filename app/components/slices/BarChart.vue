@@ -202,13 +202,6 @@ export default {
 	+below($tablet)
 		flex-direction column
 
-.cagr-label
-	position absolute
-	bottom 0
-	margin-left -3rem
-	color $blue
-	fs(12)
-
 .title-copy
 	order 1
 	width 100%
@@ -236,15 +229,15 @@ export default {
 	position relative
 	pad(.5,2,2,0)
 
-	a::before, a::after
-		background none
-
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h2, /deep/ a
 			transform translateY(10%)
 			opacity 0
 
 	/deep/
+		a::before, a::after
+			background none
+
 		h2, a
 			color $w
 			position relative
@@ -340,17 +333,12 @@ export default {
 		margin-left (100% / 9)
 		width (600% / 9)
 
-
 .y
 	bottom 0
 	height 100%
 	left 0
 	position absolute
 	width 100%
-
-	+below($mobile)
-		top 0
-		height 170%
 
 	.step
 		border-left 1px solid #979797
@@ -375,12 +363,23 @@ export default {
 			fs(12)
 			line-height 0
 
+		&::after
+			border-top 1px solid #979797
+			content ''
+			position absolute
+			top -1px
+			right 0
+			width 5px
+
 .bars
 	height 0
-	padding-bottom (290 / 449) * 100%
+	padding-bottom (290 / 240) * 100%
 	position relative
 
 	+above($tablet)
+		padding-bottom ((290 * 1.7) / 449) * 100%
+
+	+above($notebook)
 		padding-bottom (290 / 699) * 100%
 
 	.index
@@ -388,9 +387,6 @@ export default {
 		position absolute
 		text-align center
 		top 0
-
-		+below($mobile)
-			height 170%
 
 	for i in 0..12
 		.bar-slot:nth-child({i + 1}) .index
@@ -419,17 +415,19 @@ export default {
 		left 0
 		color $b
 		fs(10)
+		line-height (15 / 10)
 		position absolute
 		width 100%
-		+below($mobile)
-			writing-mode: vertical-rl;
-			padding-top 58%
-			margin auto
-			transform rotate(180deg)
 
 		+above($tablet)
 			fs(12)
 			letter-spacing (0.09em / 12)
+
+		+below($mobile)
+			margin auto
+			padding-top 1em
+			transform rotate(180deg)
+			writing-mode: vertical-rl;
 
 .labels,
 .cagr
@@ -440,60 +438,68 @@ export default {
 	.title
 		color $b
 		fs(10)
-		line-height (13/ 10)
+		line-height (15/ 10)
 		pad(.5,.5)
 
 		+above($tablet)
 			fs(10)
 			letter-spacing (0.07em / 10)
-			line-height (13/ 10)
+			line-height (13 / 10)
 			text-align center
 
 		+below($tablet)
 			border-left 1px solid $grey
-			// border-right none
-			pad(.5,.25)
+			pad(.5, .25, 1, .25)
 
-			// &:last-child
-			// 	border-left none
-
-		+below($mobile)
-			padding-bottom 50%
+			&:first-child
+				border-left none
 
 	.title-text
 		+below($tablet)
-			transform rotate(180deg)
 			text-align right
+			transform rotate(180deg)
 			writing-mode: vertical-rl
 
 .title-vertical
 	color $blue
 	position absolute
 	margin auto
-	right 110%
+	right 100%
 	white-space: nowrap;
-	writing-mode: vertical-rl;
-	transform rotateZ(-180deg)
+	transform rotateZ(-90deg)
 	text-align center
-	top 25%
+	top 50%
 	fs(12)
-
-	// +below($tablet)
-	// 	right 118%
 
 
 .cagr
-	border-top 1px solid #979797
-	mgn(.5, 0)
-	pad(.5, 0)
-
+	position relative
 	.index
 		color $b
 		text-align center
 		fs(10)
 
-		+above($tablet)
+	+above($tablet)
+		border-top 1px solid #979797
+		mgn(.5, 0)
+		pad(.5, 0)
+
+		.index
 			fs(12)
 			letter-spacing (0.09em / 12)
+
+	+below($tablet)
+		mgn(-.5, 0, 1)
+
+.cagr-label
+	bottom 0
+	position absolute
+	margin-left -3rem
+	color $blue
+	fs(12)
+
+	+below($tablet)
+		/deep/ p
+			margin 0
 
 </style>

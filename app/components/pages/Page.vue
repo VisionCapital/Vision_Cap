@@ -43,7 +43,7 @@ export default {
 
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y - this.$refs.footer.$el.offsetHeight;
+			return this.$store.state.device.win.y * 0.85;
 		}
 	},
 

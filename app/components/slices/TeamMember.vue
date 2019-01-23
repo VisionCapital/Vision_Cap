@@ -206,7 +206,7 @@ export default {
 		overflow visible
 		max-height 100%
 	/deep/
-		li 
+		li
 			mgn(1, 0)
 		ul
 			padding-left 1.8em
@@ -221,5 +221,8 @@ export default {
 			+below($tablet)
 				fs(30)
 				line-height $let*1rem
+
+		strong
+			font-family $circular-bold
 
 </style>
