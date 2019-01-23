@@ -15,12 +15,12 @@ class LerpScroll {
 		this.native = false;
 		this.lerpFactor = 10;
 
-		if (this.native) {
-			this.outer.style.overflow = 'auto';
-		} else {
-			this.outer.style.overflow = 'hidden';
-			this.el.style.transform = 'translate3d(0, 0, 0)';
-		}
+		// if (this.native) {
+		// 	this.outer.style.overflow = 'auto';
+		// } else {
+		// 	this.outer.style.overflow = 'hidden';
+		this.el.style.transform = 'translate3d(0, 0, 0)';
+		// }
 
 		this.pos = 0;
 		this.target = 0;

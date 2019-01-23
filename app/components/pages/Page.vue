@@ -77,9 +77,10 @@ export default {
 
 <style lang="stylus" scoped>
 
-@import "../../styl/_variables"
-
 .page
 	height 100%
+	overflow hidden
+	position relative
+	z-index 1
 
 </style>

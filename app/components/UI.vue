@@ -1,14 +1,6 @@
 <template>
 	<div class="app">
 
-		<!-- why does this exist? -->
-		<!-- <router-link v-if="$store.state.device.mobile"
-			to="/"
-			class="home-link"
-			title="Home">
-			<logo class="light" :interactive="interactive"/>
-		</router-link> -->
-
 		<main-nav
 			v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
 			:pageTop="pageTop"
@@ -18,22 +10,23 @@
 
 		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
 
+		<transition appear>
+			<div class="zish"
+				:key="$route.fullPath"/>
+		</transition>
+
 	</div>
 </template>
 
 <script>
 
-import Logo from './svg/Logo.vue';
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
-import Hero from './slices/Hero.vue';
 
 export default {
 	components: {
-		Logo,
 		MainNav,
-		NavSwitch,
-		Hero
+		NavSwitch
 	},
 
 	computed: {
@@ -48,9 +41,11 @@ export default {
 		};
 	},
 	beforeCreate() {
+
 		this.$cms.loadType('navigation').then((results) => {
 			this.$store.dispatch('setNavData', results.results[0].data);
 		});
+
 		this.$cms.loadType('resource').then((results) => {
 			let resourceTitles = {};
 			let resourceTags = [];
@@ -78,21 +73,14 @@ export default {
 
 @import "../styl/_variables"
 
-.app
+.zish
+	background $darkblue
+	background linear-gradient(120deg, #071559, #030532)
+	bottom 0
 	height 100%
-	
-.home-link
-	display block
 	left 0
 	position fixed
-	top 0
-	z-index 11
-
-	+above($desktop)
-		margin-left ($desktop / -2)
-		left 50%
-
-	/deep/ svg
-		display block
+	width 100%
+	z-index 9
 
 </style>
