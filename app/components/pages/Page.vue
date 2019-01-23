@@ -26,6 +26,13 @@ export default {
 	props: [ 'slug' ],
 
 	mixins: [ slices ],
+
+	watch: {
+		$route() {
+			this.$emit('pageTop');
+		}
+	},
+
 	data() {
 		let record = this.$cms.findRecord(this.slug);
 
@@ -61,7 +68,7 @@ export default {
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(this.lastScrollTop);
-		}, 1000);
+		}, 800);
 	}
 
 };

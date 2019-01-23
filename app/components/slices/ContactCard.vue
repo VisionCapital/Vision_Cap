@@ -62,9 +62,11 @@ export default {
 
 .contact-card
 	@extend .slice
-	pad(3,0,3,0)
+	pad(3,0,4)
+
 	.wrap
 		position relative
+
 		+above($tablet)
 			display flex
 
