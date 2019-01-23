@@ -23,13 +23,14 @@
 								:to="`/${link.page_link.slug}`"
 							/>
 							<arrow-head
+								v-if="$store.state.device.win.x > 1024"
 								@click.native="mutualOpen = !mutualOpen"
 								class="arrow-head"
 								:pointDown="mutualOpen"
 								color="#fff"
 							/>
 						</div>
-						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown'">
+						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1024">
 							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
@@ -138,7 +139,8 @@ div.footer
 .home-link
 	margin 0 auto
 	display inline-block
-
+	&:before, &:after
+		display none
 
 .footer
 	background $blue
@@ -268,8 +270,8 @@ div.footer
 	cursor pointer
 
 	pad(0,0)
-	/deep/ a:after, a:before
-		top 22px
+	// /deep/ a:after, a:before
+	// 	top 22px
 
 .dropdown
 	display flex
@@ -285,4 +287,27 @@ div.footer
 		background $blue
 		&:hover::after, &:hover::before
 			display none
+
+a.router-link-exact-active, .drop-toggle .router-link-active
+	&:before
+		width 100%
+		left 0
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+	&:after
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+		width 100%
+		background none
+
+	&:hover
+		&::before
+			background none
+
+			width 0%
+
+		&::after
+			background $w
+			right 0
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width 0%
 </style>
