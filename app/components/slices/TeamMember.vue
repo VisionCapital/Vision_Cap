@@ -219,5 +219,6 @@ export default {
 			margin-left 0
 			+below($tablet)
 				fs(30)
+				line-height $let*1rem
 
 </style>
