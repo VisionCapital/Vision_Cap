@@ -20,8 +20,6 @@
 				<p v-html="copy"/>
 			</div>
 
-			<!-- included media e.g. audio -->
-
 			<audio-player
 				v-if="data.data.audio && data.data.audio.url"
 				:audio="data.data.audio"
@@ -111,7 +109,7 @@ export default {
 	position relative
 	+below($mobile)
 		pad(0,0,1)
-	
+
 a
 	color: black
 	position relative
@@ -190,8 +188,8 @@ a
 	// 	&:only-child
 	// 		color $blk
 
-.copy /deep/ strong 
-	position relative 
+.copy /deep/ strong
+	position relative
 	top 1em
 
 .image
@@ -214,7 +212,7 @@ a
 		line-height 1
 
 .media
-	.title 
+	.title
 		width 78vw
 		+above($laptop)
 			width 74vw
