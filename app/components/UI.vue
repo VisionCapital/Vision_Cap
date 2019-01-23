@@ -111,9 +111,10 @@ export default {
 		opacity 0
 
 	&.v-enter
-		opacity 0
-		transition-delay 250ms
 		transform translate3d(3%, 0, 0)
+
+	&.v-enter-active
+		transition-delay 125ms
 
 	&.v-leave-active
 		transition-duration 0ms

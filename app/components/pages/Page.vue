@@ -13,7 +13,7 @@
 					ref="slice"/>
 			</transition>
 
-			<page-footer ref="footer"/>
+			<page-footer ref="footer" :class="[ 'onpage', { inview : sidx >= record.getModules().length - 1 }]"/>
 
 		</div>
 
@@ -74,8 +74,6 @@ export default {
 
 <style lang="stylus" scoped>
 
-// @import "../../styl/_variables"
-
 .page-scroll
 	position relative
 	z-index 1
@@ -85,6 +83,5 @@ export default {
 
 		.v-enter-active &
 			opacity 0
-
 
 </style>

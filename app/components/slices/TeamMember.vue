@@ -124,6 +124,7 @@ export default {
 
 	/deep/ p
 		max-width 100%
+		overflow-y hidden
 
 .copy
 	position relative
@@ -160,7 +161,7 @@ export default {
 
 		img
 			width 220px
-			max-width 100vw
+			max-width 100%
 			width 100%
 			height 100%
 			position absolute
@@ -170,7 +171,7 @@ export default {
 
 			+below($tablet)
 				padding-right 1em
-				width 96px
+				width 96%
 				float left
 
 	&.v-enter, &.onpage:not(.inview)
