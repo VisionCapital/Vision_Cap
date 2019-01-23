@@ -25,7 +25,8 @@
 			<div class="volume-slider" 
 				v-if="!$store.state.device.mobile"
 				ref="volumeBar" 
-				@mousedown="volDown" 
+				@mousedown="volDown"
+				@touchstart="touchDown"
 				@click="clickVolume($event)"
 			>
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
@@ -116,6 +117,23 @@ export default {
 		volUp() {
 			window.removeEventListener('mousemove', this.volumeSlide);
 			window.removeEventListener('mouseup', this.volUp);
+		},
+		touchDown() {
+			window.addEventListener('touchmove', this.touchSlide);
+			window.addEventListener('touchend', this.touchUp);
+		},
+		touchSlide(evt) {
+			let box = this.$refs.volumeBar.getBoundingClientRect();
+			let mx = evt.changedTouches[0].pageX;
+			let bx = box.left;
+			let bw = box.width;
+
+			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
+			this.audioVolume = amt;
+		},
+		touchUp() {
+			window.removeEventListener('touchmove', this.touchSlide);
+			window.removeEventListener('touchend', this.touchUp);
 		},
 		clickVolume(evt) {
 
