@@ -163,12 +163,8 @@ div.footer
 
 .bg
 	background $blue
-	width 100%
-	height 100% 
-	position absolute 
-	top 0
-	left 0
-	transition top 0.5s
+	abs()
+	transition top 0.4s
 	.v-enter &, .onpage:not(.inview) &
 		top 100%
 
@@ -216,7 +212,7 @@ div.footer
 		transition transform 0.5s, opacity 0.5s
 		for i in 1..10
 			&:nth-child({i})
-				transition-delay 75ms * (i - 1) + 0.4s
+				transition-delay 75ms * (i - 1) + 0.3s
 
 		+below($mobile)
 			column-count 2
