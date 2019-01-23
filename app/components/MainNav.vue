@@ -199,26 +199,26 @@ for i in 1..10
 			pad(1,.5)
 			display flex
 			margin auto 0
+			+below($notebook)
+				padding 4vh 0 0 0			
 			&.dropdown
-				/deep/ a:after, a:before
-					top 4.5rem
 				+above($notebook)
 					pad(0,0)
 					/deep/ a:after, a:before
-						top 22px
+						top 1.75em
 
 
 		li:first-child
 			margin-right auto
 			padding-left 0
 		li, a
-			+below($notebook)
-				padding 4vh 0 0 0
+
 			+below($mobile)
 				pad(.5,0)
 
 .light
 	max-width 300px
+
 
 .dropdown-container
 	color $w
