@@ -160,7 +160,8 @@ export default {
 		+above($tablet)
 			width 36%
 			position absolute
-			top 5.4rem
+			// top 5.4rem
+			bottom 16.2rem
 			right 0
 		p
 			text-align center
