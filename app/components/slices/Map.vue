@@ -4,24 +4,12 @@
 			<div class="annotations-wrap">
 				<div class="annotations">
 
-					<!-- <div class="copy">
-						<h2 v-if="heading"
-							v-html="heading"/>
-						<p v-if="subheading"
-							v-html="subheading"/>
-					</div> -->
-
-					<div class="cta" v-if="$store.state.device.win.x > 1024">
+					<div class="cta">
 						<h2 v-html="data.text('map_title')"/>
 						<p v-html="data.text('map_location')"/>
 						<a :href="data.fields.map_link.url" target="_blank">
 							<div v-html="data.text('map_link_title')"/>
 						</a>
-					</div>
-
-					<div class="cta-mobile" v-if="$store.state.device.win.x < 1024">
-						<h2 v-html="data.text('map_title')"/>
-						<p v-html="data.text('map_location')"/>
 					</div>
 
 				</div>
@@ -236,6 +224,7 @@ export default {
 .annotations
 
 	+below($notebook)
+		pad(1.5,0)
 		text-align center
 		p
 			min-width 100%
@@ -264,12 +253,6 @@ export default {
 			// 		margin 0
 			.button
 				width 100%
-
-	+below($notebook)
-
-		.cta-mobile
-			text-align center
-			display inline-block
 
 .map-frame
 	width 50%
@@ -310,6 +293,7 @@ h2
 	color $blue
 	mgn(0,1,0,0)
 	+below($tablet)
+		mgn(0,0)
 		fs(30)
 a div
 	transition-delay 0.4s
