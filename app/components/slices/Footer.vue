@@ -273,9 +273,11 @@ div.footer
 
 .dropdown
 	display flex
-	// flex-direction column
+	flex-direction column
 	position absolute
 	bottom 100%
+	+below($notebook)
+		top 100%
 
 	a
 		margin-bottom 2px
