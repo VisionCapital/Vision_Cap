@@ -218,7 +218,7 @@ h5
 	.v-enter &, .onpage:not(.inview) &
 		height 0
 	background $lightgrey
-	z-index -1
+	// z-index 0
 	position absolute
 	left 50%
 	transform translateX(-50%)
@@ -240,11 +240,14 @@ h5
 
 .disclaimer
 	transition opacity 0.3s 1s, transform 0.3s 1s
+	fs(12)
+	pad(3,0)
+	position relative
+
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(3em)
-	fs(12)
-	pad(3,0)
+
 	+above($tablet)
 		width 70%
 	/deep/ p

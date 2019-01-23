@@ -1,7 +1,7 @@
 <template>
 	<div class="info-card-slice">
 
-		<div class="bg"/>
+		<!-- <div class="bg"/> -->
 
 		<div class="wrap">
 			<div class="heroAboveCards">
@@ -58,8 +58,8 @@ export default {
 
 @import "../../styl/_variables"
 
-
 .info-card-slice
+	background none
 	position relative
 	width 100%
 
@@ -149,15 +149,15 @@ export default {
 	//	+below($tablet)
 	//		fs($p)
 
-.bg
-	background url('../../images/strip-bg.jpg')
-	height 100%
-	left 0
-	position absolute
-	top 0
-	width 100%
-	background-repeat: no-repeat;
-	background-size: cover;
+// .bg
+// 	background url('../../images/strip-bg.jpg')
+// 	height 100%
+// 	left 0
+// 	position absolute
+// 	top 0
+// 	width 100%
+// 	background-repeat: no-repeat;
+// 	background-size: cover;
 
 .cards
 	width 100%

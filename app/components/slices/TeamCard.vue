@@ -1,12 +1,14 @@
 <template>
 	<div class="team-cards">
 
-		<div class="wrap" v-if="data.items.length && data.fields.team_title[0].text">
-			<div class="heading" v-html="data.html('team_title')"></div>
-		</div>
+		<header>
+			<div class="wrap heading-wrap" v-if="data.items.length && data.fields.team_title[0].text">
+				<div class="heading" v-html="data.html('team_title')"></div>
+			</div>
+		</header>
 
 		<div class="card" v-for="(card, idx) in data.items" :key="idx">
-			<div class="wrap" >
+			<div class="wrap">
 				<transition appear>
 					<team-member
 						:class="[ 'onpage', { inview : sidx >= idx }]"
@@ -16,7 +18,6 @@
 				</transition>
 			</div>
 		</div>
-
 
 	</div>
 </template>
@@ -79,12 +80,20 @@ export default {
 
 .team-cards
 	@extend .slice
-	
-	.card:nth-child(even)
-		background $lightgrey
 
-.heading /deep/ h2 
-	font-family $cormorant
-	font-weight bold
+	/deep/ header
+		background $bg
+		padding 1px 0
+
+	.card
+		&:nth-of-type(odd)
+			background $bg
+
+		&:nth-of-type(even)
+			background $lightgrey
+
+.heading /deep/ h2
+	font-family $cormorant-semibold
 	mgn(2,0)
+
 </style>

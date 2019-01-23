@@ -2,7 +2,8 @@
 	<div class="main-nav">
 
 		<transition appear>
-			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"/>
+			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"
+				:key="$route.fullPath"/>
 		</transition>
 
 		<nav>
@@ -200,7 +201,7 @@ for i in 1..10
 			display flex
 			margin auto 0
 			+below($notebook)
-				padding 4vh 0 0 0			
+				padding 4vh 0 0 0
 			&.dropdown
 				+above($notebook)
 					pad(0,0)

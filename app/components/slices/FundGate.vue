@@ -89,8 +89,8 @@ export default {
 	position relative
 
 .wrap
-	background-color $darkblue
-	background-color #031543
+	// background-color $darkblue
+	// background-color #031543
 	color $w
 	position relative
 		width 100%
@@ -112,8 +112,8 @@ export default {
 	position relative
 	margin-top 4px
 	overflow hidden
-	background-color: $darkblue
-	background-color #031543
+	// background-color: $darkblue
+	// background-color #031543
 
 	&:hover .bg
 		transform scale(1.1)

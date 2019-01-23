@@ -1,19 +1,23 @@
 <template>
-	<div class="page"><div>
+	<div class="page">
 
-		<transition appear v-for="(module, idx) in record.getModules()"
-			:key="module.id">
-			<component :is="module.component"
-				:page="record"
-				:data="module"
-				:class="[ 'onpage', { inview : sidx >= idx }]"
-				:inview="sidx >= idx"
-				ref="slice"/>
-		</transition>
+		<div class="page-scroll">
 
-		<page-footer/>
+			<transition appear v-for="(module, idx) in record.getModules()"
+				:key="module.id">
+				<component :is="module.component"
+					:page="record"
+					:data="module"
+					:class="[ 'onpage', { inview : sidx >= idx }]"
+					:inview="sidx >= idx"
+					ref="slice"/>
+			</transition>
 
-	</div></div>
+			<page-footer ref="footer"/>
+
+		</div>
+
+	</div>
 </template>
 
 <script>
@@ -27,26 +31,19 @@ export default {
 
 	mixins: [ slices ],
 
-	watch: {
-		$route() {
-			this.$emit('pageTop');
-		}
-	},
-
 	data() {
 		let record = this.$cms.findRecord(this.slug);
 
 		return {
 			lastScrollTop: 0,
 			sidx: 0,
-			// tops: 0,
 			record
 		};
 	},
 
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y;
+			return this.$store.state.device.win.y - this.$refs.footer.$el.offsetHeight;
 		}
 	},
 
@@ -55,7 +52,7 @@ export default {
 			this.$emit('pageTop', scrollTop < 30);
 
 			for (let i = this.$refs.slice.length - 1; i > -1; i--) {
-				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.slice[i].$el.offsetTop) {
+				if (scrollTop + this.deviceHeight > this.$refs.slice[i].$el.offsetTop) {
 					this.sidx = i;
 					return;
 				}
@@ -77,10 +74,17 @@ export default {
 
 <style lang="stylus" scoped>
 
-.page
-	height 100%
-	overflow hidden
+// @import "../../styl/_variables"
+
+.page-scroll
 	position relative
 	z-index 1
+
+	/deep/ > div
+		transition opacity 500ms
+
+		.v-enter-active &
+			opacity 0
+
 
 </style>

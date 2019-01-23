@@ -1,12 +1,6 @@
 <template>
 	<div class="hero">
 
-		<div class="bg"/>
-
-		<!-- <div class="bg canvas">
-			<hero-background/>
-		</div> -->
-
 		<div class="wrap">
 			<div class="copy">
 
@@ -39,12 +33,8 @@
 
 import airprops from '../../mixins/airprops';
 
-import HeroBackground from '../HeroBackground.vue';
-
 export default {
-	components: {
-		HeroBackground
-	},
+
 	mixins: [ airprops ]
 
 };
@@ -54,18 +44,8 @@ export default {
 
 @import "../../styl/_variables"
 
-.hero-image
-	pad(2,0,1)
-
-	+above($tablet)
-		pad(0,5,1,5)
-
-		/deep/ img
-			pad(1,0,0,0)
-			// max-width 920px
-			mgn(0,auto)
-
 .hero
+	background none
 	@extend .slice
 	pad(2,0,1)
 	position relative
@@ -95,14 +75,26 @@ export default {
 					fs(12)
 					line-height (24/12)
 
-.bg
-	background url('../../images/strip-bg.jpg')
-	background-repeat no-repeat
-	background-size cover
-	height 100%
-	left 0
-	position absolute
-	top 0
-	width 100%
+.hero-image
+	pad(2,0,1)
+
+	+above($tablet)
+		pad(0,5,1,5)
+
+		/deep/ img
+			pad(1,0,0,0)
+			// max-width 920px
+			mgn(0,auto)
+
+
+// .bg
+// 	background url('../../images/strip-bg.jpg')
+// 	background-repeat no-repeat
+// 	background-size cover
+// 	height 100%
+// 	left 0
+// 	position absolute
+// 	top 0
+// 	width 100%
 
 </style>

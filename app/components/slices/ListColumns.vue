@@ -23,12 +23,13 @@
 
 
 <script>
+
 import airprops from '../../mixins/airprops';
-// import LerpScroll from '../../js/lerp-scroll.js';
 
 export default {
 	mixins: [ airprops ]
 };
+
 </script>
 
 <style lang="stylus" scoped>
@@ -36,12 +37,14 @@ export default {
 @import "../../styl/_variables"
 
 .list-columns
+	background $bg
 	@extend .slice
-	pad(0,0,1,0)
 	overflow hidden
+	pad(0, 0, 1)
+
 	.wrap
 		position relative
-		pad(3, 0, 0);
+		pad(2, 0, 0)
 
 a
 	width auto
@@ -57,14 +60,14 @@ h2, h3
 		opacity 0
 		transform translateY(2rem)
 
-li 
+li
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateX(-2rem)
 
 .container
-	for i in 1..20 
+	for i in 1..20
 		&:nth-child({i}) li, &:nth-child({i}) h4
 			transition-delay 0.2s * i
 

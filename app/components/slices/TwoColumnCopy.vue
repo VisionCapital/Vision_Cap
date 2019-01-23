@@ -57,6 +57,7 @@ export default {
 @import "../../styl/_variables"
 
 .two-column-copy
+	background $bg
 	@extend .slice
 	pad(2,0)
 
