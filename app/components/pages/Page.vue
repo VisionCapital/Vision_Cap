@@ -11,7 +11,7 @@
 				ref="slice"/>
 		</transition>
 
-		<page-footer/>
+		<page-footer :class="[ 'onpage', { inview : sidx >= record.getModules().length - 1 }]"/>
 
 	</div></div>
 </template>

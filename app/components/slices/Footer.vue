@@ -2,6 +2,7 @@
 	<div class="footer">
 		<footer>
 			<nav>
+				<div class="bg"></div>
 				<ul class="links">
 
 					<li class="logo">
@@ -143,7 +144,6 @@ div.footer
 		display none
 
 .footer
-	background $blue
 	color $w
 	position relative
 	// overflow hidden
@@ -160,6 +160,18 @@ div.footer
 			+above($tablet)
 				padding-left auto
 	// column-count 2
+
+.bg
+	background $blue
+	width 100%
+	height 100% 
+	position absolute 
+	top 0
+	left 0
+	transition top 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		top 100%
+
 .links
 	margin 0 auto
 	display flex
@@ -187,6 +199,10 @@ div.footer
 		+below($mobile)
 			fs(16)
 			line-height 8px
+	.v-enter &, .onpage:not(.inview) &
+		li
+			transform translate(0,50%)
+			opacity 0			
 	li
 		max-width 280px
 		white-space nowrap
@@ -197,6 +213,10 @@ div.footer
 		display inline
 		pad(1,.5)
 		fs(14)
+		transition transform 0.5s, opacity 0.5s
+		for i in 1..10
+			&:nth-child({i})
+				transition-delay 75ms * (i - 1) + 0.4s
 
 		+below($mobile)
 			column-count 2
