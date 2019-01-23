@@ -276,7 +276,6 @@ export default {
 	left 50%
 	height 36vw
 	transition width 1s
-	overflow hidden
 	.v-enter &, .onpage:not(.inview) &
 		width 0
 	+below($tablet)

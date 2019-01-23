@@ -146,6 +146,10 @@ export default {
 		opacity .5
 		/deep/ p
 			font-family $circular
+			+below($tablet)
+				margin-bottom 0
+	.ctct-form-footer 
+		padding 0 0 80px
 	.ctct-form-custom .ctct-form-button
 		border-radius 0
 		font-family $circular
