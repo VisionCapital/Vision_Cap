@@ -3,13 +3,13 @@
 
 		<div class="wrap">
 
-			
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
 				v-html="data.html('bar_chart_title')"/>
 
 			<div class="title-copy" v-else-if="subheading">
 				<h3 v-html="subheading"/>
 			</div>
+
 		</div>
 
 		<div class="title-card" v-if="$store.state.device.mobile">
@@ -30,11 +30,11 @@
 				</div>
 			<div class="chart">
 
-				
+
 				<div class="bars">
 
 					<div class="y">
-						
+
 				<div class="title-vertical">
 					Cumulative Total Return
 					</div>
@@ -46,14 +46,14 @@
 								{{ max - (step - 1) * 25 + '%' }}
 							</div>
 						</div>
-						
+
 						<div class="step">
 							<div class="label">
 								0%
 							</div>
 						</div>
 
-						
+
 					</div>
 
 					<div class="index" v-for="(bar, idx) in indices" :key="idx"
@@ -80,14 +80,16 @@
 
 					<div class="title" v-for="(bar, idx) in indices" :key="idx"
 						:style="{ width: 1 / indices.length * 100 + '%' }">
-						{{ `${bar.name} (${idx + 1})` }}
+						<div class="title-text">
+							{{ `${bar.name} (${idx + 1})` }}
+						</div>
 					</div>
 					<!-- <div class="index" v-for="(bar, idx) in indices" :key="idx">
 						{{ bar.cagr + '%' }}
 					</div> -->
 
 				</div>
-				
+
 
 				<div class="cagr">
 
@@ -226,7 +228,7 @@ export default {
 	a:before, a:after
 		background none
 
-	
+
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h2, /deep/ a
 			transform translateY(10%)
@@ -340,6 +342,7 @@ export default {
 	+below($mobile)
 		top 0
 		height 170%
+
 	.step
 		border-left 1px solid #979797
 		border-top 1px solid rgba(#979797,.15)
@@ -361,6 +364,7 @@ export default {
 
 		+above($tablet)
 			fs(12)
+			line-height 0
 
 .bars
 	// height 100%
@@ -419,39 +423,38 @@ export default {
 .labels,
 .cagr
 	display flex
+	width 100%
 
 .labels
 	.title
-		text-align center
 		color $b
 		fs(10)
-
-		// letter-spacing (0.07em / 8)
 		line-height (13/ 10)
-		pad(.5,.10)
-
-		+below($tablet)
-			border-left 1px solid $grey
-			border-right none
-	
-			&:last-child
-				border-left none
+		pad(.5,.5)
 
 		+above($tablet)
 			fs(10)
-
 			letter-spacing (0.07em / 10)
 			line-height (13/ 10)
-			pad(.5,.5)
+			text-align center
 
 		+below($tablet)
-			writing-mode: vertical-rl;
-			margin-left 0.4rem
-			transform rotate(180deg)
-			text-align right
+			border-left 1px solid $grey
+			// border-right none
+			pad(.5,.25)
+
+			// &:last-child
+			// 	border-left none
+
 		+below($mobile)
 			padding-bottom 50%
-			
+
+	.title-text
+		+below($tablet)
+			transform rotate(180deg)
+			text-align right
+			writing-mode: vertical-rl
+
 .title-vertical
 	color $blue
 	position absolute
@@ -463,9 +466,9 @@ export default {
 	text-align center
 	top 25%
 	fs(12)
-	+below($tablet)
-		right 118%
-	
+
+	// +below($tablet)
+	// 	right 118%
 
 
 .cagr
