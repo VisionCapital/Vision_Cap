@@ -203,7 +203,7 @@ export default {
 
 .audio-container
 	height 36px
-	background $grey
+	background #eee
 	width 100%
 	color $blue
 	display flex
@@ -219,7 +219,7 @@ export default {
 
 .progress-bar
 	width 60%
-	background $copy
+	background #d5d5d5
 	height 6px
 	position relative
 	+below($notebook)
@@ -232,7 +232,7 @@ export default {
 	position relative
 	height 6px
 	width 60px
-	background $copy
+	background #d5d5d5
 
 .volume-level 
 	height 100%

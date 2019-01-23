@@ -82,6 +82,15 @@ export default {
 		/deep/ .ctct-form-custom .ctct-form-header
 			opacity 0
 			transform translateY(50%)
+		/deep/ .ctct-form-custom .ctct-form-button
+			width 0%
+			opacity 0
+		/deep/ .ctct-form-element
+			width 0%
+			padding-right 0
+		/deep/ .ctct-gdpr-text, /deep/ .ctct-form-footer
+			transform translate(0,50%)
+			opacity 0
 
 	/deep/
 		.grecaptcha-badge
@@ -128,6 +137,7 @@ export default {
 	.ctct-form-label
 		display none
 	.ctct-form-element
+		transition width 0.5s 0.2s, padding-right 0.5s 0.2s
 		width 60%
 		background none
 		border none
@@ -150,6 +160,10 @@ export default {
 				margin-bottom 0
 	.ctct-form-footer
 		padding 0 0 80px
+		transition transform 0.5s 0.8s, opacity 0.5s 0.8s
+	.ctct-gdpr-text 
+		transition transform 0.5s 0.6s, opacity 0.5s 0.6s
+
 	.ctct-form-custom .ctct-form-button
 		border-radius 0
 		font-family $circular
@@ -157,6 +171,9 @@ export default {
 		display flex
 		align-items center
 		width 11em
+		overflow hidden
+		transition width 0.5s 0.4s, opacity 0.01s 0.4s
+		pad(.5,0)
 		+above($tablet)
 			width 36%
 			position absolute
@@ -166,6 +183,7 @@ export default {
 			text-align center
 			margin 0
 			pad(0,0.5,0)
+
 
 
 </style>
