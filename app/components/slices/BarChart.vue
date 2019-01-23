@@ -13,31 +13,42 @@
 		</div>
 
 		<div class="title-card" v-if="$store.state.device.mobile">
+
 			<div class="bg"/>
+
 			<h2 v-if="heading"
 				v-html="heading"/>
+
 			<h2 v-html="data.html('vision_opp_pdf_title')"/>
+
 			<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+
 		</div>
 
 		<div class="wrap">
-				<div class="title-card" v-if="!$store.state.device.mobile">
-					<div class="bg"/>
-					<h2 v-if="heading"
-						v-html="heading"/>
-					<h2 v-html="data.html('vision_opp_pdf_title')"/>
-					<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
-				</div>
-			<div class="chart">
 
+			<div class="title-card" v-if="!$store.state.device.mobile">
+
+				<div class="bg"/>
+
+				<h2 v-if="heading"
+					v-html="heading"/>
+
+				<h2 v-html="data.html('vision_opp_pdf_title')"/>
+
+				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+
+			</div>
+
+			<div class="chart">
 
 				<div class="bars">
 
 					<div class="y">
 
-				<div class="title-vertical">
-					Cumulative Total Return
-					</div>
+						<div class="title-vertical">
+							Cumulative Total Return
+						</div>
 
 						<div v-for="step in steps" :key="step"
 							:style="{ height: 1 / steps * 100 + '%' }"
@@ -52,7 +63,6 @@
 								0%
 							</div>
 						</div>
-
 
 					</div>
 
@@ -74,6 +84,7 @@
 						</div>
 
 					</div>
+
 				</div>
 
 				<div class="labels">
@@ -120,9 +131,9 @@ import { TweenMax } from 'gsap/TweenMax';
 export default {
 
 	mixins: [ airprops ],
-	props: [
-		'inview'
-	],
+
+	props: [ 'inview' ],
+
 	watch: {
 		inview(newVal) {
 			if (newVal) {
@@ -142,6 +153,7 @@ export default {
 			}
 		}
 	},
+
 	computed: {
 		indices() {
 			let indices = this.data.items.map((x) => {
@@ -176,9 +188,11 @@ export default {
 	@extend .slice
 	pad(2,0)
 	transition all 3s
+
 	+below($tablet)
 		&:nth-child(even)
 			background $lightgrey
+
 .wrap
 	display flex
 
@@ -198,10 +212,10 @@ export default {
 .title-copy
 	order 1
 	width 100%
-	// padding-bottom 3rem
 
 	+above($tablet)
 		padding-bottom 3rem
+
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h3
 			opacity 0
@@ -222,12 +236,8 @@ export default {
 	position relative
 	pad(.5,2,2,0)
 
-	// +below($tablet)
-	// 	width 100%
-
-	a:before, a:after
+	a::before, a::after
 		background none
-
 
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h2, /deep/ a
@@ -314,20 +324,19 @@ export default {
 
 		.bg
 			left -($gut * 2em)
-			// right auto
-			// width 100vw
 
 .chart
 	order 3
 	position relative
 	transition opacity 0.5s 0.3s
+
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
+
 	+below($tablet)
 		pad(2,0,0,2)
 
 	+above($tablet)
-		// padding-left $gut * .5rem
 		margin-left (100% / 9)
 		width (600% / 9)
 
@@ -367,7 +376,6 @@ export default {
 			line-height 0
 
 .bars
-	// height 100%
 	height 0
 	padding-bottom (290 / 449) * 100%
 	position relative
@@ -380,11 +388,14 @@ export default {
 		position absolute
 		text-align center
 		top 0
+
 		+below($mobile)
 			height 170%
+
 	for i in 0..12
 		.bar-slot:nth-child({i + 1}) .index
 			transition-delay 0.2s * i
+
 	.bar-slot
 		transition height
 		border-bottom 1px solid #979797

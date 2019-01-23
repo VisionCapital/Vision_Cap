@@ -17,16 +17,16 @@
 		</div>
 		<div class="right">
 			<div class="input-container">
-				<textarea rows="1" 
-					v-if="data.fields.textarea_placeholder" 
+				<textarea rows="1"
+					v-if="data.fields.textarea_placeholder"
 					:placeholder="data.textField(data.fields.textarea_placeholder)"
 					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
 				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
 			</div>
-				<button id="submit" 
-					@click="doSubmit()" 
-					name="submit" 
-					type="submit" 
+				<button id="submit"
+					@click="doSubmit()"
+					name="submit"
+					type="submit"
 					:style="{'transition-delay': `${fields.length * 0.3 + 0.3}s`}"
 					class="btn">
 					<span v-html="data.textField(data.fields.submit_button)"/>
@@ -102,14 +102,14 @@ export default {
 input, select, textarea, button {
 	color: $w;
 }
-	
+
 option {
 	background-color: #222;
 }
 
 form
 	position relative
-	
+
 	+above($tablet)
 		// width 60%
 		display flex
@@ -157,6 +157,7 @@ form
 	input, textarea
 		color $w
 		border 0
+		font-smoothing()
 		width 100%
 		padding 0
 		line-height 2.5em
@@ -182,6 +183,7 @@ form
 			pad(0,0)
 	button
 		background $blk
+		font-smoothing()
 		+above($tablet)
 			position absolute
 			right 0
