@@ -1,7 +1,7 @@
 <template>
 	<div class="main-nav">
 
-		<transition>
+		<transition appear>
 			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"/>
 		</transition>
 
@@ -45,8 +45,7 @@
 									v-if="mutualOpen"
 									:to="`/${link.page_link.slug}#${tag.slug}`"
 									:style="{'transition-delay': `${(idx) * 0.4}s`}"
-									@click.native="handleClick()"
-								>
+									@click.native="handleClick()">
 									<div class="text"
 										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
 										v-html="tag.title">
@@ -57,9 +56,7 @@
 
 					</div>
 
-
 				</li>
-
 
 			</ul>
 		</nav>
@@ -82,6 +79,7 @@ export default {
 			return true; // /Chrome/.test(navigator.userAgent);
 		}
 	},
+
 	methods: {
 		// linkDelay(idx) {
 		// 	if (this.mutualOpen) {
@@ -112,7 +110,6 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
-// @import "../styl/_global"
 
 .main-nav
 	left 0
@@ -120,6 +117,7 @@ export default {
 	top 0
 	width 100%
 	z-index 10
+
 	+below($notebook)
 		height 85%
 		top 15%
@@ -130,17 +128,18 @@ export default {
 		overflow-x hidden
 		overflow-y scroll
 		z-index 12
+
 	+below($tablet)
 		padding-bottom 5vw
 
 .bg
-	background black
+	background $b
 	abs()
-	transition opacity 0.2s, transform 0.2s
+	transition transform 0.2s
+
 	&.v-enter,
 	&.v-leave-to
-		transform translateY(-100%)
-		opacity 0
+		transform translate3d(0, -100%, 0)
 
 	+below($notebook)
 		display none
@@ -165,7 +164,7 @@ for i in 1..10
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
-		
+
 		// margin-left: 4rem;
 
 	+above($notebook)
@@ -178,8 +177,9 @@ for i in 1..10
 	/deep/
 		a
 			color white
-			white-space nowrap
 			fs(14)
+			font-smoothing()
+			white-space nowrap
 
 			+below($laptop)
 				fs(10.5)
@@ -281,8 +281,9 @@ for i in 1..10
 		// 	padding 2vh 0
 		&.page-top
 			padding 0
-		&:hover::after, &:hover::before
+		&:after, &::before
 			display none
+			width 0
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
@@ -306,7 +307,11 @@ for i in 1..10
 			opacity 0
 			transform translate(0,-50%)
 
-a.router-link-exact-active
+.home-link
+	&:before, &:after
+		display none
+
+a.router-link-exact-active, .drop-toggle .router-link-active
 	&:before
 		width 100%
 		left 0
