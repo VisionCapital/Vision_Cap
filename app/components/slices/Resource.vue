@@ -84,7 +84,8 @@ export default {
 	},
 	computed: {
 		renderDate() {
-			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM M, YYYY') : null;
+			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
+
 		},
 
 		resourceType() {
