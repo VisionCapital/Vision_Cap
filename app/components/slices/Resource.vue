@@ -25,11 +25,13 @@
 				:audio="data.data.audio"
 			/>
 
+			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >View Full Article.</a>
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
+
 
 		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
 			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
@@ -106,6 +108,38 @@ export default {
 	position relative
 	+below($mobile)
 		pad(0,0,1)
+	
+a
+	color: black
+	position relative
+	text-decoration: none
+
+	&:before, &:after
+		background: $blue
+		content: ''
+		height 2px
+		position: absolute
+		top 100%
+		width: 0%
+
+	&:before
+		left: 0
+
+	&:after
+		right 0
+		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+	&:hover
+		color: $blue
+
+		&:before
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width: 100%
+
+		&:after
+			background: transparent
+			transition: 0s
+			width: 100%
 
 
 .title, .date, .copy /deep/ p
