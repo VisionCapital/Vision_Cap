@@ -2,10 +2,12 @@
 	<div :class="[ 'resource', resourceType ]">
 
 		<div class="body">
-			<p class="date"
-				v-if="renderDate"
-				v-html="renderDate"/>
-
+			<div class="date">
+				<p class="date" v-if="renderDate"
+					v-html="renderDate"/>
+				<p class="date" v-if="$cms.htmlField(data.data.resource_author)"
+					v-html="$cms.htmlField(data.data.resource_author)"/>
+			</div>
 			<div class="title">
 				<h2 v-if="data.data.resource_title"
 					v-html="$cms.textField(data.data.resource_title)"/>
@@ -154,12 +156,19 @@ a
 	width 100%
 	+above($tablet)
 		width (600% / 9)
-	
+		// /deep/ p
+		// 	font-size 14px
+		// 	line-height 2px
+
 .date
-	font-family $circular
-	fs(16)
+	font-family $cormorant
+	fs(22)
+	line-height 1
+	/deep/ p
+		line-height 5px
 	+below($tablet)
-		fs(12)
+		font-family $circular
+		fs(14)
 
 .title
 	transition-delay 0.2s
@@ -169,7 +178,7 @@ a
 		line-height (48 / 40)
 		+below($tablet)
 			fs(20)
-.copy /deep/ p, .media .date
+.copy /deep/ li p .media .date
 	fs(12)
 	letter-spacing (0.09 / 12) * 1em
 	line-height (20 / 12)
