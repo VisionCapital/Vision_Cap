@@ -25,13 +25,12 @@
 				:audio="data.data.audio"
 			/>
 
-			<a :href="data.data.resource_link.url" v-if="data.data.resource_link.url" target="_blank" >View Full Article.</a>
+			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >View Full Article.</a>
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-
 
 		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
 			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
