@@ -25,13 +25,21 @@
 				:audio="data.data.audio"
 			/>
 
-			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >View Full Article.</a>
+			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a><br>
+			<a :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
+
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-
+		
+<div class="more-pagination-wrap">
+	<div class="more-pagination">
+		<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
+		<arrow-head class="arrow-head" color="#000000"/>
+	</div>
+	</div>
 		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
 			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
 
@@ -42,16 +50,19 @@
 		</div> -->
 
 	</div>
+	
 </template>
 
 <script>
 
+import ArrowHead from '../svg/ArrowHead.vue';
 import moment from 'moment';
 import AudioPlayer from './AudioPlayer.vue';
 
 export default {
 	components: {
-		AudioPlayer
+		AudioPlayer,
+		ArrowHead
 	},
 	props: {
 		data: {
@@ -62,6 +73,7 @@ export default {
 	methods: {
 		setDelays() {
 			let children = this.$refs.copy.children;
+			// let resource = this.data.resources;
 			let titleDelay = 0.2;
 			if (this.data.data.resource_title) {
 				titleDelay += 0.2;
@@ -75,6 +87,9 @@ export default {
 					}
 				}
 			}
+		},
+		toggleResource() {
+			console.log('f');
 		}
 	},
 	mounted() {
@@ -83,6 +98,7 @@ export default {
 
 	computed: {
 		renderDate() {
+			console.log('f');
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
 
 		},
@@ -105,11 +121,31 @@ export default {
 	mgn(0, 0, 2)
 	pad(1, 0)
 	position relative
+
 	+below($mobile)
 		pad(0,0,1)
-
+	
+	&:not(:last-child)
+		.more-pagination-wrap
+			display none
+	.more-pagination-wrap
+		width 100%
+		position absolute
+		top 100%
+		.more-pagination
+			text-align:center
+			.see-more
+				display inline-block
+				margin auto
+			.arrow-head
+				display inline-block
+				margin auto
+			button
+				pad(1,0)
+				border none
+			
 a
-	color: black
+	color: $blue
 	position relative
 	text-decoration: none
 
