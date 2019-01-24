@@ -119,7 +119,7 @@ export default {
 	border-bottom 1px solid #d8d8d8
 	display flex
 	mgn(0, 0, 2)
-	pad(1, 0)
+	pad(0, 0,3,0)
 	position relative
 
 	+below($mobile)
@@ -196,7 +196,7 @@ a
 	font-family $cormorant
 	fs(22)
 	/deep/ p
-		line-height 30px
+		line-height 5px
 		+below($tablet)
 			line-height 0px
 	+below($tablet)
