@@ -25,7 +25,7 @@
 				:audio="data.data.audio"
 			/>
 
-			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >View Full Article.</a>
+			<a :href="data.data.resource_link.url" v-if="data.data.resource_link.url" target="_blank" >View Full Article.</a>
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
@@ -82,6 +82,7 @@ export default {
 	mounted() {
 		this.setDelays();
 	},
+
 	computed: {
 		renderDate() {
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
@@ -93,6 +94,7 @@ export default {
 			return str.substr(0, str.indexOf(' ')).toLowerCase();
 		}
 	}
+	
 };
 
 </script>
@@ -161,12 +163,13 @@ a
 .date
 	font-family $cormorant
 	fs(22)
-	line-height 1
 	/deep/ p
-		line-height 5px
+		line-height 30px
 	+below($tablet)
 		font-family $circular
 		fs(14)
+	+above($tablet)
+		white-space nowrap
 
 .title
 	transition-delay 0.2s
@@ -190,7 +193,6 @@ a
 
 .copy /deep/ strong
 	position relative
-	top 1em
 
 .image
 	order 1
