@@ -148,11 +148,6 @@ a
 .body
 	order 2
 	width 100%
-	+above($tablet)
-		width (600% / 9)
-		// /deep/ p
-		// 	font-size 14px
-		// 	line-height 2px
 
 .date
 	font-family $cormorant
@@ -210,11 +205,20 @@ a
 	.date
 		line-height 1
 
+	.body
+		+above($tablet)
+			width (600% / 9)
+
 .media
-	.title
-		width 78vw
-		+above($laptop)
-			width 74vw
+	// .title
+	// 	width 78vw
+	// 	+above($laptop)
+	// 		width 74vw
+
+	.copy, .audio-component
+		+above($tablet)
+			width (600% / 9)
+
 	/deep/ h2
 		color $blk
 		fs(40)
