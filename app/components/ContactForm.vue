@@ -65,7 +65,7 @@ export default {
 	},
 	methods: {
 		doSubmit() {
-			console.log('do submit');
+			console.log('do submit'); // eslint-disable-line no-console
 			this.success = false;
 			this.errors = null;
 
