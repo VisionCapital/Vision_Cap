@@ -273,9 +273,6 @@ for i in 1..10
 .anchor-links
 	font-family $circular
 
-	+below($notebook)
-		font-family $cormorant
-
 	+above($notebook)
 		left $gut*-.5rem
 		position absolute
@@ -318,15 +315,17 @@ for i in 1..10
 						transition-delay 100ms * (i + 1)
 
 		+below($notebook)
-			// &:first-child
-			// 	padding 3vh 0
-			// margin-left 1em
-			pad(1,0,0)
+			&:first-child
+				pad(1,0,0)
+			&:last-child
+				pad(0.8,0,1)
+			pad(0.8,0,0)
 			margin 0
 
 	.text
 		// mgn(0,0.5)
-		pad(0.5,0.5)
+		fs(14)
+		pad(0,0.5)
 		display inline-block
 		transition opacity 0.3s, transform 0.3s
 

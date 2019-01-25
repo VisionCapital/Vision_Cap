@@ -265,7 +265,7 @@ a
 			width (600% / 9)
 
 	/deep/ h2
-		color $blk
+		color $b
 		fs(40)
 		font-family $cormorant-semibold
 		line-height (48 / 40)
