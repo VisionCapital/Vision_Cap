@@ -13,7 +13,9 @@
 
 			<button class="more-pagination" v-if="totalPages > loadedPages" @click="loadTags(loadedPages + 1)">
 				<p v-html="`More ${data.text('title_tag')} `"/>
-				<arrow-head class="arrow-head" color="#000000"/>
+				<arrow-head v-if="!loadingPages" class="arrow-head" color="#000000"/>
+				<div class="spinner" v-else>*loadSpinner</div>
+
 			</button>
 
 		</div>
@@ -47,7 +49,8 @@ export default {
 			resourceID: '',
 			sidx: -1,
 			loadedPages: 1,
-			totalPages: 0
+			totalPages: 0,
+			loadingPages: false
 		};
 	},
 	computed: {
@@ -71,6 +74,7 @@ export default {
 			}
 		},
 		loadTags(pagNum) {
+			this.loadingPages = true;
 			this.$cms.loadTags(this.data.text('title_tag'), pagNum).then((results) => {
 				if (pagNum === 1) {
 					this.resources = results.results;
@@ -87,6 +91,7 @@ export default {
 				this.totalPages = results.total_pages;
 
 			});
+			this.loadingPages = false;
 		}
 	},
 	mounted() {
@@ -142,7 +147,7 @@ export default {
 		color $bluesat
 		display inline-block
 		margin-right 0.5em
-	.arrow-head
+	.arrow-head, .spinner
 		display inline-block
 		margin auto
 	/deep/ path
