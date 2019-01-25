@@ -31,11 +31,11 @@
 
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
-import HeroBackground from './HeroBackground.vue';
+// import HeroBackground from './HeroBackground.vue';
 
 export default {
 	components: {
-		HeroBackground,
+		// HeroBackground,
 		MainNav,
 		NavSwitch
 	},
@@ -73,28 +73,6 @@ export default {
 			}
 			this.$store.dispatch('setResourceTags', resourceTags);
 		});
-
-
-		// this.$cms.loadType('resource').then((results) => {
-
-		// 	console.log(results);
-
-		// 	let resourceTitles = {};
-		// 	let resourceTags = [];
-		// 	// there's probably a better way to remove duplicate tags than this
-		// 	for (let resource of results.results) {
-		// 		resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
-		// 	}
-		// 	for (let title in resourceTitles) {
-		// 		if (title) {
-		// 			resourceTags.push({
-		// 				title: title,
-		// 				slug: resourceTitles[title]
-		// 			});
-		// 		}
-		// 	}
-		// 	this.$store.dispatch('setResourceTags', resourceTags);
-		// });
 
 	}
 };

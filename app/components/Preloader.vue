@@ -28,7 +28,7 @@ export default {
 	position: fixed
 	top: 0
 	width: 100%
-	z-index: 2
+	z-index: 12
 	transition: opacity 500ms $easeInOutCubic
 
 	&.v-leave-to
@@ -40,5 +40,9 @@ export default {
 	transform translate3d(-50%,-50%,0)
 	transition transform 500ms $easeInOutCubic
 	top 50%
+
+	.logo-outer
+		height (268 / 2040) * 50vw
+		width 50vw
 
 </style>
