@@ -43,18 +43,23 @@ export default {
 
 <style lang="stylus" scoped>
 
+@import "../../styl/_variables"
+
 .logo-outer
 	position relative
-	width 100%
-	height 100%
 
 .cube-wrap
 	position absolute
-	width 54px
-	height 54px
-	top 50%
-	left -3px
-	transform translate3d(0, -50%, 0)
+	width 43px
+	height 43px
+	top -7px
+	left -4px
+
+	+above($tablet)
+		width 52px
+		height 52px
+		top -7px
+		left -3px
 
 .links:not(.bg-links)
 	.cls-8
@@ -66,9 +71,6 @@ export default {
 
 .cls-1
 	fill #000
-
-// .cls-2
-// 	fill #151515
 
 .cls-8
 	fill #2f5dd6

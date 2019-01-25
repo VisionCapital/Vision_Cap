@@ -59,7 +59,7 @@ export default {
 	},
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y;
+			return this.$store.state.device.win.y * 0.85;
 		}
 	},
 	methods: {
@@ -70,7 +70,7 @@ export default {
 		},
 		checkScroll(scrollTop) {
 			for (let i = this.$refs.resourceComp.length - 1; i > -1; i--) {
-				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.resourceComp[i].$el.offsetTop) {
+				if (scrollTop + this.deviceHeight > this.$refs.resourceComp[i].$el.offsetTop) {
 					this.sidx = i;
 					return;
 				}
@@ -140,17 +140,17 @@ export default {
 			fs(65)
 		+below($mobile)
 			fs(30)
-			
+
 
 .more-pagination
 	text-align center
-	margin auto 
+	margin auto
 	border none
 	transition opacity 0.5s 0.6s, transform 0.5s 0.6s
 	&.v-enter, &.onpage:not(.inview)
 		transform translate(0,20%)
 		opacity 0
-	p 
+	p
 		color $bluesat
 		display inline-block
 		margin-right 0.5em
@@ -159,5 +159,5 @@ export default {
 		margin auto
 	/deep/ path
 		stroke $bluesat
-		
+
 </style>

@@ -444,7 +444,23 @@ export default {
 			fs(10)
 			letter-spacing (0.07em / 10)
 			line-height (13 / 10)
+			position relative
 			text-align center
+
+			&::before, &::after
+				border-left 1px solid #979797
+				height 6px
+				position absolute
+				top 0
+
+			&::before
+				content ''
+				left 0
+
+			&:last-child
+				&::after
+					content ''
+					right 0
 
 		+below($tablet)
 			border-left 1px solid $grey

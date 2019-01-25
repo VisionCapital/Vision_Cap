@@ -38,6 +38,7 @@ export default {
 	mixins: [ airprops ]
 
 };
+
 </script>
 
 <style lang="stylus" scoped>
@@ -83,18 +84,6 @@ export default {
 
 		/deep/ img
 			pad(1,0,0,0)
-			// max-width 920px
 			mgn(0,auto)
-
-
-// .bg
-// 	background url('../../images/strip-bg.jpg')
-// 	background-repeat no-repeat
-// 	background-size cover
-// 	height 100%
-// 	left 0
-// 	position absolute
-// 	top 0
-// 	width 100%
 
 </style>

@@ -223,13 +223,13 @@ canvas
 	width: 100%;
 	height: 100%;
 	top: 0;
-	+below(1060px)
-		top -12%
-	+below($notebook)
-		left -9%
-		top 10%
-		display block
-		width 60%
+	// +below(1060px)
+	// 	top -12%
+	// +below($notebook)
+	// 	left -9%
+	// 	top 10%
+	// 	display block
+	// 	width 60%
 // .resize
 // 	display flex
 // 	width 50%

@@ -201,7 +201,7 @@ export default {
 		width 11em
 		overflow hidden
 		transition width 0.5s 0.6s, opacity 0.01s 0.6s
-		pad(.5,0)
+		// pad(.5,0)
 
 		+above($tablet)
 			top ($let * 2 + 2) * 1rem
@@ -210,9 +210,11 @@ export default {
 			left 64%
 		p
 			text-align center
-			margin 0
-			pad(0,0.5,0)
+			// margin 0
+			margin auto
+			// pad(0,0.5,0)
 
-
+svg
+	margin auto
 
 </style>
