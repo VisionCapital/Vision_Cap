@@ -7,7 +7,7 @@
 
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2040 268" width="2040" height="268" focusable="false">
 			<title>Vision Capital Corporation</title>
-			<path d="M234.41 2.77H118.17L2 134.2l116.17 131.35 116.24-.07 116.25-131.33L234.41 2.77z" class="cls-1"/>
+			<!-- <path d="M234.41 2.77H118.17L2 134.2l116.17 131.35 116.24-.07 116.25-131.33L234.41 2.77z" class="cls-1"/> -->
 			<g v-if="!interactive">
 				<!-- <g> -->
 				<path fill="#007" d="M118.17 265.55l58.14-65.74 58.1 65.67-116.24.07z"/>
@@ -54,6 +54,12 @@ export default {
 	height 43px
 	top -7px
 	left -4px
+
+	+above($tablet)
+		width 52px
+		height 52px
+		top -7px
+		left -3px
 
 .links:not(.bg-links)
 	.cls-8
