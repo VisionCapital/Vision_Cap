@@ -24,6 +24,14 @@
 				v-if="data.data.audio && data.data.audio.url"
 				:audio="data.data.audio"
 			/>
+			<audio-player
+				v-if="data.data.audio1 && data.data.audio1.url"
+				:audio="data.data.audio1"
+			/>
+			<audio-player
+				v-if="data.data.audio2 && data.data.audio2.url"
+				:audio="data.data.audio2"
+			/>
 
 			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a><br>
 			<a :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
