@@ -39,7 +39,7 @@ export default {
 	},
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y * 0.75;
+			return this.$store.state.device.win.y * 0.85;
 		}
 	},
 	methods: {

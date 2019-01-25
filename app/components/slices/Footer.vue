@@ -1,8 +1,10 @@
 <template>
 	<div class="footer">
+
+		<div class="bg"/>
+
 		<footer>
 			<nav>
-				<div class="bg"></div>
 				<ul class="links">
 
 					<li class="logo">
@@ -13,35 +15,45 @@
 							<logo class="light"/>
 						</router-link>
 					</li>
+
 					<li v-for="link in links"
-						:key="link.path">
-						<router-link :to="`/${link.page_link.slug}`" v-if="link.link_type === 'normal'"
+						:key="link.path"
+						:class="link.link_type">
+
+						<router-link v-if="link.link_type === 'normal'"
+							:to="`/${link.page_link.slug}`"
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/>
 
 						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">
-							<router-link v-html="link.link_title[0].text"
-								:to="`/${link.page_link.slug}`"
-							/>
-							<arrow-head
-								v-if="$store.state.device.win.x > 1024"
-								@click.native="mutualOpen = !mutualOpen"
-								class="arrow-head"
-								:pointDown="mutualOpen"
-								color="#fff"
-							/>
+
+							<router-link :to="`/${link.page_link.slug}`"
+								v-html="link.link_title[0].text"/>
+
+							<button v-if="$store.state.device.win.x > 1024"
+								@click.prevent="mutualOpen = !mutualOpen">
+								<arrow-head
+									class="arrow-head"
+									:pointDown="mutualOpen"
+									color="#fff"/>
+							</button>
+
 						</div>
-						<div class="dropdown" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1024">
+
+						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1024">
 							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
 								:class="tag.slug"
 								:key="idx"/>
 						</div>
+
 					</li>
+
 				</ul>
 			</nav>
 		</footer>
+
 	</div>
 </template>
 
@@ -57,22 +69,19 @@ export default {
 		ArrowHead
 	},
 
+	computed: {
+		links() { return this.$store.state.navData.links; },
+		resourceTags() { return this.$store.state.resourceTags; }
+	},
+
 	data() {
-
-		let links = [];
-
-		links = this.$store.state.navData.links;
-		let resourceTags = this.$store.state.resourceTags;
-
 		let mutualDrop = {
 			path: '/resources',
 			title: 'Resources'
 		};
 
 		return {
-			links,
 			mutualOpen: false,
-			resourceTags,
 			mutualDrop
 		};
 	}
@@ -85,17 +94,13 @@ export default {
 
 @import "../../styl/_variables"
 
-div.footer
-	display block
-
 .footer
+	background $bg
 	left 0
 	top 0
 	width 100%
 	z-index 10
-	background $bg
 
-	display block
 	+below($notebook)
 		position fixed
 		width 100%
@@ -138,10 +143,11 @@ div.footer
 		height 100%
 
 .home-link
-	margin 0 auto
 	display inline-block
-	&:before, &:after
-		display none
+	margin 0 auto
+
+	&::before, &::after
+		content none
 
 .footer
 	color $w
@@ -150,6 +156,7 @@ div.footer
 	z-index 2
 	+below($tablet)
 		pad(1,1)
+
 .linkwrap
 	vertical-align middle
 	float right
@@ -159,116 +166,97 @@ div.footer
 		&:first-child
 			+above($tablet)
 				padding-left auto
-	// column-count 2
 
 .bg
 	background $blue
 	abs()
-	transition top 0.4s
+	transition transform 300ms $easeOutQuint
+
 	.v-enter &, .onpage:not(.inview) &
-		top 100%
+		transform translate3d(0, 100%, 0)
 
 .links
-	margin 0 auto
 	display flex
+	justify-content center
 	list-style none
+	margin 0 auto
+	max-width 1060px
 	padding 0
 	position relative
 	text-align center
-	justify-content center
-	max-width 1060px
 	width 80%
 
 	+below($notebook)
 		width 376px
 		margin auto
 		flex-wrap wrap
+
 	+below($mobile)
 		display inline-block
 		width auto
 
+	/deep/
+		a
+			color $w
+			display inline-block
+			font-smoothing()
+			vertical-align top
 
-	/deep/ a
-		color $w
-		font-smoothing()
+			+below($mobile)
+				fs(16)
+				line-height 8px
 
-		+below($mobile)
-			fs(16)
-			line-height 8px
-	.v-enter &, .onpage:not(.inview) &
+
 		li
-			transform translate(0,50%)
-			opacity 0			
-	li
-		max-width 280px
-		white-space nowrap
-		margin auto 0
-		position relative
-		display flex
-		flex-direction column
-		display inline
-		pad(1,.5)
-		fs(14)
-		transition transform 0.5s, opacity 0.5s
-		for i in 1..10
-			&:nth-child({i})
-				transition-delay 75ms * (i - 1) + 0.3s
+			max-width 280px
+			margin auto 0
+			pad(1,.5)
+			position relative
+			transition transform 0.5s, opacity 0.5s
 
-		+below($mobile)
-			column-count 2
-			width 40%
-			float left
-			text-align left
-			padding-bottom: 4px;
+			for i in 1..10
+				&:nth-child({i})
+					transition-delay 75ms * (i - 1) + 0.3s
 
-		+below($laptop)
-			fs(10.5)
-			mgn(0,0)
+			.v-enter &, .onpage:not(.inview) &
+				transform translate(0,50%)
+				opacity 0
 
-		// &:nth-child(1) //starts next line after the logo
-		// 	&:after
-		// 		content ''
-		// 		margin-bottom 2rem
-		// 		display flex
+			+below($mobile)
+				column-count 2
+				width 40%
+				float left
+				text-align left
+				padding-bottom: 4px;
 
-		// &:nth-child(4n)//starts next line after every 4
-		// 	&:after
-		// 		content ''
-		// 		display flex
+			+below($laptop)
+				fs(10.5)
+				mgn(0,0)
 
-		// &:first-child
-		// 	+above($tablet)
-		// 		padding-left 0
-		// 		margin-right auto
-
-		// 	+below($tablet)
-		// 		max-width 100%
-		// 		width auto
-		// 	+below($mobile)
-		// 		padding 0
+	.dropdown
+		padding 0
 
 	.logo
 		/deep/ a
 			&::before, &::after
 				background none
 
-		+below($notebook)
-			width 100%
-			max-width 100%
-		+below($mobile)
-			display flex
-			padding-bottom 2rem
-			max-width 90%
 		+above($notebook)
 			margin-right auto
 			padding-left 0
 
-	.arrow-head
-		margin-left 0.4vw
-		display inline-block
 		+below($notebook)
-			margin: 0 0 0 .5em
-			width 0.75em
+			max-width 100%
+			width 100%
+
+		+below($mobile)
+			display flex
+			padding-bottom 2rem
+			max-width 90%
+
+	.arrow-head
+		display block
+		width 1em
 
 		.drop-toggle
 			// display flex;
@@ -279,28 +267,35 @@ div.footer
 				height 100%
 				pad(1,.5)
 
-	svg
-		width: 1em;
 .drop-toggle
-	display inline
-	cursor pointer
+	+above($notebook)
+		pad(1,0,1,.5)
 
-	pad(0,0)
-	// /deep/ a:after, a:before
-	// 	top 22px
+	/deep/
+		a, button
+			display inline-block
+			vertical-align middle
 
-.dropdown
-	display flex
-	flex-direction column
-	position absolute
+		button
+			border 0
+			margin 0
+			padding 0
+
+			+above($notebook)
+				pad(.5,.25)
+
+.anchor-links
 	bottom 100%
-	+below($notebook)
-		top 100%
+	left $gut*-.5rem
+	position absolute
+	right $gut*-.5rem
 
-	a
+	/deep/ a
+		background $blue
+		display block
 		margin-bottom 2px
 		pad(0.5,0.5)
-		background $blue
+
 		&:hover::after, &:hover::before
 			display none
 
