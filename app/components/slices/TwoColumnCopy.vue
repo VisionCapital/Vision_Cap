@@ -58,7 +58,7 @@ export default {
 
 .two-column-copy
 	background $bg
-	@extend .slice
+	@extend $slice
 	pad(2,0)
 
 .title

@@ -49,7 +49,7 @@ export default {
 @import "../../styl/_variables"
 
 .image-copy-feature
-	@extend .slice
+	@extend $slice
 
 +above($tablet)
 	.wrap

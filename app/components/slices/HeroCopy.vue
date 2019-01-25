@@ -33,7 +33,7 @@ export default {
 @import "../../styl/_variables"
 
 .hero-copy
-	@extend .slice
+	@extend $slice
 	padding 1px 0
 
 	.wrap
@@ -41,7 +41,7 @@ export default {
 
 .title
 	/deep/ h3
-		@extend .heading
+		@extend $heading
 
 	+above($tablet)
 		margin 0 (100% / 8) 0 (200% / 8)

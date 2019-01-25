@@ -46,7 +46,7 @@ export default {
 @import "../../styl/_variables"
 
 .difference-poster
-	@extend .slice
+	@extend $slice
 	background none
 	height 100%
 
@@ -91,7 +91,7 @@ export default {
 			line-height (74 / 78)
 
 		h3
-			@extend .heading
+			@extend $heading
 			fs(46)
 			line-height (56 / 46)
 			letter-spacing -(0.7 / 46) * 1em

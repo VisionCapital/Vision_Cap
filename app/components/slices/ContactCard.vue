@@ -61,7 +61,7 @@ export default {
 @import "../../styl/_variables"
 
 .contact-card
-	@extend .slice
+	@extend $slice
 	pad(3,0,4)
 
 	.wrap
@@ -111,7 +111,7 @@ for i in 1..8
 		opacity 0
 		transform translateY(2rem)
 	/deep/ h2
-		@extend .heading
+		@extend $heading
 		font-family $cormorant-semibold
 		+below($tablet)
 			fs(30)

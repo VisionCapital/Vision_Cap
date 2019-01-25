@@ -11,14 +11,14 @@
 
 				<div class="contacts">
 					<div class="contact" v-for="(contact, idx) in contacts" :key="idx">
-						
+
 						<div v-if="contact.contact_name" v-html="data.htmlField(contact.contact_name)"></div>
-						<a :href="`tel:${data.textField(contact.contact_phone)}`" 
-							v-if="contact.contact_phone" 
+						<a :href="`tel:${data.textField(contact.contact_phone)}`"
+							v-if="contact.contact_phone"
 							v-html="data.textField(contact.contact_phone)"/>
 						<em v-if="contact.contact_email && contact.contact_phone">or</em>
-						<a v-if="contact.contact_email" 
-							:href="`mailto:${data.textField(contact.contact_email)}`" 
+						<a v-if="contact.contact_email"
+							:href="`mailto:${data.textField(contact.contact_email)}`"
 							v-html="data.textField(contact.contact_email)"/>
 
 					</div>
@@ -53,12 +53,12 @@ export default {
 	background-color $lightgrey
 
 .funds-info
-	@extend .slice
+	@extend $slice
 	pad(2,0)
 
-// .inview 
+// .inview
 // 	.contact, p, /deep/ h3
-// 		transform none 
+// 		transform none
 // 		opacity 1
 
 /deep/ a
@@ -80,8 +80,8 @@ p
 	.v-enter &, .onpage:not(.inview) &
 		transform translateX(-3em)
 		opacity 0
-	for i in 1..5 
-		&:nth-child({i}) 
+	for i in 1..5
+		&:nth-child({i})
 			transition transform (0.5s + 0.2s * i) $easeOutSine, opacity (0.5s + 0.2s * i)
 			transition-delay (0.1s + 0.1s * i)
 
@@ -108,7 +108,7 @@ p
 		margin-bottom 0
 		color $blk
 
-.contact 
+.contact
 	+below($tablet)
 		display inline-block
 		width 47%

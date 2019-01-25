@@ -44,7 +44,7 @@ export default {
 @import "../../styl/_variables"
 
 .image-copy
-	@extend .slice
+	@extend $slice
 
 +above($tablet)
 	.wrap
@@ -61,7 +61,7 @@ export default {
 		margin-left 25%
 
 		/deep/ h2
-			@extend .heading
+			@extend $heading
 			width 75%
 
 		/deep/ p

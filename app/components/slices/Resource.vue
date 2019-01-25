@@ -2,12 +2,14 @@
 	<div :class="[ 'resource', resourceType ]">
 
 		<div class="body">
+
 			<div class="date">
 				<p class="date" v-if="renderDate"
 					v-html="renderDate"/>
 				<p class="date" v-if="$cms.htmlField(data.data.resource_author)"
 					v-html="$cms.htmlField(data.data.resource_author)"/>
 			</div>
+
 			<div class="title">
 				<h2 v-if="data.data.resource_title"
 					v-html="$cms.textField(data.data.resource_title)"/>
@@ -20,45 +22,38 @@
 				<p v-html="copy"/>
 			</div>
 
-			<audio-player
-				v-if="data.data.audio && data.data.audio.url"
-				:audio="data.data.audio"
-			/>
-			<audio-player
-				v-if="data.data.audio1 && data.data.audio1.url"
-				:audio="data.data.audio1"
-			/>
-			<audio-player
-				v-if="data.data.audio2 && data.data.audio2.url"
-				:audio="data.data.audio2"
-			/>
 
-			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a><br>
-			<a :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
+			<transition appear>
+				
+					<audio-player
+						:style="{'transition-delay': audioZishDelay}"
+						v-if="data.data.audio && data.data.audio.url && inview"
+						:audio="data.data.audio"
+					/>
+					<audio-player
+						:style="{'transition-delay': audioZishDelay}"
+						v-if="data.data.audio1 && data.data.audio1.url && inview"
+						:audio="data.data.audio1"
+					/>
+					<audio-player
+						:style="{'transition-delay': audioZishDelay}"
+						v-if="data.data.audio2 && data.data.audio2.url && inview"
+						:audio="data.data.audio2"
+			/>
+				
+			</transition>
+
+			<a ref="pdfLink" :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a>
+			<br v-if="data.data.resource_pdf.url && data.data.resource_article.url">
+			<a ref="pressLink" :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
 
 		</div>
 
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-		
-<div class="more-pagination-wrap">
-	<div class="more-pagination">
-		<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
-		<arrow-head class="arrow-head" color="#000000"/>
 	</div>
-	</div>
-		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
-			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
 
-			<img :src="media.url" v-if="media.type === 'image/png' ">
-			<video v-else controls>
-				<source :src="media.url" :type="media.type">
-			</video>
-		</div> -->
-
-	</div>
-	
 </template>
 
 <script>
@@ -76,6 +71,9 @@ export default {
 		data: {
 			type: Object,
 			required: true
+		},
+		inview: {
+			type: Boolean
 		}
 	},
 	methods: {
@@ -83,8 +81,14 @@ export default {
 			let children = this.$refs.copy.children;
 			// let resource = this.data.resources;
 			let titleDelay = 0.2;
-			if (this.data.data.resource_title) {
+			if (this.data.data.resource_title[0].text) {
 				titleDelay += 0.2;
+			}
+			if (this.data.data.resource_pdf.url) {
+				this.$refs.pdfLink.style['transition-delay'] = `${0.2 * children.length + titleDelay}s`;
+			}
+			if (this.data.data.resource_article.url) {
+				this.$refs.pressLink.style['transition-delay'] = `${0.2 * children.length + titleDelay}s`;
 			}
 			for (let i in children) {
 				if (children[i].style) {
@@ -95,9 +99,6 @@ export default {
 					}
 				}
 			}
-		},
-		toggleResource() {
-			console.log('f');
 		}
 	},
 	mounted() {
@@ -106,13 +107,18 @@ export default {
 
 	computed: {
 		renderDate() {
-			console.log('f');
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
 
 		},
 		resourceType() {
 			const str = this.data.tags[0];
 			return str.substr(0, str.indexOf(' ')).toLowerCase();
+		},
+		audioZishDelay() {
+			if (this.data.data.resource_title[0].text) {
+				return `${this.$refs.copy.children.length * 0.2 + 0.4}s`;
+			}
+			return `${this.$refs.copy.children.length * 0.2 + 0.2}s`;
 		}
 	}
 };
@@ -132,26 +138,6 @@ export default {
 
 	+below($mobile)
 		pad(0,0,1)
-	
-	&:not(:last-child)
-		.more-pagination-wrap
-			display none
-	.more-pagination-wrap
-		width 100%
-		position absolute
-		top 100%
-		.more-pagination
-			text-align:center
-			.see-more
-				display inline-block
-				margin auto
-			.arrow-head
-				display inline-block
-				margin auto
-			button
-				pad(1,0)
-				border none
-			
 a
 	color: $blue
 	position relative
@@ -184,21 +170,29 @@ a
 			transition: 0s
 			width: 100%
 
+a
+	top 0
+	transition opacity 0.5s, top 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		top 2rem
+		opacity 0
 
-.title, .date, .copy /deep/ p
+.title, .date
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		transform translateY(2rem)
 		opacity 0
 
+.copy /deep/
+	p, h4, ul
+		transition opacity 0.5s, transform 0.5s
+		.v-enter &, .onpage:not(.inview) &
+			transform translateY(2rem)
+			opacity 0
+
 .body
 	order 2
 	width 100%
-	+above($tablet)
-		width (600% / 9)
-		// /deep/ p
-		// 	font-size 14px
-		// 	line-height 2px
 
 .date
 	font-family $cormorant
@@ -256,11 +250,20 @@ a
 	.date
 		line-height 1
 
+	.body
+		+above($tablet)
+			width (600% / 9)
+
 .media
-	.title
-		width 78vw
-		+above($laptop)
-			width 74vw
+	// .title
+	// 	width 78vw
+	// 	+above($laptop)
+	// 		width 74vw
+
+	.copy, .audio-component
+		+above($tablet)
+			width (600% / 9)
+
 	/deep/ h2
 		color $blk
 		fs(40)

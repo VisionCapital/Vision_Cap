@@ -68,19 +68,28 @@ class CMSAdapter {
 
 		this.records = docs.results.map((d) => new CMSRecord(d));
 
-		let mutualFund = await this.prismic.query(
-			Prismic.Predicates.at('document.type', 'mutual_funds')
-		);
+		// let mutualFund = await this.prismic.query(
+		// 	Prismic.Predicates.at('document.type', 'mutual_funds')
+		// );
 
-		this.funds = mutualFund.results[0];
+		// this.funds = mutualFund.results[0];
 
 	}
 
-	loadTags(tag) {
+	loadPage(slug) {
+		return this.prismic.getByUID(
+			'page', slug
+		);
+	}
+
+	loadTags(tag, pagNum = 0) {
 		return this.prismic.query(
-			// Prismic.Predicates.at('document.type', 'resource'),
 			Prismic.Predicates.at('document.tags', [ tag ]),
-			{ orderings: '[my.resource.publish_date desc]' }
+			{
+				orderings: '[my.resource.publish_date desc]',
+				pageSize: 20,
+				page: pagNum
+			}
 		);
 	}
 

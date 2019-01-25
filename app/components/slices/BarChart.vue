@@ -182,10 +182,9 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-@import "../../styl/_global"
 
 .bar-chart
-	@extend .slice
+	@extend $slice
 	pad(2,0)
 	transition all 3s
 

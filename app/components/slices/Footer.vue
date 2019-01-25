@@ -86,14 +86,14 @@ export default {
 @import "../../styl/_variables"
 
 div.footer
-
 	display block
+
 .footer
 	left 0
-	position fixed
 	top 0
 	width 100%
 	z-index 10
+	background $bg
 
 	display block
 	+below($notebook)
