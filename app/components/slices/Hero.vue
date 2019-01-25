@@ -80,10 +80,12 @@ export default {
 	pad(2,0,1)
 
 	+above($tablet)
-		pad(0,5,1,5)
+		pad(1, 3)
 
 		/deep/ img
-			pad(1,0,0,0)
 			mgn(0,auto)
+
+	+above($notebook)
+		pad(1, 5)
 
 </style>

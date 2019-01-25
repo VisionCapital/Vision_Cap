@@ -155,7 +155,6 @@ for i in 1..10
 	list-style none
 	padding 0
 	position relative
-	justify-content center
 	margin 0 12px
 
 	a.router-link-exact-active, .drop-toggle .router-link-active
@@ -181,42 +180,25 @@ for i in 1..10
 				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 				width 0%
 
-
-
 	+below($notebook)
 		flex-direction column
 		justify-content flex-start
 		min-height 100%
 
 	+above($notebook)
-		text-align center
 		margin 0 auto
 		max-width 1060px
-		width 80%
+		width (780 / 1024) * 100%
+
+	+above($laptop)
+		width (1060 / 1366) * 100%
 
 	/deep/
-		a
-			color white
-			display inline-block
-			font-smoothing()
-			vertical-align top
-			white-space nowrap
-
-			+below($laptop)
-				fs(10.5)
-				mgn(0,0)
-			+below($notebook)
-				fs(30)
-
-			&::before, &::after
-				background $w
-
-			&:hover
-				&::after
-					background none
+		li, a
+			+below($mobile)
+				pad(.5,0)
 
 		li
-			max-width 280px
 			pad(1,.5)
 			margin auto 0
 			position relative
@@ -230,18 +212,32 @@ for i in 1..10
 					/deep/ a:after, a:before
 						top 1.75em
 
-
 		li:first-child
 			margin-right auto
 			padding-left 0
-		li, a
 
-			+below($mobile)
-				pad(.5,0)
+		li:last-child
+			padding-right 0
 
-.light
-	max-width 300px
+		a
+			color $w
+			display inline-block
+			font-smoothing()
+			vertical-align top
 
+			+below($laptop)
+				fs(10.5)
+				mgn(0,0)
+
+			+below($notebook)
+				fs(30)
+
+			&::before, &::after
+				background $w
+
+			&:hover
+				&::after
+					background none
 
 .dropdown-container
 	position relative
@@ -323,15 +319,12 @@ for i in 1..10
 			margin 0
 
 	.text
-		// mgn(0,0.5)
-		fs(14)
-		pad(0,0.5)
-		display inline-block
+		text-align center
+		pad(.5, .5)
 		transition opacity 0.3s, transform 0.3s
 
 		+above($notebook)
 			line-height (15 / 13)
-			white-space normal
 
 	.v-enter, .v-leave-to
 		.text

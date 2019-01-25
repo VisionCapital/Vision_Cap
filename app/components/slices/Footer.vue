@@ -195,16 +195,13 @@ export default {
 				transform translate(0,50%)
 				opacity 0
 
+			+above($laptop)
+				&:last-child
+					padding-right 0
+
 			+below($mobile)
 				pad(.25,1)
 				width 50%
-			// 	float left
-			// 	text-align left
-			// 	padding-bottom: 4px;
-
-			// +below($laptop)
-			// 	fs(10.5)
-			// 	mgn(0,0)
 
 	.dropdown
 		+above($laptop)
@@ -224,11 +221,6 @@ export default {
 			max-width 100%
 			text-align center
 			width 100%
-
-		// +below($mobile)
-		// 	display flex
-		// 	padding-bottom 2rem
-		// 	max-width 90%
 
 	.arrow-head
 		display block
