@@ -33,13 +33,7 @@
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-		
-<div class="more-pagination-wrap">
-	<div class="more-pagination">
-		<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
-		<arrow-head class="arrow-head" color="#000000"/>
-	</div>
-	</div>
+			
 		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
 			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
 
@@ -87,9 +81,6 @@ export default {
 					}
 				}
 			}
-		},
-		toggleResource() {
-			console.log('f');
 		}
 	},
 	mounted() {
@@ -98,7 +89,6 @@ export default {
 
 	computed: {
 		renderDate() {
-			console.log('f');
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
 
 		},
@@ -125,25 +115,6 @@ export default {
 	+below($mobile)
 		pad(0,0,1)
 	
-	&:not(:last-child)
-		.more-pagination-wrap
-			display none
-	.more-pagination-wrap
-		width 100%
-		position absolute
-		top 100%
-		.more-pagination
-			text-align:center
-			.see-more
-				display inline-block
-				margin auto
-			.arrow-head
-				display inline-block
-				margin auto
-			button
-				pad(1,0)
-				border none
-			
 a
 	color: $blue
 	position relative
