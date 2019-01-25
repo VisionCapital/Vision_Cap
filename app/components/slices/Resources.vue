@@ -8,6 +8,7 @@
 			<resource v-for="(resource, i) in resources"
 				:key="i"
 				:class="[ 'onpage', { inview : sidx >= i }]"
+				:inview="sidx >= i"
 				ref="resourceComp"
 				:data="resource"/>
 

@@ -201,6 +201,12 @@ export default {
 
 @import "../../styl/_variables"
 
+.audio-component
+	transition transform 0.5s $easeOutCubic, opacity 0.5s	
+	&.v-enter, &.v-leave-to
+		transform translate(100%,0)
+		opacity 0
+
 .audio-container
 	height 36px
 	background #eee
