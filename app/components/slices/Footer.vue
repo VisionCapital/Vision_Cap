@@ -96,6 +96,7 @@ export default {
 
 .footer
 	background $bg
+	z-index 2
 
 	+below($notebook)
 
@@ -160,6 +161,7 @@ export default {
 		max-width 376px
 
 	+above($notebook)
+		padding 0
 		justify-content space-between
 		max-width 1060px
 		width 80%
@@ -286,4 +288,5 @@ a.router-link-exact-active, .drop-toggle .router-link-active
 			right 0
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 			width 0%
+
 </style>
