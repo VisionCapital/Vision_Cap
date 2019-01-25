@@ -30,7 +30,7 @@
 							<router-link :to="`/${link.page_link.slug}`"
 								v-html="link.link_title[0].text"/>
 
-							<button v-if="$store.state.device.win.x > 1024"
+							<button v-if="$store.state.device.win.x > 1366"
 								@click.prevent="mutualOpen = !mutualOpen">
 								<arrow-head
 									class="arrow-head"
@@ -40,7 +40,7 @@
 
 						</div>
 
-						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1024">
+						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
 							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
@@ -96,21 +96,8 @@ export default {
 
 .footer
 	background $bg
-	left 0
-	top 0
-	width 100%
-	z-index 10
 
 	+below($notebook)
-		position fixed
-		width 100%
-		right 0
-		top 0
-		z-index 11
-		display flex
-		justify-content space-between
-		// align-items center
-		pad(1,1)
 
 		a:after
 			background:none
@@ -118,29 +105,11 @@ export default {
 		a:before
 			background:none
 
-		/deep/ button
-			appearance none
-			background none
-			border 0
-			padding 0
-			mgn(0,0)
-			text-align center
-
-			svg
-				display inline-block
-				vertical-align middle
-	+below($tablet)
-		padding-bottom 5vw
-
 .logo-outer
-	max-width: 280px;
-	width 100%
-	height 100%
+	max-width: 280px
 
-	+below(1024px)
+	+below($notebook)
 		position relative
-		max-width: 210px;
-		height 100%
 
 .home-link
 	display inline-block
@@ -153,9 +122,9 @@ export default {
 	color $w
 	position relative
 	// overflow hidden
-	z-index 2
-	+below($tablet)
-		pad(1,1)
+	// z-index 2
+	// +below($tablet)
+	// 	pad(1,1)
 
 .linkwrap
 	vertical-align middle
@@ -177,23 +146,27 @@ export default {
 
 .links
 	display flex
-	justify-content center
+	flex-wrap wrap
 	list-style none
 	margin 0 auto
-	max-width 1060px
-	padding 0
+	pad(1,1)
 	position relative
-	text-align center
-	width 80%
+	width 100%
 
-	+below($notebook)
-		width 376px
-		margin auto
-		flex-wrap wrap
+	+above($mobile)
+		justify-content center
+		text-align center
+		pad(1,0)
+		max-width 376px
 
-	+below($mobile)
-		display inline-block
-		width auto
+	+above($notebook)
+		justify-content space-between
+		max-width 1060px
+		width 80%
+
+	// +below($mobile)
+	// 	display inline-block
+	// 	width auto
 
 	/deep/
 		a
@@ -203,12 +176,10 @@ export default {
 			vertical-align top
 
 			+below($mobile)
-				fs(16)
-				line-height 8px
-
+				fs(12)
 
 		li
-			max-width 280px
+			// max-width 280px
 			margin auto 0
 			pad(1,.5)
 			position relative
@@ -223,52 +194,46 @@ export default {
 				opacity 0
 
 			+below($mobile)
-				column-count 2
-				width 40%
-				float left
-				text-align left
-				padding-bottom: 4px;
+				pad(.25,1)
+				width 50%
+			// 	float left
+			// 	text-align left
+			// 	padding-bottom: 4px;
 
-			+below($laptop)
-				fs(10.5)
-				mgn(0,0)
+			// +below($laptop)
+			// 	fs(10.5)
+			// 	mgn(0,0)
 
 	.dropdown
-		padding 0
+		+above($laptop)
+			padding 0
 
 	.logo
 		/deep/ a
 			&::before, &::after
 				background none
 
-		+above($notebook)
+		+above($laptop)
 			margin-right auto
 			padding-left 0
 
-		+below($notebook)
+		+below($laptop)
+			pad(1,1)
 			max-width 100%
+			text-align center
 			width 100%
 
-		+below($mobile)
-			display flex
-			padding-bottom 2rem
-			max-width 90%
+		// +below($mobile)
+		// 	display flex
+		// 	padding-bottom 2rem
+		// 	max-width 90%
 
 	.arrow-head
 		display block
 		width 1em
 
-		.drop-toggle
-			// display flex;
-			// display inline-block
-			// align-items flex-start
-			cursor pointer
-			+above($notebook)
-				height 100%
-				pad(1,.5)
-
 .drop-toggle
-	+above($notebook)
+	+above($laptop)
 		pad(1,0,1,.5)
 
 	/deep/

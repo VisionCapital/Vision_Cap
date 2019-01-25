@@ -22,25 +22,25 @@
 				<p v-html="copy"/>
 			</div>
 
+			<transition appear>
+				<audio-player
+					:style="{'transition-delay': audioZishDelay}"
+					v-if="data.data.audio && data.data.audio.url && inview"
+					:audio="data.data.audio"/>
+			</transition>
 
 			<transition appear>
-				
-					<audio-player
-						:style="{'transition-delay': audioZishDelay}"
-						v-if="data.data.audio && data.data.audio.url && inview"
-						:audio="data.data.audio"
-					/>
-					<audio-player
-						:style="{'transition-delay': audioZishDelay}"
-						v-if="data.data.audio1 && data.data.audio1.url && inview"
-						:audio="data.data.audio1"
-					/>
-					<audio-player
-						:style="{'transition-delay': audioZishDelay}"
-						v-if="data.data.audio2 && data.data.audio2.url && inview"
-						:audio="data.data.audio2"
-			/>
-				
+				<audio-player
+					:style="{'transition-delay': audioZishDelay}"
+					v-if="data.data.audio1 && data.data.audio1.url && inview"
+					:audio="data.data.audio1"/>
+			</transition>
+
+			<transition appear>
+				<audio-player
+					:style="{'transition-delay': audioZishDelay}"
+					v-if="data.data.audio2 && data.data.audio2.url && inview"
+					:audio="data.data.audio2"/>
 			</transition>
 
 			<a ref="pdfLink" :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a>

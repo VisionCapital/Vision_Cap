@@ -7,7 +7,7 @@
 
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2040 268" width="2040" height="268" focusable="false">
 			<title>Vision Capital Corporation</title>
-			<!-- <path d="M234.41 2.77H118.17L2 134.2l116.17 131.35 116.24-.07 116.25-131.33L234.41 2.77z" class="cls-1"/> -->
+			<path d="M234.41 2.77H118.17L2 134.2l116.17 131.35 116.24-.07 116.25-131.33L234.41 2.77z" class="cls-1"/>
 			<g v-if="!interactive">
 				<!-- <g> -->
 				<path fill="#007" d="M118.17 265.55l58.14-65.74 58.1 65.67-116.24.07z"/>
@@ -43,18 +43,17 @@ export default {
 
 <style lang="stylus" scoped>
 
+@import "../../styl/_variables"
+
 .logo-outer
 	position relative
-	width 100%
-	height 100%
 
 .cube-wrap
 	position absolute
-	width 54px
-	height 54px
-	top 50%
-	left -3px
-	transform translate3d(0, -50%, 0)
+	width 43px
+	height 43px
+	top -7px
+	left -4px
 
 .links:not(.bg-links)
 	.cls-8
@@ -66,9 +65,6 @@ export default {
 
 .cls-1
 	fill #000
-
-// .cls-2
-// 	fill #151515
 
 .cls-8
 	fill #2f5dd6

@@ -42,18 +42,9 @@ export default {
 	+below($mobile)
 		flex-wrap wrap
 
-	// flex-direction: row;
-	// flex-wrap: nowrap;
-	// justify-content: space-between;
-
 .image-container
-	// align-items: center;
-	// display: flex;
-	// max-width relative
-	// flex-direction: row;
-	// flex-wrap: nowrap;
-	// pad(2,0,3,0)
 	mgn(.5,2,.5,0)
+
 	&:last-child
 		mgn(.5,0)
 

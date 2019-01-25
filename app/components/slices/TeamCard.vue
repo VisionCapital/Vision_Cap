@@ -80,6 +80,7 @@ export default {
 
 .team-cards
 	@extend $slice
+	padding 1px 0
 
 	.card
 		&:nth-of-type(even)

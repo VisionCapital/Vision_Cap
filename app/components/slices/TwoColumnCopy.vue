@@ -81,10 +81,10 @@ export default {
 .copy
 	+above($tablet)
 		&:first-child
-			margin-right 3rem
+			margin-right $gut*1rem
 
 		&:last-child
-			margin-left 3rem
+			margin-left $gut*1rem
 
 .copy-container
 	pad(1,0)
