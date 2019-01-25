@@ -22,13 +22,17 @@
 				<p v-html="copy"/>
 			</div>
 
-			<audio-player
-				v-if="data.data.audio && data.data.audio.url"
-				:audio="data.data.audio"/>
+			<transition appear>
+				<audio-player
+					:style="{'transition-delay': audioZishDelay}"
+					v-if="data.data.audio && data.data.audio.url && inview"
+					:audio="data.data.audio"
+				/>
+			</transition>
 
-			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a><br>
-
-			<a :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
+			<a ref="pdfLink" :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a>
+			<br v-if="data.data.resource_pdf.url && data.data.resource_article.url">
+			<a ref="pressLink" :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
 
 		</div>
 
@@ -54,6 +58,9 @@ export default {
 		data: {
 			type: Object,
 			required: true
+		},
+		inview: {
+			type: Boolean
 		}
 	},
 	methods: {
@@ -61,8 +68,14 @@ export default {
 			let children = this.$refs.copy.children;
 			// let resource = this.data.resources;
 			let titleDelay = 0.2;
-			if (this.data.data.resource_title) {
+			if (this.data.data.resource_title[0].text) {
 				titleDelay += 0.2;
+			}
+			if (this.data.data.resource_pdf.url) {
+				this.$refs.pdfLink.style['transition-delay'] = `${0.2 * children.length + titleDelay}s`;
+			}
+			if (this.data.data.resource_article.url) {
+				this.$refs.pressLink.style['transition-delay'] = `${0.2 * children.length + titleDelay}s`;
 			}
 			for (let i in children) {
 				if (children[i].style) {
@@ -87,6 +100,12 @@ export default {
 		resourceType() {
 			const str = this.data.tags[0];
 			return str.substr(0, str.indexOf(' ')).toLowerCase();
+		},
+		audioZishDelay() {
+			if (this.data.data.resource_title[0].text) {
+				return `${this.$refs.copy.children.length * 0.2 + 0.4}s`;
+			}
+			return `${this.$refs.copy.children.length * 0.2 + 0.2}s`;
 		}
 	}
 };
@@ -138,12 +157,25 @@ a
 			transition: 0s
 			width: 100%
 
+a
+	top 0
+	transition opacity 0.5s, top 0.5s
+	.v-enter &, .onpage:not(.inview) &
+		top 2rem
+		opacity 0
 
-.title, .date, .copy /deep/ p
+.title, .date
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		transform translateY(2rem)
 		opacity 0
+
+.copy /deep/
+	p, h4, ul
+		transition opacity 0.5s, transform 0.5s
+		.v-enter &, .onpage:not(.inview) &
+			transform translateY(2rem)
+			opacity 0
 
 .body
 	order 2
