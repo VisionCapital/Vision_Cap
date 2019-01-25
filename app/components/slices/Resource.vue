@@ -35,14 +35,6 @@
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-
-		<div class="more-pagination-wrap">
-			<div class="more-pagination">
-				<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
-				<arrow-head class="arrow-head" color="#000000"/>
-			</div>
-		</div>
-
 	</div>
 
 </template>
@@ -114,30 +106,6 @@ export default {
 
 	+below($mobile)
 		pad(0,0,1)
-<<<<<<< HEAD
-
-	&:not(:last-child)
-		.more-pagination-wrap
-			display none
-	.more-pagination-wrap
-		width 100%
-		position absolute
-		top 100%
-		.more-pagination
-			text-align:center
-			.see-more
-				display inline-block
-				margin auto
-			.arrow-head
-				display inline-block
-				margin auto
-			button
-				pad(1,0)
-				border none
-
-=======
-
->>>>>>> 957f5c1f1e9ed3aabbfdac86431933c9c79240af
 a
 	color: $blue
 	position relative
