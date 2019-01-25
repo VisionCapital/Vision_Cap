@@ -81,9 +81,6 @@ export default {
 					}
 				}
 			}
-		},
-		toggleResource() {
-			console.log('f');
 		}
 	},
 	mounted() {
@@ -92,7 +89,6 @@ export default {
 
 	computed: {
 		renderDate() {
-			console.log('f');
 			return this.data.data.publish_date ? moment(this.data.data.publish_date).format('MMM D, YYYY') : null;
 
 		},
@@ -118,6 +114,7 @@ export default {
 
 	+below($mobile)
 		pad(0,0,1)
+<<<<<<< HEAD
 
 	&:not(:last-child)
 		.more-pagination-wrap
@@ -138,6 +135,9 @@ export default {
 				pad(1,0)
 				border none
 
+=======
+
+>>>>>>> 957f5c1f1e9ed3aabbfdac86431933c9c79240af
 a
 	color: $blue
 	position relative

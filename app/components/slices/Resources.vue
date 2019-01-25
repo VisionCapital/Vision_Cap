@@ -6,10 +6,17 @@
 				v-html="data.text('title_tag')"/>
 
 			<resource v-for="(resource, i) in resources"
-				:key="resource.id"
+				:key="i"
 				:class="[ 'onpage', { inview : sidx >= i }]"
 				ref="resourceComp"
 				:data="resource"/>
+
+			<button class="more-pagination" v-if="totalPages > loadedPages" @click="loadTags(loadedPages + 1)">
+				<p v-html="`More ${data.text('title_tag')} `"/>
+				<arrow-head v-if="!loadingPages" class="arrow-head" color="#000000"/>
+				<div class="spinner" v-else>*loadSpinner</div>
+
+			</button>
 
 		</div>
 	</div>
@@ -19,6 +26,7 @@
 
 import airprops from '../../mixins/airprops';
 import Resource from './Resource.vue';
+import ArrowHead from '../svg/ArrowHead.vue';
 
 export default {
 	mixins: [ airprops ],
@@ -30,13 +38,19 @@ export default {
 		}
 	},
 
-	components: { Resource },
+	components: {
+		Resource,
+		ArrowHead
+	},
 
 	data() {
 		return {
 			resources: [],
 			resourceID: '',
-			sidx: -1
+			sidx: -1,
+			loadedPages: 1,
+			totalPages: 0,
+			loadingPages: false
 		};
 	},
 	computed: {
@@ -58,16 +72,31 @@ export default {
 				}
 				this.sidx = -1;
 			}
+		},
+		loadTags(pagNum) {
+			this.loadingPages = true;
+			this.$cms.loadTags(this.data.text('title_tag'), pagNum).then((results) => {
+				if (pagNum === 1) {
+					this.resources = results.results;
+					if (this.resources[0]) {
+						this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
+						this.$nextTick(this.hashScroll);
+					}
+				} else {
+					this.loadedPages = pagNum;
+					for (let resource of results.results) {
+						this.resources.push(resource);
+					}
+				}
+				this.totalPages = results.total_pages;
+
+			});
+			this.loadingPages = false;
 		}
 	},
 	mounted() {
-		this.$cms.loadTags(this.data.text('title_tag')).then((results) => {
-			this.resources = results.results;
-			if (this.resources[0]) {
-				this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
-				this.$nextTick(this.hashScroll);
-			}
-		});
+
+		this.loadTags(1);
 
 		this.scrollInterval = setInterval(() => {
 			if (this.$refs.resourceComp) {
@@ -108,5 +137,20 @@ export default {
 			fs(65)
 		+below($mobile)
 			fs(30)
+			
 
+.more-pagination
+	text-align center
+	margin auto 
+	border none
+	p 
+		color $bluesat
+		display inline-block
+		margin-right 0.5em
+	.arrow-head, .spinner
+		display inline-block
+		margin auto
+	/deep/ path
+		stroke $bluesat
+		
 </style>
