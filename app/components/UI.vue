@@ -46,12 +46,6 @@ export default {
 		}
 	},
 
-	computed: {
-		interactive() {
-			return true;
-		}
-	},
-
 	data() {
 		return {
 			pageTop: true
@@ -63,23 +57,44 @@ export default {
 			this.$store.dispatch('setNavData', results.results[0].data);
 		});
 
-		this.$cms.loadType('resource').then((results) => {
-			let resourceTitles = {};
-			let resourceTags = [];
-			// there's probably a better way to remove duplicate tags than this
-			for (let resource of results.results) {
-				resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
-			}
-			for (let title in resourceTitles) {
-				if (title) {
+		let resourceTags = [];
+
+		this.$cms.loadPage('resources').then((results) => {
+			for (let r = 0; r < results.data.body.length; r++) {
+				if (results.data.body[r].slice_type === 'resources') {
+					let title = this.$cms.textField(results.data.body[r].primary.title_tag);
+					let slug = title.replace(/\s/g, '-').toLowerCase();
+
 					resourceTags.push({
 						title: title,
-						slug: resourceTitles[title]
+						slug: slug
 					});
 				}
 			}
 			this.$store.dispatch('setResourceTags', resourceTags);
 		});
+
+
+		// this.$cms.loadType('resource').then((results) => {
+
+		// 	console.log(results);
+
+		// 	let resourceTitles = {};
+		// 	let resourceTags = [];
+		// 	// there's probably a better way to remove duplicate tags than this
+		// 	for (let resource of results.results) {
+		// 		resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
+		// 	}
+		// 	for (let title in resourceTitles) {
+		// 		if (title) {
+		// 			resourceTags.push({
+		// 				title: title,
+		// 				slug: resourceTitles[title]
+		// 			});
+		// 		}
+		// 	}
+		// 	this.$store.dispatch('setResourceTags', resourceTags);
+		// });
 
 	}
 };
