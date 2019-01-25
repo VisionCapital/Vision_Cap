@@ -158,6 +158,31 @@ for i in 1..10
 	justify-content center
 	margin 0 12px
 
+	a.router-link-exact-active, .drop-toggle .router-link-active
+		&:before
+			width 100%
+			left 0
+			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+		&:after
+			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+			width 100%
+			background none
+
+		&:hover
+			&::before
+				background none
+
+				width 0%
+
+			&::after
+				background $w
+				right 0
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+				width 0%
+
+
+
 	+below($notebook)
 		flex-direction column
 		justify-content flex-start
@@ -317,28 +342,5 @@ for i in 1..10
 .home-link
 	&:before, &:after
 		display none
-
-a.router-link-exact-active, .drop-toggle .router-link-active
-	&:before
-		width 100%
-		left 0
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
-
-	&:after
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
-		width 100%
-		background none
-
-	&:hover
-		&::before
-			background none
-
-			width 0%
-
-		&::after
-			background $w
-			right 0
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-			width 0%
 
 </style>

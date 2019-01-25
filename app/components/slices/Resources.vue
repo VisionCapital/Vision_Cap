@@ -12,11 +12,14 @@
 				ref="resourceComp"
 				:data="resource"/>
 
-			<button class="more-pagination" v-if="totalPages > loadedPages" @click="loadTags(loadedPages + 1)">
+			<button class="more-pagination"
+				:class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"
+				v-if="totalPages > loadedPages"
+				@click="loadTags(loadedPages + 1)"
+			>
 				<p v-html="`More ${data.text('title_tag')} `"/>
 				<arrow-head v-if="!loadingPages" class="arrow-head" color="#000000"/>
 				<div class="spinner" v-else>*loadSpinner</div>
-
 			</button>
 
 		</div>
@@ -120,7 +123,6 @@ export default {
 .resources
 	@extend $slice
 	pad(2, 0)
-
 	&:nth-child(odd)
 		background #f8f8f8
 
@@ -130,7 +132,7 @@ export default {
 			opacity 0
 
 	/deep/ h2
-		transition opacity 0.5s, transform 0.5s
+		transition opacity 0.3s, transform 0.3s
 		fs(80)
 		line-height (100 / 80)
 		letter-spacing (-.97 / 80) * 1em
@@ -144,6 +146,10 @@ export default {
 	text-align center
 	margin auto
 	border none
+	transition opacity 0.5s 0.6s, transform 0.5s 0.6s
+	&.v-enter, &.onpage:not(.inview)
+		transform translate(0,20%)
+		opacity 0
 	p
 		color $bluesat
 		display inline-block
