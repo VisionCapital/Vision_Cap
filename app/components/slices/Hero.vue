@@ -47,7 +47,7 @@ export default {
 .hero
 	background none
 	@extend $slice
-	pad(2,0,1)
+	pad(3,0,1)
 	position relative
 
 	+above($notebook)
