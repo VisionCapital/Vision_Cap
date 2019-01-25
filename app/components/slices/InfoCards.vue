@@ -65,7 +65,7 @@ export default {
 		width 100%
 
 	+above($notebook)
-		@extend .slice
+		@extend $slice
 		width 100%
 
 	.wrap

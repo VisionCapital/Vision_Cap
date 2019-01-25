@@ -31,7 +31,7 @@ export default {
 @import "../../styl/_variables"
 
 .no-slice
-	@extend .slice
+	@extend $slice
 
 h5
 	font-size 1rem

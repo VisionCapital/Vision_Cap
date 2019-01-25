@@ -104,7 +104,7 @@ export default {
 @import "../../styl/_variables"
 
 .mutual-fund
-	@extend .slice
+	@extend $slice
 	overflow hidden
 
 	.wrap

@@ -26,7 +26,7 @@ export default {
 
 @import "../../styl/_variables"
 .single-column-copy
-	@extend .slice
+	@extend $slice
 	padding 1px 0
 	transition opacity 0.5s
 

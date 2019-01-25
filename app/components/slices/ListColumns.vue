@@ -38,7 +38,7 @@ export default {
 
 .list-columns
 	background $bg
-	@extend .slice
+	@extend $slice
 	overflow hidden
 	pad(0, 0, 1)
 

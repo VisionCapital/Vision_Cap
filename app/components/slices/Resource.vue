@@ -2,12 +2,14 @@
 	<div :class="[ 'resource', resourceType ]">
 
 		<div class="body">
+
 			<div class="date">
 				<p class="date" v-if="renderDate"
 					v-html="renderDate"/>
 				<p class="date" v-if="$cms.htmlField(data.data.resource_author)"
 					v-html="$cms.htmlField(data.data.resource_author)"/>
 			</div>
+
 			<div class="title">
 				<h2 v-if="data.data.resource_title"
 					v-html="$cms.textField(data.data.resource_title)"/>
@@ -37,18 +39,8 @@
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-			
-		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
-			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
-
-			<img :src="media.url" v-if="media.type === 'image/png' ">
-			<video v-else controls>
-				<source :src="media.url" :type="media.type">
-			</video>
-		</div> -->
-
 	</div>
-	
+
 </template>
 
 <script>
@@ -133,7 +125,6 @@ export default {
 
 	+below($mobile)
 		pad(0,0,1)
-	
 a
 	color: $blue
 	position relative
@@ -189,11 +180,6 @@ a
 .body
 	order 2
 	width 100%
-	+above($tablet)
-		width (600% / 9)
-		// /deep/ p
-		// 	font-size 14px
-		// 	line-height 2px
 
 .date
 	font-family $cormorant
@@ -251,11 +237,20 @@ a
 	.date
 		line-height 1
 
+	.body
+		+above($tablet)
+			width (600% / 9)
+
 .media
-	.title
-		width 78vw
-		+above($laptop)
-			width 74vw
+	// .title
+	// 	width 78vw
+	// 	+above($laptop)
+	// 		width 74vw
+
+	.copy, .audio-component
+		+above($tablet)
+			width (600% / 9)
+
 	/deep/ h2
 		color $blk
 		fs(40)

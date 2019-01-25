@@ -210,7 +210,7 @@ export default {
 	background-color $lightgrey
 
 .annotations-wrap-wrap
-	@extend .slice .wrap
+	@extend $slice .wrap
 
 .annotations-wrap
 	margin-left auto
@@ -287,7 +287,7 @@ p
 	max-width 80%
 	transition-delay 0.3s
 h2
-	@extend .heading
+	@extend $heading
 	font-family $cormorant-semibold
 	transition-delay 0.2s
 	color $blue

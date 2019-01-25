@@ -216,7 +216,7 @@ export default {
 				margin-top 0
 
 		h2, h3
-			@extend .heading
+			@extend $heading
 			margin-left 0
 			+below($tablet)
 				fs(30)

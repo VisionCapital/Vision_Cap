@@ -29,7 +29,7 @@ export default {
 @import "../../styl/_variables"
 
 .image-row
-	@extend .slice
+	@extend $slice
 	pad(0,0,2,0)
 
 .image-wrap
