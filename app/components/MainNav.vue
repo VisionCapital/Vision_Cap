@@ -276,7 +276,7 @@ for i in 1..10
 	display flex
 	flex-direction column
 	+below($notebook)
-		font-family $cormorant
+		font-family $circular
 	+above($notebook)
 		position absolute
 		left 50%
@@ -309,15 +309,17 @@ for i in 1..10
 		&.v-enter, &.v-leave-to
 			max-height 0vh
 		+below($notebook)
-			// &:first-child
-			// 	padding 3vh 0
-			// margin-left 1em
-			pad(1,0,0)
+			&:first-child
+				pad(1,0,0)
+			&:last-child
+				pad(0.8,0,1)
+			pad(0.8,0,0)
 			margin 0
 
 	.text
 		// mgn(0,0.5)
-		pad(0.5,0.5)
+		fs(14)
+		pad(0,0.5)
 		display inline-block
 		transition opacity 0.3s, transform 0.3s
 		+above($notebook)
