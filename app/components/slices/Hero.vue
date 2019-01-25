@@ -46,7 +46,7 @@ export default {
 
 .hero
 	background none
-	@extend .slice
+	@extend $slice
 	pad(2,0,1)
 	position relative
 

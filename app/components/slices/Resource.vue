@@ -2,12 +2,14 @@
 	<div :class="[ 'resource', resourceType ]">
 
 		<div class="body">
+
 			<div class="date">
 				<p class="date" v-if="renderDate"
 					v-html="renderDate"/>
 				<p class="date" v-if="$cms.htmlField(data.data.resource_author)"
 					v-html="$cms.htmlField(data.data.resource_author)"/>
 			</div>
+
 			<div class="title">
 				<h2 v-if="data.data.resource_title"
 					v-html="$cms.textField(data.data.resource_title)"/>
@@ -22,10 +24,10 @@
 
 			<audio-player
 				v-if="data.data.audio && data.data.audio.url"
-				:audio="data.data.audio"
-			/>
+				:audio="data.data.audio"/>
 
 			<a :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a><br>
+
 			<a :href="data.data.resource_article.url" v-if="data.data.resource_article.url" target="_blank" >Please click here for a link to the press release.</a>
 
 		</div>
@@ -33,24 +35,16 @@
 		<div class="image" v-if="data.data.hero_image.url">
 			<img :src="data.data.hero_image.url" />
 		</div>
-		
-<div class="more-pagination-wrap">
-	<div class="more-pagination">
-		<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
-		<arrow-head class="arrow-head" color="#000000"/>
-	</div>
-	</div>
-		<!-- <div class="media" v-for="(media, idx) in image" :key="idx">
-			<h5 v-if="image.length > 0"> Part {{idx + 1}}/{{image.length}} </h5>
 
-			<img :src="media.url" v-if="media.type === 'image/png' ">
-			<video v-else controls>
-				<source :src="media.url" :type="media.type">
-			</video>
-		</div> -->
+		<div class="more-pagination-wrap">
+			<div class="more-pagination">
+				<button class="see-more" v-if="true"><p v-html="'More ' + data.tags[0]"/></button>
+				<arrow-head class="arrow-head" color="#000000"/>
+			</div>
+		</div>
 
 	</div>
-	
+
 </template>
 
 <script>
@@ -124,7 +118,7 @@ export default {
 
 	+below($mobile)
 		pad(0,0,1)
-	
+
 	&:not(:last-child)
 		.more-pagination-wrap
 			display none
@@ -143,7 +137,7 @@ export default {
 			button
 				pad(1,0)
 				border none
-			
+
 a
 	color: $blue
 	position relative

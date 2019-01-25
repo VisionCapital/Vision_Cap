@@ -42,7 +42,7 @@ export default {
 @import "../../styl/_variables"
 
 .contact-form
-	@extend .slice
+	@extend $slice
 	text-align center
 	background $blue
 	.wrap
@@ -70,6 +70,6 @@ h3, h4
 	.v-enter &, .onpage:not(.inview) &
 		transform translate(0,50%)
 		opacity 0
-h4 
+h4
 	transition-delay 0.25s
 </style>

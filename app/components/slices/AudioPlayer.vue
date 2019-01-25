@@ -10,25 +10,43 @@
 		</audio>
 
 		<div v-if="audio" class="audio-container">
-			<div class="play-button" @click="playToggle()">{{ playText }}</div>
+
+			<button class="play-button" @click.prevent="playToggle()"
+				:title="playText">
+				<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" focusable="false">
+					<path fill="#00227D" fill-rule="evenodd" d="M0 .5v16.779l9.518-8.39z"/>
+				</svg>
+			</button>
+
 			<div class="time elapsed" v-html="currentPrint"></div>
-			<div class="progress-bar" 
-				ref="progressBar" 
+
+			<div class="progress-bar"
+				ref="progressBar"
 				@mousedown="progDown"
-				@click="clickProgress($event)"
-			>
+				@click="clickProgress($event)">
 				<div class="finished" :style="{width: progress}"></div>
 				<div class="loaded"></div>
 			</div>
+
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
-			<div class="volume-toggle" @click="volumeToggle()">volume</div>
-			<div class="volume-slider" 
+
+			<button class="volume-toggle" @click.prevent="volumeToggle()">
+				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" focusable="false">
+					<g fill="#040170" fill-rule="evenodd">
+						<path d="M0 10.5h3v-7H0z"/>
+						<path d="M10 .5L4 3.647v6.706l6 3.147V.5z"/>
+						<path d="M15.137 13.435l-1.002-.813.424-.48c1.347-1.524 2.058-3.3 2.058-5.138s-.711-3.614-2.057-5.138l-.425-.48 1.002-.813.424.48c1.55 1.754 2.369 3.812 2.369 5.951 0 2.14-.82 4.197-2.37 5.95l-.423.48z"/>
+						<path d="M13.084 10.881l-1.032-.777.406-.495a4.07 4.07 0 0 0 .94-2.605 4.07 4.07 0 0 0-.94-2.605l-.406-.495 1.032-.777.406.494a5.284 5.284 0 0 1 1.22 3.383 5.284 5.284 0 0 1-1.22 3.383l-.406.494z"/>
+					</g>
+				</svg>
+			</button>
+
+			<div class="volume-slider"
 				v-if="!$store.state.device.mobile"
-				ref="volumeBar" 
+				ref="volumeBar"
 				@mousedown="volDown"
 				@touchstart="touchDown"
-				@click="clickVolume($event)"
-			>
+				@click="clickVolume($event)">
 				<div class="volume-level" :style="{width: `${audioVolume * 100}%`}"></div>
 			</div>
 		</div>
@@ -49,8 +67,8 @@ export default {
 			required: true
 		}
 	},
-	data() {
 
+	data() {
 		return {
 			currentPrint: 0.00,
 			durationPrint: false,
@@ -61,8 +79,7 @@ export default {
 			playText: 'play'
 		};
 	},
-	computed: {
-	},
+
 	watch: {
 		audioVolume() {
 			if (this.$refs.audioFile) {
@@ -70,6 +87,7 @@ export default {
 			}
 		}
 	},
+
 	methods: {
 		timeFormat(time) {
 			let minutes = '';
@@ -82,10 +100,12 @@ export default {
 			}
 			return millisec(time).format(`${minutes}mm:${seconds}ss`);
 		},
+
 		progDown() {
-			window.addEventListener('mousemove', this.progSlide);
-			window.addEventListener('mouseup', this.progUp);
+			window.addEventListener('mousemove', this.progSlide, { passive: true });
+			window.addEventListener('mouseup', this.progUp, { passive: true });
 		},
+
 		progSlide(evt) {
 			let box = this.$refs.progressBar.getBoundingClientRect();
 			let mx = evt.pageX;
@@ -96,14 +116,17 @@ export default {
 			this.progress = `${amt * 100}%`;
 			this.$refs.audioFile.currentTime = amt * this.durationNum;
 		},
+
 		progUp() {
-			window.removeEventListener('mousemove', this.progSlide);
-			window.removeEventListener('mouseup', this.progUp);
+			window.removeEventListener('mousemove', this.progSlide, { passive: true });
+			window.removeEventListener('mouseup', this.progUp, { passive: true });
 		},
+
 		volDown() {
-			window.addEventListener('mousemove', this.volumeSlide);
-			window.addEventListener('mouseup', this.volUp);
+			window.addEventListener('mousemove', this.volumeSlide, { passive: true });
+			window.addEventListener('mouseup', this.volUp, { passive: true });
 		},
+
 		volumeSlide(evt) {
 
 			let box = this.$refs.volumeBar.getBoundingClientRect();
@@ -115,12 +138,12 @@ export default {
 			this.audioVolume = amt;
 		},
 		volUp() {
-			window.removeEventListener('mousemove', this.volumeSlide);
-			window.removeEventListener('mouseup', this.volUp);
+			window.removeEventListener('mousemove', this.volumeSlide, { passive: true });
+			window.removeEventListener('mouseup', this.volUp, { passive: true });
 		},
 		touchDown() {
-			window.addEventListener('touchmove', this.touchSlide);
-			window.addEventListener('touchend', this.touchUp);
+			window.addEventListener('touchmove', this.touchSlide, { passive: true });
+			window.addEventListener('touchend', this.touchUp, { passive: true });
 		},
 		touchSlide(evt) {
 			let box = this.$refs.volumeBar.getBoundingClientRect();
@@ -132,8 +155,8 @@ export default {
 			this.audioVolume = amt;
 		},
 		touchUp() {
-			window.removeEventListener('touchmove', this.touchSlide);
-			window.removeEventListener('touchend', this.touchUp);
+			window.removeEventListener('touchmove', this.touchSlide, { passive: true });
+			window.removeEventListener('touchend', this.touchUp, { passive: true });
 		},
 		clickVolume(evt) {
 
@@ -215,7 +238,10 @@ export default {
 		mgn(0,.25)
 
 .play-button, .volume-toggle
-	cursor pointer
+	background 0
+	border 0
+	padding 0
+	margin 0
 
 .progress-bar
 	width 60%
@@ -224,6 +250,7 @@ export default {
 	position relative
 	+below($notebook)
 		width 50%
+
 .finished
 	height 100%
 	background $blue
@@ -234,8 +261,9 @@ export default {
 	width 60px
 	background #d5d5d5
 
-.volume-level 
-	height 100%
-	width 6px
+.volume-level
 	background $blue
+	width 6px
+	height 100%
+
 </style>

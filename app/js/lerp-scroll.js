@@ -10,9 +10,9 @@ class LerpScroll {
 	constructor(el, cb) {
 
 		this.outer = el;
-		this.el = this.outer.querySelector(':first-child');
+		this.el = this.outer.querySelector('.page-scroll');
 
-		this.native = false;
+		// this.native = false;
 		this.lerpFactor = 10;
 
 		// if (this.native) {
@@ -85,7 +85,7 @@ class LerpScroll {
 			mousewheel: this.onMouseWheel,
 			touchmove: this.touchMove,
 			touchstart: this.touchStart
-		}[e.type] || (() => console.log(`No handler for event type ${e.type}`)))(); // eslint-disable=line no-console
+		}[e.type] || (() => console.log(`No handler for event type ${e.type}`)))(); // eslint-disable-line no-console
 
 		if (!this.tick) {
 			requestAnimationFrame(this.update);
@@ -97,17 +97,18 @@ class LerpScroll {
 		let dist = this.target - this.pos;
 		this.pos += dist / this.lerpFactor;
 
-		if (this.native) {
-			this.outer.scrollTop = -this.pos;
-		} else {
-			this.el.style.transform = `translate3d(0, ${this.pos}px, 0)`;
-		}
+		// if (this.native) {
+		// 	this.outer.scrollTop = -this.pos;
+		// } else {
+		this.el.style.transform = `translate3d(0, ${this.pos}px, 0)`;
+		// }
 
 		if (this.cb) {
-			this.cb({ pos: this.pos, source: this, pct: this.pos / this.max });
+			// this.cb({ pos: this.pos, source: this, pct: this.pos / this.max });
+			this.cb({ pos: this.pos });
 		}
 
-		this.tick = Math.abs(this.target - this.pos) > 0.1;
+		this.tick = Math.abs(this.target - this.pos) > 0.5;
 
 	}
 

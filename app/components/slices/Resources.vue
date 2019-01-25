@@ -88,7 +88,7 @@ export default {
 @import "../../styl/_variables"
 
 .resources
-	@extend .slice
+	@extend $slice
 	pad(2, 0)
 
 	&:nth-child(odd)

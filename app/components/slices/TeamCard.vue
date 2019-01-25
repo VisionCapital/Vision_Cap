@@ -79,7 +79,7 @@ export default {
 @import "../../styl/_variables"
 
 .team-cards
-	@extend .slice
+	@extend $slice
 
 	.card
 		&:nth-of-type(even)
