@@ -18,7 +18,7 @@
 				@click="loadTags(loadedPages + 1)"
 			>
 				<p v-html="`More ${data.text('title_tag')} `"/>
-				<arrow-head v-if="!loadingPages" class="arrow-head" color="#000000"/>
+				<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
 				<div class="spinner" v-else>*loadSpinner</div>
 			</button>
 
@@ -157,7 +157,5 @@ export default {
 	.arrow-head, .spinner
 		display inline-block
 		margin auto
-	/deep/ path
-		stroke $bluesat
-
+		
 </style>
