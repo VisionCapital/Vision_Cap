@@ -17,9 +17,9 @@
 							</svg>
 						</div>
 
-							<div class="link">
-								<h3 v-html="data.textField(link.gate_heading)"/>
-							</div>
+						<div class="link">
+							<h3 v-html="data.textField(link.gate_heading)"/>
+						</div>
 
 					</div>
 
@@ -38,14 +38,12 @@
 
 						<!-- <core-button type="link" :route="link.url" :label="link.label"></core-button> -->
 
-				<div class="border">
-					<div class="border-stroke"/>
+					<div class="border">
+						<div class="border-stroke"/>
+						<div class="link" v-html="link.label"></div>
+					</div>
 
-						<div class="link" v-html="link.label">
-											</div>
-
-						</div>
-						</router-link>
+				</router-link>
 			</div>
 
 		</div>
@@ -96,9 +94,6 @@ export default {
 
 	+above($tablet)
 		display flex
-
-	+below($tablet)
-		display inline-block
 
 .column
 	width 100%

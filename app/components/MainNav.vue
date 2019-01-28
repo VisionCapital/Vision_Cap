@@ -156,17 +156,20 @@ for i in 1..10
 		&:before
 			width 100%
 			left 0
+			background $w
 			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 
 		&:after
 			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 			width 100%
-			background none
+			background $w
 
 		&:hover
 			&::before
-				background $blue
+				background $bluesat
 				width 100%
+				transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+				
 
 			&::after
 				background $w

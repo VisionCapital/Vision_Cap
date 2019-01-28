@@ -196,6 +196,7 @@ a
 			transition transform 0.5s, opacity 0.5s
 			// height (78vw * (2 / 3) * 270 / 480)
 			// width 100%
+			max-width 100%
 
 			.v-enter &, .onpage:not(.inview) &
 				transform translateX(20%)
@@ -264,6 +265,8 @@ a
 .awards
 	.date
 		line-height 1
+		font-family $circular
+		fs(16)
 
 	.body
 		+above($tablet)
@@ -274,7 +277,9 @@ a
 	// 	width 78vw
 	// 	+above($laptop)
 	// 		width 74vw
-
+	.date
+		font-family $circular
+		fs(16)
 	.copy, .audio-component
 		+above($tablet)
 			width (600% / 9)

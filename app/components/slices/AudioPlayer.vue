@@ -6,17 +6,17 @@
 			v-if="audio"
 			@loadeddata="loaded()"
 			:src="audio.url">
-			<p>Your browser does not support ths audio file, here is a <a :href="audio.url">link to the audio</a> instead</p>
+			<p>Your browser does not support this audio file, here is a <a :href="audio.url">link to the audio</a> instead</p>
 		</audio>
 
 		<div v-if="audio" class="audio-container">
 
 			<button class="play-button" @click.prevent="playToggle()"
 				:title="playText">
-				<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" focusable="false">
+				<svg v-if="playText === 'play'" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" focusable="false">
 					<path fill="#00227D" fill-rule="evenodd" d="M0 .5v16.779l9.518-8.39z"/>
 				</svg>
-				<svg xmlns="http://www.w3.org/2000/svg" width="9" height="14" viewBox="0 0 9 14">
+				<svg v-else xmlns="http://www.w3.org/2000/svg" width="9" height="14" viewBox="0 0 9 14">
 					<g fill="#00227D" fill-rule="evenodd">
 						<path d="M0 0h3v14H0z"/>
 						<path d="M6 0h3v14H6z"/>
@@ -37,7 +37,7 @@
 			<div class="time remaining" v-html="durationPrint">remaining time</div>
 
 			<button class="volume-toggle" @click.prevent="volumeToggle()">
-				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" focusable="false">
+				<svg v-if="!muted" xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" focusable="false">
 					<g fill="#040170" fill-rule="evenodd">
 						<path d="M0 10.5h3v-7H0z"/>
 						<path d="M10 .5L4 3.647v6.706l6 3.147V.5z"/>
@@ -45,7 +45,7 @@
 						<path d="M13.084 10.881l-1.032-.777.406-.495a4.07 4.07 0 0 0 .94-2.605 4.07 4.07 0 0 0-.94-2.605l-.406-.495 1.032-.777.406.494a5.284 5.284 0 0 1 1.22 3.383 5.284 5.284 0 0 1-1.22 3.383l-.406.494z"/>
 					</g>
 				</svg>
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
+				<svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
 					<g fill="none" fill-rule="evenodd">
 						<path fill="#040170" d="M0 10.5h3v-7H0z"/>
 						<path fill="#040170" d="M10 .5L4 3.647v6.706l6 3.147V.5z"/>
@@ -87,12 +87,13 @@ export default {
 	data() {
 		return {
 			currentPrint: 0.00,
-			durationPrint: false,
+			durationPrint: '00:00',
 			durationNum: 0,
 			currentNum: 0,
 			progress: '0%',
 			audioVolume: 0,
-			playText: 'play'
+			playText: 'play',
+			muted: false
 		};
 	},
 
@@ -100,6 +101,7 @@ export default {
 		audioVolume() {
 			if (this.$refs.audioFile) {
 				this.$refs.audioFile.volume = this.audioVolume;
+				this.muted = this.$refs.audioFile.muted;
 			}
 		}
 	},
@@ -152,6 +154,11 @@ export default {
 
 			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
 			this.audioVolume = amt;
+			if (amt <= 0) {
+				this.$refs.audioFile.muted = true;
+			} else {
+				this.$refs.audioFile.muted = false;
+			}
 		},
 		volUp() {
 			window.removeEventListener('mousemove', this.volumeSlide, { passive: true });
@@ -169,6 +176,11 @@ export default {
 
 			let amt = Math.max(0, Math.min(bw, mx - bx)) / bw;
 			this.audioVolume = amt;
+			if (amt <= 0) {
+				this.$refs.audioFile.muted = true;
+			} else {
+				this.$refs.audioFile.muted = false;
+			}
 		},
 		touchUp() {
 			window.removeEventListener('touchmove', this.touchSlide, { passive: true });
@@ -197,6 +209,7 @@ export default {
 		},
 		volumeToggle() {
 			this.$refs.audioFile.muted = !this.$refs.audioFile.muted;
+			this.muted = this.$refs.audioFile.muted;
 		},
 		playToggle() {
 			if (this.$refs.audioFile.paused) {
@@ -264,6 +277,7 @@ export default {
 	border 0
 	padding 0
 	margin 0
+	width 1rem
 
 .progress-bar
 	width 60%
@@ -288,4 +302,6 @@ export default {
 	width 6px
 	height 100%
 
+.time.elapsed
+	width 2rem
 </style>

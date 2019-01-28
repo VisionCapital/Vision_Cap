@@ -78,6 +78,8 @@ export default {
 
 @import "../../styl/_variables"
 
+
+
 .newsletter-signup
 	background #f5f5f5
 	pad(4,0)
@@ -127,6 +129,7 @@ export default {
 	.ctct-form-field
 		position relative
 		overflow hidden
+
 		span
 			background $blue
 			position absolute
@@ -135,6 +138,8 @@ export default {
 			bottom 0
 			height 2px
 			transition width 0.5s 0.2s
+			+below($tablet)
+				width 100%
 	.ctct-form-custom
 		padding 0 0 46px
 
@@ -166,6 +171,12 @@ export default {
 		display none
 	.ctct-form-element
 		transition transform 0.5s 0.4s
+
+		&:focus
+			+ span 
+				background $bluesat
+		&:focus 
+			outline none
 		width 60%
 		background none
 		border none
@@ -180,6 +191,8 @@ export default {
 	#gdpr_text
 		order 5
 		opacity .5
+		p
+			font-family $circular
 		/deep/ p
 			font-family $circular
 			+below($tablet)

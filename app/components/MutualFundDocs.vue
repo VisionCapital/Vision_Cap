@@ -164,14 +164,17 @@ for i in 1..12
 	.v-enter &, .onpage:not(.inview) &
 		width 0%
 
+
+
 .row
-	
 	display flex
 	position relative
 	justify-content space-between
 	align-items center
 	+above($tablet)
 		pad(0,1.5)
+		&:nth-child(2)
+			padding-top 2em
 	+below($mobile)
 		&:last-child
 			border-bottom none

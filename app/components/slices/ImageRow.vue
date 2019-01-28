@@ -37,14 +37,19 @@ export default {
 	display flex
 	// width 50%
 	+below($tablet)
+		// justify-content space-around
 		width 100%
-
-	+below($mobile)
 		flex-wrap wrap
 
 .image-container
 	mgn(.5,2,.5,0)
-
+	for i in 1..10
+		&:nth-child({i})
+			transition opacity 0.5s (0.1 * i)s, transform 0.5s (0.1 * i)s
+		
+	.v-enter &, .onpage:not(.inview) &
+		transform translate(0, 8rem)
+		opacity 0
 	&:last-child
 		mgn(.5,0)
 
