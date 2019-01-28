@@ -138,6 +138,8 @@ export default {
 			bottom 0
 			height 2px
 			transition width 0.5s 0.2s
+			+below($tablet)
+				width 100%
 	.ctct-form-custom
 		padding 0 0 46px
 
