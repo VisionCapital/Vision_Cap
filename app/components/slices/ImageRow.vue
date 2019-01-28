@@ -37,9 +37,8 @@ export default {
 	display flex
 	// width 50%
 	+below($tablet)
+		// justify-content space-around
 		width 100%
-
-	+below($mobile)
 		flex-wrap wrap
 
 	// flex-direction: row;
