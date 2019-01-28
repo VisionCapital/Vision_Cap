@@ -167,14 +167,14 @@ for i in 1..12
 
 
 .row
-	&:nth-child(2)
-		padding-top 2em
 	display flex
 	position relative
 	justify-content space-between
 	align-items center
 	+above($tablet)
 		pad(0,1.5)
+		&:nth-child(2)
+			padding-top 2em
 	+below($mobile)
 		&:last-child
 			border-bottom none
