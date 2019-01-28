@@ -6,22 +6,18 @@
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
 				v-html="data.html('bar_chart_title')"/>
 
-			<div class="title-copy" v-else-if="subheading">
-				<h3 v-html="subheading"/>
-			</div>
-
 		</div>
 
 		<div class="title-card" v-if="$store.state.device.mobile">
 
 			<div class="bg"/>
 
-			<h2 v-if="heading"
-				v-html="heading"/>
-
 			<h2 v-html="data.html('vision_opp_pdf_title')"/>
 
-			<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+			<a :href="data.fields.pdf_upload.url"
+				target="_blank" rel="noopener"
+				v-html="data.html('pdf_link_name')"
+				:title="data.html('pdf_link_name')"/>
 
 		</div>
 
@@ -30,9 +26,6 @@
 			<div class="title-card" v-if="!$store.state.device.mobile">
 
 				<div class="bg"/>
-
-				<h2 v-if="heading"
-					v-html="heading"/>
 
 				<h2 v-html="data.html('vision_opp_pdf_title')"/>
 

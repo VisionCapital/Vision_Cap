@@ -25,12 +25,15 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
+
 .single-column-copy
 	@extend $slice
 	padding 6em 0
+
+.wrap
 	transition opacity 0.5s
 
-	&.v-enter, &.onpage:not(.inview)
+	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 
 </style>

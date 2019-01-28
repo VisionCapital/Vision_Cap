@@ -96,21 +96,14 @@ export default {
 
 .footer
 	background $bg
+	color $w
+	position relative
 	z-index 2
 
-	+below($notebook)
-
-		a:after
-			background:none
-
-		a:before
-			background:none
-
-.logo-outer
-	max-width: 280px
-
-	+below($notebook)
-		position relative
+	// +below($notebook)
+	// 	/deep/
+	// 		a::before, a::after
+	// 		content none
 
 .home-link
 	display inline-block
@@ -118,14 +111,6 @@ export default {
 
 	&::before, &::after
 		content none
-
-.footer
-	color $w
-	position relative
-	// overflow hidden
-	// z-index 2
-	// +below($tablet)
-	// 	pad(1,1)
 
 .linkwrap
 	vertical-align middle
@@ -272,7 +257,6 @@ a.router-link-exact-active, .drop-toggle .router-link-active
 	&:hover
 		&::before
 			background none
-
 			width 0%
 
 		&::after

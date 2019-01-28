@@ -9,16 +9,8 @@
 						:src="data.image('hero_image')"/>
 				</div>
 
-				<h1 v-if="heading"
-					v-html="heading"/>
-				<h1 v-else-if="data.fields.hero_title.length"
+				<h1 v-if="data.fields.hero_title.length"
 					v-html="data.text('hero_title')"/>
-
-				<h3 v-if="subheading"
-					v-html="subheading"/>
-
-				<p v-if="copy"
-					v-html="copy"/>
 
 				<div v-if="data.fields.hero_copy.length"
 					v-html="data.html('hero_copy')"/>

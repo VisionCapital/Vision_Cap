@@ -11,7 +11,7 @@ a
 	position relative
 	text-decoration: none
 
-	&:before, &:after
+	&::before, &::after
 		background: $w
 		content: ''
 		height 2px
@@ -19,21 +19,21 @@ a
 		top 100%
 		width: 0%
 
-	&:before
+	&::before
 		left: 0
 
-	&:after
+	&::after
 		right 0
 		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 
 	&:hover
 		color: $blue
 
-		&:before
+		&::before
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 			width: 100%
 
-		&:after
+		&::after
 			background: $blue
 			transition: 0s
 			width: 100%
@@ -62,8 +62,6 @@ h1
 	line-height 1
 	letter-spacing -(1.21 / 100) * 1em
 	margin-left -.08em
-	// orphans 10
-	// widows 10
 
 	+below($mobile)
 		fs(mp(4))
@@ -80,14 +78,6 @@ h4
 
 h5
 	fs(mp(1))
-
-// p
-// 	orphans 5
-// 	widows 4
-
-// p
-// 	+below($mobile)
-// 		fs(mp(1))
 
 pre
 	font-family: monospace
