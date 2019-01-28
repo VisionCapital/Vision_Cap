@@ -6,7 +6,7 @@
 				<div class="input-container">
 					<input :id="`field-${idx}`"
 						type="text"
-						:name="data.textField(field.key)"
+						:name="data.textField(field.key).toLowerCase()"
 						:style="{'transition-delay': `${0.3 * idx + 0.2}s`}"
 						:placeholder="data.textField(field.placeholder)"
 						:required="field.required === 'Yes'">
@@ -19,12 +19,12 @@
 			<div class="input-container">
 				<textarea rows="1"
 					v-if="data.fields.textarea_placeholder"
-					:placeholder="data.textField(data.fields.textarea_placeholder)"
+					name="message"
+					:placeholder="data.textField(data.fields.textarea_placeholder).toLowerCase()"
 					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
 				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
 			</div>
 				<button id="submit"
-					@click="doSubmit()"
 					name="submit"
 					type="submit"
 					:style="{'transition-delay': `${fields.length * 0.3 + 0.3}s`}"
