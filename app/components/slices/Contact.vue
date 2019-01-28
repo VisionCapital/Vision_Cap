@@ -63,7 +63,7 @@ export default {
 	.copy
 		mgn(0,auto)
 		max-width 656px
-		width 75%
+		width 90%
 
 h3, h4
 	transition opacity 0.5s, transform 0.5s $easeOutCubic
