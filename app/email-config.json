@@ -1,5 +1,5 @@
 {
-	"action": "https://yvwz0pz64f.execute-api.us-east-1.amazonaws.com/prod/frank walker/email",
+	"action": "https://yvwz0pz64f.execute-api.us-east-1.amazonaws.com/prod/visioncap-prod/email",
 	"to": [
 		"ben@arrayofstars.com"
 	],
