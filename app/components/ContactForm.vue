@@ -108,7 +108,7 @@ option {
 
 form
 	position relative
-
+	pad(0,1)
 	+above($tablet)
 		// width 60%
 		display flex
