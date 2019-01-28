@@ -3,50 +3,70 @@
 // ----------
 
 html, body, #app, .app, .page
-	height: 100%
+	height 100%
 	overflow hidden
 
 a
-	color: black
+	color black
 	position relative
-	text-decoration: none
+	text-decoration none
 
 	&::before, &::after
-		background: $w
-		content: ''
+		background $blue
+		content ''
 		height 2px
-		position: absolute
+		position absolute
 		top 100%
-		width: 0%
+		width 0%
 
 	&::before
-		left: 0
+		left 0
 
 	&::after
 		right 0
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+		transition width 0.8s cubic-bezier(0.25,0.1,0.25,1)
 
 	&:hover
-		color: $blue
+		color $blue
 
 		&::before
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-			width: 100%
+			transition width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+			width 100%
 
 		&::after
-			background: $blue
-			transition: 0s
-			width: 100%
+			background 0
+			transition 0s
+			width 100%
+
+	&.active
+		&::before
+			background $bluesat
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+		&::after
+			background $b
+			transition-duration 0.6s
+			width 100%
+
+		&:hover
+			&::before
+				transition-duration 0.6s
+
+			&::after
+				background $b
+				transition-duration 0.5s
+				width 0
+
 
 img, svg
-	display: block
-	height: auto
-	max-width: 100%
+	display block
+	height auto
+	max-width 100%
 
 h1, h2, h3, h4, h5, p
 	font-weight normal
 	mgn(1,0)
-	max-width: $pwidth*1em
+	max-width $pwidth*1em
 
 h1, h2, h3, h4
 	font-family $cormorant
@@ -64,11 +84,14 @@ h1
 	margin-left -.08em
 
 	+below($mobile)
-		fs(mp(4))
+		fs(60)
 
 h2
 	fs(80)
-	line-height: (100 / 80)
+	line-height (100 / 80)
+
+	+below($mobile)
+		fs(60)
 
 h3
 	fs(44)
@@ -80,7 +103,7 @@ h5
 	fs(mp(1))
 
 pre
-	font-family: monospace
+	font-family monospace
 	fs(mp(0))
 
 ul, ol
@@ -91,10 +114,10 @@ ul, ol
 		mgn(.5,0)
 
 ul
-	list-style: disc
+	list-style disc
 
 ol
-	list-style: decimal
+	list-style decimal
 
 form
 	mgn(1,0)
@@ -103,37 +126,36 @@ form
 	mgn(.5,0)
 
 button, input, label, select, textarea
-	display: block
-	font: inherit
-	line-height: $let
-	width: 100%
+	display block
+	font inherit
+	line-height $let
+	width 100%
 
 button, input, select, textarea
-	appearance: none
-	background: none
-	// border: 1px solid $blue
+	appearance none
+	background none
 	border-radius 0
-	outline: 0
+	outline 0
 
 	&:focus
-		border-color: $blk
+		border-color $blk
 
 button, [type=submit]
-	cursor: pointer
+	cursor pointer
 	mgn(0, auto)
 	pad(.25, 1)
-	width: auto
+	width auto
 
 // ----------
 // clearfix
 // ----------
 
 .cf
-	*zoom: 1
+	*zoom 1
 
 	&::before, &::after
-		content: ' '
-		display: block
+		content ' '
+		display block
 
 	&::after
-		clear: both
+		clear both

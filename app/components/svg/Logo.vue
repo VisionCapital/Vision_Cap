@@ -50,10 +50,14 @@ export default {
 	/deep/ svg
 		height (268 / 2040) * 210px
 		width 210px
+		// height $let * 1rem
+		// width (2040 / 268) * $let * 1rem
 
 		+above($tablet)
 			height (268 / 2040) * 280px
 			width 280px
+			// height $let * 1.5rem
+			// width (2040 / 268) * $let * 1.5rem
 
 .cube-wrap
 	position absolute
@@ -67,10 +71,6 @@ export default {
 		height 52px
 		top -7px
 		left -2px
-
-.links:not(.bg-links)
-	.cls-8
-		fill #fff
 
 .light
 	.cls-1, .cls-8

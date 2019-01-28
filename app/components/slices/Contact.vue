@@ -27,12 +27,6 @@ export default {
 	mixins: [ airprops ],
 	components: {
 		ContactForm
-	},
-	data() {
-		return {
-		};
-	},
-	methods: {
 	}
 };
 </script>
@@ -43,33 +37,36 @@ export default {
 
 .contact-form
 	@extend $slice
-	text-align center
 	background $blue
-	.wrap
-		color $w
-		position relative
-		pad(2,0)
+	text-align center
 
-		/deep/ h3
+.wrap
+	color $w
+	pad(2,0)
+
+.copy
+	mgn(0,auto)
+	max-width 656px
+	width 90%
+
+	/deep/
+		h3, h4
+			transition opacity 0.5s, transform 0.5s $easeOutCubic
+
+			.v-enter &, .onpage:not(.inview) &
+				transform translate(0,50%)
+				opacity 0
+
+		h3
 			color $w
-		/deep/ h4
-			max-width 100%
-			// color #5079E8
+
+		h4
 			color #00b7f5
+			color #4A90E2
 			fs(26)
+			transition-delay 0.25s
+
 			+below($tablet)
 				fs(20)
 
-	.copy
-		mgn(0,auto)
-		max-width 656px
-		width 90%
-
-h3, h4
-	transition opacity 0.5s, transform 0.5s $easeOutCubic
-	.v-enter &, .onpage:not(.inview) &
-		transform translate(0,50%)
-		opacity 0
-h4
-	transition-delay 0.25s
 </style>

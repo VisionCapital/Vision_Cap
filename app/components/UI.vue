@@ -1,8 +1,8 @@
 <template>
 	<div class="app">
 
+			<!-- v-if="($store.state.device.win.x > 1366) || $store.state.navOpen" -->
 		<main-nav
-			v-if="($store.state.device.win.x > 1366) || $store.state.navOpen"
 			:pageTop="pageTop"/>
 
 		<transition appear mode="out-in" duration="1000">
@@ -41,7 +41,9 @@ export default {
 
 	watch: {
 		$route() {
-			this.pageTop = true;
+			setTimeout(() => {
+				this.pageTop = true;
+			}, 800);
 		}
 	},
 

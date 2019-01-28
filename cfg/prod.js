@@ -1,5 +1,5 @@
 module.exports = {
-	title: 'Envoy',
+	title: 'Vision Capital',
 	description: '', // meta description for SEO
 	publicPath: '/',
 	analyticsId: 'UA-XXXXXXXX-X',

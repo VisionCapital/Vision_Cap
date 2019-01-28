@@ -100,11 +100,6 @@ export default {
 	position relative
 	z-index 2
 
-	// +below($notebook)
-	// 	/deep/
-	// 		a::before, a::after
-	// 		content none
-
 .home-link
 	display inline-block
 	margin 0 auto
@@ -151,10 +146,6 @@ export default {
 		max-width 1060px
 		width 80%
 
-	// +below($mobile)
-	// 	display inline-block
-	// 	width auto
-
 	/deep/
 		a
 			color $w
@@ -166,7 +157,6 @@ export default {
 				fs(12)
 
 		li
-			// max-width 280px
 			margin auto 0
 			pad(1,.5)
 			position relative

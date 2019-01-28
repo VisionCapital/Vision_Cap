@@ -41,7 +41,7 @@ export default {
 	transition transform 500ms $easeInOutCubic
 	top 50%
 
-	.logo-outer
+	.logo-outer /deep/ svg
 		height (268 / 2040) * 50vw
 		width 50vw
 

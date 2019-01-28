@@ -16,8 +16,9 @@
 
 			<a :href="data.fields.pdf_upload.url"
 				target="_blank" rel="noopener"
-				v-html="data.html('pdf_link_name')"
-				:title="data.html('pdf_link_name')"/>
+				class="active"
+				v-html="data.text('pdf_link_name')"
+				:title="data.text('pdf_link_name')"/>
 
 		</div>
 
@@ -29,7 +30,11 @@
 
 				<h2 v-html="data.html('vision_opp_pdf_title')"/>
 
-				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+				<a :href="data.fields.pdf_upload.url"
+					target="_blank" rel="noopener"
+					class="active"
+					v-html="data.text('pdf_link_name')"
+					:title="data.text('pdf_link_name')"/>
 
 			</div>
 
@@ -227,8 +232,8 @@ export default {
 			opacity 0
 
 	/deep/
-		a::before, a::after
-			background none
+		// a::before, a::after
+		// 	background none
 
 		h2, a
 			color $w
@@ -249,43 +254,13 @@ export default {
 		a
 			display inline-block
 			transition opacity 0.5s 0.4s, transform 0.5s 0.4s
-			z-index 1000
-			/deep/ p
 
-					margin-bottom -0rem
-
-			&:before, &:after
-				content: ''
-				position: absolute;
-				height 3px
-
-			&:before
-				content: ''
-				background: $w;
-				left 0
-				top 100%
-				width: 0%
-
-			&:after
-				background: $w;
-				right: 2px;
-				right 0
-				top 100%
-				width: 0%
-				transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1);
+			&::after
+				background $w
 
 			&:hover
-				color: $w;
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-				&:before
-					width: 100%;
-					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1);
-
-				&:after
-					width: 100%;
-					transition: 0s;
-					background: transparent;
+				&::after
+					background $w
 
 	.bg
 		background url('../../images/strip-bg.jpg')
@@ -506,8 +481,10 @@ export default {
 	color $blue
 	fs(12)
 
-	+below($tablet)
-		/deep/ p
+	/deep/ p
+		mgn(.5, 0)
+
+		+below($tablet)
 			margin 0
 
 </style>

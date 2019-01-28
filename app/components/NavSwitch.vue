@@ -24,9 +24,9 @@
 
 		</div>
 
-		<transition>
+		<!-- <transition>
 			<div class="bg" :class="{'nav-open': $store.state.navOpen}" v-if="!pageTop || $store.state.navOpen"></div>
-		</transition>
+		</transition> -->
 
 	</div>
 </template>

@@ -13,7 +13,7 @@
 					<div class="contact" v-for="(contact, idx) in contacts" :key="idx">
 
 						<div v-if="contact.contact_name" v-html="data.htmlField(contact.contact_name)"></div>
-						<a :href="`tel:${data.textField(contact.contact_phone)}`"
+						<a :href="`tel:${renderTel(data.textField(contact.contact_phone))}`"
 							v-if="contact.contact_phone"
 							v-html="data.textField(contact.contact_phone)"/>
 						<em v-if="contact.contact_email && contact.contact_phone">or</em>
@@ -36,6 +36,20 @@ import airprops from '../../mixins/airprops';
 
 export default {
 	mixins: [ airprops ],
+
+	methods: {
+		renderTel(tel) {
+			let num = tel;
+
+			num = num.replace('-', '');
+			num = num.replace('(', '');
+			num = num.replace(')', '');
+			num = num.replace(' ', '');
+
+			return '+1' + num;
+		}
+	},
+
 	data() {
 		let contacts = this.data.items;
 		return {

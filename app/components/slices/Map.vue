@@ -1,5 +1,5 @@
 <template>
-	<div class="map-background">
+	<div class="map">
 		<div class="annotations-wrap-wrap">
 			<div class="annotations-wrap">
 				<div class="annotations">
@@ -7,7 +7,10 @@
 					<div class="cta">
 						<h2 v-html="data.text('map_title')"/>
 						<p v-html="data.text('map_location')"/>
-						<a :href="data.fields.map_link.url" target="_blank">
+						<a :href="data.fields.map_link.url"
+							target="_blank" rel="noopener"
+							:title="data.text('map_link_title')"
+							class="active">
 							<div v-html="data.text('map_link_title')"/>
 						</a>
 					</div>
@@ -29,12 +32,10 @@
 				zoomControlOptions: {
 					position:	6
 				},
-			}"
-		>
+			}">
 			<GmapMarker
 				:icon="{url: require('../../images/map-icon.png')}"
-				:position="{lat: markerCenter.lat, lng: markerCenter.lng}"
-			/>
+				:position="{lat: markerCenter.lat, lng: markerCenter.lng}"/>
 		</GmapMap>
 
 	</div>
@@ -55,9 +56,7 @@ Vue.use(VueGoogleMaps, {
 
 export default {
 	mixins: [ airprops ],
-	props: [
-		'inview'
-	],
+	props: [ 'inview' ],
 	watch: {
 		inview(newVal) {
 			if (newVal) {
@@ -206,7 +205,7 @@ export default {
 
 @import "../../styl/_variables"
 
-.map-background
+.map
 	background-color $lightgrey
 
 .annotations-wrap-wrap
@@ -246,11 +245,7 @@ export default {
 			height 36vw
 			pad(1,0)
 			width 100%
-			//width (200%/ 6)
 
-			// /deep/
-			// 	h2
-			// 		margin 0
 			.button
 				width 100%
 
@@ -266,8 +261,9 @@ export default {
 	+below($notebook)
 		width 100%
 		left 0
-/deep/ .gmnoprint
-	right auto
+
+	/deep/ .gmnoprint
+		right auto
 
 //--------------------------------------------------
 p, a div, h2
@@ -278,11 +274,11 @@ p, a div, h2
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(2rem)
-a
-	&:before, &:after
-		background $blue
-	&:hover:after
-		background transparent
+// a
+// 	&:before, &:after
+// 		background $blue
+// 	&:hover:after
+// 		background transparent
 p
 	max-width 80%
 	transition-delay 0.3s
