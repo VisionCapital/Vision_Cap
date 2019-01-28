@@ -46,12 +46,14 @@ export default {
 
 .logo-outer
 	position relative
-	height (268 / 2040) * 210px
-	width 210px
 
-	+above($tablet)
-		height (268 / 2040) * 280px
-		width 280px
+	/deep/ svg
+		height (268 / 2040) * 210px
+		width 210px
+
+		+above($tablet)
+			height (268 / 2040) * 280px
+			width 280px
 
 .cube-wrap
 	position absolute

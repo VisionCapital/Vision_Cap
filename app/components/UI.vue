@@ -2,9 +2,8 @@
 	<div class="app">
 
 		<main-nav
-			v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
-			:pageTop="pageTop"
-		/>
+			v-if="($store.state.device.win.x > 1366) || $store.state.navOpen"
+			:pageTop="pageTop"/>
 
 		<transition appear mode="out-in" duration="1000">
 			<div class="stripes-bg"
@@ -17,7 +16,7 @@
 				:key="$route.fullPath"/>
 		</transition>
 
-		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
+		<nav-switch v-if="$store.state.device.win.x <= 1366" :pageTop="pageTop"/>
 
 		<transition appear mode="out-in" duration="1000">
 			<div class="wipe"
@@ -84,7 +83,7 @@ export default {
 @import "../styl/_variables"
 
 .app
-	background linear-gradient(120deg, #071559, #030532)
+	background linear-gradient(142deg, #011254, #00022e)
 
 .stripes-bg
 	background url('../images/strip-bg.jpg')
@@ -114,7 +113,7 @@ export default {
 		transition-delay 1000ms
 
 .wipe
-	background linear-gradient(120deg, #071559, #030532)
+	background linear-gradient(142deg, #011254, #00022e)
 	abs()
 	position fixed
 	pointer-events none

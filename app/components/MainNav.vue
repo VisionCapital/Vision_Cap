@@ -2,14 +2,14 @@
 	<div class="main-nav">
 
 		<transition appear>
-			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"
+			<div class="bg" v-if="$store.state.device.win.x < 1366 || !pageTop"
 				:key="$route.fullPath"/>
 		</transition>
 
 		<nav>
 			<ul :class="[ 'links', { 'bg-links' : !pageTop }]" v-if="$store.state.navData">
 
-				<li v-if="$store.state.device.win.x > 1024">
+				<li v-if="$store.state.device.win.x > 1366">
 					<router-link
 						to="/"
 						@click.native="handleClick()"
@@ -115,19 +115,16 @@ export default {
 	width 100%
 	z-index 10
 
-	+below($notebook)
-		height 85%
-		top 15%
-		pad(0,1,2)
+	+below($laptop)
+		// height 85%
+		// top 15%
+		pad(3, 0)
 		font-family $cormorant
 		fs(30)
 		-webkit-overflow-scrolling touch
 		overflow-y scroll
 		overflow-x hidden
 		z-index 12
-
-	+below($tablet)
-		padding-bottom 5vw
 
 .bg
 	background $b
@@ -138,7 +135,7 @@ export default {
 	&.v-leave-to
 		transform translate3d(0, -100%, 0)
 
-	+below($notebook)
+	+below($laptop)
 		display none
 
 for i in 1..10
@@ -150,12 +147,10 @@ for i in 1..10
 			transform translateY(1rem)
 
 .links
-	display flex
 	margin 0 auto
 	list-style none
 	padding 0
 	position relative
-	margin 0 12px
 
 	a.router-link-exact-active, .drop-toggle .router-link-active
 		&:before
@@ -179,18 +174,33 @@ for i in 1..10
 				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 				width 0%
 
-	+below($notebook)
-		flex-direction column
-		justify-content flex-start
-		min-height 100%
+	margin 0 auto
+	max-width 1060px
+	width (300 / 375) * 100%
+
+	+above($tablet)
+		width (540 / 768) * 100%
 
 	+above($notebook)
-		margin 0 auto
-		max-width 1060px
+		width (780 / 1024) * 100%
+
+	+above($laptop)
+		display flex
+		width (1060 / 1366) * 100%
+
+	+above($laptop)
 		width (780 / 1024) * 100%
 
 	+above($laptop)
 		width (1060 / 1366) * 100%
+
+		/deep/
+			li:first-child
+				margin-right auto
+				padding-left 0
+
+			li:last-child
+				padding-right 0
 
 	/deep/
 		li, a
@@ -202,21 +212,15 @@ for i in 1..10
 			margin auto 0
 			position relative
 
-			+below($notebook)
+			+below($laptop)
+				display block
 				padding 4vh 0 0 0
 
 			&.dropdown
-				+above($notebook)
+				+above($laptop)
 					pad(0,0)
 					/deep/ a:after, a:before
 						top 1.75em
-
-		li:first-child
-			margin-right auto
-			padding-left 0
-
-		li:last-child
-			padding-right 0
 
 		a
 			color $w
@@ -228,7 +232,7 @@ for i in 1..10
 			// 	fs(14)
 			// 	mgn(0,0)
 
-			+below($notebook)
+			+below($laptop)
 				fs(30)
 
 			&::before, &::after
@@ -242,7 +246,7 @@ for i in 1..10
 	position relative
 
 .drop-toggle
-	+above($notebook)
+	+above($laptop)
 		pad(1,0,1,.5)
 
 	/deep/
@@ -255,24 +259,27 @@ for i in 1..10
 			margin 0
 			padding 0
 
-			+above($notebook)
+			+above($laptop)
 				pad(.5,.25)
 
 	.arrow-head
 		display block
 		width: 0.7em
 
-		+below($notebook)
+		+below($laptop)
 			width 0.3em
 
 .anchor-links
 	font-family $circular
 
-	+above($notebook)
+	+above($laptop)
 		left $gut*-.5rem
 		position absolute
 		right $gut*-.5rem
 		top 100%
+
+	+below($laptop)
+		padding-top 2vh
 
 	+below($tablet)
 		fs(18)
@@ -282,7 +289,7 @@ for i in 1..10
 		a
 			background $b
 
-	+below($notebook)
+	+below($laptop)
 		fs(18)
 
 	/deep/ a
@@ -309,22 +316,24 @@ for i in 1..10
 					.text
 						transition-delay 100ms * (i + 1)
 
-		+below($notebook)
-			&:first-child
-				pad(1,0,0)
-			&:last-child
-				pad(0.8,0,1)
-			pad(0.8,0,0)
+		+below($laptop)
+			// pad(0.8,0,0)
 			margin 0
 
+			// &:first-child
+			// 	pad(1,0,0)
+			// &:last-child
+			// 	pad(0.8,0,1)
+
 	.text
-		pad(.5, .5)
+		pad(.5, 0, .5, 1)
 		fs(16)
 		transition opacity 0.3s, transform 0.3s
 
-		+above($notebook)
-			text-align center
+		+above($laptop)
 			line-height (15 / 13)
+			pad(.5, .5)
+			text-align center
 
 	.v-enter, .v-leave-to
 		.text
@@ -333,6 +342,6 @@ for i in 1..10
 
 .home-link
 	&:before, &:after
-		display none
+		content none
 
 </style>

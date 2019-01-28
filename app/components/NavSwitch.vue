@@ -11,9 +11,11 @@
 			</router-link>
 
 			<button v-if="!$store.state.navOpen" @click.prevent="$store.dispatch('toggleNav')">
-				<svg xmlns="http://www.w3.org/2000/svg" width="23" height="17" viewBox="0 0 23 17">
-					<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="square">
-						<path d="M.5.5h22M4 8.5h15M.5 16.5h22"/>
+				<svg xmlns="http://www.w3.org/2000/svg" width="26" height="15" viewBox="0 0 26 15">
+					<g fill="#FFF" fill-rule="evenodd">
+						<path d="M0 13.636h26V15H0z"/>
+						<path d="M0 6.818h26v1.364H0z"/>
+						<path d="M0 0h26v1.364H0z"/>
 					</g>
 				</svg>
 			</button>
@@ -66,39 +68,31 @@ export default {
 		justify-content space-between
 		pad(1,0)
 
-	a:after
-		background:none
+	/deep/
+		a::before, a::after
+			content none
 
-	a:before
-		background:none
+		button
+			appearance none
+			background none
+			border 0
+			padding 0
+			mgn(0,0)
+			text-align center
 
-	/deep/ button
-		appearance none
-		background none
-		border 0
-		padding 0
-		mgn(0,0)
-		text-align center
+			svg
+				display inline-block
+				vertical-align middle
 
-		/deep/ svg
-			display inline-block
-			vertical-align middle
+		canvas
+			width 50%
 
-canvas
-	width 50%
-
-.close-outer.close-outer
-	top: 0
-	right: 0
-	position relative
-	height 23px
-	width 23px
-
-.home-link
-	.logo-outer
-		/deep/ svg
-			height (268/2040)*210px
-			width 210px
+	.close-outer.close-outer
+		top: 0
+		right: 0
+		position relative
+		height 23px
+		width 23px
 
 .bg
 	position absolute
@@ -119,4 +113,5 @@ canvas
 
 	&.nav-open
 		height 100vh
+
 </style>
