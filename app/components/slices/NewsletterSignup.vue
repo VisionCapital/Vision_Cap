@@ -138,6 +138,8 @@ export default {
 			bottom 0
 			height 2px
 			transition width 0.5s 0.2s
+			+below($tablet)
+				width 100%
 	.ctct-form-custom
 		padding 0 0 46px
 
@@ -189,6 +191,8 @@ export default {
 	#gdpr_text
 		order 5
 		opacity .5
+		p
+			font-family $circular
 		/deep/ p
 			font-family $circular
 			+below($tablet)
