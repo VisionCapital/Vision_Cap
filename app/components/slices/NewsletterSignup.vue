@@ -212,6 +212,7 @@ export default {
 			text-align center
 			// margin 0
 			margin auto
+			margin-left 0
 			// pad(0,0.5,0)
 
 svg

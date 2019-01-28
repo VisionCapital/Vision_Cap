@@ -206,7 +206,9 @@ form
 			mgn(1.5,auto,0)
 
 		span
-			pad(0,.5,0,.25)
+			pad(0,.5,0,0)
+			margin auto
+			margin-left 0
 
 		&:hover, &:focus
 			background $copy

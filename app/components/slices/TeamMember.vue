@@ -203,7 +203,7 @@ export default {
 	word-wrap break-word
 
 	&.full-copy
-		overflow visible
+		overflow hidden
 		max-height 100%
 	/deep/
 		li

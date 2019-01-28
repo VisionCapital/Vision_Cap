@@ -170,9 +170,8 @@ for i in 1..10
 
 		&:hover
 			&::before
-				background none
-
-				width 0%
+				background $blue
+				width 100%
 
 			&::after
 				background $w
@@ -225,9 +224,9 @@ for i in 1..10
 			font-smoothing()
 			vertical-align top
 
-			+below($laptop)
-				fs(10.5)
-				mgn(0,0)
+			// +below($laptop)
+			// 	fs(14)
+			// 	mgn(0,0)
 
 			+below($notebook)
 				fs(30)
@@ -261,10 +260,10 @@ for i in 1..10
 
 	.arrow-head
 		display block
-		width: 1em
+		width: 0.7em
 
 		+below($notebook)
-			width 0.75em
+			width 0.3em
 
 .anchor-links
 	font-family $circular
@@ -319,11 +318,12 @@ for i in 1..10
 			margin 0
 
 	.text
-		text-align center
 		pad(.5, .5)
+		fs(16)
 		transition opacity 0.3s, transform 0.3s
 
 		+above($notebook)
+			text-align center
 			line-height (15 / 13)
 
 	.v-enter, .v-leave-to
