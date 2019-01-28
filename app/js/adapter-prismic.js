@@ -68,11 +68,11 @@ class CMSAdapter {
 
 		this.records = docs.results.map((d) => new CMSRecord(d));
 
-		// let mutualFund = await this.prismic.query(
-		// 	Prismic.Predicates.at('document.type', 'mutual_funds')
-		// );
+		let mutualFund = await this.prismic.query(
+			Prismic.Predicates.at('document.type', 'mutual_funds')
+		);
 
-		// this.funds = mutualFund.results[0];
+		this.funds = mutualFund.results[0];
 
 	}
 

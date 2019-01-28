@@ -68,13 +68,13 @@ export default {
 	},
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y;
+			return this.$store.state.device.win.y * 0.85;
 		}
 	},
 	methods: {
 		checkScroll(scrollTop) {
 			let top = this.$refs.mutualFund.offsetTop + this.$refs.module.$el.offsetTop;
-			if (scrollTop + this.deviceHeight * 0.75 > top) {
+			if (scrollTop + this.deviceHeight > top) {
 				this.docsInview = true;
 				return;
 			}
@@ -82,16 +82,13 @@ export default {
 		}
 	},
 	mounted() {
-		// this.$cms.loadType('mutual_funds').then((results) => {
-		// 	this.resources = results.results;
-		// });
-
 		this.scrollInterval = setInterval(() => {
 			if (this.$refs.module && this.$refs.mutualFund) {
 				this.checkScroll(Math.abs(this.page.scroll.pos));
 			}
 		}, 500);
 	},
+
 	destroy() {
 		clearInterval(this.scrollInterval);
 	}

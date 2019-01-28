@@ -85,25 +85,19 @@ export default {
 @import "../../styl/_variables"
 
 .fund-gate
-	// pad(2px,0)
 	position relative
 
 .wrap
-	// background-color $darkblue
-	// background-color #031543
 	color $w
 	position relative
-		width 100%
-
-	+above($tablet) //desktop
-		display flex
-		width 100%
 
 	/deep/ h1
 		color $w
 
-	+below($tablet) //tablet and phone
-		width 100%
+	+above($tablet)
+		display flex
+
+	+below($tablet)
 		display inline-block
 
 .column

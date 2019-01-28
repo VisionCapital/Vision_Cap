@@ -147,6 +147,7 @@ for i in 1..12
 			transition-delay 0.15s * i
 
 .pdf-info, .align-pdf
+
 	transition opacity 0.3s, transform 0.3s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
@@ -164,6 +165,7 @@ for i in 1..12
 		width 0%
 
 .row
+	
 	display flex
 	position relative
 	justify-content space-between
@@ -198,6 +200,7 @@ h5
 		background $grey
 
 .report-content
+
 	position relative
 	z-index 2
 .heading-tabs

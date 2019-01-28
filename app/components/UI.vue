@@ -2,9 +2,8 @@
 	<div class="app">
 
 		<main-nav
-			v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
-			:pageTop="pageTop"
-		/>
+			v-if="($store.state.device.win.x > 1366) || $store.state.navOpen"
+			:pageTop="pageTop"/>
 
 		<transition appear mode="out-in" duration="1000">
 			<div class="stripes-bg"
@@ -17,7 +16,7 @@
 				:key="$route.fullPath"/>
 		</transition>
 
-		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
+		<nav-switch v-if="$store.state.device.win.x <= 1366" :pageTop="pageTop"/>
 
 		<transition appear mode="out-in" duration="1000">
 			<div class="wipe"
@@ -31,11 +30,11 @@
 
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
-import HeroBackground from './HeroBackground.vue';
+// import HeroBackground from './HeroBackground.vue';
 
 export default {
 	components: {
-		HeroBackground,
+		// HeroBackground,
 		MainNav,
 		NavSwitch
 	},
@@ -74,28 +73,6 @@ export default {
 			this.$store.dispatch('setResourceTags', resourceTags);
 		});
 
-
-		// this.$cms.loadType('resource').then((results) => {
-
-		// 	console.log(results);
-
-		// 	let resourceTitles = {};
-		// 	let resourceTags = [];
-		// 	// there's probably a better way to remove duplicate tags than this
-		// 	for (let resource of results.results) {
-		// 		resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
-		// 	}
-		// 	for (let title in resourceTitles) {
-		// 		if (title) {
-		// 			resourceTags.push({
-		// 				title: title,
-		// 				slug: resourceTitles[title]
-		// 			});
-		// 		}
-		// 	}
-		// 	this.$store.dispatch('setResourceTags', resourceTags);
-		// });
-
 	}
 };
 
@@ -106,7 +83,7 @@ export default {
 @import "../styl/_variables"
 
 .app
-	background linear-gradient(120deg, #071559, #030532)
+	background linear-gradient(142deg, #011254, #00022e)
 
 .stripes-bg
 	background url('../images/strip-bg.jpg')
@@ -136,7 +113,7 @@ export default {
 		transition-delay 1000ms
 
 .wipe
-	background linear-gradient(120deg, #071559, #030532)
+	background linear-gradient(142deg, #011254, #00022e)
 	abs()
 	position fixed
 	pointer-events none

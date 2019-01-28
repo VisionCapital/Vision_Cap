@@ -35,7 +35,6 @@
 							<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
 						</g>
 					</svg>
-
 				</button>
 
 		</div>
@@ -102,10 +101,10 @@ export default {
 input, select, textarea, button {
 	color: $w;
 }
-
 option {
 	background-color: #222;
 }
+
 
 form
 	position relative
@@ -207,7 +206,9 @@ form
 			mgn(1.5,auto,0)
 
 		span
-			pad(0,.5,0,.25)
+			pad(0,.5,0,0)
+			margin auto
+			margin-left 0
 
 		&:hover, &:focus
 			background $copy

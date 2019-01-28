@@ -26,24 +26,21 @@
 				<audio-player
 					:style="{'transition-delay': audioZishDelay}"
 					v-if="data.data.audio && data.data.audio.url && inview"
-					:audio="data.data.audio"
-				/>
+					:audio="data.data.audio"/>
 			</transition>
 
 			<transition appear>
 				<audio-player
 					:style="{'transition-delay': audioZishDelay}"
 					v-if="data.data.audio1 && data.data.audio1.url && inview"
-					:audio="data.data.audio1"
-				/>
+					:audio="data.data.audio1"/>
 			</transition>
 
 			<transition appear>
 				<audio-player
 					:style="{'transition-delay': audioZishDelay}"
 					v-if="data.data.audio2 && data.data.audio2.url && inview"
-					:audio="data.data.audio2"
-				/>
+					:audio="data.data.audio2"/>
 			</transition>
 
 			<a ref="pdfLink" :href="data.data.resource_pdf.url" v-if="data.data.resource_pdf.url" target="_blank" >Please click here to view the PDF.</a>
@@ -136,11 +133,12 @@ export default {
 	border-bottom 1px solid #d8d8d8
 	display flex
 	mgn(0, 0, 2)
-	pad(0, 0,3,0)
+	pad(0, 0, 3)
 	position relative
 
 	+below($mobile)
 		pad(0,0,1)
+
 a
 	color: $blue
 	position relative
@@ -186,12 +184,26 @@ a
 		transform translateY(2rem)
 		opacity 0
 
-.copy /deep/
-	p, h4, ul
-		transition opacity 0.5s, transform 0.5s
-		.v-enter &, .onpage:not(.inview) &
-			transform translateY(2rem)
-			opacity 0
+.copy
+	/deep/
+		p, h4, ul
+			transition opacity 0.5s, transform 0.5s
+			.v-enter &, .onpage:not(.inview) &
+				transform translateY(2rem)
+				opacity 0
+
+		iframe
+			transition transform 0.5s, opacity 0.5s
+			// height (78vw * (2 / 3) * 270 / 480)
+			// width 100%
+
+			.v-enter &, .onpage:not(.inview) &
+				transform translateX(20%)
+				opacity 0
+
+			// +below($tablet)
+			// 	width 100%
+			// 	height (78vw * 270 / 480)
 
 .body
 	order 2
@@ -282,14 +294,4 @@ a
 	/deep/ h2
 		color $blk
 
-/deep/ iframe
-	transition transform 0.5s, opacity 0.5s
-	width 100%
-	height (78vw * (2 / 3) * 270 / 480)
-	.v-enter &, .onpage:not(.inview) &
-		transform translateX(20%)
-		opacity 0
-	+below($tablet)
-		width 100%
-		height (78vw * 270 / 480)
 </style>

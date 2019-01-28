@@ -67,6 +67,9 @@ li
 		transform translateX(-2rem)
 
 .container
+
+	&:nth-child(odd)
+		pad(0,2,0,0)
 	for i in 1..20
 		&:nth-child({i}) li, &:nth-child({i}) h4
 			transition-delay 0.2s * i
@@ -82,6 +85,6 @@ li
 		color $blue
 	>div
 		+above($tablet)
-			width 45%
+			width 50%
 
 </style>
