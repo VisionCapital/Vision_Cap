@@ -224,7 +224,7 @@ export default {
 
 	.arrow-head
 		display block
-		width 1em
+		width 0.7em
 
 .drop-toggle
 	+above($laptop)

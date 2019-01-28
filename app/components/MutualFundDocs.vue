@@ -164,8 +164,11 @@ for i in 1..12
 	.v-enter &, .onpage:not(.inview) &
 		width 0%
 
+
+
 .row
-	
+	&:nth-child(2)
+		padding-top 2em
 	display flex
 	position relative
 	justify-content space-between
