@@ -1,6 +1,5 @@
 <template>
 	<div class="newsletter-signup">
-
 		<div class="wrap">
 
 			<!-- Begin Constant Contact Inline Form Code -->
@@ -8,7 +7,6 @@
 			<!-- End Constant Contact Inline Form Code -->
 
 		</div>
-
 	</div>
 </template>
 
@@ -17,7 +15,9 @@
 import airprops from '../../mixins/airprops';
 
 export default {
+
 	mixins: [ airprops ],
+
 	mounted() {
 
 		let form = this.$refs.ctctForm;
@@ -68,17 +68,14 @@ export default {
 		if (window.ctctOnLoadCallback) {
 			window.ctctOnLoadCallback();
 		}
-
 	}
 };
-</script>
 
+</script>
 
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-
-
 
 .newsletter-signup
 	background #f5f5f5
@@ -173,9 +170,9 @@ export default {
 		transition transform 0.5s 0.4s
 
 		&:focus
-			+ span 
+			+ span
 				background $bluesat
-		&:focus 
+		&:focus
 			outline none
 		width 60%
 		background none
