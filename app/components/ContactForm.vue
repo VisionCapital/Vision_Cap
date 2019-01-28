@@ -17,16 +17,16 @@
 		</div>
 		<div class="right">
 			<div class="input-container">
-				<textarea rows="1" 
-					v-if="data.fields.textarea_placeholder" 
+				<textarea rows="1"
+					v-if="data.fields.textarea_placeholder"
 					:placeholder="data.textField(data.fields.textarea_placeholder)"
 					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
 				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
 			</div>
-				<button id="submit" 
-					@click="doSubmit()" 
-					name="submit" 
-					type="submit" 
+				<button id="submit"
+					@click="doSubmit()"
+					name="submit"
+					type="submit"
 					:style="{'transition-delay': `${fields.length * 0.3 + 0.3}s`}"
 					class="btn">
 					<span v-html="data.textField(data.fields.submit_button)"/>
@@ -35,7 +35,6 @@
 							<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
 						</g>
 					</svg>
-
 				</button>
 
 		</div>
@@ -65,7 +64,7 @@ export default {
 	},
 	methods: {
 		doSubmit() {
-			console.log('do submit');
+			console.log('do submit'); // eslint-disable-line no-console
 			this.success = false;
 			this.errors = null;
 
@@ -102,14 +101,14 @@ export default {
 input, select, textarea, button {
 	color: $w;
 }
-	
 option {
 	background-color: #222;
 }
 
+
 form
 	position relative
-	
+	pad(0,1)
 	+above($tablet)
 		// width 60%
 		display flex
@@ -157,6 +156,7 @@ form
 	input, textarea
 		color $w
 		border 0
+		font-smoothing()
 		width 100%
 		padding 0
 		line-height 2.5em
@@ -182,6 +182,7 @@ form
 			pad(0,0)
 	button
 		background $blk
+		font-smoothing()
 		+above($tablet)
 			position absolute
 			right 0
@@ -205,7 +206,9 @@ form
 			mgn(1.5,auto,0)
 
 		span
-			pad(0,.5,0,.25)
+			pad(0,.5,0,0)
+			margin auto
+			margin-left 0
 
 		&:hover, &:focus
 			background $copy

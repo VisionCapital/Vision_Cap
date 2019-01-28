@@ -76,11 +76,20 @@ class CMSAdapter {
 
 	}
 
-	loadTags(tag) {
+	loadPage(slug) {
+		return this.prismic.getByUID(
+			'page', slug
+		);
+	}
+
+	loadTags(tag, pagNum = 0) {
 		return this.prismic.query(
-			// Prismic.Predicates.at('document.type', 'resource'),
 			Prismic.Predicates.at('document.tags', [ tag ]),
-			{ orderings: '[my.resource.publish_date desc]' }
+			{
+				orderings: '[my.resource.publish_date desc]',
+				pageSize: 20,
+				page: pagNum
+			}
 		);
 	}
 

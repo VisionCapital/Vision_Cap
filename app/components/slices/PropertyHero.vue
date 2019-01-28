@@ -55,7 +55,7 @@ export default {
 @import "../../styl/_variables"
 
 .hero
-	@extend .slice
+	@extend $slice
 	height 100%
 	position relative
 

@@ -56,58 +56,55 @@ export default {
 
 @import "../../styl/_variables"
 
-
 .two-column-copy
-	@extend .slice
+	background $bg
+	@extend $slice
 	pad(2,0)
 
 .title
-	width relative
-	text-align left
+	/deep/
+		h2, h3
+			font-family $cormorant-semibold
+			fs(44)
+			max-width 100%
+			transition line-height 0.5s, opacity 0.5s, transform 0.5s
 
-/deep/
-	h2, h3
-		font-family $cormorant-semibold
-		max-width 100%
-		transition line-height 0.5s, opacity 0.5s, transform 0.5s
-		fs(44)
-		.v-enter &, .onpage:not(.inview) &
-			line-height 1.5
-			opacity 0
-			transform translateY(10%)
+			.v-enter &, .onpage:not(.inview) &
+				line-height 1.3
+				opacity 0
+				transform translateY(10%)
 
-		+below($tablet)
-			font-family $cormorant-medium
-			fs(mp(2))
+			+below($tablet)
+				font-family $cormorant-medium
+				fs(mp(2))
 
 .copy
-	// column-count 2
-	// column-gap 6rem
 	+above($tablet)
 		&:first-child
-			margin-right 3rem
+			margin-right $gut*1rem
+
 		&:last-child
-			margin-left 3rem
+			margin-left $gut*1rem
 
 .copy-container
 	pad(1,0)
-	+above($tablet) {
+
+	+above($tablet)
 		display flex
-	}
+
+.copy
+	/deep/ p
+		margin-top 0
+		letter-spacing (0.1 / $p) * 1em
+		position relative
+		transition transform 0.5s, opacity 0.5s
+		.v-enter &, .onpage:not(.inview) &
+			transform translateY(40px)
+			opacity 0
+
+		for i in 1..20
+			&:nth-child({i})
+				transition-delay 0.2s * i
 
 
-.copy /deep/ p
-	margin-top 0
-	letter-spacing (0.1 / $p) * 1em
-	position relative
-	transition transform 0.5s, opacity 0.5s
-	.onpage:not(.inview) &
-		transform translateY(40px)
-		opacity 0
-
-for i in 1..20 
-	/deep/ p:nth-child({i}) 
-		transition-delay 0.2s * i
-	
-	
 </style>

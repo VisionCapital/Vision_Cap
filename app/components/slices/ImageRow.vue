@@ -29,7 +29,7 @@ export default {
 @import "../../styl/_variables"
 
 .image-row
-	@extend .slice
+	@extend $slice
 	pad(0,0,2,0)
 
 .image-wrap
@@ -37,23 +37,19 @@ export default {
 	display flex
 	// width 50%
 	+below($tablet)
+		// justify-content space-around
 		width 100%
-
-	+below($mobile)
 		flex-wrap wrap
 
-	// flex-direction: row;
-	// flex-wrap: nowrap;
-	// justify-content: space-between;
-
 .image-container
-	// align-items: center;
-	// display: flex;
-	// max-width relative
-	// flex-direction: row;
-	// flex-wrap: nowrap;
-	// pad(2,0,3,0)
 	mgn(.5,2,.5,0)
+	for i in 1..10
+		&:nth-child({i})
+			transition opacity 0.5s (0.1 * i)s, transform 0.5s (0.1 * i)s
+		
+	.v-enter &, .onpage:not(.inview) &
+		transform translate(0, 8rem)
+		opacity 0
 	&:last-child
 		mgn(.5,0)
 

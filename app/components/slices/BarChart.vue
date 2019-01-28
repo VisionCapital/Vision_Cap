@@ -3,41 +3,52 @@
 
 		<div class="wrap">
 
-			
 			<div class="title-copy" v-if="data.fields.bar_chart_title"
 				v-html="data.html('bar_chart_title')"/>
 
 			<div class="title-copy" v-else-if="subheading">
 				<h3 v-html="subheading"/>
 			</div>
+
 		</div>
 
 		<div class="title-card" v-if="$store.state.device.mobile">
+
 			<div class="bg"/>
+
 			<h2 v-if="heading"
 				v-html="heading"/>
+
 			<h2 v-html="data.html('vision_opp_pdf_title')"/>
+
 			<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+
 		</div>
 
 		<div class="wrap">
-				<div class="title-card" v-if="!$store.state.device.mobile">
-					<div class="bg"/>
-					<h2 v-if="heading"
-						v-html="heading"/>
-					<h2 v-html="data.html('vision_opp_pdf_title')"/>
-					<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
-				</div>
+
+			<div class="title-card" v-if="!$store.state.device.mobile">
+
+				<div class="bg"/>
+
+				<h2 v-if="heading"
+					v-html="heading"/>
+
+				<h2 v-html="data.html('vision_opp_pdf_title')"/>
+
+				<a :href="data.fields.pdf_upload.url" target="_blank" v-html="data.html('pdf_link_name')"/>
+
+			</div>
+
 			<div class="chart">
 
-				
 				<div class="bars">
 
 					<div class="y">
-						
-				<div class="title-vertical">
-					Cumulative Total Return
-					</div>
+
+						<div class="title-vertical">
+							Cumulative Total Return
+						</div>
 
 						<div v-for="step in steps" :key="step"
 							:style="{ height: 1 / steps * 100 + '%' }"
@@ -46,14 +57,13 @@
 								{{ max - (step - 1) * 25 + '%' }}
 							</div>
 						</div>
-						
+
 						<div class="step">
 							<div class="label">
 								0%
 							</div>
 						</div>
 
-						
 					</div>
 
 					<div class="index" v-for="(bar, idx) in indices" :key="idx"
@@ -74,20 +84,23 @@
 						</div>
 
 					</div>
+
 				</div>
 
 				<div class="labels">
 
 					<div class="title" v-for="(bar, idx) in indices" :key="idx"
 						:style="{ width: 1 / indices.length * 100 + '%' }">
-						{{ `${bar.name} (${idx + 1})` }}
+						<div class="title-text">
+							{{ `${bar.name} (${idx + 1})` }}
+						</div>
 					</div>
 					<!-- <div class="index" v-for="(bar, idx) in indices" :key="idx">
 						{{ bar.cagr + '%' }}
 					</div> -->
 
 				</div>
-				
+
 
 				<div class="cagr">
 
@@ -118,9 +131,9 @@ import { TweenMax } from 'gsap/TweenMax';
 export default {
 
 	mixins: [ airprops ],
-	props: [
-		'inview'
-	],
+
+	props: [ 'inview' ],
+
 	watch: {
 		inview(newVal) {
 			if (newVal) {
@@ -140,6 +153,7 @@ export default {
 			}
 		}
 	},
+
 	computed: {
 		indices() {
 			let indices = this.data.items.map((x) => {
@@ -168,15 +182,16 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-@import "../../styl/_global"
 
 .bar-chart
-	@extend .slice
+	@extend $slice
 	pad(2,0)
 	transition all 3s
+
 	+below($tablet)
 		&:nth-child(even)
 			background $lightgrey
+
 .wrap
 	display flex
 
@@ -186,20 +201,13 @@ export default {
 	+below($tablet)
 		flex-direction column
 
-.cagr-label
-	position absolute
-	bottom 0
-	margin-left -3rem
-	color $blue
-	fs(12)
-
 .title-copy
 	order 1
 	width 100%
-	// padding-bottom 3rem
 
 	+above($tablet)
 		padding-bottom 3rem
+
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h3
 			opacity 0
@@ -220,19 +228,15 @@ export default {
 	position relative
 	pad(.5,2,2,0)
 
-	// +below($tablet)
-	// 	width 100%
-
-	a:before, a:after
-		background none
-
-	
 	.v-enter &, .onpage:not(.inview) &
 		/deep/ h2, /deep/ a
 			transform translateY(10%)
 			opacity 0
 
 	/deep/
+		a::before, a::after
+			background none
+
 		h2, a
 			color $w
 			position relative
@@ -312,23 +316,21 @@ export default {
 
 		.bg
 			left -($gut * 2em)
-			// right auto
-			// width 100vw
 
 .chart
 	order 3
 	position relative
 	transition opacity 0.5s 0.3s
+
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
+
 	+below($tablet)
 		pad(2,0,0,2)
 
 	+above($tablet)
-		// padding-left $gut * .5rem
 		margin-left (100% / 9)
 		width (600% / 9)
-
 
 .y
 	bottom 0
@@ -337,9 +339,6 @@ export default {
 	position absolute
 	width 100%
 
-	+below($mobile)
-		top 0
-		height 170%
 	.step
 		border-left 1px solid #979797
 		border-top 1px solid rgba(#979797,.15)
@@ -361,14 +360,25 @@ export default {
 
 		+above($tablet)
 			fs(12)
+			line-height 0
+
+		&::after
+			border-top 1px solid #979797
+			content ''
+			position absolute
+			top -1px
+			right 0
+			width 5px
 
 .bars
-	// height 100%
 	height 0
-	padding-bottom (290 / 449) * 100%
+	padding-bottom (290 / 240) * 100%
 	position relative
 
 	+above($tablet)
+		padding-bottom ((290 * 1.7) / 449) * 100%
+
+	+above($notebook)
 		padding-bottom (290 / 699) * 100%
 
 	.index
@@ -376,11 +386,11 @@ export default {
 		position absolute
 		text-align center
 		top 0
-		+below($mobile)
-			height 170%
+
 	for i in 0..12
 		.bar-slot:nth-child({i + 1}) .index
 			transition-delay 0.2s * i
+
 	.bar-slot
 		transition height
 		border-bottom 1px solid #979797
@@ -404,82 +414,107 @@ export default {
 		left 0
 		color $b
 		fs(10)
+		line-height (15 / 10)
 		position absolute
 		width 100%
-		+below($mobile)
-			writing-mode: vertical-rl;
-			padding-top 58%
-			margin auto
-			transform rotate(180deg)
 
 		+above($tablet)
 			fs(12)
 			letter-spacing (0.09em / 12)
 
+		+below($mobile)
+			margin auto
+			padding-top 1em
+			transform rotate(180deg)
+			writing-mode: vertical-rl;
+
 .labels,
 .cagr
 	display flex
+	width 100%
 
 .labels
 	.title
-		text-align center
 		color $b
 		fs(10)
-
-		// letter-spacing (0.07em / 8)
-		line-height (13/ 10)
-		pad(.5,.10)
-
-		+below($tablet)
-			border-left 1px solid $grey
-			border-right none
-	
-			&:last-child
-				border-left none
+		line-height (15/ 10)
+		pad(.5,.5)
 
 		+above($tablet)
 			fs(10)
-
 			letter-spacing (0.07em / 10)
-			line-height (13/ 10)
-			pad(.5,.5)
+			line-height (13 / 10)
+			position relative
+			text-align center
+
+			&::before, &::after
+				border-left 1px solid #979797
+				height 6px
+				position absolute
+				top 0
+
+			&::before
+				content ''
+				left 0
+
+			&:last-child
+				&::after
+					content ''
+					right 0
 
 		+below($tablet)
-			writing-mode: vertical-rl;
-			margin-left 0.4rem
-			transform rotate(180deg)
+			border-left 1px solid $grey
+			pad(.5, .25, 1, .25)
+
+			&:first-child
+				border-left none
+
+	.title-text
+		+below($tablet)
 			text-align right
-		+below($mobile)
-			padding-bottom 50%
-			
+			transform rotate(180deg)
+			writing-mode: vertical-rl
+
 .title-vertical
 	color $blue
 	position absolute
 	margin auto
-	right 110%
+	right 100%
 	white-space: nowrap;
-	writing-mode: vertical-rl;
-	transform rotateZ(-180deg)
+	transform rotateZ(-90deg)
 	text-align center
-	top 25%
+	top 50%
 	fs(12)
-	+below($tablet)
-		right 118%
-	
 
 
 .cagr
-	border-top 1px solid #979797
-	mgn(.5, 0)
-	pad(.5, 0)
-
+	position relative
 	.index
 		color $b
 		text-align center
 		fs(10)
 
-		+above($tablet)
+	+above($tablet)
+		border-top 1px solid #979797
+		mgn(.5, 0)
+		pad(.5, 0)
+
+		.index
 			fs(12)
 			letter-spacing (0.09em / 12)
+
+	+below($tablet)
+		mgn(-.5, 0, 1)
+
+.cagr-label
+	bottom 0
+	position absolute
+	margin-left -3rem
+	color $blue
+	fs(12)
+
+	+below($tablet)
+		/deep/ p
+			margin 0
 
 </style>

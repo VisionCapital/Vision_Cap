@@ -1,8 +1,6 @@
 <template>
 	<div class="info-card-slice">
 
-		<div class="bg"/>
-
 		<div class="wrap">
 			<div class="heroAboveCards">
 
@@ -16,7 +14,7 @@
 			</div>
 		</div>
 
-		<div :class="{'individual-card-wrap': $store.state.device.mobile}">
+		<div :class="{ 'individual-card-wrap': $store.state.device.mobile}">
 
 			<div class="cards" v-if="data.items">
 				<div class="individual-card" v-for="(item, i) in data.items" :key="i">
@@ -58,8 +56,8 @@ export default {
 
 @import "../../styl/_variables"
 
-
 .info-card-slice
+	background none
 	position relative
 	width 100%
 
@@ -67,7 +65,7 @@ export default {
 		width 100%
 
 	+above($notebook)
-		@extend .slice
+		@extend $slice
 		width 100%
 
 	.wrap
@@ -142,22 +140,6 @@ export default {
 		max-width 20em
 		mgn(0,auto)
 		display block
-	//p
-	//	font-size relative
-	//	+below($notebook) //mobile and tablet
-	//		fs(12)
-	//	+below($tablet)
-	//		fs($p)
-
-.bg
-	background url('../../images/strip-bg.jpg')
-	height 100%
-	left 0
-	position absolute
-	top 0
-	width 100%
-	background-repeat: no-repeat;
-	background-size: cover;
 
 .cards
 	width 100%
@@ -169,8 +151,6 @@ export default {
 		width 100%
 
 .heroAboveCards
-	// padding-top 11rem
-	// padding-bottom 4em
 	pad(4,0,2)
 
 	+above($tablet)

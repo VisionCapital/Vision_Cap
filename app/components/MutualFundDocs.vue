@@ -9,7 +9,7 @@
 				<div class="tab" v-html="reports[reportIdx].primary.tab_title[0].text"></div>
 				<arrow-head class="arrow-head" :pointDown="reportDrop"/>
 			</div>
-			<div class="heading-tabs" v-if="$store.state.device.win.x <= 375" :style="{display: reportDrop ? 'flex' : 'none'}">
+			<div class="heading-tabs" :style="{display: reportDrop ? 'flex' : 'none'}">
 
 				<div class="tab" v-for="(tab, idx) in reports"
 					v-html="$cms.textField(tab.primary.tab_title)"
@@ -147,6 +147,7 @@ for i in 1..12
 			transition-delay 0.15s * i
 
 .pdf-info, .align-pdf
+
 	transition opacity 0.3s, transform 0.3s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
@@ -163,6 +164,8 @@ for i in 1..12
 	.v-enter &, .onpage:not(.inview) &
 		width 0%
 
+
+
 .row
 	display flex
 	position relative
@@ -170,6 +173,8 @@ for i in 1..12
 	align-items center
 	+above($tablet)
 		pad(0,1.5)
+		&:nth-child(2)
+			padding-top 2em
 	+below($mobile)
 		&:last-child
 			border-bottom none
@@ -198,6 +203,7 @@ h5
 		background $grey
 
 .report-content
+
 	position relative
 	z-index 2
 .heading-tabs
@@ -218,7 +224,7 @@ h5
 	.v-enter &, .onpage:not(.inview) &
 		height 0
 	background $lightgrey
-	z-index -1
+	// z-index 0
 	position absolute
 	left 50%
 	transform translateX(-50%)
@@ -240,11 +246,14 @@ h5
 
 .disclaimer
 	transition opacity 0.3s 1s, transform 0.3s 1s
+	fs(12)
+	pad(3,0)
+	position relative
+
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(3em)
-	fs(12)
-	pad(3,0)
+
 	+above($tablet)
 		width 70%
 	/deep/ p

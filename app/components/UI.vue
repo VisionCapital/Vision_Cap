@@ -1,44 +1,47 @@
 <template>
 	<div class="app">
 
-		<!-- why does this exist? -->
-		<!-- <router-link v-if="$store.state.device.mobile"
-			to="/"
-			class="home-link"
-			title="Home">
-			<logo class="light" :interactive="interactive"/>
-		</router-link> -->
-
 		<main-nav
-			v-if="($store.state.device.win.x > 1024) || $store.state.navOpen"
-			:pageTop="pageTop"
-		/>
+			v-if="($store.state.device.win.x > 1366) || $store.state.navOpen"
+			:pageTop="pageTop"/>
 
-		<router-view @pageTop="pageTop = $event" :key="$route.fullPath"/>
+		<transition appear mode="out-in" duration="1000">
+			<div class="stripes-bg"
+				:key="$route.fullPath"/>
+		</transition>
 
-		<nav-switch v-if="$store.state.device.win.x <= 1024" :pageTop="pageTop"/>
+		<transition appear mode="out-in" duration="1000">
+			<router-view
+				@pageTop="pageTop = $event"
+				:key="$route.fullPath"/>
+		</transition>
+
+		<nav-switch v-if="$store.state.device.win.x <= 1366" :pageTop="pageTop"/>
+
+		<transition appear mode="out-in" duration="1000">
+			<div class="wipe"
+				:key="$route.fullPath"/>
+		</transition>
 
 	</div>
 </template>
 
 <script>
 
-import Logo from './svg/Logo.vue';
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
-import Hero from './slices/Hero.vue';
+// import HeroBackground from './HeroBackground.vue';
 
 export default {
 	components: {
-		Logo,
+		// HeroBackground,
 		MainNav,
-		NavSwitch,
-		Hero
+		NavSwitch
 	},
 
-	computed: {
-		interactive() {
-			return true; // /Chrome/.test(navigator.userAgent);
+	watch: {
+		$route() {
+			this.pageTop = true;
 		}
 	},
 
@@ -47,22 +50,23 @@ export default {
 			pageTop: true
 		};
 	},
+
 	beforeCreate() {
 		this.$cms.loadType('navigation').then((results) => {
 			this.$store.dispatch('setNavData', results.results[0].data);
 		});
-		this.$cms.loadType('resource').then((results) => {
-			let resourceTitles = {};
-			let resourceTags = [];
-			// there's probably a better way to remove duplicate tags than this
-			for (let resource of results.results) {
-				resourceTitles[resource.tags[0]] = resource.tags[0].replace(/\s/g, '-').toLowerCase();
-			}
-			for (let title in resourceTitles) {
-				if (title) {
+
+		let resourceTags = [];
+
+		this.$cms.loadPage('resources').then((results) => {
+			for (let r = 0; r < results.data.body.length; r++) {
+				if (results.data.body[r].slice_type === 'resources') {
+					let title = this.$cms.textField(results.data.body[r].primary.title_tag);
+					let slug = title.replace(/\s/g, '-').toLowerCase();
+
 					resourceTags.push({
 						title: title,
-						slug: resourceTitles[title]
+						slug: slug
 					});
 				}
 			}
@@ -74,25 +78,50 @@ export default {
 
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 
 @import "../styl/_variables"
 
 .app
-	height 100%
-	
-.home-link
-	display block
-	left 0
+	background linear-gradient(142deg, #011254, #00022e)
+
+.stripes-bg
+	background url('../images/strip-bg.jpg')
+	background-repeat no-repeat
+	background-size cover
+	abs()
+	left -3%
+	width 103%
 	position fixed
-	top 0
-	z-index 11
+	opacity 1
+	transform translate3d(0%, 0, 0)
+	transition transform 750ms $easeOutCubic
+	transition-property opacity, transform
+	z-index 0
 
-	+above($desktop)
-		margin-left ($desktop / -2)
-		left 50%
+	&.v-enter, &.v-leave-to
+		opacity 0
 
-	/deep/ svg
-		display block
+	&.v-enter
+		transform translate3d(3%, 0, 0)
+
+	&.v-enter-active
+		transition-delay 125ms
+
+	&.v-leave-active
+		transition-duration 0ms
+		transition-delay 1000ms
+
+.wipe
+	background linear-gradient(142deg, #011254, #00022e)
+	abs()
+	position fixed
+	pointer-events none
+	transform translate3d(0, 100%, 0)
+	transition transform 1000ms $easeOutQuint
+	z-index 9
+
+	&.v-leave-to
+		transform translate3d(0, 0%, 0)
 
 </style>

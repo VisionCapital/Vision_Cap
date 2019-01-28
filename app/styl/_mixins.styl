@@ -2,36 +2,30 @@
 // Window/drawer
 // ----------
 
-.slice
+$slice
+	background $bg
+
 	.wrap
 		margin 0 auto
 		max-width 1060px
 		width (300 / 375) * 100%
 
-		// +above($mobile)//tablet
-		// 	width 70%
-		+above($tablet)//notebook
-			width 76%
-		+above($notebook)//laptop
-			width 78%
-		+above($laptop)//laptop-large
-			width 74%
+		+above($tablet)
+			width (540 / 768) * 100%
 
-		// +above($laptop-large)//desktop
-		// 	width 66%
-		// +above($desktop)//ultra
-		// 	width 55%
+		+above($notebook)
+			width (780 / 1024) * 100%
 
-.heading
+		+above($laptop)
+			width (1060 / 1366) * 100%
+
+$heading
 	color $blue
-	font-family $cormorant-light
-	fs(46)
-	font-weight 300
-	letter-spacing -(0.7 / 46) * 1em
-	line-height (56 / 46)
+	font-family $cormorant
+	fs(44)
 	margin-left -0.08em
 
-.smol-copy
+$smol-copy
 	fs(14)
 	letter-spacing -(0.1 / 14) * 1em
 	line-height (26 / 14)
@@ -42,3 +36,4 @@ abs()
 	position: absolute
 	top: 0
 	width: 100%
+

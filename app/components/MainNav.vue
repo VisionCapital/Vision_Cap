@@ -1,54 +1,56 @@
 <template>
 	<div class="main-nav">
 
-		<transition>
-			<div class="bg" v-if="$store.state.device.win.x < 1024 || !pageTop"/>
+		<transition appear>
+			<div class="bg" v-if="$store.state.device.win.x < 1366 || !pageTop"
+				:key="$route.fullPath"/>
 		</transition>
 
 		<nav>
 			<ul :class="[ 'links', { 'bg-links' : !pageTop }]" v-if="$store.state.navData">
 
-				<li v-if="$store.state.device.win.x > 1024">
+				<li v-if="$store.state.device.win.x > 1366">
 					<router-link
 						to="/"
 						@click.native="handleClick()"
 						class="home-link"
 						title="Home">
-						<logo class="light" :interactive="interactive"/>
+						<logo class="light" :interactive="true"/>
 					</router-link>
 				</li>
 
-				<li :class="link.link_type" v-for="link in $store.state.navData.links"
-					:key="link.page_link.slug">
+				<li v-for="link in $store.state.navData.links"
+					:key="link.page_link.slug"
+					:class="link.link_type">
 
-					<router-link :to="`/${link.page_link.slug}`"
-						v-if="link.page_link.slug && link.link_type === 'normal'"
+					<router-link v-if="link.page_link.slug && link.link_type === 'normal'"
+						:to="`/${link.page_link.slug}`"
 						:title="link.link_title[0].text"
 						@click.native="handleClick()"
 						v-html="link.link_title[0].text"/>
 
 					<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'dropdown'">
+
 						<div class="drop-toggle">
+
 							<router-link :to="`/${link.page_link.slug}`"
 								@click.native="handleClick()"
 								v-html="link.link_title[0].text"/>
-							<arrow-head @click.native="mutualOpen = !mutualOpen"
-								class="arrow-head"
-								:pointDown="!mutualOpen"
-								color="#fff"
-							/>
+
+							<button @click.prevent="mutualOpen = !mutualOpen">
+								<arrow-head class="arrow-head"
+									:pointDown="!mutualOpen"
+									color="#fff"/>
+							</button>
+
 						</div>
 
-						<div class="anchor-links" :class="{'page-top': !pageTop}">
+						<div class="anchor-links" :class="{ 'page-top': !pageTop }">
 							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-								<router-link
-									v-if="mutualOpen"
+								<router-link v-if="mutualOpen"
 									:to="`/${link.page_link.slug}#${tag.slug}`"
-									:style="{'transition-delay': `${(idx) * 0.4}s`}"
-									@click.native="handleClick()"
-								>
+									@click.native="handleClick()">
 									<div class="text"
-										:style="{'transition-delay': `${idx * 0.4 + 0.3}s`}"
 										v-html="tag.title">
 									</div>
 								</router-link>
@@ -57,9 +59,7 @@
 
 					</div>
 
-
 				</li>
-
 
 			</ul>
 		</nav>
@@ -77,26 +77,21 @@ export default {
 		'pageTop'
 	],
 
-	computed: {
-		interactive() {
-			return true; // /Chrome/.test(navigator.userAgent);
-		}
+	components: {
+		Logo,
+		ArrowHead
 	},
+
+	computed: {
+		links() { return this.$store.state.navData.links; },
+		resourceTags() { return this.$store.state.resourceTags; }
+	},
+
 	methods: {
-		// linkDelay(idx) {
-		// 	if (this.mutualOpen) {
-		// 		return `${idx * 0.4}s`;
-		// 	}
-		// 	return `${(this.$store.state.resourceTags.length - idx) * 0.5}s`;
-		// },
 		handleClick() {
 			this.mutualOpen = false;
 			this.$store.dispatch('toggleNav');
 		}
-	},
-	components: {
-		Logo,
-		ArrowHead
 	},
 
 	data() {
@@ -112,7 +107,6 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
-// @import "../styl/_global"
 
 .main-nav
 	left 0
@@ -120,29 +114,28 @@ export default {
 	top 0
 	width 100%
 	z-index 10
-	+below($notebook)
-		height 85%
-		top 15%
-		pad(0,1,2)
+
+	+below($laptop)
+		// height 85%
+		// top 15%
+		pad(3, 0)
 		font-family $cormorant
 		fs(30)
 		-webkit-overflow-scrolling touch
-		overflow-x hidden
 		overflow-y scroll
+		overflow-x hidden
 		z-index 12
-	+below($tablet)
-		padding-bottom 5vw
 
 .bg
-	background black
+	background $b
 	abs()
-	transition opacity 0.2s, transform 0.2s
+	transition transform 300ms $easeOutQuint
+
 	&.v-enter,
 	&.v-leave-to
-		transform translateY(-100%)
-		opacity 0
+		transform translate3d(0, -100%, 0)
 
-	+below($notebook)
+	+below($laptop)
 		display none
 
 for i in 1..10
@@ -154,37 +147,95 @@ for i in 1..10
 			transform translateY(1rem)
 
 .links
-	display flex
 	margin 0 auto
 	list-style none
 	padding 0
 	position relative
-	justify-content center
-	margin 0 12px
-	+below($notebook)
-		flex-direction column
-		justify-content flex-start
-		min-height 100%
-		
-		// margin-left: 4rem;
+
+	a.router-link-exact-active, .drop-toggle .router-link-active
+		&:before
+			width 100%
+			left 0
+			background $w
+			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+		&:after
+			transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+			width 100%
+			background $w
+
+		&:hover
+			&::before
+				background $bluesat
+				width 100%
+				transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+				
+
+			&::after
+				background $w
+				right 0
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+				width 0%
+
+	margin 0 auto
+	max-width 1060px
+	width (300 / 375) * 100%
+
+	+above($tablet)
+		width (540 / 768) * 100%
 
 	+above($notebook)
-		text-align center
-		margin 0 auto
-		max-width 1060px
-		width 80%
+		width (780 / 1024) * 100%
 
+	+above($laptop)
+		display flex
+		width (1060 / 1366) * 100%
+
+	+above($laptop)
+		width (780 / 1024) * 100%
+
+	+above($laptop)
+		width (1060 / 1366) * 100%
+
+		/deep/
+			li:first-child
+				margin-right auto
+				padding-left 0
+
+			li:last-child
+				padding-right 0
 
 	/deep/
-		a
-			color white
-			white-space nowrap
-			fs(14)
+		li, a
+			+below($mobile)
+				pad(.5,0)
+
+		li
+			pad(1,.5)
+			margin auto 0
+			position relative
 
 			+below($laptop)
-				fs(10.5)
-				mgn(0,0)
-			+below($notebook)
+				display block
+				padding 4vh 0 0 0
+
+			&.dropdown
+				+above($laptop)
+					pad(0,0)
+					/deep/ a:after, a:before
+						top 1.75em
+
+		a
+			color $w
+			display inline-block
+			font-smoothing()
+			vertical-align top
+
+			// +below($laptop)
+			// 	fs(14)
+			// 	mgn(0,0)
+
+			+below($laptop)
 				fs(30)
 
 			&::before, &::after
@@ -194,68 +245,44 @@ for i in 1..10
 				&::after
 					background none
 
-		li //underline link resources
-			max-width 280px
-			pad(1,.5)
-			display flex
-			margin auto 0
-			&.dropdown
-				/deep/ a:after, a:before
-					top 4.5rem
-				+above($notebook)
-					pad(0,0)
-					/deep/ a:after, a:before
-						top 22px
-
-
-		li:first-child
-			margin-right auto
-			padding-left 0
-		li, a
-			+below($notebook)
-				padding 4vh 0 0 0
-			+below($mobile)
-				pad(.5,0)
-
-.light
-	max-width 300px
-
 .dropdown-container
-	color $w
 	position relative
-	height 100%
 
-	svg
-		width: 1em;
+.drop-toggle
+	+above($laptop)
+		pad(1,0,1,.5)
+
+	/deep/
+		a, button
+			display inline-block
+			vertical-align middle
+
+		button
+			border 0
+			margin 0
+			padding 0
+
+			+above($laptop)
+				pad(.5,.25)
 
 	.arrow-head
-		margin-left 0.4vw
-		display inline-block
-		+below($notebook)
-			margin: 0 0 0 .5em
-			width 0.75em
+		display block
+		width: 0.7em
 
-	.drop-toggle
-		// display flex;
-		// display inline-block
-		// align-items flex-start
-		cursor pointer
-		+above($notebook)
-			height 100%
-			pad(1,.5)
+		+below($laptop)
+			width 0.3em
 
 .anchor-links
 	font-family $circular
-	display flex
-	flex-direction column
-	+below($notebook)
-		font-family $cormorant
-	+above($notebook)
+
+	+above($laptop)
+		left $gut*-.5rem
 		position absolute
-		left 50%
-		transform translateX(-50%);
-		width 100%
+		right $gut*-.5rem
 		top 100%
+
+	+below($laptop)
+		padding-top 2vh
 
 	+below($tablet)
 		fs(18)
@@ -265,63 +292,59 @@ for i in 1..10
 		a
 			background $b
 
-	+below($notebook)
+	+below($laptop)
 		fs(18)
-	a
-		max-height 8rem
-		transition max-height 0.5s
-		background-color none
+
+	/deep/ a
+		background-color $b
+		display block
+		max-height 6em
 		margin-top 2px
-		// &:first-child
-		// 	padding 2vh 0
+		transition max-height 300ms $easeOutQuint
+
 		&.page-top
 			padding 0
-		&:hover::after, &:hover::before
-			display none
+
+		&:after, &::before
+			content none
+
 		&.v-enter, &.v-leave-to
-			max-height 0vh
-		+below($notebook)
-			// &:first-child
-			// 	padding 3vh 0
-			// margin-left 1em
-			pad(1,0,0)
+			max-height 0em
+
+		&.v-enter-active
+			for i in 1..4
+				&:nth-child({i})
+					transition-delay 100ms * i
+
+					.text
+						transition-delay 100ms * (i + 1)
+
+		+below($laptop)
+			// pad(0.8,0,0)
 			margin 0
 
+			// &:first-child
+			// 	pad(1,0,0)
+			// &:last-child
+			// 	pad(0.8,0,1)
+
 	.text
-		// mgn(0,0.5)
-		pad(0.5,0.5)
-		display inline-block
+		pad(.5, 0, .5, 1)
+		fs(16)
 		transition opacity 0.3s, transform 0.3s
-		+above($notebook)
-			white-space: normal;
-			line-height 1.5
+
+		+above($laptop)
+			line-height (15 / 13)
+			pad(.5, .5)
+			text-align center
 
 	.v-enter, .v-leave-to
 		.text
 			opacity 0
 			transform translate(0,-50%)
 
-a.router-link-exact-active
-	&:before
-		width 100%
-		left 0
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
-
-	&:after
-		transition: width 0.8s cubic-bezier(0.25,0.1,0.25,1)
-		width 100%
-		background none
-
-	&:hover
-		&::before
-			background none
-
-			width 0%
-
-		&::after
-			background $w
-			right 0
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-			width 0%
+.home-link
+	&:before, &:after
+		content none
 
 </style>

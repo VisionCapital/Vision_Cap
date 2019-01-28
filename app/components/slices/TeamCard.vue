@@ -1,12 +1,14 @@
 <template>
 	<div class="team-cards">
 
-		<div class="wrap" v-if="data.items.length && data.fields.team_title[0].text">
-			<div class="heading" v-html="data.html('team_title')"></div>
-		</div>
+		<header>
+			<div class="wrap heading-wrap" v-if="data.items.length && data.fields.team_title[0].text">
+				<div class="heading" v-html="data.html('team_title')"></div>
+			</div>
+		</header>
 
 		<div class="card" v-for="(card, idx) in data.items" :key="idx">
-			<div class="wrap" >
+			<div class="wrap">
 				<transition appear>
 					<team-member
 						:class="[ 'onpage', { inview : sidx >= idx }]"
@@ -16,7 +18,6 @@
 				</transition>
 			</div>
 		</div>
-
 
 	</div>
 </template>
@@ -38,7 +39,7 @@ export default {
 	},
 	computed: {
 		deviceHeight() {
-			return this.$store.state.device.win.y;
+			return this.$store.state.device.win.y * 0.85;
 		}
 	},
 	methods: {
@@ -50,7 +51,7 @@ export default {
 		},
 		checkScroll(scrollTop) {
 			for (let i = this.$refs.teamMember.length - 1; i > -1; i--) {
-				if (scrollTop + this.deviceHeight * 0.75 > this.$refs.teamMember[i].$el.offsetTop) {
+				if (scrollTop + this.deviceHeight > this.$refs.teamMember[i].$el.offsetTop) {
 					this.sidx = i;
 					return;
 				}
@@ -58,7 +59,7 @@ export default {
 		}
 	},
 	mounted() {
-		window.addEventListener('resize', this.resize);
+		window.addEventListener('resize', this.resize, { passive: true });
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(Math.abs(this.page.scroll.pos));
@@ -66,7 +67,7 @@ export default {
 
 	},
 	destroy() {
-		window.removeEventListener('resize', this.resize);
+		window.removeEventListener('resize', this.resize, { passive: true });
 		clearInterval(this.scrollInterval);
 	}
 };
@@ -78,13 +79,15 @@ export default {
 @import "../../styl/_variables"
 
 .team-cards
-	@extend .slice
-	
-	.card:nth-child(even)
-		background $lightgrey
+	@extend $slice
+	padding 1px 0
 
-.heading /deep/ h2 
-	font-family $cormorant
-	font-weight bold
+	.card
+		&:nth-of-type(even)
+			background $lightgrey
+
+.heading /deep/ h2
+	font-family $cormorant-semibold
 	mgn(2,0)
+
 </style>

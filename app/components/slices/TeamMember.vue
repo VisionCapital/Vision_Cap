@@ -15,7 +15,7 @@
 
 			<div @click="toggleText()" v-if="longCopy" class="copy-cta">
 				<p v-if="collapsed">Read More</p>
-				<p v-else>Collapse</p>
+				<p v-if="!collapsed">Collapse</p>
 				<arrow-head class="arrow-head" :pointDown="collapsed"/>
 			</div>
 
@@ -124,6 +124,7 @@ export default {
 
 	/deep/ p
 		max-width 100%
+		overflow-y hidden
 
 .copy
 	position relative
@@ -160,7 +161,7 @@ export default {
 
 		img
 			width 220px
-			max-width 100vw
+			max-width 100%
 			width 100%
 			height 100%
 			position absolute
@@ -170,7 +171,7 @@ export default {
 
 			+below($tablet)
 				padding-right 1em
-				width 96px
+				width 96%
 				float left
 
 	&.v-enter, &.onpage:not(.inview)
@@ -202,10 +203,10 @@ export default {
 	word-wrap break-word
 
 	&.full-copy
-		overflow visible
+		overflow hidden
 		max-height 100%
 	/deep/
-		li 
+		li
 			mgn(1, 0)
 		ul
 			padding-left 1.8em
@@ -215,9 +216,13 @@ export default {
 				margin-top 0
 
 		h2, h3
-			@extend .heading
+			@extend $heading
 			margin-left 0
 			+below($tablet)
 				fs(30)
+				line-height $let*1rem
+
+		strong
+			font-family $circular-bold
 
 </style>

@@ -42,7 +42,7 @@ export default {
 @import "../../styl/_variables"
 
 .contact-form
-	@extend .slice
+	@extend $slice
 	text-align center
 	background $blue
 	.wrap
@@ -63,13 +63,13 @@ export default {
 	.copy
 		mgn(0,auto)
 		max-width 656px
-		width 75%
+		width 90%
 
 h3, h4
 	transition opacity 0.5s, transform 0.5s $easeOutCubic
 	.v-enter &, .onpage:not(.inview) &
 		transform translate(0,50%)
 		opacity 0
-h4 
+h4
 	transition-delay 0.25s
 </style>

@@ -119,6 +119,8 @@ export default {
 
 		},
 		update() {
+			this.mopo[0] /= 1.05;
+			this.mopo[1] /= 1.05;
 
 			this.mouse[0] += (this.mopo[0] - this.mouse[0]) / 50;
 			this.mouse[1] += (this.mopo[1] - this.mouse[1]) / 50;
@@ -171,7 +173,6 @@ export default {
 			];
 		}
 	},
-	created() {},
 	mounted() {
 
 		// if (!window.WebGLRenderingContext) {
@@ -209,7 +210,7 @@ export default {
 <style lang="stylus" scoped>
 @import "../styl/_variables"
 
-div 
+div
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -217,18 +218,18 @@ div
 	left: 0;
 
 
-canvas 
+canvas
 	position: relative;
 	width: 100%;
 	height: 100%;
 	top: 0;
-	+below(1060px)
-		top -12%
-	+below($notebook)
-		left -9%
-		top 10%
-		display block
-		width 60%
+	// +below(1060px)
+	// 	top -12%
+	// +below($notebook)
+	// 	left -9%
+	// 	top 10%
+	// 	display block
+	// 	width 60%
 // .resize
 // 	display flex
 // 	width 50%

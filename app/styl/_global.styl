@@ -2,8 +2,9 @@
 // Global elements
 // ----------
 
-html, body, #app
+html, body, #app, .app, .page
 	height: 100%
+	overflow hidden
 
 a
 	color: black
@@ -33,7 +34,7 @@ a
 			width: 100%
 
 		&:after
-			background: transparent
+			background: $blue
 			transition: 0s
 			width: 100%
 
@@ -57,22 +58,22 @@ h4
 	color $b
 
 h1
-	fs(mp(5))
+	fs(100)
+	line-height 1
 	letter-spacing -(1.21 / 100) * 1em
 	margin-left -.08em
-	orphans 10
-	widows 10
+	// orphans 10
+	// widows 10
 
 	+below($mobile)
 		fs(mp(4))
 
 h2
-	fs(mp(4))
+	fs(80)
+	line-height: (100 / 80)
 
 h3
-	fs(mp(3))
-	+below($mobile)
-		fs(mp(2))
+	fs(44)
 
 h4
 	fs(mp(2))
@@ -80,9 +81,9 @@ h4
 h5
 	fs(mp(1))
 
-p
-	orphans 5
-	widows 4
+// p
+// 	orphans 5
+// 	widows 4
 
 // p
 // 	+below($mobile)

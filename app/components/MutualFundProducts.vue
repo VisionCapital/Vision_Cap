@@ -76,7 +76,7 @@
 					<pdf-icon class="pdf-icon"/>
 					<span>.PDF</span>
         </a>
-					
+
       </div>
 
     </div>
@@ -142,13 +142,9 @@ a
 		display none
 
 .bg
-	position absolute
-	height 100%
-	z-index -1
-	left 0
+	abs()
 	transition width 0.5s
-	top 0
-	width 100%
+	z-index 0
 
 	.v-enter &, .onpage:not(.inview) &
 		width 0
@@ -202,6 +198,10 @@ for i in 0..12
 		&:last-child
 			border-bottom none
 			align-items center
+
+	/deep/ p
+		position relative
+		z-index 1
 
 .products
 	transition all 4s
