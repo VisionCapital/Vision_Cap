@@ -196,6 +196,7 @@ a
 			transition transform 0.5s, opacity 0.5s
 			// height (78vw * (2 / 3) * 270 / 480)
 			// width 100%
+			max-width 100%
 
 			.v-enter &, .onpage:not(.inview) &
 				transform translateX(20%)

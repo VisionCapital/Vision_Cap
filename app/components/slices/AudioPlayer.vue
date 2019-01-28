@@ -87,7 +87,7 @@ export default {
 	data() {
 		return {
 			currentPrint: 0.00,
-			durationPrint: false,
+			durationPrint: '00:00',
 			durationNum: 0,
 			currentNum: 0,
 			progress: '0%',
