@@ -23,9 +23,13 @@
 					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
 				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
 			</div>
-				<div class="spinner">
-
-				</div>
+				<transition appear>
+					<div class="spinner" v-if="loading">
+						<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+							<path d="M 25 50 A 25 25 0 1 0 50 25"/>
+						</svg>
+					</div>
+				</transition>
 				<button id="submit"
 					name="submit"
 					type="submit"
@@ -39,7 +43,9 @@
 					</svg>
 				</button>
 
-				<div :class="{ errorMessage: 1, success }" v-if="errorMessage">{{ errorMessage }}</div>
+				<transition appear>
+					<div :class="{ errorMessage: 1, success }" v-if="errorMessage">{{ errorMessage }}</div>
+				</transition>
 
 		</div>
 	</form>
@@ -63,7 +69,8 @@ export default {
 			errorMessage: null,
 			success: false,
 			action,
-			fields
+			fields,
+			loading: false
 		};
 	},
 	methods: {
@@ -91,8 +98,11 @@ export default {
 				request[item[0]] = item[1];
 			}
 
+			this.loading = true;
+
 			axios.post(action, request).then((response) => {
 
+				this.loading = false;
 				let data = response.data;
 				if (data.status === 'ok') {
 					this.success = true;
@@ -102,6 +112,7 @@ export default {
 
 				this.errorMessage = data.message;
 				this.errors = data.errors;
+
 
 			});
 		}
@@ -113,6 +124,7 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../styl/_variables"
+@import "../styl/_ease"
 
 input, select, textarea, button {
 	color: $w;
@@ -156,6 +168,7 @@ form
 	position relative
 	overflow hidden
 	&.error .bottom-border
+		transition-delay 0s !important // pls to forgive me
 		background #ff0000
 
 .bottom-border
@@ -166,7 +179,7 @@ form
 	left 0
 	z-index 2
 	background #3360D9
-	transition width 0.5s
+	transition width 0.5s, background 1s $easeOutCubic
 
 	input:focus + &,
 	textarea:focus + &
@@ -241,6 +254,10 @@ form
 
 	.errorMessage
 		color #ff0000
+		transition opacity 1s $easeOutCubic
+
+		&.v-enter, &.v-leave-to
+			opacity 0
 
 		&.success
 			color #00ff00;
@@ -249,5 +266,39 @@ form
 			position absolute
 			top 10rem
 			right 0
+
+.spinner
+	position absolute
+	right 10rem
+	margin-top -2px
+	width 50px
+	height 50px
+	animation 1s infinite linear rotate
+	transition opacity 1s $easeOutCubic
+
+	+below($tablet)
+		right auto
+		margin-top 0.5rem
+
+	&.v-enter, &.v-leave-to
+		opacity 0
+
+	&.v-leave-active
+		transition-delay 0.3s
+
+	svg
+		width 50px
+		height 50px
+		path
+			stroke-width 5
+			stroke #ffffff
+			stroke-linecap round
+			fill none
+
+@keyframes rotate
+	0%
+		transform rotate(0deg)
+	100%
+		transform rotate(360deg)
 
 </style>
