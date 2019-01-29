@@ -42,8 +42,7 @@
 
       </div>
 
-			<div class="disclaimer" v-if="disclaimer">
-				<p v-html="$cms.textField(disclaimer)"/>
+			<div class="disclaimer" v-if="disclaimer" v-html="$cms.htmlField(disclaimer)">
 			</div>
 
     </div>

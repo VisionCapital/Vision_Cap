@@ -9,9 +9,7 @@
 				<div class="columns">
 					<div class="container" v-for="(reason, idx) in data.items" :key="idx">
 						<h3 v-html="$cms.textField(reason.heading)" v-if="reason.heading"></h3>
-						<ul>
-							<li v-for="(item, i) in reason.list_items" :key="'item' + i" v-html="item.text"></li>
-						</ul>
+						<div v-html="$cms.htmlField(reason.list_items)" />
 					</div>
 				</div>
 
@@ -60,7 +58,7 @@ h2, h3
 		opacity 0
 		transform translateY(2rem)
 
-li
+/deep/ li
 	transition opacity 0.5s, transform 0.5s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
