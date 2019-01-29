@@ -34,7 +34,7 @@
 					name="submit"
 					type="submit"
 					:style="{'transition-delay': `${fields.length * 0.3 + 0.3}s`}"
-					class="btn">
+					:class="{ btn: 1, success }">
 					<span v-html="data.textField(data.fields.submit_button)"/>
 					<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
 						<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
@@ -85,6 +85,11 @@ export default {
 			return this.errors.includes(field);
 		},
 		doSubmit() {
+
+			if (this.success) {
+				return;
+			}
+
 			console.log('do submit'); // eslint-disable-line no-console
 			this.success = false;
 			this.errors = null;
@@ -112,6 +117,12 @@ export default {
 
 				this.errorMessage = data.message;
 				this.errors = data.errors;
+
+				// setTimeout(() => {
+				// 	this.success = false;
+				// 	this.errorMessage = null;
+				// 	this.errors = null;
+				// }, 20000);
 
 
 			});
@@ -237,6 +248,10 @@ form
 		overflow hidden
 		max-width 600px
 		transition max-width 0.75s, padding-left 0.5s, padding-right 0.5s
+
+		&.success
+			opacity 0.5
+			pointer-events none
 
 		+below($tablet)
 			mgn(1.5,auto,0)
