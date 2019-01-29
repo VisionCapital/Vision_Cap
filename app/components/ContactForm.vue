@@ -306,7 +306,7 @@ form
 		height 50px
 		path
 			stroke-width 5
-			stroke #ffffff
+			stroke #3360d9
 			stroke-linecap round
 			fill none
 
