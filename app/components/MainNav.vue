@@ -19,7 +19,7 @@
 						</router-link>
 					</li>
 
-					<li v-for="link in $store.state.navData.links"
+					<li v-for="link in links"
 						:key="link.page_link.slug"
 						:class="link.link_type">
 
@@ -91,7 +91,9 @@ export default {
 	methods: {
 		handleClick() {
 			this.mutualOpen = false;
-			this.$store.dispatch('toggleNav');
+			if (!this.$store.state.device.mobile) {
+				this.$store.dispatch('toggleNav');
+			}
 		}
 	},
 
@@ -121,7 +123,6 @@ export default {
 	z-index 10
 
 	+below($laptop)
-		pad(3, 0)
 		pointer-events all
 		-webkit-overflow-scrolling touch
 		overflow-y scroll
@@ -156,7 +157,6 @@ for i in 1..10
 			transform translateY(1rem)
 
 .links
-	height $let * 3rem
 	list-style none
 	margin 0 auto
 	max-width 1060px
@@ -165,10 +165,10 @@ for i in 1..10
 	width (300 / 375) * 100%
 
 	+above($tablet)
-		height $let * 3.5rem
 		width (540 / 768) * 100%
 
 	+above($notebook)
+		height $let * 3.5rem
 		width (780 / 1024) * 100%
 
 	+above($laptop)
@@ -182,6 +182,9 @@ for i in 1..10
 		/deep/
 			li:last-child
 				padding-right 0
+
+	+below($laptop)
+		pad(4, 0)
 
 	.router-link-exact-active, .drop-toggle .router-link-active
 		&::before

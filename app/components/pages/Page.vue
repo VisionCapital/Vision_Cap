@@ -31,6 +31,12 @@ export default {
 
 	mixins: [ slices ],
 
+	watch: {
+		record() {
+			this.$nextTick(this.checkScroll(this.lastScrollTop));
+		}
+	},
+
 	data() {
 		let record = this.$cms.findRecord(this.slug);
 
@@ -65,23 +71,44 @@ export default {
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(this.lastScrollTop);
-		}, 800);
+		}, 600);
 	}
 
 };
 
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+
+@import "../../styl/_variables"
 
 .page-scroll
 	position relative
 	z-index 1
 
-	/deep/ > div
-		transition opacity 500ms
+	> div
+		background $bg
+		// transform translate3d(0, 0, 0)
+		transition background 600ms $easeOutCubic
+		// transition-property background, transform
 
-		.v-enter-active &
-			opacity 0
+		&.v-enter
+			background rgba($bg,0)
+			// transform translate3d(0, 5vh, 0)
+
+		+above($tablet)
+			&.v-enter-active, .v-enter-active &
+				for i in 1..3
+					&:nth-child({i})
+						transition-delay (i + 6) * 100ms
+
+.page.v-enter-active
+	transition-duration 1800ms
+
+	// /deep/ > div
+	// 	transition opacity 500ms
+
+	// 	.v-enter-active &
+	// 		opacity 0
 
 </style>

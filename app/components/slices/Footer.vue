@@ -75,14 +75,8 @@ export default {
 	},
 
 	data() {
-		let mutualDrop = {
-			path: '/resources',
-			title: 'Resources'
-		};
-
 		return {
-			mutualOpen: false,
-			mutualDrop
+			mutualOpen: false
 		};
 	}
 
@@ -95,9 +89,8 @@ export default {
 @import "../../styl/_variables"
 
 .footer
-	background $bg
-	color $w
 	position relative
+	overflow hidden
 	z-index 2
 
 .home-link
@@ -126,11 +119,11 @@ export default {
 		transform translate3d(0, 100%, 0)
 
 .links
+	color $w
 	display flex
-	flex-wrap wrap
 	list-style none
 	margin 0 auto
-	pad(1,1)
+	pad(1, 1)
 	position relative
 	width 100%
 
@@ -145,6 +138,27 @@ export default {
 		justify-content space-between
 		max-width 1060px
 		width 80%
+
+	+below($notebook)
+		flex-wrap wrap
+
+	.router-link-exact-active, .drop-toggle .router-link-active
+		&::before
+			background $w
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+		&::after
+			transition-duration 0.6s
+			width 100%
+
+		&:hover
+			&::before
+				transition-duration 0.6s
+
+			&::after
+				background $w
+				transition-duration 0.5s
+				width 0
 
 	/deep/
 		a
@@ -230,8 +244,8 @@ export default {
 		margin-bottom 2px
 		pad(0.5,0.5)
 
-		&:hover::after, &:hover::before
-			display none
+		&::after, &::before
+			content none
 
 a.router-link-exact-active, .drop-toggle .router-link-active
 	&:before

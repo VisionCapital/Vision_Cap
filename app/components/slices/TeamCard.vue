@@ -26,22 +26,27 @@
 
 import airprops from '../../mixins/airprops';
 import TeamMember from './TeamMember.vue';
+
 export default {
 
 	mixins: [ airprops ],
+
 	components: {
 		TeamMember
 	},
+
 	data() {
 		return {
 			sidx: -1
 		};
 	},
+
 	computed: {
 		deviceHeight() {
 			return this.$store.state.device.win.y * 0.85;
 		}
 	},
+
 	methods: {
 		resize() {
 			let members = this.$refs.teamMember;
@@ -49,6 +54,7 @@ export default {
 				member.checkImgHeight();
 			}
 		},
+
 		checkScroll(scrollTop) {
 			for (let i = this.$refs.teamMember.length - 1; i > -1; i--) {
 				if (scrollTop + this.deviceHeight > this.$refs.teamMember[i].$el.offsetTop) {
@@ -83,11 +89,19 @@ export default {
 	padding 1px 0
 
 	.card
+		transition background 500ms $easeOutCubic
+
 		&:nth-of-type(even)
 			background $lightgrey
 
-.heading /deep/ h2
-	font-family $cormorant-semibold
-	mgn(2,0)
+	&.v-enter
+		.card
+			background rgba($bg,0)
+
+
+.heading
+	/deep/ h2
+		font-family $cormorant-semibold
+		mgn(2,0)
 
 </style>

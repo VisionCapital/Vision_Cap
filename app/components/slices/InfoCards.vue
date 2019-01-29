@@ -59,14 +59,9 @@ export default {
 .info-card-slice
 	background none
 	position relative
-	width 100%
-
-	+below($tablet)
-		width 100%
 
 	+above($notebook)
 		@extend $slice
-		width 100%
 
 	.wrap
 		position relative
@@ -105,12 +100,14 @@ export default {
 	font-family $cormorant
 	line-height (30 / 23)
 	align-items center
-	transition transform 0.5s, opacity 0.5s, delay 2s
+	transition transform 0.5s, opacity 0.5s
 	transition-delay 0.8s
+
 	.v-enter &
 		transform translateY(40px)
 		opacity 0
-	for i in 1..20
+
+	for i in 1..3
 		&:nth-child({i})
 			transition-delay (0.4s * i) + 0.8s
 
@@ -153,12 +150,10 @@ export default {
 .heroAboveCards
 	pad(4,0,2)
 
-	+above($tablet)
-		pad(4,0,2)
-
 	/deep/ h1
-		transition line-height 0.5s, opacity 0.5s, delay 0.5s
-		transition-delay 0.7s
+		transition line-height 0.5s, opacity 0.5s
+		transition-delay 0.5s
+
 		.v-enter &
 			line-height 1.5
 			opacity 0

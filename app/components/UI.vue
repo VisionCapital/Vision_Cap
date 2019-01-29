@@ -5,12 +5,12 @@
 		<main-nav
 			:pageTop="pageTop"/>
 
-		<transition appear mode="out-in" duration="1000">
+		<transition appear mode="out-in" duration="600">
 			<div class="stripes-bg"
 				:key="$route.fullPath"/>
 		</transition>
 
-		<transition appear mode="out-in" duration="1000">
+		<transition appear mode="out-in" duration="600">
 			<router-view
 				@pageTop="pageTop = $event"
 				:key="$route.fullPath"/>
@@ -18,7 +18,7 @@
 
 		<nav-switch v-if="$store.state.device.win.x <= 1366" :pageTop="pageTop"/>
 
-		<transition appear mode="out-in" duration="1000">
+		<transition appear mode="out-in" duration="600">
 			<div class="wipe"
 				:key="$route.fullPath"/>
 		</transition>
@@ -43,7 +43,10 @@ export default {
 		$route() {
 			setTimeout(() => {
 				this.pageTop = true;
-			}, 800);
+				if (this.$store.state.navOpen) {
+					this.$store.dispatch('toggleNav');
+				}
+			}, 500);
 		}
 	},
 
@@ -84,9 +87,6 @@ export default {
 
 @import "../styl/_variables"
 
-.app
-	background linear-gradient(142deg, #011254, #00022e)
-
 .stripes-bg
 	background url('../images/strip-bg.jpg')
 	background-repeat no-repeat
@@ -97,7 +97,7 @@ export default {
 	position fixed
 	opacity 1
 	transform translate3d(0%, 0, 0)
-	transition transform 750ms $easeOutCubic
+	transition transform 900ms $easeInOutCubic
 	transition-property opacity, transform
 	z-index 0
 
@@ -105,14 +105,17 @@ export default {
 		opacity 0
 
 	&.v-enter
-		transform translate3d(3%, 0, 0)
+		transform translate3d(8%, 0, 0)
+
+		+above($tablet)
+			transform translate3d(3%, 0, 0)
 
 	&.v-enter-active
-		transition-delay 125ms
+		transition-delay 150ms
 
 	&.v-leave-active
 		transition-duration 0ms
-		transition-delay 1000ms
+		transition-delay 600ms
 
 .wipe
 	background linear-gradient(142deg, #011254, #00022e)
@@ -120,8 +123,8 @@ export default {
 	position fixed
 	pointer-events none
 	transform translate3d(0, 100%, 0)
-	transition transform 1000ms $easeOutQuint
-	z-index 9
+	transition transform 600ms $easeOutQuint
+	z-index 10
 
 	&.v-leave-to
 		transform translate3d(0, 0%, 0)

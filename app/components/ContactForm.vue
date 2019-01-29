@@ -149,6 +149,11 @@ form
 	z-index 2
 	background #3360D9
 	transition width 0.5s
+
+	input:focus + &,
+	textarea:focus + &
+		background lighten($blue, 60%)
+
 	.v-enter &, .onpage:not(.inview) &
 		width 0%
 

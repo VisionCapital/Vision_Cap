@@ -83,6 +83,7 @@ export default {
 @import "../../styl/_variables"
 
 .fund-gate
+	background none
 	position relative
 
 .wrap

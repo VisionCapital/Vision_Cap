@@ -70,30 +70,26 @@ export default {
 	@extend $slice
 	pad(2,0)
 
-// .inview
-// 	.contact, p, /deep/ h3
-// 		transform none
-// 		opacity 1
+	/deep/ a
+		color $blue
 
-/deep/ a
-	color $blue
+	/deep/ em
+		font-style normal
 
-em
-	font-style normal
+	/deep/ h3, /deep/ p
+		color $copy
 
-/deep/ h3, /deep/ p
-	color $copy
-
-p
-	transition transform 0.5s 0.2s, opacity 0.5s 0.2s
-	.v-enter &, .onpage:not(.inview) &
-		transform translateY(2em)
-		opacity 0
+	/deep/ p
+		transition transform 0.5s 0.2s, opacity 0.5s 0.2s
+		.v-enter &, .onpage:not(.inview) &
+			transform translateY(2em)
+			opacity 0
 
 .contact
 	.v-enter &, .onpage:not(.inview) &
 		transform translateX(-3em)
 		opacity 0
+
 	for i in 1..5
 		&:nth-child({i})
 			transition transform (0.5s + 0.2s * i) $easeOutSine, opacity (0.5s + 0.2s * i)
@@ -101,7 +97,6 @@ p
 
 
 /deep/ h3
-	// fs(38)
 	font-family $cormorant-semibold
 	transition transform 0.5s, line-height 0.5s, opacity 0.5s
 
@@ -128,7 +123,13 @@ p
 		width 47%
 		margin-right 3%
 		vertical-align top
+
 	+below($mobile)
 		width 100%
 		margin 0
+
+	/deep/ strong
+		font-family $circular-medium
+		font-weight normal
+
 </style>

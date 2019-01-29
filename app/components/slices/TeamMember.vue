@@ -52,7 +52,7 @@ export default {
 				}
 				return `${this.elDimensions.height - 2 * 26}px`;
 			} else if (this.longCopy && !this.collapsed) {
-				return '100%';
+				return `${this.$refs.copy.offsetHeight}px`;
 			}
 			return `${this.elDimensions.height}px`;
 		}
@@ -81,16 +81,16 @@ export default {
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
 		},
-		paragraphCutOff() {
-			let cycleCopy = this.$refs.copy.querySelectorAll('li, p');
+		// paragraphCutOff() {
+		// 	let cycleCopy = this.$refs.copy.querySelectorAll('li, p');
 
-			for (let text of cycleCopy) {
-				if (this.elDimensions.height < text.offsetTop + text.offsetHeight) {
-					text.classList.add('cut-off-text');
-					this.cutOffText.push(text);
-				}
-			}
-		},
+		// 	for (let text of cycleCopy) {
+		// 		if (this.elDimensions.height < text.offsetTop + text.offsetHeight) {
+		// 			text.classList.add('cut-off-text');
+		// 			this.cutOffText.push(text);
+		// 		}
+		// 	}
+		// },
 		toggleText() {
 			this.collapsed = !this.collapsed;
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
@@ -118,7 +118,8 @@ export default {
 
 .team-member
 	pad(2,0)
-	transition all 0.5s
+	transition opacity 500ms
+
 	+above($tablet)
 		display flex
 
@@ -134,22 +135,25 @@ export default {
 			opacity 0
 
 .copy-cta
-	transition opacity 0.5s 0.4s, transform 0.5s 0.4s
+	transition opacity 0.5s 0.8s, transform 0.5s 0.8s
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(-2rem)
 
 .team-member
 	/deep/ h3
-		transition opacity 0.5s, transform 0.5s
-	/deep/ h4
-		transition opacity 0.5s 0.2s, transform 0.5s 0.2s
-	.copy-container /deep/ p, /deep/ ul
 		transition opacity 0.5s 0.4s, transform 0.5s 0.4s
+	/deep/ h4
+		transition opacity 0.5s 0.6s, transform 0.5s 0.6s
+	.copy-container /deep/ p, /deep/ ul
+		transition opacity 0.5s 0.8s, transform 0.5s 0.8s
 	&.v-enter, &.onpage:not(.inview)
 		/deep/ h3, /deep/ h4, .copy-container /deep/ p, /deep/ ul
 			opacity 0
 			transform translateY(2rem)
+
+		/deep/ img
+			transform translate3d(0, 100%, 0)
 
 	/deep/
 		h4
@@ -159,32 +163,26 @@ export default {
 			+below($tablet)
 				fs(20)
 
+.img-wrap
+	flex-shrink 0
+	position relative
+	margin-right 6em
+	overflow hidden
+
+	+below($tablet)
+		margin-right 1em
+		float left
+
+	/deep/
 		img
-			width 220px
-			max-width 100%
+			transform translate3d(0, 0%, 0)
+			transition transform 500ms $easeOutCubic 500ms
 			width 100%
-			height 100%
-			position absolute
-			bottom 0
-			object-fit cover
-			transition height 0.5s
 
 			+below($tablet)
 				padding-right 1em
 				width 96%
 				float left
-
-	&.v-enter, &.onpage:not(.inview)
-		/deep/ img
-			height 0%
-
-.img-wrap
-	flex-shrink 0
-	position relative
-	margin-right 6em
-	+below($tablet)
-		margin-right 1em
-		float left
 
 .copy-cta
 	align-items center

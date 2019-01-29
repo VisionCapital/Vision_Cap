@@ -3,12 +3,9 @@
 
 		<sniffer/>
 
-		<transition appear>
+		<transition appear mode="out-in">
 			<preloader v-if="!loaded"/>
-		</transition>
-
-		<transition appear>
-			<router-view v-if="loaded"/>
+			<router-view v-else-if="loaded"/>
 		</transition>
 
 	</div>
@@ -48,5 +45,8 @@ export default {
 <style lang="stylus">
 
 @import "../styl/main"
+
+#app
+	background linear-gradient(142deg, #011254, #00022e)
 
 </style>

@@ -4,8 +4,10 @@
 		<div class="wrap">
 
 			<div class="copy">
+
 				<h3 v-if="data.fields.heading"
 					v-html="data.text('heading')"/>
+
 				<h4 v-if="data.fields.subheading"
 					v-html="data.text('subheading')"/>
 
@@ -65,6 +67,8 @@ export default {
 			color #4A90E2
 			fs(26)
 			transition-delay 0.25s
+			max-width: 18em
+			margin: 0 auto
 
 			+below($tablet)
 				fs(20)

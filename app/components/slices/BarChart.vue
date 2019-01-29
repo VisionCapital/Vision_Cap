@@ -184,7 +184,6 @@ export default {
 .bar-chart
 	@extend $slice
 	pad(2,0)
-	transition all 3s
 
 	+below($tablet)
 		&:nth-child(even)
@@ -232,9 +231,6 @@ export default {
 			opacity 0
 
 	/deep/
-		// a::before, a::after
-		// 	background none
-
 		h2, a
 			color $w
 			position relative
@@ -266,24 +262,26 @@ export default {
 		background url('../../images/strip-bg.jpg')
 		background-repeat no-repeat
 		background-size cover
-		display inline-block
 		height 100%
-		width auto
-		bottom 0
 		left 0
 		right 0
 		top 0
 		position absolute
+		transition opacity 500ms
 
-	+below($tablet)
-		pad(.5,1,1)
-		text-align center
+		.v-enter &, .onpage:not(.inview) &
+			opacity 0
 
 	+above($tablet)
 		width (200% / 9)
 
 		.bg
 			left -($gut * 2em)
+
+	+below($tablet)
+		mgn(0, .5)
+		pad(.5,1,1.5)
+		text-align center
 
 .chart
 	order 3
@@ -294,6 +292,8 @@ export default {
 		opacity 0
 
 	+below($tablet)
+		margin-left $gut * -.25em
+		margin-right $gut * -.25em
 		pad(2,0,0,2)
 
 	+above($tablet)
