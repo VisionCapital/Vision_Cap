@@ -5,7 +5,7 @@
 	],
 	"from": "noreply@arrayofstars.com",
 	"site_name": "Vision Capital",
-	"fail_message": "Please correct the following:",
+	"fail_message": "Please fill out all required fields",
 	"success_message": "The email was successfully sent",
 	"fields": {
 		"name": {

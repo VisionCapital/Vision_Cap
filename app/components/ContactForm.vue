@@ -3,13 +3,12 @@
 		<div class="left">
 			<div class="form-row" v-for="(field, idx) in fields" :key="idx">
 				<div class="required" v-if="field.required === 'Yes'" :style="{'transition-delay': `${0.3 * idx}s`}">*</div>
-				<div class="input-container">
+				<div :class="{ 'input-container': 1, error: isError(key(field)) }">
 					<input :id="`field-${idx}`"
 						type="text"
-						:name="data.textField(field.key).toLowerCase()"
+						:name="key(field)"
 						:style="{'transition-delay': `${0.3 * idx + 0.2}s`}"
-						:placeholder="data.textField(field.placeholder)"
-						:required="field.required === 'Yes'">
+						:placeholder="data.textField(field.placeholder)">
 					<div class="bottom-border"
 						:style="{'transition-delay': `${0.3 * idx}s`}"/>
 				</div>
@@ -20,10 +19,13 @@
 				<textarea rows="1"
 					v-if="data.fields.textarea_placeholder"
 					name="message"
-					:placeholder="data.textField(data.fields.textarea_placeholder).toLowerCase()"
+					:placeholder="data.textField(data.fields.textarea_placeholder)"
 					:style="{'transition-delay': `${fields.length * 0.3}s`}"></textarea>
 				<div class="bottom-border" :style="{'transition-delay': `${fields.length * 0.3}s`}"></div>
 			</div>
+				<div class="spinner">
+
+				</div>
 				<button id="submit"
 					name="submit"
 					type="submit"
@@ -36,6 +38,8 @@
 						</g>
 					</svg>
 				</button>
+
+				<div :class="{ errorMessage: 1, success }" v-if="errorMessage">{{ errorMessage }}</div>
 
 		</div>
 	</form>
@@ -63,10 +67,21 @@ export default {
 		};
 	},
 	methods: {
+		key(obj) {
+			return this.data.textField(obj.key).toLowerCase();
+		},
+		isError(field) {
+			if (!this.errors) {
+				return false;
+			}
+
+			return this.errors.includes(field);
+		},
 		doSubmit() {
 			console.log('do submit'); // eslint-disable-line no-console
 			this.success = false;
 			this.errors = null;
+			this.errorMessage = null;
 
 			let form = this.$refs.form;
 			let formData = new FormData(form);
@@ -81,6 +96,7 @@ export default {
 				let data = response.data;
 				if (data.status === 'ok') {
 					this.success = true;
+					this.errorMessage = 'Thank you';
 					return;
 				}
 
@@ -139,6 +155,8 @@ form
 .input-container
 	position relative
 	overflow hidden
+	&.error .bottom-border
+		background #ff0000
 
 .bottom-border
 	height 1px
@@ -221,5 +239,15 @@ form
 		&:active
 			// background $blk
 
+	.errorMessage
+		color #ff0000
+
+		&.success
+			color #00ff00;
+
+		+above($tablet)
+			position absolute
+			top 10rem
+			right 0
 
 </style>
