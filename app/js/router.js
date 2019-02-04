@@ -22,6 +22,12 @@ const router = new VueRouter({
 					name: 'page',
 					props: true,
 					component: () => import('../components/pages/Page.vue')
+				},
+				{
+					path: 'resources/:slug?',
+					component: () => import('../components/slices/ResourcePage.vue'),
+					name: 'resources',
+					props: true
 				}
 			]
 		}
