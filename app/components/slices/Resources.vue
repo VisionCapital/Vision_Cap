@@ -1,10 +1,16 @@
 <template>
-	<div class="resources" :id="resourceID" :ref="resourceID" v-if="resources.length">
+<!-- :id="resourceID" :ref="resourceID" v-if="resources.length" -->
+
+<div class="resource-container">
+	<div class="resources">
 		<div class="wrap">
 
-			<router-link :to="`/resources/${slugify(data.text('title_tag'))}`" @click.native.stop><h2 v-if="data.fields.title_tag"
-				v-html="data.text('title_tag')"/></router-link>
-
+				<router-link 
+				:to="`/resources/${slugify(data.text('title_tag'))}`" 
+				@click.native.stop>
+				<h2 v-if="data.fields.title_tag"
+					v-html="data.text('title_tag')"/></router-link>
+		
 			<!-- <resource v-for="(resource, i) in resources"
 				:key="i"
 				:class="[ 'onpage', { inview : sidx >= i }]"
@@ -21,9 +27,10 @@
 				<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
 				<div class="spinner" v-else>*loadSpinner</div>
 			</button> -->
-
+		
 		</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -80,27 +87,27 @@ export default {
 				}
 				this.sidx = -1;
 			}
-		},
-		loadTags(pagNum) {
-			this.loadingPages = true;
-			this.$cms.loadTags(this.data.text('title_tag'), pagNum).then((results) => {
-				if (pagNum === 1) {
-					this.resources = results.results;
-					if (this.resources[0]) {
-						this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
-						this.$nextTick(this.hashScroll);
-					}
-				} else {
-					this.loadedPages = pagNum;
-					for (let resource of results.results) {
-						this.resources.push(resource);
-					}
-				}
-				this.totalPages = results.total_pages;
-
-			});
-			this.loadingPages = false;
 		}
+		// loadTags(pagNum) {
+		// 	this.loadingPages = true;
+		// 	this.$cms.loadTags(this.data.text('title_tag'), pagNum).then((results) => {
+		// 		if (pagNum === 1) {
+		// 			this.resources = results.results;
+		// 			if (this.resources[0]) {
+		// 				this.resourceID = this.resources[0].tags[0].replace(/\s/g, '-').toLowerCase();
+		// 				this.$nextTick(this.hashScroll);
+		// 			}
+		// 		} else {
+		// 			this.loadedPages = pagNum;
+		// 			for (let resource of results.results) {
+		// 				this.resources.push(resource);
+		// 			}
+		// 		}
+		// 		this.totalPages = results.total_pages;
+
+		// 	});
+		// 	this.loadingPages = false;
+		// }
 	},
 	mounted() {
 
@@ -123,12 +130,18 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
+.wrap
+	display flex
+	position relative
+
+.resource-container
+	@extend $slice
+	position relative
 
 .resources
-	@extend $slice
-	pad(2, 0)
-	&:nth-child(odd)
-		background #f8f8f8
+	// pad(2, 0)
+	// &:nth-child(odd)
+	// 	background #f8f8f8
 
 	&.v-enter, &.onpage:not(.inview)
 		/deep/ h2
@@ -137,7 +150,7 @@ export default {
 
 	/deep/ h2
 		transition opacity 0.3s, transform 0.3s
-		fs(80)
+		fs(50)
 		line-height (100 / 80)
 		letter-spacing (-.97 / 80) * 1em
 		+below($tablet)

@@ -161,6 +161,7 @@ export default {
 	position relative
 }
 .page-scroll
+	@extend $slice
 	position relative
 	z-index 1
 
