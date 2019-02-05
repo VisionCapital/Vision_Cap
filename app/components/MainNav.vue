@@ -48,7 +48,7 @@
 							<div class="anchor-links" :class="{ 'page-top': !pageTop }">
 								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
 									<router-link v-if="mutualOpen"
-										:to="`/${link.page_link.slug}#${tag.slug}`"
+										:to="`/${link.page_link.slug}/${tag.slug}`"
 										@click.native="handleClick()">
 										<div class="text"
 											v-html="tag.title">

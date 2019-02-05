@@ -41,7 +41,7 @@
 						</div>
 
 						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
-							<router-link :to="`/${link.page_link.slug}#${tag.slug}`"
+							<router-link :to="`/${link.page_link.slug}/${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
 								:class="tag.slug"
