@@ -11,29 +11,20 @@ import airprops from '../../mixins/airprops';
 
 export default {
 	mixins: [ airprops ],
-
 	components: {
-		
 	},
-
 	data() {
 		return {
-
 		};
 	},
 	computed: {
-		
 	},
 	methods: {
-		
 	},
 	mounted() {
-
-	
 	},
 	destroy() {
 	}
-
 };
 
 </script>
