@@ -1,14 +1,15 @@
 <template>
-	<div class="resource-page"  :id="resourceID" :ref="resourceID" v-if="resources.length">
-		<div class="wrap">
-
-			<p>sddsf</p>
-
-				<!-- :class="[ 'onpage', { inview : sidx >= i }]" -->
-
+	<div class="resource-page"  :id="resourceID" :ref="resourceID" >
+		<div class="page-scroll">
+			<div class="hero">
+				<Hero :data="heroData"/>
+			</div>
+			<div>
+		<div class="wrap" v-if="resources.length">
 			<resource v-for="(resource, i) in resources"
 				:key="i"
 				:inview="sidx >= i"
+				:class="[ 'onpage', { inview : sidx >= i }]" 
 				ref="resourceComp"
 				:data="resource"/>
 
@@ -21,8 +22,9 @@
 				<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
 				<div class="spinner" v-else>*loadSpinner</div>
 			</button>
-			
-
+		</div>
+		<page-footer ref="footer" :class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"/>
+		</div>
 		</div>
 	</div>
 </template>
@@ -30,13 +32,26 @@
 <script>
 
 import Resource from './Resource.vue';
+import Hero from './Hero.vue';
 import ArrowHead from '../svg/ArrowHead.vue';
-// import LerpScroll from '../../js/lerp-scroll.js';
+import LerpScroll from '../../js/lerp-scroll.js';
 
 export default {
 
+	watch: {
+		tag: {
+			immediate: true,
+			handler(tag) {
+				if (tag) {
+					this.heroData.fields.hero_title[0].text = tag;
+				}
+			}
+		}
+	},
+
 	components: {
 		Resource,
+		Hero,
 		ArrowHead
 	},
 	props: [
@@ -44,8 +59,21 @@ export default {
 	],
 	data() {
 		let record = this.$cms.findRecord(this.slug);
+		let heroData = {
+			'fields': {
+				'hero_title': [
+					{
+						'text': this.tag
+					}
+				],
+				'hero_copy': [],
+				'hero_image': {}
+			}
+			}; // eslint-disable-line 
 		return {
+			heroData,
 			resources: [],
+			resourceID: '',
 			loadedPages: 1,
 			sidx: -1,
 			totalPages: 0,
@@ -95,6 +123,7 @@ export default {
 			}
 		},
 		checkScroll(scrollTop) {
+			this.$emit('pageTop', scrollTop < 1);
 			for (let i = this.$refs.resourceComp.length - 1; i > -1; i--) {
 				if (scrollTop + this.deviceHeight > this.$refs.resourceComp[i].$el.offsetTop) {
 					this.sidx = i;
@@ -105,13 +134,17 @@ export default {
 		}
 	},
 	mounted() {
+		this.scroll = new LerpScroll(this.$el, (d) => { this.lastScrollTop = Math.abs(d.pos); });
 		this.loadTags(1);
 
 		this.scrollInterval = setInterval(() => {
 			if (this.$refs.resourceComp) {
-				this.checkScroll(Math.abs(this.page.scroll.pos));
+				this.checkScroll(this.lastScrollTop);
 			}
 		}, 500);
+	},
+	destroy() {
+		clearInterval(this.scrollInterval);
 	}
 };
 
@@ -120,18 +153,24 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-
+.wrap
+	padding-top 5em
+.resource-page {
+	@extend $slice
+    height: 100%;
+	position relative
+}
 .page-scroll
 	position relative
 	z-index 1
 
 	> div
-		background $bg
+		background $w
 		// transform translate3d(0, 0, 0)
 		transition background 600ms $easeOutCubic
 		// transition-property background, transform
 
-		&.v-enter
+		&.v-enter, &.hero
 			background rgba($bg,0)
 			// transform translate3d(0, 5vh, 0)
 
@@ -143,7 +182,6 @@ export default {
 
 
 .resources
-	@extend $slice
 	pad(2, 0)
 	&:nth-child(odd)
 		background #f8f8f8

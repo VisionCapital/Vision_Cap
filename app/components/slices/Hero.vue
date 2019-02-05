@@ -2,17 +2,17 @@
 	<div class="hero">
 
 		<div class="wrap">
-			<div class="copy">
+			<div class="copy" v-if="data && data.fields">
 
 				<div class="hero-image" v-if="data.fields.hero_image.url">
 					<img :src="data.image('hero_image')"/>
 				</div>
 
 				<h1 v-if="data.fields.hero_title.length"
-					v-html="data.text('hero_title')"/>
+					v-html="$cms.textField(data.fields.hero_title)"/>
 
 				<div v-if="data.fields.hero_copy.length"
-					v-html="data.html('hero_copy')"/>
+					v-html="$cms.htmlField(data.fields.hero_copy)"/>
 
 			</div>
 		</div>
