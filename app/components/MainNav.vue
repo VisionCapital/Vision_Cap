@@ -33,9 +33,9 @@
 
 							<div class="drop-toggle">
 
-								<router-link :to="`/${link.page_link.slug}`"
+								<router-link :to="`/${link.page_link.uid}`"
 									@click.native="handleClick()"
-									v-html="link.link_title[0].text"/>
+									v-html="$cms.textField(link.link_title)"/>
 
 								<button @click.prevent="mutualOpen = !mutualOpen">
 									<arrow-head class="arrow-head"
