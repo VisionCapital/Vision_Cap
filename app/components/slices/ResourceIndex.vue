@@ -2,14 +2,17 @@
 
 <div class="resource-index">
 	<div class="wrap">
-	<h3 class="index" v-for="item in data.items" :key="item">
-				<router-link 
-					:to="`/resources/${slugify(data.textField(item.resource_title))}`" 
-					@click.native.stop>
-						<h3 v-html="data.textField(item.resource_title)"/>
-						<img class="index-image" ref="img" :src="item.resource_thumbnail.url">
-				</router-link>
-	</h3>
+		<div class="index-column" v-for="item in data.items" :key="item">
+			<div class="index">
+					<router-link 
+						:to="`/resources/${slugify(data.textField(item.resource_title))}`" 
+						@click.native.stop>
+							<h3 v-html="data.textField(item.resource_title)"/>
+							<img class="index-image" ref="img" :src="item.resource_thumbnail.url">
+					</router-link>
+				</div>
+		</div>
+
 </div>
 </div>
 </template>
@@ -45,13 +48,40 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
+.wrap
+	padding-bottom 6em
+	+above($mobile)
+		display flex
+		flex-wrap wrap
+
 .resource-index
 	@extend $slice
-	position relative
+
+	text-align left
 	/deep/ h3
 		font-family $cormorant-semibold	
+		fs(30)
+		+above($tablet)
+			fs(40)
+			text-align left
+
+.index-column
+	width 100%
+	margin auto
+	margin-bottom: 0;
+	+above($tablet)
+		width 48%
+		position relative
+		&:nth-child(even)
+			margin-left 2%
 .index
-	width 50%
-	display inline-block
-	position relative
+
+	padding-top 3em
+	+above($tablet)
+		bottom 0
+		position relative
+
+.index-image
+	width 100%
+
 </style>
