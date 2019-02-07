@@ -50,8 +50,8 @@
 									<router-link v-if="mutualOpen"
 										:to="`/${link.page_link.uid}/${tag.slug}`"
 										@click.native="handleClick()">
-										<div class="text"
-											v-html="tag.title">
+										<div class="text">
+											<span v-html="tag.title"/>
 										</div>
 									</router-link>
 								</transition>
@@ -210,6 +210,7 @@ for i in 1..10
 
 			&::before, &::after
 				background $w
+				z-index 100
 
 			&:hover
 				&::after
@@ -234,6 +235,7 @@ for i in 1..10
 
 				&::after
 					background $w
+					z-index 100
 					transition-duration 0.5s
 					width 0
 
@@ -263,12 +265,16 @@ for i in 1..10
 			width: 0.7em
 
 .anchor-links
+
+	width 15em
 	.router-link-exact-active, .router-link-active
 		&::before
 			background $bluesat
+			z-index 100
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
 		&::after
+			z-index 100
 			transition-duration 0.6s
 			width 100%
 
@@ -278,6 +284,7 @@ for i in 1..10
 
 			&::after
 				background $w
+				z-index 100
 				transition-duration 0.5s
 				width 0
 
@@ -304,8 +311,9 @@ for i in 1..10
 		display block
 		max-height 6em
 		margin-top 2px
+		position: relative;
 		transition max-height 300ms $easeOutQuint
-		
+
 		&.page-top
 			padding 0
 
@@ -328,11 +336,35 @@ for i in 1..10
 		pad(.5, 0, .5, 1)
 		fs(16)
 		transition opacity 0.3s, transform 0.3s
+		.router-link-exact-active, .router-link-active
+			/deep/ a
+				&::before
+					background $bluesat
+					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
-		+above($laptop)
-			line-height (15 / 13)
-			pad(.5, .5)
-			text-align center
+				&::after
+					transition-duration 0.6s
+					width 100%
+
+				&:hover
+					&::before
+						transition-duration 0.6s
+
+					&::after
+						background $w
+						z-index 100
+						transition-duration 0.5s
+						width 0
+
+
+		span
+			&::before, &::after
+				background $w
+				z-index 100
+
+			&:hover
+				&::after
+					background none
 
 	.v-enter, .v-leave-to
 		.text
