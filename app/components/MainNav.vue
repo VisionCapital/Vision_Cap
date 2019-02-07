@@ -218,6 +218,24 @@ for i in 1..10
 			+below($laptop)
 				font-family $cormorant
 				fs(30)
+				
+		.router-link-exact-active, .router-link-active
+			&::before
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+			&::after
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $w
+					transition-duration 0.5s
+					width 0
 
 .dropdown-container
 	position relative
