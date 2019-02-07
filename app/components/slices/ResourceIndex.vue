@@ -8,7 +8,7 @@
 						:to="`/resources/${slugify(data.textField(item.resource_title))}`" 
 						@click.native.stop>
 							<h3 v-html="data.textField(item.resource_title)"/>
-							<img class="index-image" ref="img" :src="item.resource_thumbnail.url">
+							<img class="index-image" ref="img" :src="item.resource_thumbnail.url"/>
 					</router-link>
 				</div>
 		</div>

@@ -65,14 +65,17 @@ export default {
 
 		this.$cms.loadPage('resources').then((results) => {
 			for (let r = 0; r < results.data.body.length; r++) {
-				if (results.data.body[r].slice_type === 'resources') {
-					let title = this.$cms.textField(results.data.body[r].primary.title_tag);
-					let slug = title.replace(/\s/g, '-').toLowerCase();
+				if (results.data.body[r].slice_type === 'resource_index') {
+					for (let i = 0; i < results.data.body[r].items.length; i++) {
 
-					resourceTags.push({
-						title: title,
-						slug: slug
-					});
+						let title = this.$cms.textField(results.data.body[r].items[i].resource_title);
+						let slug = title.replace(/\s/g, '-').toLowerCase();
+
+						resourceTags.push({
+							title: title,
+							slug: slug
+						});
+					}
 				}
 			}
 			this.$store.dispatch('setResourceTags', resourceTags);
