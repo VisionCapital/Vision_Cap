@@ -100,7 +100,7 @@ export default {
 		content none
 
 .linkwrap
-	vertical-align middle
+	vertical-align top
 	float right
 	display inline-block
 	margin auto 0
@@ -165,7 +165,11 @@ export default {
 			display inline-block
 			font-smoothing()
 			vertical-align top
-
+			&::before, &::after
+				background $w
+			&:hover
+				&::after
+					background none
 			+below($mobile)
 				fs(12)
 
@@ -216,12 +220,13 @@ export default {
 
 .drop-toggle
 	+above($laptop)
+		display flex
 		pad(1,0,1,.5)
 
 	/deep/
 		a, button
 			display inline-block
-			vertical-align middle
+			vertical-align top
 
 		button
 			border 0
@@ -229,7 +234,8 @@ export default {
 			padding 0
 
 			+above($laptop)
-				pad(.5,.25)
+				margin auto
+				pad(0,.25)
 
 .anchor-links
 	bottom 100%
@@ -243,8 +249,6 @@ export default {
 		margin-bottom 2px
 		pad(0.5,0.5)
 
-		&::after, &::before
-			content none
 
 a.router-link-exact-active, .drop-toggle .router-link-active
 	&:before

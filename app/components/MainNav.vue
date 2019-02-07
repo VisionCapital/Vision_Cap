@@ -186,23 +186,6 @@ for i in 1..10
 	+below($laptop)
 		pad(4, 0)
 
-	.router-link-exact-active, .drop-toggle .router-link-active
-		&::before
-			background $bluesat
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-
-		&::after
-			transition-duration 0.6s
-			width 100%
-
-		&:hover
-			&::before
-				transition-duration 0.6s
-
-			&::after
-				background $w
-				transition-duration 0.5s
-				width 0
 
 	/deep/
 		li
@@ -262,6 +245,25 @@ for i in 1..10
 			width: 0.7em
 
 .anchor-links
+	.router-link-exact-active, .router-link-active
+		&::before
+			background $bluesat
+			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+		&::after
+			transition-duration 0.6s
+			width 100%
+
+		&:hover
+			&::before
+				transition-duration 0.6s
+
+			&::after
+				background $w
+				transition-duration 0.5s
+				width 0
+
+				
 	+above($laptop)
 		left $gut*-.5rem
 		position absolute
@@ -285,12 +287,9 @@ for i in 1..10
 		max-height 6em
 		margin-top 2px
 		transition max-height 300ms $easeOutQuint
-
+		
 		&.page-top
 			padding 0
-
-		&:after, &::before
-			content none
 
 		&.v-enter, &.v-leave-to
 			max-height 0em
