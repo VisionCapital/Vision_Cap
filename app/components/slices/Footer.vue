@@ -27,7 +27,7 @@
 
 						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">
 
-							<router-link :to="`/${link.page_link.slug}`"
+							<router-link :to="`/${link.page_link.uid}`"
 								v-html="link.link_title[0].text"/>
 
 							<button v-if="$store.state.device.win.x > 1366"
@@ -41,7 +41,7 @@
 						</div>
 
 						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
-							<router-link :to="`/${link.page_link.slug}/${tag.slug}`"
+							<router-link :to="`/${link.page_link.uid}/${tag.slug}`"
 								v-for="(tag, idx) in resourceTags"
 								v-html="tag.title"
 								:class="tag.slug"
@@ -90,7 +90,6 @@ export default {
 
 .footer
 	position relative
-	overflow hidden
 	z-index 2
 
 .home-link
@@ -133,13 +132,13 @@ export default {
 		pad(1,0)
 		max-width 376px
 
-	+above($notebook)
+	+above($laptop)
 		padding 0
 		justify-content space-between
 		max-width 1060px
 		width 80%
 
-	+below($notebook)
+	+below($laptop)
 		flex-wrap wrap
 
 	.router-link-exact-active, .drop-toggle .router-link-active
@@ -229,7 +228,7 @@ export default {
 			margin 0
 			padding 0
 
-			+above($notebook)
+			+above($laptop)
 				pad(.5,.25)
 
 .anchor-links
