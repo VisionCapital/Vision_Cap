@@ -296,7 +296,25 @@ for i in 1..10
 	position relative
 	+below($laptop)
 		padding-top: 1em;
+	.router-link-exact-active, .router-link-active
+		.text
+			&::before
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
+			&::after
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $w
+					z-index 100
+					transition-duration 0.5s
+					width 0	
 	.text-box
 		margin auto
 		background $b

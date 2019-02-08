@@ -126,7 +126,6 @@ export default {
 	position relative
 	width 100%
 	max-width 1060px
-
 	+above($mobile)
 		justify-content center
 		text-align center
@@ -144,7 +143,7 @@ export default {
 
 	.router-link-exact-active, .drop-toggle .router-link-active
 		&::before
-			background green
+			background $w
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
 		&::after
@@ -156,24 +155,87 @@ export default {
 				transition-duration 0.6s
 
 			&::after
-				background green
+				background $w
 				transition-duration 0.5s
 				width 0
 
 	/deep/
 		a
+			&::before, &::after
+				background $w
+				content ''
+				height 2px
+				position absolute
+				top 100%
+				width 0%
+
+			&::before
+				left 0
+
+			&::after
+				right 0
+				transition width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+			&:hover
+				&::before
+					transition width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+					width 100%
+
+				&::after
+					background 0
+					transition 0s
+					width 100%
+
+			&.active
+				&::before
+					background $w
+					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+				&::after
+					background $w
+					transition-duration 0.6s
+					width 100%
+
+				&:hover
+					&::before
+						transition-duration 0.6s
+
+					&::after
+						background $w
+						transition-duration 0.5s
+						width 0
+
 			color $w
 			display inline-block
 			font-smoothing()
 			vertical-align top
-			
-			&::before, &::after
-				content none
+		
 			&:hover
 				&::after
 					background none
 			+below($mobile)
 				fs(12)
+
+			.router-link-exact-active, .router-link-active
+				/deep/ a
+					&::before
+						background $bluesat
+						transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+					&::after
+						transition-duration 0.6s
+						width 100%
+
+					&:hover
+						&::before
+							transition-duration 0.6s
+
+						&::after
+							background $w
+							z-index 100
+							transition-duration 0.5s
+							width 0	
+		
 
 		li
 			margin auto 0
@@ -254,7 +316,7 @@ export default {
 		width: 100%;
 		margin-bottom: 2px;
 
-		&.v-enter, &.v-leave-to
+		&.v-enter
 			max-height 0em
 			opacity 0
 
