@@ -41,11 +41,13 @@
 						</div>
 
 						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
+							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
 							<router-link :to="`/${link.page_link.uid}/${tag.slug}`"
-								v-for="(tag, idx) in resourceTags"
-								v-html="tag.title"
-								:class="tag.slug"
-								:key="idx"/>
+								class="text-box"
+								:key="idx">
+								<div class="text" v-html="tag.title"/>
+								</router-link>
+								</transition>
 						</div>
 
 					</li>
@@ -96,8 +98,6 @@ export default {
 	display inline-block
 	margin 0 auto
 
-	&::before, &::after
-		content none
 
 .linkwrap
 	vertical-align top
@@ -125,6 +125,7 @@ export default {
 	pad(1, 1)
 	position relative
 	width 100%
+	max-width 1060px
 
 	+above($mobile)
 		justify-content center
@@ -143,7 +144,7 @@ export default {
 
 	.router-link-exact-active, .drop-toggle .router-link-active
 		&::before
-			background $w
+			background green
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
 		&::after
@@ -155,7 +156,7 @@ export default {
 				transition-duration 0.6s
 
 			&::after
-				background $w
+				background green
 				transition-duration 0.5s
 				width 0
 
@@ -165,8 +166,9 @@ export default {
 			display inline-block
 			font-smoothing()
 			vertical-align top
+			
 			&::before, &::after
-				background $w
+				content none
 			&:hover
 				&::after
 					background none
@@ -222,7 +224,6 @@ export default {
 	+above($laptop)
 		display flex
 		pad(1,0,1,.5)
-
 	/deep/
 		a, button
 			display inline-block
@@ -239,10 +240,96 @@ export default {
 
 .anchor-links
 	bottom 100%
-	left $gut*-.5rem
+	left $gut*-2.15rem
 	position absolute
-	right $gut*-.5rem
+	right $gut*-2.15rem
+	
+	.text-box
+		margin auto
+		background $blue
+		max-height 6em
+		pad(.5,.5)
+		opacity 1
+		transition all 300ms $easeOutQuint
+		width: 100%;
+		margin-bottom: 2px;
 
+		&.v-enter, &.v-leave-to
+			max-height 0em
+			opacity 0
+
+		&.v-enter-active
+			for i in 1..4
+				&:nth-child({5 - i})
+					transition-delay 100ms * i
+
+					.text
+						transition-delay 100ms * (i + 1)
+		.text
+			position relative
+			display inline-block
+			&::before, &::after
+				background $w
+				content ''
+				height 2px
+				top 100%
+				position absolute
+				width 0%
+
+			&::before
+				left 0
+
+			&::after
+				right 0
+				transition width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+			&:hover
+				&::before
+					transition width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+					width 100%
+
+				&::after
+					background 0
+					transition 0s
+					width 100%
+
+			&.active
+				&::before
+					background $bluesat
+					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+				&::after
+					background $b
+					transition-duration 0.6s
+					width 100%
+
+				&:hover
+					&::before
+						transition-duration 0.6s
+
+					&::after
+						background $b
+						transition-duration 0.5s
+						width 0
+	.router-link-exact-active, .router-link-active
+		.text
+			&::before
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+			&::after
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $w
+					z-index 100
+					transition-duration 0.5s
+					width 0			
 	/deep/ a
 		background $blue
 		display block

@@ -113,7 +113,6 @@ export default {
 .main-nav
 	pointer-events none
 
-
 .nav-content
 	height 100%
 	left 0
@@ -186,7 +185,6 @@ for i in 1..10
 	+below($laptop)
 		pad(4, 0)
 
-
 	/deep/
 		li
 			+above($laptop)
@@ -251,7 +249,6 @@ for i in 1..10
 			display inline-block
 			vertical-align middle
 			
-
 		button
 			border 0
 			margin 0
@@ -285,8 +282,6 @@ for i in 1..10
 						transition-duration 0.5s
 						width 0
 		
-		
-
 		+below($laptop)
 			font-family $circular
 			margin 0
@@ -307,8 +302,9 @@ for i in 1..10
 		background $b
 		max-height 6em
 		pad(.5,.5)
-		transition all 300ms $easeOutQuint
 		opacity 1
+		transition all 300ms $easeOutQuint
+		width 100%
 		margin-bottom: 2px;
 
 		&.v-enter, &.v-leave-to
@@ -320,8 +316,8 @@ for i in 1..10
 				&:nth-child({i})
 					transition-delay 100ms * i
 
-				.text
-					transition-delay 100ms * (i + 1)
+					.text
+						transition-delay 100ms * (i + 1)
 						
 	.router-link-exact-active, .router-link-active
 		.text
@@ -342,7 +338,6 @@ for i in 1..10
 					z-index 100
 					transition-duration 0.5s
 					width 0			
-
 
 	/deep/ a //the dropdown links container
 
@@ -429,7 +424,6 @@ for i in 1..10
 				z-index 100
 				transition-duration 0.5s
 				width 0
-
 				
 	+above($laptop)
 		left $gut*-2.15rem
@@ -447,20 +441,6 @@ for i in 1..10
 
 	+below($laptop)
 		fs(18)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .home-link
 	/deep/ a
