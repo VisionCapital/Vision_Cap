@@ -47,13 +47,11 @@
 
 							<div class="anchor-links" :class="{ 'page-top': !pageTop }">
 								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-									<router-link v-if="mutualOpen"
-										:to="`/${link.page_link.uid}/${tag.slug}`"
-										@click.native="handleClick()">
-										<div class="text">
-											<span v-html="tag.title"/>
-										</div>
-									</router-link>
+										<router-link class="text-box" v-if="mutualOpen"
+											:to="`/${link.page_link.uid}/${tag.slug}`"
+											@click.native="handleClick()">
+											<div class="text" v-html="tag.title"/>
+										</router-link>
 								</transition>
 							</div>
 
@@ -111,8 +109,10 @@ export default {
 
 @import "../styl/_variables"
 
+
 .main-nav
 	pointer-events none
+
 
 .nav-content
 	height 100%
@@ -215,11 +215,11 @@ for i in 1..10
 			&:hover
 				&::after
 					background none
-
+			
 			+below($laptop)
 				font-family $cormorant
 				fs(30)
-				
+		
 		.router-link-exact-active, .router-link-active
 			&::before
 				background $bluesat
@@ -250,6 +250,7 @@ for i in 1..10
 		a, button
 			display inline-block
 			vertical-align middle
+			
 
 		button
 			border 0
@@ -264,9 +265,150 @@ for i in 1..10
 		+above($laptop)
 			width: 0.7em
 
-.anchor-links
+		.router-link-exact-active, .router-link-active
+			/deep/ a
+				&::before
+					background $bluesat
+					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
-	width 15em
+				&::after
+					transition-duration 0.6s
+					width 100%
+
+				&:hover
+					&::before
+						transition-duration 0.6s
+
+					&::after
+						background $w
+						z-index 100
+						transition-duration 0.5s
+						width 0
+		
+		
+
+		+below($laptop)
+			font-family $circular
+			margin 0
+
+	.v-enter, .v-leave-to
+		.text
+			opacity 0
+			transform translate(0,-50%)
+
+
+.anchor-links //the actual links
+	position relative
+	+below($laptop)
+		padding-top: 1em;
+
+	.text-box
+		margin auto
+		background $b
+		max-height 6em
+		pad(.5,.5)
+		transition all 300ms $easeOutQuint
+		opacity 1
+		margin-bottom: 2px;
+
+		&.v-enter, &.v-leave-to
+			max-height 0em
+			opacity 0
+
+		&.v-enter-active
+			for i in 1..4
+				&:nth-child({i})
+					transition-delay 100ms * i
+
+				.text
+					transition-delay 100ms * (i + 1)
+						
+	.router-link-exact-active, .router-link-active
+		.text
+			&::before
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+			&::after
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $w
+					z-index 100
+					transition-duration 0.5s
+					width 0			
+
+
+	/deep/ a //the dropdown links container
+
+			background-color $b
+			display block
+			margin-top 2px
+			position: relative;
+			margin -.5, .5
+			transition opacity 0.3s, transform 0.3s
+			text-align center
+			+below($laptop)
+				text-align left
+				fs(22)
+			&:before, &:after //to remove that automatic blue lining
+				content none
+	.text
+		pad(0,0)
+		display inline-block
+		position relative
+		text-decoration none
+		color $w
+
+		&::before, &::after
+			background $w
+			content ''
+			height 2px
+			position absolute
+			top 100%
+			width 0%
+
+		&::before
+			left 0
+
+		&::after
+			right 0
+			transition width 0.8s cubic-bezier(0.25,0.1,0.25,1)
+
+		&:hover
+			&::before
+				transition width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+				width 100%
+
+			&::after
+				background 0
+				transition 0s
+				width 100%
+
+		&.active
+			&::before
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+			&::after
+				background $b
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $b
+					transition-duration 0.5s
+					width 0
+		
 	.router-link-exact-active, .router-link-active
 		&::before
 			background $bluesat
@@ -290,9 +432,9 @@ for i in 1..10
 
 				
 	+above($laptop)
-		left $gut*-.5rem
+		left $gut*-2.15rem
 		position absolute
-		right $gut*-.5rem
+		right $gut*-2.15rem
 		top 100%
 
 	+below($tablet)
@@ -306,70 +448,19 @@ for i in 1..10
 	+below($laptop)
 		fs(18)
 
-	/deep/ a
-		background-color $b
-		display block
-		max-height 6em
-		margin-top 2px
-		position: relative;
-		transition max-height 300ms $easeOutQuint
-
-		&.page-top
-			padding 0
-
-		&.v-enter, &.v-leave-to
-			max-height 0em
-
-		&.v-enter-active
-			for i in 1..4
-				&:nth-child({i})
-					transition-delay 100ms * i
-
-					.text
-						transition-delay 100ms * (i + 1)
-
-		+below($laptop)
-			font-family $circular
-			margin 0
-
-	.text
-		pad(.5, 0, .5, 1)
-		fs(16)
-		transition opacity 0.3s, transform 0.3s
-		.router-link-exact-active, .router-link-active
-			/deep/ a
-				&::before
-					background $bluesat
-					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-
-				&::after
-					transition-duration 0.6s
-					width 100%
-
-				&:hover
-					&::before
-						transition-duration 0.6s
-
-					&::after
-						background $w
-						z-index 100
-						transition-duration 0.5s
-						width 0
 
 
-		span
-			&::before, &::after
-				background $w
-				z-index 100
 
-			&:hover
-				&::after
-					background none
 
-	.v-enter, .v-leave-to
-		.text
-			opacity 0
-			transform translate(0,-50%)
+
+
+
+
+
+
+
+
+
 
 .home-link
 	/deep/ a
