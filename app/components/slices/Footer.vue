@@ -143,29 +143,22 @@ export default {
 
 	.router-link-exact-active, .drop-toggle .router-link-active
 		&::before
+			background $bluesat
 			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-			background $w
-			width 0%
-			z-index 2
 
 		&::after
-
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-			background $bluesat
+			transition-duration 0.6s
 			width 100%
-			z-index 1
 
 		&:hover
 			&::before
-				background $bluesat
-				width 100%
-				z-index 1
+				transition-duration 0.6s
 
 			&::after
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 				background $w
-				width 0%
-				z-index 2
+				z-index 100
+				transition-duration 0.5s
+				width 0
 
 
 
@@ -229,32 +222,22 @@ export default {
 			.router-link-exact-active, .router-link-active
 				/deep/ a
 					&::before
+						background $bluesat
 						transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-						background $w
-						width 0%
-						z-index 2
 
 					&::after
-
-						transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-						background $bluesat
+						transition-duration 0.6s
 						width 100%
-						z-index 1
 
 					&:hover
 						&::before
-							background $bluesat
-							width 100%
-							z-index 1
+							transition-duration 0.6s
 
 						&::after
-							transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 							background $w
-							width 0%
-							z-index 2
-
-		
-
+							z-index 100
+							transition-duration 0.5s
+							width 0
 		li
 			margin auto 0
 			pad(1,.5)
@@ -397,29 +380,22 @@ export default {
 	.router-link-exact-active, .router-link-active
 		.text
 			&::before
+				background $bluesat
 				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-				background $w
-				width 0%
-				z-index 2
 
 			&::after
-
-				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-				background $bluesat
+				transition-duration 0.6s
 				width 100%
-				z-index 1
 
 			&:hover
 				&::before
-					background $bluesat
-					width 100%
-					z-index 1
+					transition-duration 0.6s
 
 				&::after
-					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 					background $w
-					width 0%
-					z-index 2
+					z-index 100
+					transition-duration 0.5s
+					width 0
 		
 	/deep/ a
 		background $blue
@@ -430,29 +406,22 @@ export default {
 
 a.router-link-exact-active, .drop-toggle .router-link-active
 	&::before
+		background $bluesat
 		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-		background $w
-		width 0%
-		z-index 2
 
 	&::after
-
-		transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-		background $bluesat
+		transition-duration 0.6s
 		width 100%
-		z-index 1
 
 	&:hover
 		&::before
-			background $bluesat
-			width 100%
-			z-index 1
+			transition-duration 0.6s
 
 		&::after
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 			background $w
-			width 0%
-			z-index 2
+			z-index 100
+			transition-duration 0.5s
+			width 0
 
 
 

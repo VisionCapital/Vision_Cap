@@ -8,7 +8,9 @@
 						:to="`/resources/${slugify(data.textField(item.resource_title))}`" 
 						@click.native.stop>
 							<h3 v-html="data.textField(item.resource_title)"/>
-							<img class="index-image" ref="img" :src="item.resource_thumbnail.url"/>
+							<div class="image-wrap" :style="{'background-image': 'url('+item.resource_thumbnail.url+')'}">
+								<img class="index-image" ref="img" :src="item.resource_thumbnail.url"/>
+							</div>
 					</router-link>
 				</div>
 		</div>
@@ -64,7 +66,6 @@ export default {
 		+above($tablet)
 			fs(40)
 			text-align left
-
 .index-column
 	width 100%
 	margin auto
@@ -75,13 +76,22 @@ export default {
 		&:nth-child(even)
 			margin-left 2%
 .index
-
 	padding-top 3em
 	+above($tablet)
 		bottom 0
 		position relative
 
+.image-wrap
+	overflow hidden
+	background-position center
+	background-size cover
+	height 0
+	padding-bottom (3/4 * 100%)
+	position relative
+
 .index-image
 	width 100%
-
+	opacity 0
+	position absolute 
+	pointer-events none
 </style>

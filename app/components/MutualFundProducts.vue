@@ -17,8 +17,8 @@
         <p v-html="fund.date"></p>
         <p v-html="$cms.textField(fund.value)"></p>
 
-				<p>
-					<a :href="fund.pdf.url">
+					<p> 
+					<a :href="fund.pdf.url" v-if="fund.pdf.url">
 						<pdf-icon class="pdf-icon"/>
 						<span>.PDF</span>
 					</a>

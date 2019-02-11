@@ -31,7 +31,8 @@
           <p v-html="document.date"></p>
         </div>
 
-				<div class="align-pdf">
+				
+					<div class="align-pdf" v-if="document.pdf.url">
 					<a class="pdf" :href="document.pdf.url">
 						<pdf-icon class="pdf-icon"/>
 						<span>.PDF</span>
