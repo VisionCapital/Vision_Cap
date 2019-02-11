@@ -1,13 +1,15 @@
 <template>
 	<div class="team-member">
 
-		<div class="img-wrap" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}">
-			<img class="profile-pic" ref="img" @load="checkImgHeight()" :src="card.profile_image.url" v-if="card.profile_image">
+		<div class="img-wrap" v-if="card.profile_image.url" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
+			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url" v-if="card.profile_image">
 		</div>
-
+		<div class="img-wrap">
+			<div class="no-image" :style="{height: `${this.elDimensions.height}px`, width: `220px`}" v-if="!card.profile_image.url"/>
+		</div>
 		<div class="content" >
 
-			<div  class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
+			<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 				<div class="copy" ref="copy"
 					v-html="$cms.htmlField(card.profile_copy)">
 				</div>
@@ -59,24 +61,28 @@ export default {
 	},
 	methods: {
 		setElDimensions() {
-			// should probably add event listener resize for this
-			let dimensions = this.card.profile_image.dimensions;
-
 			let width = 220;
-
 			if (this.$store.state.device.mobile) {
 				width = 104;
 			}
+			// should probably add event listener resize for this
+			if (this.card.profile_image.url) {
+				let dimensions = this.card.profile_image.dimensions;
 
-			let height = width * (dimensions.height / dimensions.width);
-			height = 26 * Math.floor(height / 26);
+				let height = width * (dimensions.height / dimensions.width);
+				height = 26 * Math.floor(height / 26);
+				return {
+					height: height,
+					width: width
+				};
+			}
 			return {
-				height: height,
+				height: 26 * 12,
 				width: width
 			};
 		},
-		checkImgHeight() {
-			if (this.$refs.copy && this.elDimensions.height < this.$refs.copy.offsetHeight) {
+		checkImgHeight(profileExists) {
+			if (profileExists && this.$refs.copy && this.elDimensions.height < this.$refs.copy.offsetHeight) {
 				this.longCopy = true;
 			}
 			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
@@ -163,6 +169,11 @@ export default {
 			+below($tablet)
 				fs(20)
 
+.no-image
+	background-color $grey
+	margin-right 6em
+	height auto
+	display inline-block
 .img-wrap
 	flex-shrink 0
 	position relative

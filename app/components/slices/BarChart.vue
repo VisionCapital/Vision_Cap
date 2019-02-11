@@ -31,6 +31,7 @@
 				<h2 v-html="data.html('vision_opp_pdf_title')"/>
 
 				<a :href="data.fields.pdf_upload.url"
+					v-if="data.fields.pdf_upload.url"
 					target="_blank" rel="noopener"
 					class="active"
 					v-html="data.text('pdf_link_name')"
@@ -185,24 +186,24 @@ export default {
 	@extend $slice
 	pad(2,0)
 
-	+below($tablet)
+	+below($notebook)
 		&:nth-child(even)
 			background $lightgrey
 
 .wrap
 	display flex
 
-	+above($tablet)
+	+above($notebook)
 		flex-wrap wrap
 
-	+below($tablet)
+	+below($notebook)
 		flex-direction column
 
 .title-copy
 	order 1
 	width 100%
 
-	+above($tablet)
+	+above($notebook)
 		padding-bottom 3rem
 
 	.v-enter &, .onpage:not(.inview) &
@@ -240,9 +241,9 @@ export default {
 			fs(mp(2))
 			letter-spacing -(0.32 / 32) * 1em
 			font-family $cormorant-medium
-			+below($tablet)
+			+below($notebook)
 				fs(mp(2))
-			+above($tablet)
+			+above($notebook)
 				fs(mp(1))
 			+above($notebook)
 				fs(mp(2))
@@ -272,13 +273,13 @@ export default {
 		.v-enter &, .onpage:not(.inview) &
 			opacity 0
 
-	+above($tablet)
+	+above($notebook)
 		width (200% / 9)
 
 		.bg
 			left -($gut * 2em)
 
-	+below($tablet)
+	+below($notebook)
 		mgn(0, .5)
 		pad(.5,1,1.5)
 		text-align center
@@ -291,12 +292,12 @@ export default {
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 
-	+below($tablet)
+	+below($notebook)
 		margin-left $gut * -.25em
 		margin-right $gut * -.25em
 		pad(2,0,0,2)
 
-	+above($tablet)
+	+above($notebook)
 		margin-left (100% / 9)
 		width (600% / 9)
 
@@ -326,7 +327,7 @@ export default {
 		right 100%
 		top 0
 
-		+above($tablet)
+		+above($notebook)
 			fs(12)
 			line-height 0
 
@@ -343,7 +344,7 @@ export default {
 	padding-bottom (290 / 240) * 100%
 	position relative
 
-	+above($tablet)
+	+above($notebook)
 		padding-bottom ((290 * 1.7) / 449) * 100%
 
 	+above($notebook)
@@ -373,7 +374,7 @@ export default {
 		right $gut*.25em
 		position absolute
 
-		+above($tablet)
+		+above($notebook)
 			left $gut*.5em
 			right $gut*.5em
 
@@ -386,7 +387,7 @@ export default {
 		position absolute
 		width 100%
 
-		+above($tablet)
+		+above($notebook)
 			fs(12)
 			letter-spacing (0.09em / 12)
 
@@ -408,7 +409,7 @@ export default {
 		line-height (15/ 10)
 		pad(.5,.5)
 
-		+above($tablet)
+		+above($notebook)
 			fs(10)
 			letter-spacing (0.07em / 10)
 			line-height (13 / 10)
@@ -430,7 +431,7 @@ export default {
 					content ''
 					right 0
 
-		+below($tablet)
+		+below($notebook)
 			border-left 1px solid $grey
 			pad(.5, .25, 1, .25)
 
@@ -438,7 +439,7 @@ export default {
 				border-left none
 
 	.title-text
-		+below($tablet)
+		+below($notebook)
 			text-align right
 			transform rotate(180deg)
 			writing-mode: vertical-rl
@@ -462,7 +463,7 @@ export default {
 		text-align center
 		fs(10)
 
-	+above($tablet)
+	+above($notebook)
 		border-top 1px solid #979797
 		mgn(.5, 0)
 		pad(.5, 0)
@@ -471,7 +472,7 @@ export default {
 			fs(12)
 			letter-spacing (0.09em / 12)
 
-	+below($tablet)
+	+below($notebook)
 		mgn(-.5, 0, 1)
 
 .cagr-label
@@ -484,7 +485,7 @@ export default {
 	/deep/ p
 		mgn(.5, 0)
 
-		+below($tablet)
+		+below($notebook)
 			margin 0
 
 </style>

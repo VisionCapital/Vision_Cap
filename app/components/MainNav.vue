@@ -219,31 +219,23 @@ for i in 1..10
 				fs(30)
 		// --------------____________________________________________________________________
 		.router-link-exact-active, .router-link-active
-			
 			&::before
-					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-					background $w
-					width 0%
-					z-index 2
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
+
+			&::after
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
 
 				&::after
-
-					transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-					background $bluesat
-					width 100%
-					z-index 1
-
-				&:hover
-					&::before
-						background $bluesat
-						width 100%
-						z-index 1
-
-					&::after
-						transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-						background $w
-						width 0%
-						z-index 2
+					background $w
+					z-index 100
+					transition-duration 0.5s
+					width 0
 
 .dropdown-container
 	position relative
@@ -289,7 +281,7 @@ for i in 1..10
 						z-index 100
 						transition-duration 0.5s
 						width 0
-		
+			
 		+below($laptop)
 			font-family $circular
 			margin 0
@@ -322,7 +314,7 @@ for i in 1..10
 					background $w
 					z-index 100
 					transition-duration 0.5s
-					width 0	
+					width 0
 	.text-box
 		margin auto
 		background $b
@@ -432,24 +424,22 @@ for i in 1..10
 		
 	.router-link-exact-active, .router-link-active
 		&::before
-			background $bluesat
-			z-index 100
-			transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
-
-		&::after
-			z-index 100
-			transition-duration 0.6s
-			width 100%
-
-		&:hover
-			&::before
-				transition-duration 0.6s
+				background $bluesat
+				transition: width 0.5s cubic-bezier(0.25,0.1,0.25,1)
 
 			&::after
-				background $w
-				z-index 100
-				transition-duration 0.5s
-				width 0
+				transition-duration 0.6s
+				width 100%
+
+			&:hover
+				&::before
+					transition-duration 0.6s
+
+				&::after
+					background $w
+					z-index 100
+					transition-duration 0.5s
+					width 0
 				
 	+above($laptop)
 		left $gut*-2.15rem
