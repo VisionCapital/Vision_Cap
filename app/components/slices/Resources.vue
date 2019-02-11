@@ -1,36 +1,35 @@
 <template>
-<!-- :id="resourceID" :ref="resourceID" v-if="resources.length" -->
+	<div class="resource-container">
+		<div class="resources">
+			<div class="wrap">
 
-<div class="resource-container">
-	<div class="resources">
-		<div class="wrap">
+				<router-link
+					:to="`/resources/${slugify(data.text('title_tag'))}`"
+					@click.native.stop>
+					<h2 v-if="data.fields.title_tag"
+						v-html="data.text('title_tag')"/>
+				</router-link>
 
-				<router-link 
-				:to="`/resources/${slugify(data.text('title_tag'))}`" 
-				@click.native.stop>
-				<h2 v-if="data.fields.title_tag"
-					v-html="data.text('title_tag')"/></router-link>
-		
-			<!-- <resource v-for="(resource, i) in resources"
-				:key="i"
-				:class="[ 'onpage', { inview : sidx >= i }]"
-				:inview="sidx >= i"
-				ref="resourceComp"
-				:data="resource"/>
+				<!-- <resource v-for="(resource, i) in resources"
+					:key="i"
+					:class="[ 'onpage', { inview : sidx >= i }]"
+					:inview="sidx >= i"
+					ref="resourceComp"
+					:data="resource"/>
 
-			<button class="more-pagination"
-				:class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"
-				v-if="totalPages > loadedPages"
-				@click="loadTags(loadedPages + 1)"
-			>
-				<p v-html="`More ${data.text('title_tag')} `"/>
-				<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
-				<div class="spinner" v-else>*loadSpinner</div>
-			</button> -->
-		
+				<button class="more-pagination"
+					:class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"
+					v-if="totalPages > loadedPages"
+					@click="loadTags(loadedPages + 1)"
+				>
+					<p v-html="`More ${data.text('title_tag')} `"/>
+					<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
+					<div class="spinner" v-else>*loadSpinner</div>
+				</button> -->
+
+			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>
@@ -174,5 +173,5 @@ export default {
 	.arrow-head, .spinner
 		display inline-block
 		margin auto
-		
+
 </style>

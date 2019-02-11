@@ -25,7 +25,7 @@ const router = new VueRouter({
 				},
 				{
 					path: 'resources/:slug?',
-					component: () => import('../components/slices/ResourcePage.vue'),
+					component: () => import('../components/pages/ResourcePage.vue'),
 					name: 'resources',
 					props: true
 				}

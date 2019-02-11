@@ -35,7 +35,6 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('FundGate', () => import('../components/slices/FundGate.vue'));
 	Vue.component('FundsInfo', () => import('../components/slices/FundsInfo.vue'));
 	Vue.component('Resources', () => import('../components/slices/Resources.vue'));
-	Vue.component('ResourcePage', () => import('../components/slices/ResourcePage.vue'));
 	Vue.component('ResourceIndex', () => import('../components/slices/ResourceIndex.vue'));
 	Vue.component('SingleColumnCopy', () => import('../components/slices/SingleColumnCopy.vue'));
 
