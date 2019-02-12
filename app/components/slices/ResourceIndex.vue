@@ -83,10 +83,10 @@ export default {
 
 .image-wrap
 	overflow hidden
-	background-position center
+	background-position center top
 	background-size cover
 	height 0
-	padding-bottom (3/4 * 100%)
+	padding-bottom (9/16 * 100%)
 	position relative
 
 .index-image
