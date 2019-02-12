@@ -94,4 +94,5 @@ export default {
 	opacity 0
 	position absolute 
 	pointer-events none
+	
 </style>
