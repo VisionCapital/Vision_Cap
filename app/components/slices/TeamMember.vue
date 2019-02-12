@@ -2,12 +2,13 @@
 	<div class="team-member">
 
 		<div class="img-wrap" v-if="card.profile_image.url" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
-			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url" v-if="card.profile_image">
+			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url">
 		</div>
-		<div class="img-wrap">
-			<div class="no-image" :style="{height: `${this.elDimensions.height}px`, width: `220px`}" v-if="!card.profile_image.url"/>
+		<div class="img-wrap" v-else>
+			<div class="no-image" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.height}px` }"/>
 		</div>
-		<div class="content" >
+
+		<div class="content">
 
 			<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 				<div class="copy" ref="copy"

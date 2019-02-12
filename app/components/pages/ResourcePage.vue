@@ -1,38 +1,44 @@
 <template>
 	<div class="resource-page"  :id="resourceID" :ref="resourceID" >
 		<div class="page-scroll">
-			<div class="hero">
-				<Hero :data="heroData"/>
-			</div>
-			<div>
-		<div class="wrap" v-if="resources.length">
-			<resource v-for="(resource, i) in resources"
-				:key="i"
-				:inview="sidx >= i"
-				:class="[ 'onpage', { inview : sidx >= i }]" 
-				ref="resourceComp"
-				:data="resource"/>
 
-			<button class="more-pagination"
-				:class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"
-				v-if="totalPages > loadedPages"
-				@click="loadTags(loadedPages + 1)"
-			>
-				<p v-html="`More ${tag} `"/>
-				<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
-				<div class="spinner" v-else>*loadSpinner</div>
-			</button>
-		</div>
-		<page-footer ref="footer" :class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"/>
-		</div>
+			<div class="hero">
+				<hero :data="heroData"/>
+			</div>
+
+			<div>
+
+				<div class="wrap" v-if="resources.length">
+
+					<resource v-for="(resource, i) in resources"
+						:key="i"
+						:inview="sidx >= i"
+						:class="[ 'onpage', { inview : sidx >= i }]"
+						ref="resourceComp"
+						:data="resource"/>
+
+					<button class="more-pagination"
+						:class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"
+						v-if="totalPages > loadedPages"
+						@click="loadTags(loadedPages + 1)">
+						<span v-html="`More ${tag} `"/>
+						<arrow-head v-if="!loadingPages" class="arrow-head" color="#0165d8"/>
+						<div class="spinner" v-else>Loading…</div>
+					</button>
+
+				</div>
+
+				<page-footer ref="footer" :class="[ 'onpage', { inview : sidx >= resources.length - 1 }]"/>
+
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 
-import Resource from './Resource.vue';
-import Hero from './Hero.vue';
+import Resource from '../slices/Resource.vue';
+import Hero from '../slices/Hero.vue';
 import ArrowHead from '../svg/ArrowHead.vue';
 import LerpScroll from '../../js/lerp-scroll.js';
 
@@ -69,7 +75,7 @@ export default {
 				'hero_copy': [],
 				'hero_image': {}
 			}
-			}; // eslint-disable-line 
+			}; // eslint-disable-line
 		return {
 			heroData,
 			resources: [],

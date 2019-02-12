@@ -109,23 +109,23 @@ export default {
 
 @import "../styl/_variables"
 
-
 .main-nav
 	pointer-events none
 
 .nav-content
-	height 100%
 	left 0
 	position fixed
 	top 0
 	width 100%
-	z-index 10
+	z-index 11
 
 	+below($laptop)
+		height 100%
 		pointer-events all
 		-webkit-overflow-scrolling touch
 		overflow-y scroll
 		overflow-x hidden
+		z-index 10
 
 .bg
 	background $b
@@ -213,7 +213,7 @@ for i in 1..10
 			&:hover
 				&::after
 					background none
-			
+
 			+below($laptop)
 				font-family $cormorant
 				fs(30)
@@ -248,7 +248,7 @@ for i in 1..10
 		a, button
 			display inline-block
 			vertical-align middle
-			
+
 		button
 			border 0
 			margin 0
@@ -281,7 +281,7 @@ for i in 1..10
 						z-index 100
 						transition-duration 0.5s
 						width 0
-			
+
 		+below($laptop)
 			font-family $circular
 			margin 0
@@ -338,7 +338,7 @@ for i in 1..10
 
 					.text
 						transition-delay 100ms * (i + 1)
-						
+
 	.router-link-exact-active, .router-link-active
 		.text
 			&::before
@@ -357,7 +357,7 @@ for i in 1..10
 					background $w
 					z-index 100
 					transition-duration 0.5s
-					width 0			
+					width 0
 
 	/deep/ a //the dropdown links container
 
@@ -423,7 +423,7 @@ for i in 1..10
 					background $b
 					transition-duration 0.5s
 					width 0
-		
+
 	.router-link-exact-active, .router-link-active
 		&::before
 				background $bluesat
@@ -442,7 +442,7 @@ for i in 1..10
 					z-index 100
 					transition-duration 0.5s
 					width 0
-				
+
 	+above($laptop)
 		left $gut*-2.15rem
 		position absolute

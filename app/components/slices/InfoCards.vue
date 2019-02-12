@@ -65,7 +65,7 @@ export default {
 
 	.wrap
 		position relative
-		// width 60%
+
 		/deep/ h1
 			color $w
 			font-family 'Cormorant Medium', sans-serif
