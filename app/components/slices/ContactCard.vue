@@ -62,7 +62,9 @@ export default {
 
 .contact-card
 	@extend $slice
-	pad(3,0,4)
+	pad(2,0,4)
+	+below($tablet)
+		pad(2,0,2)
 
 	.wrap
 		position relative

@@ -144,6 +144,11 @@ option {
 	background-color: #222;
 }
 
+#submit
+	position relative
+	float right
+	+below($tablet)
+		float none
 
 form
 	position relative

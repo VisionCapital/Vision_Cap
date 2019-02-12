@@ -294,8 +294,7 @@ for i in 1..10
 
 .anchor-links //the actual links
 	position relative
-	+below($laptop)
-		padding-top: 1em;
+
 	.router-link-exact-active, .router-link-active
 		.text
 			&::before
@@ -316,6 +315,9 @@ for i in 1..10
 					transition-duration 0.5s
 					width 0
 	.text-box
+		&:first-child
+			+below($laptop)
+				margin-top: 1em;
 		margin auto
 		background $b
 		max-height 6em
