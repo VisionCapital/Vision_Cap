@@ -2,10 +2,10 @@
 	<div class="main-nav">
 
 		<transition appear>
-			<div :class="[ 'bg', { 'nav-open' : $store.state.navOpen }]" v-if="($store.state.device.win.x < 1366 && $store.state.navOpen) || !pageTop"/>
+			<div :class="[ 'bg', { 'nav-open' : $store.state.navOpen }]" v-if="($store.state.device.win.x <= 1366 && $store.state.navOpen) || !pageTop"/>
 		</transition>
 
-		<div class="nav-content" v-if="$store.state.navData && ($store.state.device.win.x >= 1366 || $store.state.navOpen)">
+		<div class="nav-content" v-if="$store.state.navData && ($store.state.device.win.x > 1366 || $store.state.navOpen)">
 			<nav>
 				<ul :class="[ 'links', { 'bg-links' : !pageTop }]">
 
@@ -171,6 +171,7 @@ for i in 1..10
 		width (780 / 1024) * 100%
 
 	+above($laptop)
+		align-items center
 		display flex
 		width (1060 / 1366) * 100%
 
@@ -258,9 +259,12 @@ for i in 1..10
 
 	.arrow-head
 		display block
+		height (11 / 5)  * 0.7em
+		width 0.7em
 
 		+above($laptop)
-			width: 0.7em
+			height (11 / 5)  * 0.7em
+			width 0.7em
 
 		.router-link-exact-active, .router-link-active
 			/deep/ a

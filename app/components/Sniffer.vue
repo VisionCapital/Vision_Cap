@@ -1,5 +1,7 @@
 <template>
-	<div ref="canary"/>
+	<div ref="canary">
+		{{ device }}
+	</div>
 </template>
 
 <script>
@@ -102,6 +104,11 @@ div
 	display none
 	pointer-events none
 	position absolute
+
+	// abs()
+	// background: $b
+	// position fixed
+	// z-index 100
 
 	+below($tablet)
 		display block

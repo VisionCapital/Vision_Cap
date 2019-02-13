@@ -114,6 +114,11 @@ export default {
 			overflow hidden
 			position relative
 
+		.ctct-form-button
+			svg
+				height 11px
+				width 62px
+
 .wrap
 	display inline-block
 	+below($tablet)
