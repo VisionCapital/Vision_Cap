@@ -218,7 +218,6 @@ for i in 1..10
 			+below($laptop)
 				font-family $cormorant
 				fs(30)
-		// --------------____________________________________________________________________
 		.router-link-exact-active, .router-link-active
 			&::before
 				background $bluesat
@@ -243,7 +242,7 @@ for i in 1..10
 
 .drop-toggle
 	+above($laptop)
-		pad(1,0,1,.5)
+		pad(.5,0,.5,.5)
 
 	/deep/
 		a, button
