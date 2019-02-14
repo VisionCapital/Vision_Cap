@@ -195,11 +195,11 @@ export default {
 
 	#gdpr_text
 		order 5
-		opacity .5
+		opacity .25
+
 		p
 			font-family $circular
-		/deep/ p
-			font-family $circular
+
 			+below($tablet)
 				margin-bottom 0
 

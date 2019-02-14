@@ -1,7 +1,6 @@
 <template>
 	<div class="app">
 
-			<!-- v-if="($store.state.device.win.x > 1366) || $store.state.navOpen" -->
 		<main-nav
 			:pageTop="pageTop"/>
 
@@ -30,11 +29,10 @@
 
 import MainNav from './MainNav.vue';
 import NavSwitch from './NavSwitch.vue';
-// import HeroBackground from './HeroBackground.vue';
 
 export default {
+
 	components: {
-		// HeroBackground,
 		MainNav,
 		NavSwitch
 	},
