@@ -17,7 +17,7 @@
         <p v-html="fund.date"></p>
         <p v-html="$cms.textField(fund.value)"></p>
 
-					<p> 
+					<p>
 					<a :href="fund.pdf.url" v-if="fund.pdf.url">
 						<pdf-icon class="pdf-icon"/>
 						<span>.PDF</span>
@@ -123,6 +123,7 @@ export default {
 @import "../styl/_variables"
 
 .pdf-icon
+	height (72 / 50) * 1.2rem
 	width 1.2rem
 	display: inline-block;
 	vertical-align: middle;

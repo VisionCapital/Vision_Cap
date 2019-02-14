@@ -74,9 +74,15 @@ class LerpScroll {
 	}
 
 	doScroll(e) {
-		if (e.type !== 'touchstart') {
+
+		if (![ 'touchstart', 'touchmove' ].includes(e.type)) {
 			e.preventDefault();
 		}
+
+		if ('touchmove' === e.type && e.touches.length === 1) {
+			e.preventDefault();
+		}
+
 		this.event = e;
 		this.when = performance.now();
 

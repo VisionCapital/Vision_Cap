@@ -35,11 +35,13 @@ export default {
 .image-wrap
 	align-items center
 	display flex
+	justify-content space-between
+	flex-wrap wrap
 	// width 50%
 	+below($tablet)
-		// justify-content space-around
+		justify-content flex-start
+
 		width 100%
-		flex-wrap wrap
 
 .image-container
 	mgn(.5,2,.5,0)

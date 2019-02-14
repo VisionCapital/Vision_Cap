@@ -82,7 +82,9 @@ export default {
 
 			svg
 				display inline-block
+				height 15px
 				vertical-align middle
+				width 26px
 
 		canvas
 			width 50%

@@ -132,7 +132,7 @@ export default {
 		pad(1,0)
 		max-width 376px
 
-	+above($laptop)
+	+above($notebook)
 		padding 0
 		justify-content space-between
 		max-width 1060px
@@ -212,7 +212,7 @@ export default {
 			display inline-block
 			font-smoothing()
 			vertical-align top
-		
+
 			&:hover
 				&::after
 					background none
@@ -281,6 +281,7 @@ export default {
 
 	.arrow-head
 		display block
+		height (11 / 5)  * 0.7em
 		width 0.7em
 
 .drop-toggle
@@ -306,7 +307,7 @@ export default {
 	left $gut*-2.15rem
 	position absolute
 	right $gut*-2.15rem
-	
+
 	.text-box
 		margin auto
 		background $blue
@@ -396,7 +397,7 @@ export default {
 					z-index 100
 					transition-duration 0.5s
 					width 0
-		
+
 	/deep/ a
 		background $blue
 		display block

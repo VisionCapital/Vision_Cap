@@ -31,7 +31,7 @@
           <p v-html="document.date"></p>
         </div>
 
-				
+
 					<div class="align-pdf" v-if="document.pdf.url">
 					<a class="pdf" :href="document.pdf.url">
 						<pdf-icon class="pdf-icon"/>
@@ -99,6 +99,7 @@ export default {
 	transition all 2s
 
 .pdf-icon
+	height (72 / 50) * 1.2rem
 	width 1.2rem
 	vertical-align: top;
 	margin 0 auto
