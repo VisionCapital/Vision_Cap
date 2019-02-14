@@ -78,6 +78,8 @@ export default {
 @import "../../styl/_variables"
 
 .newsletter-signup
+	/deep/ p
+		font-family $circular
 	background #f5f5f5
 	pad(4,0)
 	position relative
