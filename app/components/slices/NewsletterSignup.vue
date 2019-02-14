@@ -111,6 +111,7 @@ export default {
 			position absolute !important
 
 		.ctct-inline-form
+			font-family $circular
 			overflow hidden
 			position relative
 
