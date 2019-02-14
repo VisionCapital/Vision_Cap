@@ -1,7 +1,8 @@
 {
 	"action": "https://yvwz0pz64f.execute-api.us-east-1.amazonaws.com/prod/visioncap-prod/email",
 	"to": [
-		"ben@arrayofstars.com"
+		"ben@arrayofstars.com",
+		"info@visioncap.ca"
 	],
 	"from": "noreply@arrayofstars.com",
 	"site_name": "Vision Capital",
