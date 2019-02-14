@@ -1,7 +1,5 @@
 <template>
-	<div ref="canary">
-		{{ device }}
-	</div>
+	<div ref="canary"/>
 </template>
 
 <script>
