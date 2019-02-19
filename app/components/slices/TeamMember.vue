@@ -1,28 +1,45 @@
 <template>
 	<div class="team-member">
+		
 
-		<div class="img-wrap" v-if="card.profile_image.url" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
+		<!-- Desktop image-->
+		<div class="img-wrap" v-if="card.profile_image.url  && this.$store.state.device.win.x > 375" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
 			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url">
-		</div>
-		<div class="img-wrap" v-else>
-			<div class="no-image" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.height}px` }"/>
 		</div>
 
 		<div class="content">
-
+			<!-- BOTH: profile title copy-->
 			<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
-				<div class="copy" ref="copy"
-					v-html="$cms.htmlField(card.profile_copy)">
+				<div class="body-copy" ref="copy">
+					<div class="copy" ref="copy"
+						v-html="$cms.htmlField(card.profile_copy)">
+					</div>
+					<!-- Desktop body copy-->
+					<div v-html="$cms.htmlField(card.profile_body_copy)" v-if="this.$store.state.device.win.x > 375"/>
 				</div>
 			</div>
 
-			<div @click="toggleText()" v-if="longCopy" class="copy-cta">
-				<p v-if="collapsed">Read More</p>
-				<p v-if="!collapsed">Collapse</p>
-				<arrow-head class="arrow-head" :pointDown="collapsed"/>
+				<!-- Mobile image-->
+				<div class="img-wrap" v-if="card.profile_image_mobile.url  && this.$store.state.device.win.x <= 375">
+					<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image_mobile.url)" :src="card.profile_image_mobile.url">
+				</div>
+		
+				<!-- Mobile body copy-->
+				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer" v-if="this.$store.state.device.win.x <= 375">
+					<div class="body-copy" ref="copy"
+						v-html="$cms.htmlField(card.profile_body_copy)">
+					</div>
+				</div>
+
+				<!-- BOTH: copy toggle-->
+				<div @click="toggleText()" v-if="longCopy" class="copy-cta">
+					<p v-if="collapsed">Read More</p>
+					<p v-if="!collapsed">Collapse</p>
+					<arrow-head class="arrow-head" :pointDown="collapsed"/>
+				</div>
+
 			</div>
 
-		</div>
 
 	</div>
 </template>
@@ -54,6 +71,7 @@ export default {
 					return `${this.elDimensions.height}px`;
 				}
 				return `${this.elDimensions.height - 2 * 26}px`;
+				// return `${this.elDimensions.height}px`;
 			} else if (this.longCopy && !this.collapsed) {
 				return `${this.$refs.copy.offsetHeight}px`;
 			}
@@ -72,6 +90,9 @@ export default {
 
 				let height = width * (dimensions.height / dimensions.width);
 				height = 26 * Math.floor(height / 26);
+				if (this.$store.state.device.win.x <= 375) {
+					this.$nextTick(height = 0);
+				}
 				return {
 					height: height,
 					width: width
@@ -110,6 +131,19 @@ export default {
 			// 		item.classList.remove('cut-off-text');
 			// 	}
 			// }
+		},
+		toggleTextMobile() {
+			this.collapsed = !this.collapsed;
+			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+			// if (this.collapsed) {
+			// 	for (let item of this.cutOffText) {
+			// 		item.classList.add('cut-off-text');
+			// 	}
+			// } else {
+			// 	for (let item of this.cutOffText) {
+			// 		item.classList.remove('cut-off-text');
+			// 	}
+			// }
 		}
 	},
 	mounted() {
@@ -122,27 +156,34 @@ export default {
 <style lang="stylus" scoped>
 
 @import "../../styl/_variables"
-
+.content
+	float: right
+	+below($mobile)
+		display flex
+		flex-direction column
+		margin auto
+		
 .team-member
 	pad(2,0)
 	transition opacity 500ms
-
+	display flex
 	+above($tablet)
-		display flex
-
+		.profile-pic
+			order 1
 	/deep/ p
 		max-width 100%
 		overflow-y hidden
 
 .copy
 	position relative
-
 	/deep/
 		.cut-off-text
 			opacity 0
 
 .copy-cta
 	transition opacity 0.5s 0.8s, transform 0.5s 0.8s
+	+below($mobile)
+		margin auto
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
 		transform translateY(-2rem)
@@ -185,6 +226,14 @@ export default {
 		margin-right 1em
 		float left
 
+	+below($mobile)
+		display inline-block
+		float: none
+		text-align center
+		margin-right 0
+		margin-bottom: 2em;
+		
+
 	/deep/
 		img
 			transform translate3d(0, 0%, 0)
@@ -192,9 +241,12 @@ export default {
 			width 100%
 
 			+below($tablet)
-				padding-right 1em
+				padding-right 0em
 				width 96%
 				float left
+			+below($mobile)
+				padding-right 0em
+				width 100%
 
 .copy-cta
 	align-items center
