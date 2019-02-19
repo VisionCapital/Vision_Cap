@@ -1,7 +1,6 @@
 <template>
 	<div class="team-member">
-		
-
+	
 		<!-- Desktop image-->
 		<div class="img-wrap" v-if="card.profile_image.url  && this.$store.state.device.win.x > 375" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
 			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url">
@@ -37,10 +36,7 @@
 					<p v-if="!collapsed">Collapse</p>
 					<arrow-head class="arrow-head" :pointDown="collapsed"/>
 				</div>
-
 			</div>
-
-
 	</div>
 </template>
 
