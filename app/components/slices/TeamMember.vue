@@ -89,9 +89,9 @@ export default {
 
 				let height = width * (dimensions.height / dimensions.width);
 				height = 26 * Math.floor(height / 26);
-				if (this.$store.state.device.win.x <= 375) {
-					this.$nextTick(height = 0);
-				}
+				// if (this.$store.state.device.win.x <= 375) {
+				// 	this.$nextTick(height = 0);
+				// }
 				return {
 					height: height,
 					width: width
