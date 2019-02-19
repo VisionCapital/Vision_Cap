@@ -7,33 +7,30 @@
 		</div>
 
 		<div class="content">
-
-				<!-- Mobile image-->
-				<div class="img-wrap" v-if="card.profile_image_mobile.url  && this.$store.state.device.win.x <= 768">
-					<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image_mobile.url)" :src="card.profile_image_mobile.url">
-				</div>
 			<!-- BOTH: profile title copy-->
 			<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 				<div class="body-copy" ref="copy">
 					<div class="copy" ref="copy"
 						v-html="$cms.htmlField(card.profile_copy)">
-						
 					</div>
-					
 					<!-- Desktop body copy-->
-					<!-- <div v-html="$cms.htmlField(card.profile_body_copy)" v-if="this.$store.state.device.win.x > 768"/> -->
+					<div v-html="$cms.htmlField(card.profile_body_copy)" v-if="this.$store.state.device.win.x > 768"/>
 				</div>
 			</div>
 
+				<!-- Mobile image-->
+				<div class="img-wrap" v-if="card.profile_image_mobile.url  && this.$store.state.device.win.x <= 768">
+					<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image_mobile.url)" :src="card.profile_image_mobile.url">
+				</div>
 		
-				<!-- Mobile body copy
+				<!-- Mobile body copy-->
 				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer" v-if="this.$store.state.device.win.x <= 768">
 					<div class="body-copy" ref="copy"
 						v-html="$cms.htmlField(card.profile_body_copy)">
 					</div>
-				</div> -->
+				</div>
 
-				<!-- BOTH: copy toggle -->
+				<!-- BOTH: copy toggle-->
 				<div @click="toggleText()" v-if="longCopy" class="copy-cta">
 					<p v-if="collapsed">Read More</p>
 					<p v-if="!collapsed">Collapse</p>
@@ -89,9 +86,9 @@ export default {
 
 				let height = width * (dimensions.height / dimensions.width);
 				height = 26 * Math.floor(height / 26);
-				// if (this.$store.state.device.win.x <= 375) {
-				// 	this.$nextTick(height = 0);
-				// }
+				if (this.$store.state.device.win.x <= 768) {
+					this.$nextTick(height = 0);
+				}
 				return {
 					height: height,
 					width: width
@@ -178,6 +175,8 @@ export default {
 	/deep/
 		.cut-off-text
 			opacity 0
+		p
+			display none
 
 .copy-cta
 	transition opacity 0.5s 0.8s, transform 0.5s 0.8s
