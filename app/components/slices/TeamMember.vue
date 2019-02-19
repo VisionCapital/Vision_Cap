@@ -2,35 +2,38 @@
 	<div class="team-member">
 	
 		<!-- Desktop image-->
-		<div class="img-wrap" v-if="card.profile_image.url  && this.$store.state.device.win.x > 375" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
+		<div class="img-wrap" v-if="card.profile_image.url  && this.$store.state.device.win.x > 768" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
 			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url">
 		</div>
 
 		<div class="content">
+
+				<!-- Mobile image-->
+				<div class="img-wrap" v-if="card.profile_image_mobile.url  && this.$store.state.device.win.x <= 768">
+					<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image_mobile.url)" :src="card.profile_image_mobile.url">
+				</div>
 			<!-- BOTH: profile title copy-->
 			<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer">
 				<div class="body-copy" ref="copy">
 					<div class="copy" ref="copy"
 						v-html="$cms.htmlField(card.profile_copy)">
+						
 					</div>
+					
 					<!-- Desktop body copy-->
-					<div v-html="$cms.htmlField(card.profile_body_copy)" v-if="this.$store.state.device.win.x > 375"/>
+					<!-- <div v-html="$cms.htmlField(card.profile_body_copy)" v-if="this.$store.state.device.win.x > 768"/> -->
 				</div>
 			</div>
 
-				<!-- Mobile image-->
-				<div class="img-wrap" v-if="card.profile_image_mobile.url  && this.$store.state.device.win.x <= 375">
-					<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image_mobile.url)" :src="card.profile_image_mobile.url">
-				</div>
 		
-				<!-- Mobile body copy-->
-				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer" v-if="this.$store.state.device.win.x <= 375">
+				<!-- Mobile body copy
+				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer" v-if="this.$store.state.device.win.x <= 768">
 					<div class="body-copy" ref="copy"
 						v-html="$cms.htmlField(card.profile_body_copy)">
 					</div>
-				</div>
+				</div> -->
 
-				<!-- BOTH: copy toggle-->
+				<!-- BOTH: copy toggle -->
 				<div @click="toggleText()" v-if="longCopy" class="copy-cta">
 					<p v-if="collapsed">Read More</p>
 					<p v-if="!collapsed">Collapse</p>
@@ -154,7 +157,7 @@ export default {
 @import "../../styl/_variables"
 .content
 	float: right
-	+below($mobile)
+	+below($tablet)
 		display flex
 		flex-direction column
 		margin auto
@@ -178,7 +181,7 @@ export default {
 
 .copy-cta
 	transition opacity 0.5s 0.8s, transform 0.5s 0.8s
-	+below($mobile)
+	+below($tablet)
 		margin auto
 	.v-enter &, .onpage:not(.inview) &
 		opacity 0
@@ -222,7 +225,7 @@ export default {
 		margin-right 1em
 		float left
 
-	+below($mobile)
+	+below($tablet)
 		display inline-block
 		float: none
 		text-align center
@@ -240,7 +243,7 @@ export default {
 				padding-right 0em
 				width 96%
 				float left
-			+below($mobile)
+			+below($tablet)
 				padding-right 0em
 				width 100%
 
