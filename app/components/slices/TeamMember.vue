@@ -1,6 +1,5 @@
 <template>
 	<div class="team-member">
-	
 		<!-- Desktop image-->
 		<div class="img-wrap" v-if="card.profile_image.url  && this.$store.state.device.win.x > 768" :style="{height: `${this.elDimensions.height}px`, width: `${this.elDimensions.width}px`}" >
 			<img class="profile-pic" ref="img" @load="checkImgHeight(card.profile_image.url)" :src="card.profile_image.url">
@@ -24,8 +23,8 @@
 				</div>
 		
 				<!-- Mobile body copy-->
-				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="copyContainer" v-if="this.$store.state.device.win.x <= 768">
-					<div class="body-copy" ref="copy"
+				<div class="copy-container" :class="{'full-copy': !collapsed}" ref="mobileCopyContainer" v-if="this.$store.state.device.win.x <= 768">
+					<div class="body-copy" ref="mobileCopy"
 						v-html="$cms.htmlField(card.profile_body_copy)">
 					</div>
 				</div>
@@ -60,34 +59,49 @@ export default {
 			cutOffText: []
 		};
 	},
+	watch: {
+		device: {
+			handler() {
+				this.resize();
+			},
+			deep: true
+		}
+	},
 	computed: {
+		device() {
+			return this.$store.state.device;
+		},
 		maxCopyHeight() {
 			if (this.longCopy && this.collapsed) {
 				if (this.$store.state.device.mobile) {
 					return `${this.elDimensions.height}px`;
 				}
 				return `${this.elDimensions.height - 2 * 26}px`;
-				// return `${this.elDimensions.height}px`;
 			} else if (this.longCopy && !this.collapsed) {
+				if (this.$store.state.device.mobile) {
+					return `${this.$refs.mobileCopy.offsetHeight}px`;
+				}
 				return `${this.$refs.copy.offsetHeight}px`;
 			}
 			return `${this.elDimensions.height}px`;
 		}
 	},
 	methods: {
+		resize() {
+			this.elDimensions = this.setElDimensions();
+		},
 		setElDimensions() {
 			let width = 220;
-			if (this.$store.state.device.mobile) {
-				width = 104;
-			}
 			// should probably add event listener resize for this
 			if (this.card.profile_image.url) {
 				let dimensions = this.card.profile_image.dimensions;
 
 				let height = width * (dimensions.height / dimensions.width);
-				height = 26 * Math.floor(height / 26);
+
 				if (this.$store.state.device.win.x <= 768) {
-					this.$nextTick(height = 0);
+					height = 0;
+				} else {
+					height = 26 * Math.floor(height / 26) - 2;
 				}
 				return {
 					height: height,
@@ -103,7 +117,11 @@ export default {
 			if (profileExists && this.$refs.copy && this.elDimensions.height < this.$refs.copy.offsetHeight) {
 				this.longCopy = true;
 			}
-			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+			if (this.device.mobile) {
+				this.$refs.mobileCopyContainer.style.maxHeight = this.maxCopyHeight;
+			} else {
+				this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+			}
 		},
 		// paragraphCutOff() {
 		// 	let cycleCopy = this.$refs.copy.querySelectorAll('li, p');
@@ -117,20 +135,12 @@ export default {
 		// },
 		toggleText() {
 			this.collapsed = !this.collapsed;
-			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
-			// if (this.collapsed) {
-			// 	for (let item of this.cutOffText) {
-			// 		item.classList.add('cut-off-text');
-			// 	}
-			// } else {
-			// 	for (let item of this.cutOffText) {
-			// 		item.classList.remove('cut-off-text');
-			// 	}
-			// }
-		},
-		toggleTextMobile() {
-			this.collapsed = !this.collapsed;
-			this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+
+			if (this.$store.state.device.mobile) {
+				this.$refs.mobileCopyContainer.style.maxHeight = this.maxCopyHeight;
+			} else {
+				this.$refs.copyContainer.style.maxHeight = this.maxCopyHeight;
+			}
 			// if (this.collapsed) {
 			// 	for (let item of this.cutOffText) {
 			// 		item.classList.add('cut-off-text');
@@ -141,9 +151,6 @@ export default {
 			// 	}
 			// }
 		}
-	},
-	mounted() {
-		// this.paragraphCutOff();
 	}
 };
 
