@@ -63,11 +63,22 @@ export default {
 					return;
 				}
 			}
+		},
+		updateScroll() {
+			this.lastScrollTop = Math.abs(this.record.scroll.pos);
 		}
 	},
 
 	mounted() {
-		this.record.scroll = new LerpScroll(this.$el, (d) => { this.lastScrollTop = Math.abs(d.pos); });
+		let opts = {
+			callback: this.updateScroll,
+			lerpFactor: this.$store.state.device.mobile ? 8 : 10,
+			resizeCallback: (obj) => {
+				this.viewportHeight = obj.viewport;
+				this.scrollHeight = obj.scrollHeight;
+			}
+		};
+		this.record.scroll = new LerpScroll(this.$el, opts);
 
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(this.lastScrollTop);

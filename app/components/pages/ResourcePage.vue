@@ -137,11 +137,23 @@ export default {
 				}
 				this.sidx = -1;
 			}
+		},
+		updateScroll() {
+			this.lastScrollTop = Math.abs(this.scroll.pos);
 		}
 	},
 	mounted() {
-		this.scroll = new LerpScroll(this.$el, (d) => { this.lastScrollTop = Math.abs(d.pos); });
+		// this.scroll = new LerpScroll(this.$el, (d) => { this.lastScrollTop = Math.abs(d.pos); });
 		this.loadTags(1);
+		let opts = {
+			callback: this.updateScroll,
+			lerpFactor: this.$store.state.device.mobile ? 8 : 10,
+			resizeCallback: (obj) => {
+				this.viewportHeight = obj.viewport;
+				this.scrollHeight = obj.scrollHeight;
+			}
+		};
+		this.scroll = new LerpScroll(this.$el, opts);
 
 		this.scrollInterval = setInterval(() => {
 			if (this.$refs.resourceComp) {
