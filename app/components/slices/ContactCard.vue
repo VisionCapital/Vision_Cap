@@ -71,6 +71,7 @@ export default {
 
 		+above($tablet)
 			display flex
+			flex-wrap wrap
 
 for i in 1..8
 	.contact:nth-child({i})
