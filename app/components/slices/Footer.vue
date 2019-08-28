@@ -20,14 +20,20 @@
 						:key="link.path"
 						:class="link.link_type">
 
-						<router-link v-if="link.link_type === 'normal'"
+						<!-- <router-link v-if="link.link_type === 'normal'"
 							:to="`/${link.page_link.slug}`"
+							:title="link.link_title[0].text"
+							v-html="link.link_title[0].text"/> -->
+						<a v-if="link.link_type === 'normal'"
+							:href="`https://visioncap.ca/${link.page_link.slug}`"
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/>
 
 						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">
 
-							<router-link :to="`/${link.page_link.uid}`"
+							<!-- <router-link :to="`/${link.page_link.uid}`"
+								v-html="link.link_title[0].text"/> -->
+							<a :href="`https://visioncap.ca/${link.page_link.uid}`"
 								v-html="link.link_title[0].text"/>
 
 							<button v-if="$store.state.device.win.x > 1366"
@@ -42,12 +48,17 @@
 
 						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
 							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-							<router-link :to="`/${link.page_link.uid}/${tag.slug}`"
-								class="text-box"
-								:key="idx">
-								<div class="text" v-html="tag.title"/>
-								</router-link>
-								</transition>
+								<!-- <router-link :to="`/${link.page_link.uid}/${tag.slug}`"
+									class="text-box"
+									:key="idx">
+									<div class="text" v-html="tag.title"/>
+								</router-link> -->
+								<a :href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
+									class="text-box"
+									:key="idx">
+									<div class="text" v-html="tag.title"/>
+								</a>
+							</transition>
 						</div>
 
 					</li>

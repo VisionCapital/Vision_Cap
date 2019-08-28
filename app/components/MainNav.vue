@@ -23,18 +23,28 @@
 						:key="link.page_link.slug"
 						:class="link.link_type">
 
-						<router-link v-if="link.page_link.slug && link.link_type === 'normal'"
+						<!-- <router-link v-if="link.page_link.slug && link.link_type === 'normal'"
 							:to="`/${link.page_link.slug}`"
 							:title="link.link_title[0].text"
 							@click.native="handleClick()"
+							v-html="link.link_title[0].text"/> -->
+
+						<a v-if="link.page_link.slug && link.link_type === 'normal'"
+							:href="`https://visioncap.ca/${link.page_link.slug}`"
+							:title="link.link_title[0].text"
+							@click="handleClick()"
 							v-html="link.link_title[0].text"/>
 
 						<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'dropdown'">
 
 							<div class="drop-toggle">
 
-								<router-link :to="`/${link.page_link.uid}`"
+								<!-- <router-link :to="`/${link.page_link.uid}`"
 									@click.native="handleClick()"
+									v-html="$cms.textField(link.link_title)"/> -->
+
+								<a :href="`https://visioncap.ca/${link.page_link.uid}`"
+									@click="handleClick()"
 									v-html="$cms.textField(link.link_title)"/>
 
 								<button @click.prevent="mutualOpen = !mutualOpen">
@@ -47,11 +57,16 @@
 
 							<div class="anchor-links" :class="{ 'page-top': !pageTop }">
 								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-										<router-link class="text-box" v-if="mutualOpen"
+										<!-- <router-link class="text-box" v-if="mutualOpen"
 											:to="`/${link.page_link.uid}/${tag.slug}`"
 											@click.native="handleClick()">
 											<div class="text" v-html="tag.title"/>
-										</router-link>
+										</router-link> -->
+										<a class="text-box" v-if="mutualOpen"
+											:href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
+											@click="handleClick()">
+											<div class="text" v-html="tag.title"/>
+										</a>
 								</transition>
 							</div>
 
