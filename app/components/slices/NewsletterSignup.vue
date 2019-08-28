@@ -36,7 +36,7 @@ export default {
 
 			if (hasBtn) {
 				btn[0].innerHTML =
-					` ${this.data.html('submit_button')}
+					` ${this.$cms.htmlField(this.data.fields.submit_button)}
 					<svg xmlns="http://www.w3.org/2000/svg" width="62" height="11" viewBox="0 0 62 11">
 						<g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.5">
 							<path d="M56 10.5l5-5.0002L56 .5M61 5.5H0"/>
@@ -45,10 +45,10 @@ export default {
 			}
 
 			if (hasInput) {
-				input[0].placeholder = this.data.text('placeholder');
+				input[0].placeholder = this.$cms.textField(this.data.fields.placeholder);
 			}
 			if (hasHeader) {
-				header[0].innerHTML = this.data.text('heading');
+				header[0].innerHTML = this.$cms.textField(this.data.fields.heading);
 			}
 			if (hasField) {
 				let border = document.createElement('span');
