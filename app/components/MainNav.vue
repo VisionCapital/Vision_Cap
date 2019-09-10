@@ -29,11 +29,18 @@
 							@click.native="handleClick()"
 							v-html="link.link_title[0].text"/> -->
 
-						<a v-if="link.page_link.slug && link.link_type === 'normal'"
-							:href="`https://visioncap.ca/${link.page_link.slug}`"
+						<a v-if="(link.link.slug || link.link.url ) && link.link_type === 'normal'"
+							:href="linkNav(link.link)"
+							:target="link.link.target"
 							:title="link.link_title[0].text"
 							@click="handleClick()"
 							v-html="link.link_title[0].text"/>
+
+						<!-- <a v-if="link.page_link.slug && link.link_type === 'normal'"
+							:href="`https://visioncap.ca/${link.page_link.slug}`"
+							:title="link.link_title[0].text"
+							@click="handleClick()"
+							v-html="link.link_title[0].text"/> -->
 
 						<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'dropdown'">
 
@@ -102,6 +109,14 @@ export default {
 	},
 
 	methods: {
+		linkNav(link) {
+			if (link.link_type === 'Document') {
+				return `https://visioncap.ca/${link.slug}`;
+			} else if (link.link_type === 'Web') {
+				return link.url;
+			}
+			return '';
+		},
 		handleClick() {
 			this.mutualOpen = false;
 			if (!this.$store.state.device.mobile) {

@@ -25,7 +25,8 @@
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/> -->
 						<a v-if="link.link_type === 'normal'"
-							:href="`https://visioncap.ca/${link.page_link.slug}`"
+							:href="linkNav(link.link)"
+							:target="link.link.target"
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/>
 
@@ -86,7 +87,16 @@ export default {
 		links() { return this.$store.state.navData.links; },
 		resourceTags() { return this.$store.state.resourceTags; }
 	},
-
+	methods: {
+		linkNav(link) {
+			if (link.link_type === 'Document') {
+				return `https://visioncap.ca/${link.slug}`;
+			} else if (link.link_type === 'Web') {
+				return link.url;
+			}
+			return '';
+		}
+	},
 	data() {
 		return {
 			mutualOpen: false
