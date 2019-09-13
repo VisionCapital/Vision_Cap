@@ -15,7 +15,7 @@ const router = new VueRouter({
 					path: '',
 					name: 'home',
 					props: { slug: 'home' },
-					component: () => import('../components/pages/InvestorPage.vue')
+					component: () => import('../components/pages/Page.vue')
 				},
 				{
 					path: ':slug',

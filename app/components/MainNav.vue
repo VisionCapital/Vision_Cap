@@ -23,36 +23,20 @@
 						:key="link.page_link.slug"
 						:class="link.link_type">
 
-						<!-- <router-link v-if="link.page_link.slug && link.link_type === 'normal'"
-							:to="`/${link.page_link.slug}`"
-							:title="link.link_title[0].text"
-							@click.native="handleClick()"
-							v-html="link.link_title[0].text"/> -->
-
-						<a v-if="(link.link.slug || link.link.url ) && link.link_type === 'normal'"
-							:href="linkNav(link.link)"
-							:target="link.link.target"
-							:title="link.link_title[0].text"
+						<menu-link
+							v-if="link.link_type !== 'dropdown'"
+							:link="link.link"
 							@click="handleClick()"
-							v-html="link.link_title[0].text"/>
+							:title="$cms.textField(link.link_title)"/>
 
-						<!-- <a v-if="link.page_link.slug && link.link_type === 'normal'"
-							:href="`https://visioncap.ca/${link.page_link.slug}`"
-							:title="link.link_title[0].text"
-							@click="handleClick()"
-							v-html="link.link_title[0].text"/> -->
-
-						<div class="dropdown-container" v-if="link.page_link.slug && link.link_type === 'dropdown'">
+						<div class="dropdown-container" v-if="link.link.slug && link.link_type === 'dropdown'">
 
 							<div class="drop-toggle">
 
-								<!-- <router-link :to="`/${link.page_link.uid}`"
-									@click.native="handleClick()"
-									v-html="$cms.textField(link.link_title)"/> -->
-
-								<a :href="`https://visioncap.ca/${link.page_link.uid}`"
+								<menu-link
+									:link="{ link_type: 'Document', slug: link.link.uid }"
 									@click="handleClick()"
-									v-html="$cms.textField(link.link_title)"/>
+									:title="$cms.textField(link.link_title)"/>
 
 								<button @click.prevent="mutualOpen = !mutualOpen">
 									<arrow-head class="arrow-head"
@@ -64,16 +48,13 @@
 
 							<div class="anchor-links" :class="{ 'page-top': !pageTop }">
 								<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-										<!-- <router-link class="text-box" v-if="mutualOpen"
-											:to="`/${link.page_link.uid}/${tag.slug}`"
+									
+										<router-link class="text-box" v-if="mutualOpen"
+											:to="`/${link.link.uid}/${tag.slug}`"
 											@click.native="handleClick()">
 											<div class="text" v-html="tag.title"/>
-										</router-link> -->
-										<a class="text-box" v-if="mutualOpen"
-											:href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
-											@click="handleClick()">
-											<div class="text" v-html="tag.title"/>
-										</a>
+										</router-link>
+
 								</transition>
 							</div>
 
@@ -90,6 +71,8 @@
 
 <script>
 
+import MenuLink from './MenuLink.vue';
+
 import Logo from './svg/Logo.vue';
 import ArrowHead from './svg/ArrowHead.vue';
 
@@ -100,7 +83,8 @@ export default {
 
 	components: {
 		Logo,
-		ArrowHead
+		ArrowHead,
+		MenuLink
 	},
 
 	computed: {
