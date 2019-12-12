@@ -1,6 +1,6 @@
-import { install } from 'resize-observer';
+import ResizeObserver from 'resize-observer-polyfill';
 
-if (!window.ResizeObserver) { install(); }
+// if (!window.ResizeObserver) { install(); }
 
 const events = [ 'mousewheel', 'DOMMouseScroll', 'wheel', 'MozMousePixelScroll', 'touchstart', 'touchmove' ];
 
@@ -32,6 +32,7 @@ class LerpScroll {
 		this.skewMax = opts.skewMax;
 		this.lerpFactor = opts.lerpFactor;
 		this.eventTarget = opts.eventTarget;
+		this.name = opts.name;
 
 		if (this.native) {
 
@@ -86,7 +87,6 @@ class LerpScroll {
 	init() {
 
 		events.forEach((e) => this.eventTarget.addEventListener(e, this.doScroll, { passive: false }));
-
 		if (this.eventTarget === window) {
 			window.addEventListener('keydown', this.doScroll);
 		}
@@ -95,7 +95,8 @@ class LerpScroll {
 		this.observer.observe(this.outer);
 		this.observer.observe(this.el);
 
-		raf.add(this.update, `lerp-scroll-${this.horizontal ? 'horiz' : 'vert'}`);
+		let name = this.name || `lerp-scroll-${this.horizontal ? 'horiz' : 'vert'}`;
+		raf.add(this.update, name);
 	}
 
 	destroy() {
@@ -124,6 +125,7 @@ class LerpScroll {
 	}
 
 	resize() {
+
 		let viewport = 0;
 		let scrollHeight = 0;
 
@@ -174,8 +176,7 @@ class LerpScroll {
 		let dist = this.target - this.pos;
 		let pct = this.pos / this.max;
 		let dir = dist === 0 ? 0 : dist > 0 ? 1 : -1;
-
-		if (this.rawCb) {
+		if (this.rawCb && !this.deaf) {
 			this.rawCb({
 				raw: true,
 				pos: this.pos,
@@ -198,7 +199,7 @@ class LerpScroll {
 			e.stopPropagation();
 		}
 
-		if (e.cancelable && e.type === 'touchmove' && !this.passive) {
+		if (e.cancelable && e.type === 'touchmove' && !this.passive && e.touches.length === 1) {
 			e.preventDefault();
 			e.stopPropagation();
 		}
@@ -209,7 +210,7 @@ class LerpScroll {
 	}
 
 	update() {
-		if (this.deaf) { return; }
+
 		let dist = this.target - this.pos;
 		this.pos += dist / this.lerpFactor;
 
@@ -244,7 +245,6 @@ class LerpScroll {
 		}
 
 		if (this.cb && !this.deaf) {
-			// this.cb({ pos: this.pos, source: this, pct: this.pos / this.max });
 			this.cb({
 				pos: this.pos,
 				pct: this.pos / this.max,
@@ -269,6 +269,7 @@ class LerpScroll {
 
 		this.target = Math.min(0, Math.max(this.max, this.target));
 	}
+
 	onKey() {
 		let e = this.event;
 		let t = e.key;
@@ -313,6 +314,7 @@ class LerpScroll {
 	deafen() {
 		this.deaf = true;
 	}
+
 	listen() {
 		this.deaf = false;
 	}
