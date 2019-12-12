@@ -43,7 +43,8 @@ export default {
 		return {
 			lastScrollTop: 0,
 			sidx: 0,
-			record
+			record,
+			shiftDown: false
 		};
 	},
 
@@ -54,6 +55,69 @@ export default {
 	},
 
 	methods: {
+		keydown(e) {
+			// this.handleTabLocation(e);
+
+			// if (this.appointmentWidget || this.pageDetails.title === 'Contact') {
+			// 	return;
+			// }
+
+			// let index = this.getScrollIndex(this.sliceTops, this.device.win.y * 0.4);
+			// console.log(e.which);
+			console.log('kerdown', this.$store.state);
+			let distance = null;
+			switch (e.which) {
+				case 16:
+					this.shiftDown = true;
+					break;
+				// j
+				case 74:
+					// index = Math.min(index + 1, this.sliceTops.length - 1);
+					distance = -this.$store.state.device.win.y;
+					break;
+				// down
+				case 40:
+					// index = Math.min(index + 1, this.sliceTops.length - 1);
+					break;
+				// k
+				case 75:
+					distance = this.$store.state.device.win.y;
+					break;
+				// spacebar
+				case 32:
+					distance = this.$store.state.device.win.y * (this.shiftDown ? 1 : -1);
+					break;
+				// up
+				case 38:
+					break;
+				// tab
+				case 9:
+					break;
+
+				default:
+					return;
+			}
+			if (distance) {
+				this.record.scroll.scrollTo(this.record.scroll.pos + distance);
+			}
+
+			// let top = this.sliceTops[index].$el.offsetTop;
+
+			// if (this.sliceTops[index].data && this.sliceTops[index].data.component === 'PropertyScroll') {
+			// 	this.scroll.scrollTo(-top - this.extraIdx);
+			// 	this.extraIdx += window.innerHeight;
+			// 	return;
+			// }
+
+			// let scrollCorr = this.navHeight * (e.which === 75 && this.pageDetails.type === 'property' ? 2 : 1);
+			// this.scroll.scrollTo(-top + scrollCorr);
+
+		},
+		keyup(e) {
+			if (e.which === 16) {
+				this.shiftDown = false;
+			}
+		},
 		checkScroll(scrollTop) {
 			this.$emit('pageTop', scrollTop < 1);
 
@@ -76,6 +140,10 @@ export default {
 			resizeCallback: (obj) => {
 				this.viewportHeight = obj.viewport;
 				this.scrollHeight = obj.scrollHeight;
+			},
+			keysAndAmt: {
+				'ArrowUp': 200,
+				'ArrowDown': -200
 			}
 		};
 		this.record.scroll = new LerpScroll(this.$el, opts);
@@ -83,6 +151,12 @@ export default {
 		this.scrollInterval = setInterval(() => {
 			this.checkScroll(this.lastScrollTop);
 		}, 600);
+		window.addEventListener('keydown', this.keydown);
+		window.addEventListener('keyup', this.keyup);
+	},
+	beforeDestroy() {
+		window.removeEventListener('keydown', this.keydown);
+		window.removeEventListener('keyup', this.keyup);
 	}
 
 };
@@ -93,10 +167,21 @@ export default {
 
 @import "../../styl/_variables"
 
+.page {
+	position: fixed;
+	height: 100%;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	width: 100%;
+}
+
 .page-scroll
 	position relative
 	z-index 1
-
+	min-height: 100%;
+	overflow: hidden;
+	width: 100%;
 	> div
 		background $bg
 		// transform translate3d(0, 0, 0)
