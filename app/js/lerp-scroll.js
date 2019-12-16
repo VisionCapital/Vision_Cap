@@ -1,6 +1,6 @@
-import ResizeObserver from 'resize-observer-polyfill';
+import { install } from 'resize-observer';
 
-// if (!window.ResizeObserver) { install(); }
+if (!window.ResizeObserver) { install(); }
 
 const events = [ 'mousewheel', 'DOMMouseScroll', 'wheel', 'MozMousePixelScroll', 'touchstart', 'touchmove' ];
 
@@ -32,11 +32,16 @@ class LerpScroll {
 		this.skewMax = opts.skewMax;
 		this.lerpFactor = opts.lerpFactor;
 		this.eventTarget = opts.eventTarget;
-		this.name = opts.name;
 
 		if (this.native) {
 
-			this.outer.style.overflow = 'auto';
+			if (this.horizontal) {
+				this.outer.style['overflow-x'] = 'scroll';
+				this.outer.style['overflow-y'] = 'hidden';
+			} else {
+				this.outer.style['overflow-x'] = 'hidden';
+				this.outer.style['overflow-y'] = 'scroll';
+			}
 
 		} else {
 
@@ -87,7 +92,8 @@ class LerpScroll {
 	init() {
 
 		events.forEach((e) => this.eventTarget.addEventListener(e, this.doScroll, { passive: false }));
-		if (this.eventTarget === window) {
+
+		if (this.eventTarget === window || this.native) {
 			window.addEventListener('keydown', this.doScroll);
 		}
 
@@ -95,17 +101,16 @@ class LerpScroll {
 		this.observer.observe(this.outer);
 		this.observer.observe(this.el);
 
-		let name = this.name || `lerp-scroll-${this.horizontal ? 'horiz' : 'vert'}`;
-		raf.add(this.update, name);
+		raf.add(this.update, `lerp-scroll-${this.horizontal ? 'horiz' : 'vert'}`);
 	}
 
 	destroy() {
 
-		if (this.outer && this.outer.parentElement) {
-			events.forEach((e) => this.eventTarget.removeEventListener(e, this.doScroll, { passive: false }));
-		}
+		// if (this.outer && this.outer.parentElement) {
+		events.forEach((e) => this.eventTarget.removeEventListener(e, this.doScroll, { passive: false }));
+		// }
 
-		if (this.eventTarget === window) {
+		if (this.eventTarget === window || this.native) {
 			window.removeEventListener('keydown', this.doScroll);
 		}
 
@@ -125,7 +130,6 @@ class LerpScroll {
 	}
 
 	resize() {
-
 		let viewport = 0;
 		let scrollHeight = 0;
 
@@ -149,6 +153,10 @@ class LerpScroll {
 	}
 
 	scrollTo(pos, immediate = false) {
+		if (this.native) {
+			this.outer.scrollTop = -pos;
+			return;
+		}
 		this.target = Math.min(0, Math.max(pos, this.max));
 		if (immediate) {
 			this.pos = this.target;
@@ -158,12 +166,14 @@ class LerpScroll {
 	scrollToTop(immediate = false) {
 		this.scrollTo(0, immediate);
 	}
+
+	// eslint-disable-next-line complexity
 	doScroll(e) {
 		if (this.deaf) {
 			return;
 		}
 		this.event = e;
-		this.when = performance.now();
+		// this.when = performance.now();
 		({
 			keydown: this.onKey,
 			wheel: this.onWheel,
@@ -176,6 +186,7 @@ class LerpScroll {
 		let dist = this.target - this.pos;
 		let pct = this.pos / this.max;
 		let dir = dist === 0 ? 0 : dist > 0 ? 1 : -1;
+
 		if (this.rawCb && !this.deaf) {
 			this.rawCb({
 				raw: true,
@@ -194,57 +205,69 @@ class LerpScroll {
 			return;
 		}
 
-		if (e.cancelable && ![ 'touchstart', 'touchmove', 'keydown' ].includes(e.type)) {
+		// if (!this.native && e.cancelable && ![ 'touchstart', 'touchmove', 'keydown' ].includes(e.type)) {
+		//   e.preventDefault();
+		//   e.stopPropagation();
+		// }
+
+		// if (!this.native && e.cancelable && e.type === 'touchmove' && !this.passive) {
+		//   e.preventDefault();
+		//   e.stopPropagation();
+		// }
+
+		if (!this.native && e.cancelable &&
+      (![ 'touchstart', 'touchmove', 'keydown' ].includes(e.type) ||
+      e.type === 'touchmove' && !this.passive && e.touches.length === 1)) {
 			e.preventDefault();
 			e.stopPropagation();
 		}
 
-		if (e.cancelable && e.type === 'touchmove' && !this.passive && e.touches.length === 1) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
-
-		if (!this.tick) {
+		if (!this.tick || this.native) {
 			requestAnimationFrame(this.update);
 		}
 	}
 
 	update() {
-
+		if (this.deaf) { return; }
 		let dist = this.target - this.pos;
-		this.pos += dist / this.lerpFactor;
-
-		if (Math.abs(dist) < 0.5) {
-			this.pos = this.target;
-			dist = 0;
-		}
-
-		let skewAmt = 0;
-		if (this.skew) {
-			skewAmt = Math.max(-this.skewMax, Math.min(this.skewMax, dist / 250));
-		}
-
-		let xform = [ 0, 0, 0 ];
-		let skew = [ 0, 0 ];
-
-		if (this.horizontal) {
-			xform[0] = `${this.pos}px`;
-			skew[0] = `${skewAmt}deg`;
-		} else {
-			xform[1] = `${this.pos}px`;
-			skew[1] = `${skewAmt}deg`;
-		}
 
 		if (this.native) {
-			this.outer.scrollTop = -this.pos;
-		} else
-		if (this.skew) {
-			this.el.style.transform = `translate3d(${xform.join(',')}) skew(${skew.join(',')})`;
+			this.pos = -this.outer.scrollTop;
 		} else {
+			this.pos += dist / this.lerpFactor;
+
+			if (Math.abs(dist) < 0.5) {
+				this.pos = this.target;
+				dist = 0;
+			}
+
+			// let skewAmt = 0;
+			// if (this.skew) {
+			//   skewAmt = Math.max(-this.skewMax, Math.min(this.skewMax, dist / 250));
+			// }
+
+			let xform = [ 0, 0, 0 ];
+			// let skew = [ 0, 0 ];
+
+			if (this.horizontal) {
+				xform[0] = `${this.pos}px`;
+				// skew[0] = `${skewAmt}deg`;
+			} else {
+				xform[1] = `${this.pos}px`;
+				// skew[1] = `${skewAmt}deg`;
+			}
+
+			// if (this.native) {
+			//   this.outer.scrollTop = -this.pos;
+			// } else
+			// if (this.skew) {
+			//   this.el.style.transform = `translate3d(${xform.join(',')}) skew(${skew.join(',')})`;
+			// } else {
 			this.el.style.transform = `translate3d(${xform.join(',')})`;
 		}
 
 		if (this.cb && !this.deaf) {
+			// this.cb({ pos: this.pos, source: this, pct: this.pos / this.max });
 			this.cb({
 				pos: this.pos,
 				pct: this.pos / this.max,
@@ -284,14 +307,15 @@ class LerpScroll {
 	onMouseWheel() {
 		let e = this.event;
 		var t = e.wheelDeltaY ? e.wheelDeltaY : e.wheelDelta;
-		this.setDelta(t);
+		// this.setDelta(t);
 
 		this.target += t;
 		this.target = Math.min(0, Math.max(this.max, this.target));
-
 	}
 
 	touchStart() {
+		if (this.native) { return; }
+
 		this.prevMove = this.target;
 
 		if (this.horizontal) {
@@ -302,6 +326,8 @@ class LerpScroll {
 	}
 
 	touchMove() {
+		if (this.native) { return; }
+
 		if (this.horizontal) {
 			this.target = 2 * (this.event.targetTouches[0].pageX - this.start) + this.prevMove;
 		} else {
@@ -314,7 +340,6 @@ class LerpScroll {
 	deafen() {
 		this.deaf = true;
 	}
-
 	listen() {
 		this.deaf = false;
 	}

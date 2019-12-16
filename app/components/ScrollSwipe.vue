@@ -27,6 +27,8 @@ export default {
 
 	methods: {
 		deviceUpdate(device) {
+			console.log("\n\n SETUP SCROLL SWIPE")
+			console.log(device);
 			switch (device.touch) {
 				case true:
 					this.addTouch();

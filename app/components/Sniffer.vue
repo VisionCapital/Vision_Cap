@@ -4,6 +4,39 @@
 
 <script>
 export default {
+	data() {
+		let device = {
+			platform: navigator.platform,
+			// mobile: null,
+			lerp: !/(Edge|Trident|Android|iOS|iPhone|iPod|iPad)/i.test(navigator.userAgent),
+			// mobile: null,
+			mobile: /(Android|iOS|iPhone|iPod|iPad)/i.test(navigator.userAgent),
+
+			win: {
+				x: window.innerWidth,
+				y: window.innerHeight
+			},
+			portrait: window.innerWidth < window.innerHeight,
+			mouse: null,
+			touch: null
+		};
+
+		switch (navigator.platform) {
+			case 'iPhone':
+			case 'iPad':
+			case 'linux armv7l':
+			case 'Linux armv8l':
+				device.touch = true;
+				device.mobile = true;
+				break;
+			default:
+				break;
+		}
+
+		return {
+			device
+		};
+	},
 
 	watch: {
 		device: {
@@ -14,6 +47,28 @@ export default {
 			deep: true
 		}
 	},
+
+	created() {
+		window.addEventListener('touchstart', this.touchstart, { passive: true });
+		// window.addEventListener('mousedown', this.mousestart, { passive: true });
+		window.addEventListener('mousemove', this.mousestart, { passive: true });
+		window.addEventListener('resize', this.resize, { passive: true });
+		window.addEventListener('mousedown', this.mousestart, { passive: true });
+	},
+
+	mounted() {
+		this.$nextTick(this.resize);
+		// this.resize();
+		setTimeout(this.resize, 1000);
+	},
+
+	beforeDestroy() {
+		window.removeEventListener('touchstart', this.touchstart, { passive: true });
+		// window.removeEventListener('mousedown', this.mousestart, { passive: true });
+		window.removeEventListener('mousemove', this.mousestart, { passive: true });
+		window.removeEventListener('resize', this.resize, { passive: true });
+	},
+
 
 	methods: {
 		touchstart() {
@@ -42,53 +97,6 @@ export default {
 			let style = window.getComputedStyle(this.$refs.canary);
 			this.device.mobile = style.display === 'block';
 		}
-	},
-
-	data() {
-		let device = {
-			platform: navigator.platform,
-			mobile: null,
-			win: {
-				x: window.innerWidth,
-				y: window.innerHeight
-			},
-			portrait: window.innerWidth < window.innerHeight,
-			mouse: null,
-			touch: null
-		};
-
-		switch (navigator.platform) {
-			case 'iPhone':
-			case 'iPad':
-			case 'linux armv7l':
-				device.touch = true;
-				device.mobile = true;
-				break;
-			default:
-				break;
-		}
-
-		return {
-			device
-		};
-	},
-
-	created() {
-		window.addEventListener('touchstart', this.touchstart, { passive: true });
-		window.addEventListener('mousedown', this.mousestart, { passive: true });
-		window.addEventListener('mousemove', this.mousestart, { passive: true });
-		window.addEventListener('resize', this.resize, { passive: true });
-	},
-
-	mounted() {
-		this.resize();
-	},
-
-	beforeDestroy() {
-		window.removeEventListener('touchstart', this.touchstart, { passive: true });
-		window.removeEventListener('mousedown', this.mousestart, { passive: true });
-		window.removeEventListener('mousemove', this.mousestart, { passive: true });
-		window.removeEventListener('resize', this.resize, { passive: true });
 	}
 
 };

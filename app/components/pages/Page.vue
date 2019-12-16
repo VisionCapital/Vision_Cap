@@ -137,6 +137,7 @@ export default {
 		let opts = {
 			callback: this.updateScroll,
 			lerpFactor: this.$store.state.device.mobile ? 8 : 10,
+			native: !this.$store.state.device.lerp,
 			resizeCallback: (obj) => {
 				this.viewportHeight = obj.viewport;
 				this.scrollHeight = obj.scrollHeight;
@@ -177,11 +178,15 @@ export default {
 }
 
 .page-scroll
-	position relative
-	z-index 1
+	position: relative;
+	z-index: 1;
 	min-height: 100%;
 	overflow: hidden;
 	width: 100%;
+	-ms-overflow-style: none;
+	min-height: 100%;
+
+
 	> div
 		background $bg
 		// transform translate3d(0, 0, 0)
