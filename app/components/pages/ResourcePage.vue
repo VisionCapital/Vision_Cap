@@ -148,6 +148,7 @@ export default {
 		let opts = {
 			callback: this.updateScroll,
 			lerpFactor: this.$store.state.device.mobile ? 8 : 10,
+			native: !this.$store.state.device.lerp,
 			resizeCallback: (obj) => {
 				this.viewportHeight = obj.viewport;
 				this.scrollHeight = obj.scrollHeight;
