@@ -103,7 +103,6 @@ export default {
 			// if (Math.abs(nextY - this.startY) > 0) {
 			// 	event.preventDefault();
 			// }
-
 			this.isDrag = true;
 
 		},

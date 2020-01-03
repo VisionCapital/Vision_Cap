@@ -70,7 +70,6 @@ class LerpScroll {
 		this.resize = this.resize.bind(this);
 		this.deafen = this.deafen.bind(this);
 		this.listen = this.listen.bind(this);
-
 		this.cb = opts.callback;
 		this.rawCb = opts.rawCallback;
 		this.resizeCb = opts.resizeCallback;
@@ -85,7 +84,6 @@ class LerpScroll {
 	}
 
 	init() {
-
 		events.forEach((e) => this.eventTarget.addEventListener(e, this.doScroll, { passive: false }));
 		if (this.eventTarget === window) {
 			window.addEventListener('keydown', this.doScroll);
@@ -288,12 +286,10 @@ class LerpScroll {
 
 		this.target += t;
 		this.target = Math.min(0, Math.max(this.max, this.target));
-
 	}
 
 	touchStart() {
 		this.prevMove = this.target;
-
 		if (this.horizontal) {
 			this.start = this.event.targetTouches[0].pageX;
 		} else {
@@ -307,7 +303,6 @@ class LerpScroll {
 		} else {
 			this.target = 2 * (this.event.targetTouches[0].pageY - this.start) + this.prevMove;
 		}
-
 		this.target = Math.min(0, Math.max(this.max, this.target));
 	}
 

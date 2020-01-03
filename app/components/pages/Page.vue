@@ -56,28 +56,18 @@ export default {
 
 	methods: {
 		keydown(e) {
-			// this.handleTabLocation(e);
-
-			// if (this.appointmentWidget || this.pageDetails.title === 'Contact') {
-			// 	return;
-			// }
-
-			// let index = this.getScrollIndex(this.sliceTops, this.device.win.y * 0.4);
-			// console.log(e.which);
-			console.log('kerdown', this.$store.state);
 			let distance = null;
 			switch (e.which) {
+				// shift
 				case 16:
 					this.shiftDown = true;
 					break;
 				// j
 				case 74:
-					// index = Math.min(index + 1, this.sliceTops.length - 1);
 					distance = -this.$store.state.device.win.y;
 					break;
 				// down
 				case 40:
-					// index = Math.min(index + 1, this.sliceTops.length - 1);
 					break;
 				// k
 				case 75:
@@ -100,17 +90,6 @@ export default {
 			if (distance) {
 				this.record.scroll.scrollTo(this.record.scroll.pos + distance);
 			}
-
-			// let top = this.sliceTops[index].$el.offsetTop;
-
-			// if (this.sliceTops[index].data && this.sliceTops[index].data.component === 'PropertyScroll') {
-			// 	this.scroll.scrollTo(-top - this.extraIdx);
-			// 	this.extraIdx += window.innerHeight;
-			// 	return;
-			// }
-
-			// let scrollCorr = this.navHeight * (e.which === 75 && this.pageDetails.type === 'property' ? 2 : 1);
-			// this.scroll.scrollTo(-top + scrollCorr);
 
 		},
 		keyup(e) {

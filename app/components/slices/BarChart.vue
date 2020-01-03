@@ -90,8 +90,7 @@
 
 					<div class="title" v-for="(bar, idx) in indices" :key="idx"
 						:style="{ width: 1 / indices.length * 100 + '%' }">
-						<div class="title-text">
-							{{ `${bar.name} (${idx + 1})` }}
+						<div class="title-text" v-html="bar.name">
 						</div>
 					</div>
 					<!-- <div class="index" v-for="(bar, idx) in indices" :key="idx">
