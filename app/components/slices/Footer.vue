@@ -74,7 +74,7 @@
 									<div class="text" v-html="tag.title"/>
 								</router-link> -->
                 <a
-                  :href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
+                  :href="`/${link.page_link.uid}/${tag.slug}`"
                   class="text-box"
                   :key="idx"
                 >
@@ -113,7 +113,7 @@ export default {
   methods: {
     linkNav(link) {
       if (link.link_type === "Document") {
-        return `https://visioncap.ca/${link.slug}`;
+        return `/${link.slug}`;
       } else if (link.link_type === "Web") {
         return link.url;
       }
