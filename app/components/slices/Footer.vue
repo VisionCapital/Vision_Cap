@@ -1,110 +1,131 @@
 <template>
-	<div class="footer">
+  <div class="footer">
+    <div class="bg" />
 
-		<div class="bg"/>
+    <footer>
+      <nav>
+        <ul class="links">
+          <li class="logo">
+            <router-link
+              to="/"
+              class="home-link"
+              title="Home"
+            >
+              <logo class="light" />
+            </router-link>
+          </li>
 
-		<footer>
-			<nav>
-				<ul class="links">
-
-					<li class="logo">
-						<router-link
-							to="/"
-							class="home-link"
-							title="Home">
-							<logo class="light"/>
-						</router-link>
-					</li>
-
-					<li v-for="link in links"
-						:key="link.path"
-						:class="link.link_type">
-
-						<!-- <router-link v-if="link.link_type === 'normal'"
+          <li
+            v-for="link in links"
+            :key="link.path"
+            :class="link.link_type"
+          >
+            <!-- <router-link v-if="link.link_type === 'normal'"
 							:to="`/${link.page_link.slug}`"
 							:title="link.link_title[0].text"
 							v-html="link.link_title[0].text"/> -->
-						<a v-if="link.link_type === 'normal'"
-							:href="linkNav(link.link)"
-							:target="link.link.target"
-							:title="link.link_title[0].text"
-							v-html="link.link_title[0].text"/>
+            <a
+              v-if="link.link_type === 'normal'"
+              :href="linkNav(link.link)"
+              :target="link.link.target"
+              :title="link.link_title[0].text"
+              v-html="link.link_title[0].text"
+            />
 
-						<div class="drop-toggle" v-if="link.link_type === 'dropdown'">
-
-							<!-- <router-link :to="`/${link.page_link.uid}`"
+            <div
+              class="drop-toggle"
+              v-if="link.link_type === 'dropdown'"
+            >
+              <!-- <router-link :to="`/${link.page_link.uid}`"
 								v-html="link.link_title[0].text"/> -->
-							<a :href="`https://visioncap.ca/${link.page_link.uid}`"
-								v-html="link.link_title[0].text"/>
+              <a
+                :href="`/${link.page_link.uid}`"
+                v-html="link.link_title[0].text"
+              />
 
-							<button v-if="$store.state.device.win.x > 1366"
-								@click.prevent="mutualOpen = !mutualOpen">
-								<arrow-head
-									class="arrow-head"
-									:pointDown="mutualOpen"
-									color="#fff"/>
-							</button>
+              <button
+                v-if="$store.state.device.win.x > 1366"
+                @click.prevent="mutualOpen = !mutualOpen"
+              >
+                <arrow-head
+                  class="arrow-head"
+                  :pointDown="mutualOpen"
+                  color="#fff"
+                />
+              </button>
+            </div>
 
-						</div>
-
-						<div class="anchor-links" v-if="mutualOpen && link.link_type === 'dropdown' && $store.state.device.win.x > 1366">
-							<transition v-for="(tag, idx) in $store.state.resourceTags" :key="idx" appear>
-								<!-- <router-link :to="`/${link.page_link.uid}/${tag.slug}`"
+            <div
+              class="anchor-links"
+              v-if="
+                mutualOpen &&
+                link.link_type === 'dropdown' &&
+                $store.state.device.win.x > 1366
+              "
+            >
+              <transition
+                v-for="(tag, idx) in $store.state.resourceTags"
+                :key="idx"
+                appear
+              >
+                <!-- <router-link :to="`/${link.page_link.uid}/${tag.slug}`"
 									class="text-box"
 									:key="idx">
 									<div class="text" v-html="tag.title"/>
 								</router-link> -->
-								<a :href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
-									class="text-box"
-									:key="idx">
-									<div class="text" v-html="tag.title"/>
-								</a>
-							</transition>
-						</div>
-
-					</li>
-
-				</ul>
-			</nav>
-		</footer>
-
-	</div>
+                <a
+                  :href="`https://visioncap.ca/${link.page_link.uid}/${tag.slug}`"
+                  class="text-box"
+                  :key="idx"
+                >
+                  <div
+                    class="text"
+                    v-html="tag.title"
+                  />
+                </a>
+              </transition>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
 </template>
 
 <script>
-
-import Logo from '../svg/Logo.vue';
-import ArrowHead from '../svg/ArrowHead.vue';
+import Logo from "../svg/Logo.vue";
+import ArrowHead from "../svg/ArrowHead.vue";
 
 export default {
+  components: {
+    Logo,
+    ArrowHead
+  },
 
-	components: {
-		Logo,
-		ArrowHead
-	},
-
-	computed: {
-		links() { return this.$store.state.navData.links; },
-		resourceTags() { return this.$store.state.resourceTags; }
-	},
-	methods: {
-		linkNav(link) {
-			if (link.link_type === 'Document') {
-				return `https://visioncap.ca/${link.slug}`;
-			} else if (link.link_type === 'Web') {
-				return link.url;
-			}
-			return '';
-		}
-	},
-	data() {
-		return {
-			mutualOpen: false
-		};
-	}
-
+  computed: {
+    links() {
+      return this.$store.state.navData.links;
+    },
+    resourceTags() {
+      return this.$store.state.resourceTags;
+    }
+  },
+  methods: {
+    linkNav(link) {
+      if (link.link_type === "Document") {
+        return `https://visioncap.ca/${link.slug}`;
+      } else if (link.link_type === "Web") {
+        return link.url;
+      }
+      return "";
+    }
+  },
+  data() {
+    return {
+      mutualOpen: false
+    };
+  }
 };
-
 </script>
 
 <style lang="stylus" scoped>
@@ -444,7 +465,4 @@ a.router-link-exact-active, .drop-toggle .router-link-active
 			z-index 100
 			transition-duration 0.5s
 			width 0
-
-
-
 </style>
