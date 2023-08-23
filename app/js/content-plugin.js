@@ -20,6 +20,9 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('NoSlice', () => import('../components/slices/NoSlice.vue'));
 	// Vue.component('PageHeader', () => import('../components/slices/Header.vue'));
 	Vue.component('Hero', () => import('../components/slices/Hero.vue'));
+	// New Slice:
+	Vue.component('HeroButton', () => import('../components/slices/test_page.vue'));
+	// End New Slice
 	Vue.component('FlexibleSlice', () => import('../components/slices/FlexibleSlice.vue'));
 	Vue.component('BarChart', () => import('../components/slices/BarChart.vue'));
 	Vue.component('PartnerImage', () => import('../components/slices/ImageRow.vue'));
@@ -38,6 +41,7 @@ ContentPlugin.install = (Vue) => {
 	Vue.component('Resources', () => import('../components/slices/Resources.vue'));
 	Vue.component('ResourceIndex', () => import('../components/slices/ResourceIndex.vue'));
 	Vue.component('SingleColumnCopy', () => import('../components/slices/SingleColumnCopy.vue'));
+	// Vue.component('Button', () => import('../components/svg/Button.vue'));
 
 	Vue.prototype.getContent = function() { // eslint-disable-line func-names
 
