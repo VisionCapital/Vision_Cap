@@ -15,15 +15,11 @@
 	</div>
     
     <div class="paragraph-section">
-
         <p v-if="data.fields.paragraph_texts"
              v-html="$cms.htmlField(data.fields.paragraphs_texts)"/>
-
-        <router-link :to="/private-funds/">
-            <button class="accept-button">
-                <span class="button-label"> Accept and Proceed </span>
-            </button>             
-        </router-link>
+        <router-link to="https://visioncap.ca/private-funds">
+            <button class="accept-button"> Accept </button> 
+        </router-link>          
     </div>
 
 </template>
@@ -86,14 +82,13 @@ export default {
     border none
     padding 10px 20px
     cursor pointer
-.button-label
     font-size 16px
-    font-weigth bold
+    font-weight bold
 
 .paragraph-section
     background $w
     p 
-    color $grey
+      color $grey
 
 
 </style>
