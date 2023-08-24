@@ -4,24 +4,26 @@
 		<div class="wrap">
 			<div class="copy" v-if="data && data.fields">
 
+				<div class="hero-image" v-if="data.fields.image.url">
+					<img :src="data.image('image')"/>
+				</div>
+
 				<h1 v-if="data.fields.title1.length"
 					v-html="$cms.textField(data.fields.title1)"/>
 
 				<div v-if="data.fields.paragraph.length"
 					v-html="$cms.htmlField(data.fields.paragraph)"/>
 
+                <router-link to="https://visioncap.ca/private-funds">
+                    <button class="accept-button">
+                        <span class="button-label" v-html="$cms.textField(data.fields.button_label)"/>
+                    </button>             
+                </router-link>
+
 			</div>
 		</div>
-	</div>
-    
-    <div class="paragraph-section">
-        <p v-if="data.fields.paragraph_texts"
-             v-html="$cms.htmlField(data.fields.paragraphs_texts)"/>
-        <router-link to="https://visioncap.ca/private-funds">
-            <button class="accept-button"> Accept </button> 
-        </router-link>          
-    </div>
 
+	</div>
 </template>
 
 <script>
@@ -75,20 +77,12 @@ export default {
 	+above($notebook)
 		pad(1, 5)
 .accept-button
-    background $blue
-    width 60px
-    height 40px
+    background $grey
     color white
     border none
     padding 10px 20px
     cursor pointer
+.button-label
     font-size 16px
-    font-weight bold
-
-.paragraph-section
-    background $w
-    p 
-      color $grey
-
-
+    font-weigth bold
 </style>
