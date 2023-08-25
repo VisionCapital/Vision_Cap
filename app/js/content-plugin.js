@@ -21,7 +21,7 @@ ContentPlugin.install = (Vue) => {
 	// Vue.component('PageHeader', () => import('../components/slices/Header.vue'));
 	Vue.component('Hero', () => import('../components/slices/Hero.vue'));
 	// New Slice:
-	Vue.component('HeroButton', () => import('../components/slices/test_page.vue'));
+	Vue.component('Button', () => import('../components/slices/test_page.vue'));
 	// End New Slice
 	Vue.component('FlexibleSlice', () => import('../components/slices/FlexibleSlice.vue'));
 	Vue.component('BarChart', () => import('../components/slices/BarChart.vue'));
