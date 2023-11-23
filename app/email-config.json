@@ -1,16 +1,15 @@
 {
 	"action": "https://yvwz0pz64f.execute-api.us-east-1.amazonaws.com/prod/visioncap-prod/email",
 	"to": [
-		"ben@arrayofstars.com",
 		"info@visioncap.ca"
 	],
-	"from": "noreply@arrayofstars.com",
+	"from": "info@visioncap.ca",
 	"site_name": "Vision Capital",
 	"fail_message": "Please fill out all required fields",
 	"success_message": "The email was successfully sent",
 	"fields": {
 		"name": {
-			"question": "&mdash; Hi, my name is",
+			"question": "Hi, my name is",
 			"type": "textField",
 			"placeholder": "Full Name",
 			"required": true
