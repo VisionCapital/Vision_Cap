@@ -4,7 +4,7 @@
 		<div class="wrap" v-if="data.items">
 
 			<div class="column"  v-for="link in data.items" :key="link.label">
-				<router-link :to="link.gate_destination.slug">
+				<router-link :to="link.gate_destination.uid">
 
 					<div class="bg" v-if="link.image"
 						:style="{ backgroundImage: `url('${link.image.url}')` }"/>
